@@ -3,7 +3,11 @@
 \usepackage{fancyhdr}
 \usepackage{marginnote}
 \usepackage{enumitem}
-\usepackage{amsmath,amssymb}
+\usepackage{scrextend}
+\usepackage[bottom]{footmisc}
+\usepackage{tikz}
+\usepackage{amsmath,amssymb,amsbsy}
+\usepackage{bm}
 \usepackage[hidelinks]{hyperref}
 \usepackage{subfiles}
 
@@ -20,6 +24,17 @@
     \renewcommand{\headrulewidth}{0pt}
 }
 
+\reversemarginpar
+
 \setitemize[3]{label={\scriptsize$\blacksquare$}}
 
-\reversemarginpar
+\deffootnotemark{\textsuperscript{\textup{[}\thefootnotemark\textup{]}}}
+\deffootnote[1.8em]{0em}{0em}{\textsuperscript{\thefootnote}}
+
+\colorlet{rex}{red!80!black!90!orange!80}
+
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}

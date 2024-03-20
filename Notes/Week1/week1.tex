@@ -9,9 +9,110 @@
 
 
 \chapter{???}
-\section{???}
+\section{Holomorphic Functions}
 \begin{itemize}
-    \item \marginnote{3/20:}
+    \item \marginnote{3/19:}We begin by reviewing some properties of the \textbf{complex numbers}.
+    \item \textbf{Complex numbers}: The field of elements $z=x+iy$ where $x,y\in\R$ and $i^2=-1$. \emph{Denoted by} $\pmb{\C}$.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style=black
+        ]
+            \small
+            \draw [-stealth] (-1.5,0) -- (1.5,0) node[right]{$\R$};
+            \draw [-stealth] (0,-1.5) -- (0,1.5) node[above]{$i\R$};
+
+            \footnotesize
+            \draw (1,0.1)    -- ++(0,-0.2) node[below]{$x$};
+            \draw (0.1,0.8)  -- ++(-0.2,0) node[left] {$y$};
+            \draw (0.1,-0.8) -- ++(-0.2,0) node[left] {$-y$};
+
+            \fill [rex] (1,0.8)  coordinate (z)    circle (1.5pt) node[above right]{$z$};
+            \fill [rex] (1,-0.8) coordinate (zbar) circle (1.5pt) node[below right]{$\bar{z}$};
+            \draw [rex,semithick,<->,shorten <=3pt,shorten >=3pt] (z) to[bend left=20] (zbar);
+        \end{tikzpicture}
+        \caption{The complex plane.}
+        \label{fig:complexPlane}
+    \end{figure}
+    \vspace{-0.4em}
+    \begin{itemize}
+        \item Can be visualized as a two-dimensional plane with the number $z$ corresponding to the point $(x,y)$.
+    \end{itemize}
+    \item \textbf{Real part}: The number $x$. \emph{Denoted by} $\bm{\re(z)}$.
+    \item \textbf{Imaginary part}: The number $y$. \emph{Denoted by} $\bm{\im(z)}$.
+    \item \textbf{Complex conjugate} (of $z$): The complex number defined as follows. \emph{Denoted by} $\bm{\bar{z}}$. \emph{Given by}
+    \begin{equation*}
+        \bar{z} := x-iy
+    \end{equation*}
+    \item Now recall the definition of a \emph{real} function that is \textbf{differentiable} at a point $x_0\in\R$.
+    \begin{itemize}
+        \item $f'(x_0)(x-x_0)$ is the "best linear approximation" of $f$ near $x_0$, where $\bm{f'(x_0)}$ is also defined below.
+    \end{itemize}
+    \item \textbf{Differentiable} ($f$ at $x_0$): A function $f:\R\to\R$ for which the following limit exists. \emph{Constraint}
+    \begin{equation*}
+        \lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0} =: f'(x_0)
+    \end{equation*}
+    \item We now build up to defining a notion of complex differentiability.
+    \begin{itemize}
+        \item Observe that the constraint above is equivalent to the constraint
+        \begin{equation*}
+            f(x) = f(x_0)+[\underbrace{f'(x_0)+e(x)}_{\Delta(x)}](x-x_0)
+        \end{equation*}
+        where $e(x)\to 0$ as $x\to x_0$.
+        \item Note that we are defining a new function $\Delta(x)$ above, with the property that $\Delta(x_0)=f'(x_0)$.
+    \end{itemize}
+    \pagebreak
+    \item \textbf{Holomorphic} ($f$ at $z_0$): A function $f:\C\to\C$ for which the following limit exists. \emph{Also known as} \textbf{$\pmb{\C}$-differentiable}. \emph{Constraints}
+    \begin{equation*}
+        \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0} =: f'(z_0)
+        \qquad\Longleftrightarrow\qquad
+        f(z) = f(z_0)+\Delta(z)(z-z_0)
+    \end{equation*}
+    where $\Delta$ is continuous at $z_0$ and $\Delta(z_0)=f'(z_0)$.
+    \begin{itemize}
+        \item Is this the true definition of "holomorphic" / "$\C$-differentiable" function, or is this just a naive first pass??
+    \end{itemize}
+    \item Properties of holomorphic functions: Let $U\subset\C$ be open.
+    \begin{enumerate}
+        \item The holomorphic functions on $U$ form a ring $\bm{\mathcal{O}(U)}$.
+        \begin{itemize}
+            \item Equivalently, the $\C$-differentiation operator is $\C$-linear.
+            \item Equivalently, if $f,g$ are holomorphic, then $f+g$ and $fg$ are holomorphic, too.
+            \item Equivalently (and most simply), we have the sum rule and the product rule (and the quotient rule if the function in the denominator is nonzero).
+        \end{itemize}
+        \item We have the chain rule.
+        \item Holomorphic implies continuous.
+    \end{enumerate}
+    \item Examples: Polynomials, rational functions $p(z)/q(z)$ (away from their \textbf{poles}).
+    \item Noney\footnote{What does "Noney" mean??}: Consider the function $f:\C\to\C$ defined by
+    \begin{equation*}
+        z \mapsto \bar{z}
+    \end{equation*}
+    \begin{itemize}
+        \item TPS\footnote{What does "TPS" mean??}: Why?
+        \item Notice that
+        \begin{align*}
+            f(0) &= 0&
+            f(t) &= t&
+            f(it) &= -it
+        \end{align*}
+        \item Thus,
+        \begin{align*}
+            \Delta(t) &= 1&
+            \Delta(it) &= -1
+        \end{align*}
+        for all $t$.
+        \item But this means that $\Delta$ can't be continuous!
+        \item Yet $f$ is clearly $\R$-differentiable! What gives?!
+        \item Note that --- viewing $f$ as a mapping of $\R^2\to\R^2$ --- we have
+        \begin{equation*}
+            Df =
+            \begin{pmatrix}
+                1 & 0\\
+                0 & -1\\
+            \end{pmatrix}
+        \end{equation*}
+    \end{itemize}
 \end{itemize}
 
 
