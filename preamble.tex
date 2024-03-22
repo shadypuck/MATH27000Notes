@@ -2,6 +2,7 @@
 \usepackage{csquotes}
 \usepackage{fancyhdr}
 \usepackage{marginnote}
+\usepackage[style=apa]{biblatex}
 \usepackage{enumitem}
 \usepackage{scrextend}
 \usepackage[bottom]{footmisc}
@@ -26,6 +27,9 @@
 
 \reversemarginpar
 
+\addbibresource{\subfix{../main.bib}}
+\DefineBibliographyStrings{english}{bibliography={References}}
+
 \setitemize[3]{label={\scriptsize$\blacksquare$}}
 
 \deffootnotemark{\textsuperscript{\textup{[}\thefootnotemark\textup{]}}}
@@ -38,3 +42,6 @@
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Ss}{\mathbb{S}}
+\newcommand{\Hh}{\mathbb{H}}
