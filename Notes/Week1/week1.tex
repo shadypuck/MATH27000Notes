@@ -38,8 +38,8 @@
     \begin{itemize}
         \item Can be visualized as a two-dimensional plane with the number $z$ corresponding to the point $(x,y)$.
     \end{itemize}
-    \item \textbf{Real part}: The number $x$. \emph{Denoted by} $\bm{\re(z)}$.
-    \item \textbf{Imaginary part}: The number $y$. \emph{Denoted by} $\bm{\im(z)}$.
+    \item \textbf{Real part}: The number $x$. \emph{Denoted by} $\bm{\re z}$.
+    \item \textbf{Imaginary part}: The number $y$. \emph{Denoted by} $\bm{\im z}$.
     \item \textbf{Complex conjugate} (of $z$): The complex number defined as follows. \emph{Denoted by} $\bm{\bar{z}}$. \emph{Given by}
     \begin{equation*}
         \bar{z} := x-iy
@@ -48,7 +48,7 @@
     \begin{itemize}
         \item $f'(x_0)(x-x_0)$ is the "best linear approximation" of $f$ near $x_0$, where $\bm{f'(x_0)}$ is also defined below.
     \end{itemize}
-    \item \textbf{Differentiable} ($f$ at $x_0$): A function $f:\R\to\R$ for which the following limit exists. \emph{Constraint}
+    \item \textbf{Differentiable} ($f:\R\to\R$ at $x_0$): A function $f$ for which the following limit exists. \emph{Constraint}
     \begin{equation*}
         \lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0} =: f'(x_0)
     \end{equation*}
@@ -70,7 +70,7 @@
     \end{equation*}
     where $\Delta$ is continuous at $z_0$ and $\Delta(z_0)=f'(z_0)$.
     \begin{itemize}
-        \item Is this the true definition of "holomorphic" / "$\C$-differentiable" function, or is this just a naive first pass??
+        \item Is this the true definition of "holomorphic" / "$\C$-differentiable" function, or is this just a na\"{i}ve first pass??
     \end{itemize}
     \item Properties of holomorphic functions: Let $U\subset\C$ be open.
     \begin{enumerate}
@@ -113,6 +113,293 @@
             \end{pmatrix}
         \end{equation*}
     \end{itemize}
+    \item The above example suggests that our definition of complex differentiability may have been to na\"{i}ve, so we'll do some further investigations now.
+    \item Observe that $\C\cong\R^2$ as $\R$-vector spaces.
+    \item \textbf{Differentiable} ($f:\R^2\to\R^2$ at $x_0$): A function $f$ for which there exists an $\R$-linear map $A:\R^2\to\R^2$ satisfying the following constraint. \emph{Constraint}
+    \begin{equation*}
+        \lim_{h\to 0}\frac{\norm{f(x_0+h)-f(x_0)-Ah}}{\norm{h}} = 0
+    \end{equation*}
+    \begin{itemize}
+        \item We also denote $A$ by $Df$.
+    \end{itemize}
+    \pagebreak
+    \item Example: Consider the function $f:\C\to\R$ defined by
+    \begin{equation*}
+        x+iy \mapsto x
+    \end{equation*}
+    \begin{itemize}
+        \item Differentiable with total derivative
+        \begin{equation*}
+            Df =
+            \begin{pmatrix}
+                1 & 0\\
+            \end{pmatrix}
+        \end{equation*}
+    \end{itemize}
+    \item Observation: While $\C\cong\R^2$ as $\R$-vector spaces, as a $\C$-vector space, there is \emph{additional} structure.
+    \begin{itemize}
+        \item In particular, all "vectors" should commute with the "multiplication by $i$" map $J:\C\to\C$ defined by any one of the following three maps.
+        \begin{align*}
+            z &\mapsto z&
+            x+iy &\mapsto xi-y&
+            \begin{pmatrix}
+                0 & -1\\
+                1 & 0\\
+            \end{pmatrix}
+        \end{align*}
+    \end{itemize}
+    \item Exercise: In $(\re,\im)$ coordinates, write down the matrix for "multiply by $w$" for any $w\in\C$.
+    \begin{itemize}
+        \item Let $w=a+bi$ and let $v=x+iy$. Then
+        \begin{align*}
+            wv &= (a+bi)(x+iy)
+                = ax-by+i(bx+ay)\\
+            &=
+            \begin{pmatrix}
+                ax-by\\
+                bx+ay\\
+            \end{pmatrix}
+                = \underbrace{
+                    \begin{pmatrix}
+                        a & -b\\
+                        b & a\\
+                    \end{pmatrix}
+                }_W
+                \begin{pmatrix}
+                    x\\
+                    y\\
+                \end{pmatrix}
+        \end{align*}
+        \item The matrix $W$ above is the desired result.
+    \end{itemize}
+    \item TPS: Is $f:\C\to\C$ defined as follows a complex linear map? Why not?
+    \begin{equation*}
+        x+iy \mapsto
+        \begin{pmatrix}
+            1 & 1\\
+            0 & 1\\
+        \end{pmatrix}
+        \begin{pmatrix}
+            x\\
+            y\\
+        \end{pmatrix}
+        = (x+y)+iy
+    \end{equation*}
+    \begin{itemize}
+        \item Among other properties, a complex linear map should satisfy
+        \begin{equation*}
+            if(x+iy) = f[i(x+iy)]
+        \end{equation*}
+        for the scalar $i\in\C$.
+        \item However, we have that
+        \begin{equation*}
+            if(x+iy) = i[(x+y)+iy]
+            = -y+i(x+y)
+            \neq (x-y)+ix
+            = f(-y+ix)
+            = f[i(x+iy)]
+        \end{equation*}
+    \end{itemize}
+    \item What about the following map?
+    \begin{equation*}
+        A =
+        \begin{pmatrix}
+            1 & 2\\
+            -2 & 1\\
+        \end{pmatrix}
+    \end{equation*}
+    \begin{itemize}
+        \item A complex linear map should satisfy
+        \begin{align*}
+            A(v+w) &= Av+Aw&
+            \lambda Av &= A(\lambda v)
+        \end{align*}
+        for all $v,w,\lambda\in\C$.
+        \item Let $v,w\in\C$ be arbitrary. Then
+        \begin{align*}
+            A(v+w) &=
+            \begin{pmatrix}
+                1 & 2\\
+                -2 & 1\\
+            \end{pmatrix}
+            \left[
+                \begin{pmatrix}
+                    v_1\\
+                    v_2\\
+                \end{pmatrix}
+                +
+                \begin{pmatrix}
+                    w_1\\
+                    w_2\\
+                \end{pmatrix}
+            \right]
+            =
+            \begin{pmatrix}
+                (v_1+w_1)+2(v_2+w_2)\\
+                -2(v_1+w_1)+(v_2+w_2)\\
+            \end{pmatrix}\\
+            &=
+            \begin{pmatrix}
+                1 & 2\\
+                -2 & 1\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                v_1\\
+                v_2\\
+            \end{pmatrix}
+            +
+            \begin{pmatrix}
+                1 & 2\\
+                -2 & 1\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                w_1\\
+                w_2\\
+            \end{pmatrix}
+            = Av+Aw
+        \end{align*}
+        \item Let $v,\lambda\in\C$. Then
+        \begin{align*}
+            \lambda Av &= (\lambda_1+i\lambda_2)\cdot[(v_1+2v_2)+i(-2v_1+v_2)]\\
+            &= [\lambda_1(v_1+2v_2)-\lambda_2(-2v_1+v_2)]+i[\lambda_2(v_1+2v_2)+\lambda_1(-2v_1+v_2)]\\
+            &= [(\lambda_1v_1-\lambda_2v_2)+2(\lambda_2v_1+\lambda_1v_2)]+i[-2(\lambda_1v_1-\lambda_2v_2)+(\lambda_2v_1+\lambda_1v_2)]\\
+            &= A[(\lambda_1v_1-\lambda_2v_2)+i(\lambda_2v_1+\lambda_1v_2)]\\
+            &= A(\lambda v)
+        \end{align*}
+        \item Therefore, since $A$ satisfies the two properties, it is complex linear.
+    \end{itemize}
+    \item Conclusion: To reiterate from the above, $A$ must commute with $J$ to be complex linear.
+    \item Implication: Every $\C$-linear map of $\C$ is just multiplication by a complex number.
+    \begin{itemize}
+        \item This is a special case of the following more general result, which holds for any field $K$.
+        \begin{equation*}
+            \Hom_K(K,K) \cong K
+        \end{equation*}
+    \end{itemize}
+    \item Now let's revisit differentiability.
+    \item It turns out that a condition for $\C$-differentiability \emph{equivalent} to the definition of "holomorphic" given above is that there exists a $\C$-linear map $A:\C\to\C$ such that
+    \begin{equation*}
+        \lim_{h\to 0}\frac{\norm{f(x_0+h)-f(x_0)-Ah}}{\norm{h}} = 0
+    \end{equation*}
+    \begin{itemize}
+        \item From the above discussion, we know that this $A$ is just multiplication by some $w\in\C$.
+        \item All of the values in the above norms are complex numbers, so \emph{another} equivalent condition is
+        \begin{equation*}
+            \lim_{z\to z_0}\frac{|f(z)-f(z_0)-w\cdot(z-z_0)|}{|z-z_0|} = 0
+        \end{equation*}
+        \item This condition is wholly mathematically equivalent to our holomorphic definition,
+        \begin{equation*}
+            `\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0} = w
+        \end{equation*}
+    \end{itemize}
+    \item So when is an $\R$-differentiable function actually holomorphic?
+    \begin{itemize}
+        \item Let $f:\R^2\to\R^2$ map $(x,y)\mapsto(g,h)$.
+        \item Let
+        \begin{equation*}
+            A = Df =
+            \begin{pmatrix}
+                g_x & g_y\\
+                h_x & h_y\\
+            \end{pmatrix}
+        \end{equation*}
+        where the subscript notation views $g$, for instance, as $g(x,y)$ and denotes the partial derivative of $g$ with respect to $x$.
+        \item Let $J$ (the "multiply by $i$") function be defined as above.
+        \item Then the "commute with $i$" condition is equivalent to
+        \begin{equation*}
+            J^{-1}AJ = A
+        \end{equation*}
+        \item Expanding the product on the left above in terms of $g_x,g_y,h_x,h_y$, we obtain
+        \begin{equation*}
+            \begin{pmatrix}
+                h_y & -h_x\\
+                -g_y & g_x\\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                0 & 1\\
+                -1 & 0\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                g_x & g_y\\
+                h_x & h_y\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                0 & -1\\
+                1 & 0\\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                g_x & g_y\\
+                h_x & h_y\\
+            \end{pmatrix}
+        \end{equation*}
+        \item This condition is equivalent to $A$ satisfying the \textbf{Cauchy-Riemann equations}.
+    \end{itemize}
+    \item \textbf{Cauchy-Riemann equations}: The following two equations, which identify when a complex function is holomorphic. \emph{Also known as} \textbf{CR equations}. \emph{Given by}
+    \begin{align*}
+        g_x &= h_y\\
+        g_y &= -h_x
+    \end{align*}
+    \item These equations are satisfied when $A$ is of the form
+    \begin{equation*}
+        A =
+        \begin{pmatrix}
+            a & -b\\
+            b & a\\
+        \end{pmatrix}
+    \end{equation*}
+    \item So at this point, we can differentiate $f$ with respect to $z$. But what if we want to differentiate it with respect to $x$ and $y$ (of $z=x+iy$)?
+    \begin{itemize}
+        \item We will need the following change of basis.
+        \begin{itemize}
+            \item Since $z=x+iy$ and $\bar{z}=x-iy$, we have
+            \begin{align*}
+                2x &= z+\bar{z}&
+                    2iy &= z-\bar{z}\\
+                x &= \frac{1}{2}(z+\bar{z})&
+                    y &= -\frac{i}{2}(z-\bar{z})
+            \end{align*}
+            \item This tells us that
+            \begin{align*}
+                \pdv{x}{z} &= \frac{1}{2}&
+                \pdv{y}{z} &= -\frac{i}{2}
+            \end{align*}
+        \end{itemize}
+        \item We can now invoke the multivariable chain rule and simplify the resultant expression.
+        \begin{equation*}
+            \pdv{f}{z} = \pdv{f}{x}\pdv{x}{z}+\pdv{f}{y}\pdv{y}{z}
+            = \frac{1}{2}(f_x-if_y)
+        \end{equation*}
+        \begin{itemize}
+            \item Note that once again, the subscript notation "$f_x$" means $\pdv*{f}{x}$.
+        \end{itemize}
+        \item Note that we can also similarly work out that
+        \begin{equation*}
+            \pdv{f}{\bar{z}} = \frac{1}{2}(f_x+if_y)
+        \end{equation*}
+        \begin{itemize}
+            \item Observe in particular that
+            \begin{align*}
+                f_x &= g_x+ih_x&
+                f_y &= g_y+ih_y
+            \end{align*}
+            \item Thus, the CR equations ($g_x=h_y$ and $g_y=-h_x$) being satisfied is equivalent to
+            \begin{equation*}
+                \pdv{f}{\bar{z}} = \frac{1}{2}(f_x+if_y)
+                = \frac{1}{2}[(g_x+ih_x)+i(g_y+ih_y)]
+                = 0
+            \end{equation*}
+            \item Note that $\pdv*{f}{\bar{z}}$ is not actually a derivative since $f$ depends on $z$, not $\bar{z}$. Rather, we use "$\pdv*{f}{\bar{z}}$" to denote the following operator applied to $f$.
+            \begin{equation*}
+                \pdv{\bar{z}} := \frac{1}{2}\left( \pdv{x}+i\pdv{y} \right)
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+    \item Theorem: The $\R$-differentiable function $f:U\to\C$ is holomorphic iff $\pdv*{f}{\bar{z}}=0$. Moreover, if it is, then
+    \begin{equation*}
+        f'(z_0) = \eval{\pdv{f}{z}}_{z_0}
+    \end{equation*}
 \end{itemize}
 
 
