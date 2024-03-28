@@ -8,9 +8,55 @@
 
 
 
-\section{???}
+\section{Holomorphicity}
+\subsection*{Set A: Graded for Completion}
 \begin{enumerate}
-    \item \marginnote{?/??:}
+    \item \marginnote{3/29:}\textcite{bib:FischerLieb}, QI.2.1. Formulate and prove the chain rule for Wirtinger derivatives. Furthermore, show that
+    \begin{equation*}
+        \overline{\pdv{f}{z}} = \pdv{\bar{f}}{\bar{z}}
+    \end{equation*}
+    \item Let $\inp{(x_1,y_1),(x_2,y_2)}=x_1x_2+y_1y_2$ denote the usual inner product on $\R^2$. We can also define the \textbf{Hermitian inner product} on $\C$ via
+    \begin{equation*}
+        (z,w) = z\bar{w}
+    \end{equation*}
+    This term \emph{Hermitian} describes the fact that this product is not symmetric, but satisfies $(w,z)=\overline{(z,w)}$. Show that thinking of $z$ as $x+iy$, we have
+    \begin{equation*}
+        \inp{z,w} = \frac{1}{2}[(z,w)+(w,z)] = \re(z,w)
+    \end{equation*}
+    \item For any integer $n$, compute the line integral $\int_\gamma z^n\dd{z}$ where $\gamma$ is any circle centered at the origin with counterclockwise orientation. Do not use Cauchy's theorem.
+    \item Without using Cauchy's theorem, show that for any $|a|<1<|b|$,
+    \begin{equation*}
+        \int_\gamma\frac{1}{(z-a)(z-b)}\dd{z} = \frac{2\pi i}{a-b}
+    \end{equation*}
+    where $\gamma$ is the circle of radius 1 centered about the origin, oriented counterclockwise.
+    \item Determine the image of the following sets under the following conformal mappings. Use level curves to illustrate the geometry of these mappings.
+    \begin{enumerate}
+        \item The unit disk $\D=\{z:|z|<1\}$ under $z\mapsto 1/z$.
+        \item $\D\setminus\{0\}$ under $z\mapsto z^2$.
+        \item The strip $S=\{z:\Im(z)\in(0,2\pi)\}$ under $z\mapsto\e[z]$.
+        \item The upper half-plane $\Hh=\{z:\Im(z)>0\}$ under $z\mapsto z^2$,
+        \item The half disk $\D\cap\Hh$ under $z\mapsto(1+z)/(1-z)$.
+    \end{enumerate}
+\end{enumerate}
+
+
+\subsection*{Set B: Graded for Content}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item A prototypical example of a weird function that is differentiable (but not $C^1$) on all of $\R$ is
+    \begin{equation*}
+        f(x) =
+        \begin{cases}
+            x^2\sin(1/x) & x\neq 0\\
+            0 & x=0
+        \end{cases}
+    \end{equation*}
+    Extend $f$ to a function on $\C$ using the same formula (replacing $x$'s with $z$'s). Is it holomorphic at the origin?
+    \item Show that if $f$ is holomorphic on a domain $U\subset\C$ and takes only real values, then it is constant.
+    \item Find a conformal map that takes the upper half-plane onto the "Pac-Man" given by
+    \begin{equation*}
+        \{z:|z|<1\,\text{ and }\arg(z)\in(\pi/4,7\pi/4)\}
+    \end{equation*}
+    Explain how you obtained this map. \emph{Hint}: Do completion problem 5 first.
 \end{enumerate}
 
 
