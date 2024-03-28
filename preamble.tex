@@ -6,10 +6,11 @@
 \usepackage{enumitem}
 \usepackage{scrextend}
 \usepackage[bottom]{footmisc}
-\usepackage{tikz}
-\usepackage{amsmath,amssymb,amsbsy}
+\usepackage{tikz,graphicx}
+\usepackage{float,subcaption}
+\usepackage{amsmath,amssymb,amsbsy,amsthm}
 \usepackage{bm,physics}
-\usepackage[hidelinks]{hyperref}
+\usepackage[colorlinks,allcolors=black,urlcolor=cyan]{hyperref}
 \usepackage{subfiles}
 
 \MakeOuterQuote{"}
@@ -35,7 +36,13 @@
 \deffootnotemark{\textsuperscript{\textup{[}\thefootnotemark\textup{]}}}
 \deffootnote[1.8em]{0em}{0em}{\textsuperscript{\thefootnote}}
 
+\usetikzlibrary{decorations.markings}
 \colorlet{rex}{red!80!black!90!orange!80}
+\colorlet{rey}{red!80!black!90!orange!50}
+\colorlet{blx}{blue!90!green!80}
+\colorlet{bly}{blue!90!green!50}
+
+\graphicspath{{../ExtFiles/}}
 
 \DeclareMathOperator{\re}{Re}
 \DeclareMathOperator{\im}{Im}
@@ -46,3 +53,5 @@
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\Ss}{\mathbb{S}}
 \newcommand{\Hh}{\mathbb{H}}
+
+\newcommand{\e}[1][]{\text{e}^{#1}}

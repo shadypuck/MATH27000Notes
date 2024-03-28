@@ -8,7 +8,7 @@
 
 
 
-\chapter{???}
+\chapter{Classifying Complex Functions}
 \section{Holomorphic Functions}
 \begin{itemize}
     \item \marginnote{3/19:}We begin by reviewing some properties of the \textbf{complex numbers}.
@@ -404,10 +404,388 @@
 
 
 
+\section{Harmonic Functions and Conformal Maps}
+\begin{itemize}
+    \item \marginnote{3/21:}Tries to remember everyone's name and actually does a pretty good job!
+    \item Has us all turn to our neighbor and meet them! I met Ryan.
+    \item Review.
+    \begin{itemize}
+        \item Na\"{i}ve holomorphic definition: Typical derivative definition.
+        \item The map $z\mapsto\bar{z}$ is not holomorphic even though it is differential over the reals.
+        \item The reason this map is not holomorphic is that its matrix derivative is not complex linear. This means that it does not commute with the "multiply by $i$" matrix, defined by
+        \begin{equation*}
+            J =
+            \begin{pmatrix}
+                0 & -1\\
+                1 & 0\\
+            \end{pmatrix}
+        \end{equation*}
+        \item Indeed, an \emph{equivalent} definition to the na\"{i}ve holomorphic one is: $f:\C\cong\R^2\to\R^2$ is $\R$-differentiable at $z_0$ with $Df(z)$ is complex linear.
+        \item Another equivalent one is the Cauchy-Riemann equation definition.
+        \begin{itemize}
+            \item Let $f(z)=u(z)+iv(z)$ where $u,v:\C\to\R$.
+            \item Then $f$ is holomorphic if $u_x=v_y$ and $v_x=-u_y$, or equivalently if $\pdv*{f}{\bar{z}}=0$.
+        \end{itemize}
+        \item The above comment motivates the definition of the operators
+        \begin{align*}
+            \pdv{\bar{z}} &:= \frac{1}{2}\left( \pdv{x}+i\pdv{y} \right)\\
+            \pdv{z} &:= \frac{1}{2}\left( \pdv{x}-i\pdv{y} \right)
+        \end{align*}
+        \item Note: Every $\C$-linear map is "multiply by $w$" for some $w\in\C$.
+        \item Note that we have not yet talked about continuity or related things.
+    \end{itemize}
+    \item Note: Different books use different conventions.
+    \begin{itemize}
+        \item "Holomorphic at a point" and "complex differentiable in a neighborhood of a point" may mean different things.
+        \item Example: Consider the function $f:\C\to\C$ defined by
+        \begin{equation*}
+            x+iy \mapsto x^2+iy^2
+        \end{equation*}
+        \begin{itemize}
+            \item Then
+            \begin{equation*}
+                Df =
+                \begin{pmatrix}
+                    2x & 0\\
+                    0 & 2y\\
+                \end{pmatrix}
+            \end{equation*}
+            \item Evidently, $Df$ is not complex linear in general because we can pick $x,y$ such that $2x\neq 2y$.
+            \item Thus, this function is not complex differentiable in general.
+            \item However, it is complex differentiable at zero because here, $Df=0$.
+            \item Thus, this function is complex differentiable \emph{at a point}, but not complex differentiable \emph{in a neighborhood}.
+        \end{itemize}
+        \item We will almost always be talking about functions that are complex differentiable \emph{in a neighborhood} in this class.
+    \end{itemize}
+    \item Example: $f(x+iy)=x^2\mathbb{I}_{Q(x)}+iy^2\mathbb{I}_{Q(y)}$ is complex differentiable in a neighborhood of the origin, but this is dumb. $\mathbb{I}$ is the \textbf{indicator function}.
+    \item Preview (we'll see this next Thursday): Holomorphic implies $C^\infty$.
+    \item Today: Some more things about the Cauchy-Riemann equations and what we can get out of them.
+    \item Let's begin with a consequence of the $\pdv*{z}$ and $\pdv*{\bar{z}}$ operators.
+    \begin{itemize}
+        \item Compute (if $f\in C^2$):
+        \begin{equation*}
+            \pdv{}{z}{\bar{z}} = \frac{1}{4}\underbrace{\left( \pdv[2]{x}+\pdv[2]{y} \right)}_{\Delta}f_{xy}=f_{yx}
+        \end{equation*}
+        \begin{itemize}
+            \item Do we need this $C^2$ condition if holomorphic already implies $C^\infty$?
+            \item No, but we haven't "learned" this yet. Once we prove this, no more talk of regularity!
+        \end{itemize}
+        \item Solutions to this, the Laplacian $\Delta$ (from physics), could be a good final project!
+        \item Look for solutions to $\Delta f=0$.
+        \begin{itemize}
+            \item Equivalently, look for $f$ such that $f_{xx}+f_{yy}=0$.
+        \end{itemize}
+        \item Observation: Any $f$ holomorphic implies that $\Delta f=0$ (since we apply $\pdv*{\bar{z}}$ to $f$ first).
+    \end{itemize}
+    \item \textbf{Harmonic} (function): A function $f:\R^2\to\C$ such that $\Delta f=0$.
+    \item Since the differentiation operator is linear,
+    \begin{equation*}
+        \Delta(u+iv) = \Delta u+i\Delta v
+    \end{equation*}
+    \item Corollary: The real and imaginary parts of a $C^2$ holomorphic function are harmonic.
+    \item So we know that $f$ holomorphic implies $u,v$ real-valued and harmonic. Can we go the other way?
+    \begin{itemize}
+        \item We know that these functions have certain properties in terms of their partial derivatives, namely that they satisfy the Cauchy-Riemann equations.
+    \end{itemize}
+    \item \textbf{Harmonic conjugates}: Two functions $u,v:\R^2\to\R$ that satisfy the CR equations.
+    \item Fact: Let $u,v$ be two $C^\infty$ harmonic conjugates. Then $f=u+iv$ is holomorphic
+    \begin{itemize}
+        \item Easy to prove if you're not concerned about regularity.
+    \end{itemize}
+    \item Is $v+iu$ holomorphic?
+    \begin{itemize}
+        \item No, partials don't work out. We still get $v_x=-u_y$, but we also get $u_x=-v_y$.
+        \item However, $v-iu$ is holomorphic!
+        \item This just means that rotating by $i$ gives us a new holomorphic function since
+        \begin{equation*}
+            i\cdot(u+iv) = -v+iu
+        \end{equation*}
+    \end{itemize}
+    \item Example: $u=x^2-y^2$ is harmonic. Find a conjugate and find $f=u+iv$.\footnote{Calderon actually let us work this out in class!}
+    \begin{itemize}
+        \item We have
+        \begin{align*}
+            v_y &= u_x = 2x\\
+            v_x &= -u_y = 2y
+        \end{align*}
+        \item Thus,
+        \begin{equation*}
+            v = 2xy+C
+        \end{equation*}
+        for some $C\in\C$
+        \item Then we would have
+        \begin{equation*}
+            f = u+iv
+            = (x^2-y^2)+i(2xy+C)
+            = x^2+2xyi-y^2+iC
+            = (x+iy)^2+iC
+            = z^2+iC
+        \end{equation*}
+    \end{itemize}
+    \item Let's now talk about integrating functions.
+    \item Let $a,b\in\R$. Consider $f:\C\to\C$, not holomorphic but continuous. How do we take $\int_a^bf\dd{z}$?
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style={black,text height=1.5ex,text depth=0.25ex}
+        ]
+            \footnotesize
+            \draw (-1.5,0) -- (1.5,0);
+            \draw (0,-1.5) -- (0,1.5);
+    
+            \fill [rex] (0.3,0) circle (1.5pt) node[below]{$a$};
+            \fill [rex] (1.2,0) circle (1.5pt) node[below]{$b$};
+            \draw [rex,thick,decoration={markings,mark=at position 0.57 with \arrow{>}},postaction=decorate] (0.3,0) -- (1.2,0);
+        \end{tikzpicture}
+        \caption{Integrating complex functions over real intervals.}
+        \label{fig:intCR}
+    \end{figure}
+    \begin{itemize}
+        \item What we do is just split the integral into real and imaginary parts.
+        \begin{equation*}
+            \int_a^bf\dd{z} = \int_a^bu\dd{t}+i\int_a^bv\dd{t}
+        \end{equation*}
+        \item This is how we integrate between reals in the complex plane.
+    \end{itemize}
+    \item How do we integrate over more arbitrary points in the complex plane, e.g., $a\lambda$ and $b\lambda$?
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style={black,text height=1.5ex,text depth=0.25ex}
+        ]
+            \footnotesize
+            \draw (-1.5,0) -- (1.5,0);
+            \draw (0,-1.5) -- (0,1.5);
+    
+            \fill [rex] (40:0.5) coordinate (a) circle (1.5pt) node[below right=-2pt]{$a\lambda$};
+            \fill [rex] (40:1.5) coordinate (b) circle (1.5pt) node[below right=-1pt]{$b\lambda$};
+            \draw [rex,thick,decoration={markings,mark=at position 0.57 with \arrow{>}},postaction=decorate] (a) -- (b);
+    
+            \node [fill=white] at (0,-0.5) {$\{t\lambda\mid t\in[a,b]\}$}
+                edge [out=0,in=-60,-latex,shorten >=2pt] (40:1.2)
+            ;
+            \node at (-0.75,0.75) {$\lambda\in\C$};
+        \end{tikzpicture}
+        \caption{Integrating complex functions over line segments in $\C$.}
+        \label{fig:intClambda}
+    \end{figure}
+    \begin{itemize}
+        \item We could take any path. Which one?
+        \item Try over the line segment $\{t\lambda\mid t\in[a,b]\}$.
+        \item Then we take
+        \begin{equation*}
+            \int_{a\lambda}^{b\lambda}f(z)\dd{z} = \int_a^bf(\lambda t)\lambda\dd{t}
+        \end{equation*}
+        via the substitutions $z=t\lambda$ and $\dd{z}=\lambda\dd{t}$.
+        \item This second integral, we can compute in the first way.
+    \end{itemize}
+    \item Now what about integrating along an arbitrary curve $\gamma:[a,b]\to\C$, which we will say is piecewise $C^1$?
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style={black,text height=1.5ex,text depth=0.25ex}
+        ]
+            \footnotesize
+            \draw (-1.5,0) -- (1.5,0);
+            \draw (0,-1.5) -- (0,1.5);
+    
+            \fill [rex] (-0.8,-0.6) coordinate (a) circle (1.5pt) node[below]{$z_0$};
+            \fill [rex] (1.1,-0.9)  coordinate (b) circle (1.5pt) node[below]{$z_1$};
+    
+            \draw [rex,thick,decoration={
+                markings,
+                mark=at position 0.2 with \node[above left]{$\gamma$};,
+                mark=at position 0.7 with \arrow{>}
+            },postaction=decorate] (a)
+                to[out=70,in=180,out looseness=1.3,in looseness=0.5] (0.1,0.2)
+                to[out=0,in=180,out looseness=1.3,in looseness=0.9] (0.3,-1.4)
+                to[out=0,in=180,looseness=0.7] (1,-0.3)
+                to[out=0,in=70] (b)
+            ;
+        \end{tikzpicture}
+        \caption{Integrating complex functions over arbitrary paths in $\C$.}
+        \label{fig:intGamma}
+    \end{figure}
+    \begin{itemize}
+        \item Note that $z_0:=\gamma(a)$ and $z_1:=\gamma(b)$.
+        \item Define
+        \begin{equation*}
+            \int_\gamma f\dd{z} = \int_a^bf(\gamma(t))\cdot\gamma'(t)\dd{t}
+        \end{equation*}
+        \item Where is the $\gamma'$ coming from? Same place as before! It's just a change of variables: $z=\gamma(t)$ implies $\dd{z}=\gamma'(t)\dd{t}$.
+        \item If we know differential forms, $f\dd{z}$ is just a complex-valued one-form. And the chain rule is just how we integrate one-forms.
+        \item We'll do lots of basic practice of this in the completion problems on the PSet.
+    \end{itemize}
+    \item Note: Whenever we do a path integral, we should ask if the parameterization matters. The parameterization does \emph{not} matter.
+    \item What do we need to compute integrals without having to take the limit of a sum over partitions? We need the fundamental theorem of calculus.
+    \begin{itemize}
+        \item The FTC does indeed hold here, too, though we won't prove this.
+    \end{itemize}
+    \item FTC: Suppose $F'=f$ on $U\subset\C$, and let $\gamma$ be a \textbf{path} inside of $U$. Then
+    \begin{equation*}
+        \int_\gamma f\dd{z} = F(\gamma(b))-F(\gamma(a))
+    \end{equation*}
+    \begin{itemize}
+        \item Again, if we like differential forms, then note that we're just saying in the above equality that
+        \begin{equation*}
+            \int_\gamma\dd{F} = \int_{\partial\gamma}F
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Path}: A function from an interval of real numbers to a vector space. \emph{Also known as} \textbf{contour}. \emph{Denoted by} $\bm{\gamma}$.
+    \item Gives us a three-minute break from 10:17-10:20 in the middle of the class.
+    \begin{itemize}
+        \item The fact that this guy actually teaches in accordance with accepted pedagogical standars is wild.
+    \end{itemize}
+    \item How do we want to visualize holomorphic functions?
+    \begin{itemize}
+        \item $f:\C\to\C$ is hard to graph because the set of points lives in $\R^4$.
+        \item So we're out of luck if we want to do graphs.
+        \item Thus, we'll look at \textbf{mappings}.
+    \end{itemize}
+    \item Example: Are we looking at the Mercator or Robinson map of the world?
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \includegraphics[width=0.7\linewidth]{Mercator.png}
+            \caption{Mercator projection.}
+            \label{fig:mappingsa}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \includegraphics[width=0.9\linewidth]{Robinson.png}
+            \caption{Robinson projection.}
+            \label{fig:mappingsb}
+        \end{subfigure}
+        \begin{tikzpicture}[remember picture,overlay]
+            \draw [ultra thick,-latex] (-5.8,1.8) -- ++(0.8,0);
+        \end{tikzpicture}
+        \caption{Visualizing functions of $\R^2\to\R^2$.}
+        \label{fig:mappings}
+    \end{figure}
+    \vspace{-0.5em}
+    \begin{itemize}
+        \item What do these mappings do to the lines of latitude and longitude?
+        \item This is a mapping of $\R^2\to\R^2$ that stretches and distorts! By drawing grid lines, we can see what it does to $\R^2$.
+    \end{itemize}
+    \item Now recall that $f$ holomorphic implies $Df$ looks like
+    \begin{equation*}
+        \begin{pmatrix}
+            a & -b\\
+            b & a\\
+        \end{pmatrix}
+    \end{equation*}
+    \begin{itemize}
+        \item What's nice about these matrices is they can always be factored into rotation and scaling matrices.
+        \begin{equation*}
+            \begin{pmatrix}
+                a & -b\\
+                b & a\\
+            \end{pmatrix}
+            =
+            \begin{pmatrix}
+                \cos\theta & -\sin\theta\\
+                \sin\theta & \cos\theta\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                \lambda & 0\\
+                0 & \lambda\\
+            \end{pmatrix}
+            \tag{$\lambda,\theta\in\R$}
+        \end{equation*}
+        \item This means that
+        \begin{equation*}
+            f'(z_0) = w = r\e[i\theta] \in \C
+        \end{equation*}
+        since multiplication by complex numbers also just rotates and scales!
+        \item This means that if $z'=r'\e[i\theta']$, then $w\cdot z'=r\cdot r'\e[i(\theta+\theta')]$.
+        \item This also means that we may have rotation and scaling but no shearing. Formally, we have the following lemma.
+    \end{itemize}
+    \item \textbf{Argument} (of $z\in\C$): The angle $\theta$ such that $z=r\e[i\theta]$ for some $r\in\R$. \emph{Denoted by} $\bm{\arg(z)}$.
+    \item Lemma: Suppose two curves $\gamma,\delta$ intersect at a point $z\in\C$. Let $f:\C\to\C$ be holomorphic. Then
+    \begin{equation*}
+        \angle_z(\gamma,\delta) = \angle_{f(z)}(f(\gamma),f(\delta))
+    \end{equation*}
+    i.e., $f$ preserves angles.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style=black
+        ]
+            \footnotesize
+            \begin{scope}[xshift=-4cm]
+                \draw [blx,thick,-latex] plot[smooth] coordinates
+                    {(-0.5,-0.8) (-0.3,-0.4) (0,0) (0.5,0.2) (2,0) (2.5,0.5)}
+                    node[right]{$\gamma$}
+                ;
+                \draw [rex,thick,-latex] plot[smooth] coordinates
+                    {(-0.6,0.2) (-0.35,0.4) (0,0) (0.5,-0.6) (1,-1)}
+                    node[right]{$\delta$}
+                ;
+                \draw [bly,semithick,->] (0,0) coordinate (z) -- (40:1) node[above right=-2pt]{$\gamma'(0)$};
+                \draw [rey,semithick,->] (0,0) -- (-55:1) node[below left=-2pt]{$\delta'(0)$};
+    
+                \fill circle (1.5pt) node[left=1pt]{$z$};
+            \end{scope}
+            \draw [-stealth] (-1,1) to[bend left=20] node[above]{$f$} ++(2,0);
+            \begin{scope}[xshift=2.5cm]
+                \draw [blx,thick,-latex] plot[smooth] coordinates
+                    {(-0.7,-0.8) (-0.4,-0.6) (0,0) (0.33,0.5) (1,0.7) (1.7,1.5)}
+                    node[right]{$f(\gamma)$}
+                ;
+                \draw [rex,thick,-latex] plot[smooth] coordinates
+                    {(-1,0) (-0.55,0.3) (0,0) (0.8,-0.3) (2,0.5) (2.5,0.3)}
+                    node[right]{$f(\delta)$}
+                ;
+                \draw [bly,semithick,->] (0,0) -- (63:1) node[above]{$(f\circ\gamma)'(0)$};
+                \draw [rey,semithick,->] (0,0) -- (-32:1) node[below right=-2pt]{$(f\circ\delta)'(0)$};
+    
+                \fill circle (1.5pt) node[left=1pt,yshift=-2pt]{$f(z)$};
+            \end{scope}
+        \end{tikzpicture}
+        \caption{Holomorphic maps preserve angles.}
+        \label{fig:holomorphicAngles}
+    \end{figure}
+    \begin{proof}
+        To consider the angle between two curves analytically, let's look at the tangent vectors to the two curves, for example at $z$. Now while we often think of $\gamma'(0)$ as a \emph{matrix}, remember that we've proven that all of these matrices are equivalent to complex numbers. In particular, since $\gamma:\R\to\R^2\cong\C$, the total derivative will just be a vector. This vector may easily be represented as a complex number $r\e[i\theta]$ in polar coordinates. Similarly, $\delta'(0)$ can be thought of as a complex number $r'\e[i\theta']$. Thus, dividing these quantities gives us the angle $\theta-\theta'$ between the two vectors, which we can isolate using the argument function.\par
+        Doing the same to the curves at $f(z)$ yields
+        \begin{align*}
+            \angle_{f(z)}(f(\gamma),f(\delta)) &= \arg\left[ \frac{(f\circ\gamma)'(0)}{(f\circ\delta)'(0)} \right]\\
+            &= \arg\left[ \frac{f'(\gamma(0))\cdot\gamma'(0)}{f'(\gamma(0))\cdot\delta'(0)} \right]\\
+            &= \arg\left[ \frac{f'(z)\cdot\gamma'(0)}{f'(z)\cdot\delta'(0)} \right]\\
+            &= \arg\left[ \frac{\gamma'(0)}{\delta'(0)} \right]\\
+            &= \angle_z(\gamma,\delta)
+        \end{align*}
+        as desired.
+    \end{proof}
+    \begin{itemize}
+        \item Calderon gave us 5 minutes to try to compute this ourselves with the hint: Use the chain rule! $\angle_z(\gamma,\delta)=\arg(\gamma'(0)\cdot[\delta'(0)]^{-1})$.
+    \end{itemize}
+    \item \textbf{Conformal} (map): A function $f:U\to V$, where $U,V\subset\C$, that satisfies the following two constraints. \emph{Constraints}
+    \begin{enumerate}
+        \item $f$ is a diffeomorphism.
+        \item $f$ preserves angles.
+    \end{enumerate}
+    \item \textbf{Diffeomorphism}: A homeomorphism for which $f,f^{-1}$ are differentiable.
+    \item \textbf{Biholomorphic} (map): A function $f:U\to V$ that is bijective, holomorphic, and for which $f^{-1}$ is holomorphic.
+    \item Theorem/observation: Biholomorphic iff conformal.
+    \begin{proof}
+        Follows straight from the definitions and the lemma we just proved.
+    \end{proof}
+    \item Calderon shows us an \href{https://wqferr.github.io/SimplyComplex/}{applet}.
+    \begin{itemize}
+        \item We can use the applet to help with the PSet, but we still do have to submit actual proofs.
+        \item Allows you to visually see the lemma for instance.
+        \item Example: Under $z\mapsto z^2$, the sector of radius 2 and argument $\pi/4$ goes to the sector of radius $2^2=4$ and argument $\pi/2$.
+    \end{itemize}
+\end{itemize}
+
+
+
 \section{Chapter I: Analysis in the Complex Plane}
 \emph{From \textcite{bib:FischerLieb}.}
 \begin{itemize}
-    \item The preface only contains comments and instructions for an instructor planning to use this textbook for a course.
+    \item \marginnote{3/19:}The preface only contains comments and instructions for an instructor planning to use this textbook for a course.
     \item The chapter begins with two paragraphs.
     \begin{itemize}
         \item The first discusses topic covered in the chapter.
