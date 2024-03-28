@@ -70,7 +70,7 @@
     \end{equation*}
     where $\Delta$ is continuous at $z_0$ and $\Delta(z_0)=f'(z_0)$.
     \begin{itemize}
-        \item Is this the true definition of "holomorphic" / "$\C$-differentiable" function, or is this just a na\"{i}ve first pass??
+        \item It will turn out that this is the true definition of "holomorphic" / "$\C$-differentiable" function, not just a na\"{i}ve first pass.
     \end{itemize}
     \item Properties of holomorphic functions: Let $U\subset\C$ be open.
     \begin{enumerate}
@@ -84,12 +84,12 @@
         \item Holomorphic implies continuous.
     \end{enumerate}
     \item Examples: Polynomials, rational functions $p(z)/q(z)$ (away from their \textbf{poles}).
-    \item Noney\footnote{What does "Noney" mean??}: Consider the function $f:\C\to\C$ defined by
+    \item Non-example: Consider the function $f:\C\to\C$ defined by
     \begin{equation*}
         z \mapsto \bar{z}
     \end{equation*}
     \begin{itemize}
-        \item TPS\footnote{What does "TPS" mean??}: Why?
+        \item Think-Pair-Share (TPS): Why?
         \item Notice that
         \begin{align*}
             f(0) &= 0&
@@ -396,6 +396,11 @@
             \end{equation*}
         \end{itemize}
     \end{itemize}
+    \item \textbf{Wirtinger derivatives}: The two differential operators defined as follows. \emph{Denoted by} $\bm{\partial/\partial z,\partial/\partial\bar{z}}$. \emph{Given by}
+    \begin{align*}
+        \pdv{\bar{z}} &:= \frac{1}{2}\left( \pdv{x}+i\pdv{y} \right)&
+        \pdv{z} &:= \frac{1}{2}\left( \pdv{x}-i\pdv{y} \right)
+    \end{align*}
     \item Theorem: The $\R$-differentiable function $f:U\to\C$ is holomorphic iff $\pdv*{f}{\bar{z}}=0$. Moreover, if it is, then
     \begin{equation*}
         f'(z_0) = \eval{\pdv{f}{z}}_{z_0}
