@@ -34,5 +34,226 @@
 
 
 
+\section{Power Series}
+\begin{itemize}
+    \item \marginnote{3/26:}Recall: We already know that\dots
+    \begin{itemize}
+        \item Polynomials are elements of $\mathcal{O}(\C)$;
+        \item Rational functions $P(z)/Q(z)$ are elements of $\mathcal{O}(\C\setminus V(Q))$.
+    \end{itemize}
+    \item \textbf{Affine algebraic set}: The set of solutions in an algebraically closed field $K$ of a system of polynomial equations with coefficients in $K$. \emph{Also known as} \textbf{variety}. \emph{Denoted by} $\bm{V(f_1,\ldots,f_n)}$.
+    \item Today, we want to determine how the other elementary functions behave over the complex numbers.
+    \begin{itemize}
+        \item Other functions we want: $\exp$, $\log$, $\sin$, $\cos$.
+        \item We will do $\log$ later, but all the others today.
+    \end{itemize}
+    \item \textbf{Exponential function}: The complex function defined as follows. \emph{Denoted by} $\textbf{e}^{\bm{z}}$, $\textbf{exp}\bm{(z)}$. \emph{Given by}
+    \begin{equation*}
+        \e[z] = \exp(z) := \sum_{k=0}^\infty\frac{z^k}{k!}
+    \end{equation*}
+    \item Na\"{i}vely, this power series is just be a polynomial $P(z)\in\mathcal{O}(\C)$.
+    \item More rigorously, however, we must specify which kind of convergence we mean for the power series.
+    \begin{itemize}
+        \item As one example, we could say that for all $z$,
+        \begin{equation*}
+            \e[z] = P(z) = \lim_{N\to\infty}\sum_{k=0}^N\frac{z^k}{k!}
+        \end{equation*}
+        \begin{itemize}
+            \item This would be \textbf{pointwise convergence}.
+        \end{itemize}
+        \item But there's an issue: Pointwise convergence of functions doesn't preserve anything, e.g., continuity.
+    \end{itemize}
+    \item \textbf{Pointwise} (convergent $\{f_n\}$): A sequence of functions $f_n:\C\to\C$ such that for all $z\in\C$, we have $f_n(z)\to f(z)$.
+    \item TPS: Come up with an example of a sequence of continuous functions $\{f_n\}$ that converges pointwise to $f$, such that the $f_n$ are all\dots
+    \begin{enumerate}
+        \item Continuous but $f$ is not;
+        \begin{itemize}
+            \item $f_n(x)=\arctan(nx)$.
+            \item Converges to the sign function $f(x)=\sgn(x)$.
+        \end{itemize}
+        \item Odd but $f$ is not;
+        \item Differentiable but $f$ is not.
+        \begin{itemize}
+            \item These last two cases were not discussed in class.
+        \end{itemize}
+    \end{enumerate}
+    \item We now recall a few definitions and lemmas from real analysis.
+    \item \textbf{Locally uniformly} (convergent $\{f_n\}$): A sequence of functions $f_n:U\to\C$ and a function $f:U\to\C$ such that for all compact $K\subset U$,
+    \begin{equation*}
+        \sup_{z\in K}|f_n(z)-f(z)| \to 0
+    \end{equation*}
+    \item Lemma: If $f_n\to f$ locally uniformly and the $f_n$ are continuous (or integrable), then so is $f$.
+    \begin{itemize}
+        \item This lemma is \emph{not} true if we sub in "differentiable!"
+        \item See the Stone-Weierstrass theorem for suitable constraint.
+    \end{itemize}
+    \item Thus, to resolve the original question, we mean that $P_N(z)\to\exp(z)$ locally uniformly.
+    \item Aside: Which functions have power series?
+    \begin{itemize}
+        \item Remember Taylor polynomials from Calc II? \textbf{Taylor's theorem} tells us which ones converge.
+    \end{itemize}
+    \item \textbf{Taylor's theorem}: If $f:\R\to\R$ is $C^{k+1}$ and $P_\alpha^k(x)$ is the $k^\text{th}$ Taylor polynomial about $\alpha\in\R$, then for all $\beta\in\R$, there exists some $x\in(\alpha,\beta)$ such that
+    \begin{equation*}
+        f(\beta)-P_\alpha^k(\beta) = \frac{(\beta-\alpha)^{k+1}}{(k+1)!}f^{(k+1)}(x)
+    \end{equation*}
+    \begin{itemize}
+        \item Essentially a version of the mean value theorem (MVT) for higher-order derivatives.
+        \item We can use the term of the right side of the equals sign above to get a bound on the error of the Taylor polynomial.
+    \end{itemize}
+    \item \textbf{Analytic} (function): A function $f:\R\to\R$ for which the Taylor polynomials converge (locally uniformly) to $f$.
+    \item Non example: The $C^\infty$ function $f:\R\to\R$
+    \begin{equation*}
+        f(x) =
+        \begin{cases}
+            \e[-1/x^2] & x\neq 0\\
+            0 & x=0
+        \end{cases}
+    \end{equation*}
+    \begin{itemize}
+        \item An excellent exercise in real analysis is to check that for all $k$, the Taylor polynomial about 0 is 0.
+        \item If we take the Taylor polynomial at some point farther from zero, the polynomial will approximate $f$ well up until zero, but then it will "hit a wall."
+        \begin{itemize}
+            \item The point is that $f$ is decaying more rapidly toward 0 than any polynomial possibly could, so the polynomial just thinks it's seeing 0.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Absolutely} (locally uniformly convergent power series): A power series $P(z)=\sum_{k=0}^\infty a_kz^k$ for which $A_N:\C\to\R$ locally uniformly converges, where
+    \begin{equation*}
+        A_N(z) := \sum_{k=0}^N|a_kz^k|
+    \end{equation*}
+    \item Absolute local uniform convergence allows you to reorder the terms in the polynomial.
+    \begin{itemize}
+        \item It also explains why you cannot reorder the terms in the series $S=1+1-1+1-1+\cdots$, i.e., why manipulating the order allows you to get any number: This series $S$ does not converge absolutely!
+        \item Formally, if $\sigma:\N\to\N$ is a permutation and $\sum^\infty a_k$ converges absolutely, then $\sum^\infty a_{\sigma(k)}$ converges.
+    \end{itemize}
+    \item Exercise: Show that
+    \begin{equation*}
+        \sum_{k=0}^\infty z^k \to \frac{1}{1-z}
+    \end{equation*}
+    converges absolutely locally uniformly on $\D=\{|z|<1\}$.
+    \begin{proof}
+        To prove this, we just have to show that $\sum^\infty|z|^k$ converges on $|z|<1$. But it does so converge because this latter series is just a standard real geometric series.
+    \end{proof}
+    \item This example generalizes somewhat into the following lemma.
+    \item Lemma: Let $P(z)$ be a power series about 0. If there exists $z_1\neq 0$ such that $|a_kz_1^k|\leq M$ for all $k$, then $P(z)=\sum a_kz^k$ converges on the disk $|z|<|z_1|$.
+    \begin{proof}
+        Uses standard series convergence results from real analysis. May be in \textcite{bib:FischerLieb}??
+    \end{proof}
+    \item \textbf{Disk of convergence}: The largest disk centered at zero on which you converge.
+    \item \textbf{Radius of convergence}: The radius of the disk of convergence.
+    \item \textbf{Cauchy-Hadamard formula}: The radius of convergence is given by
+    \begin{equation*}
+        \text{rad} = (\limsup|a_k|^{1/k})^{-1}
+    \end{equation*}
+    \begin{itemize}
+        \item We will be using this result on PSet 2.
+        \item We will also be proving it there!
+    \end{itemize}
+    \item What are power series representations good for? Here's an example of how they can be applied to help with PSet 1, QA.4.
+    \begin{itemize}
+        \item Question: For $|a|<1$ and $\gamma(t)=\e[it]$ a parameterization of a closed loop oriented counterclockwise, compute
+        \begin{equation*}
+            \int_\gamma\frac{1}{z-a}\dd{z}
+        \end{equation*}
+        \item Answer:
+        \begin{itemize}
+            \item Since $|a|<1$, we know that on $\gamma$, $|a/\gamma(t)|<1$.
+            \item Thus, we have that
+            \begin{align*}
+                \int_\gamma\frac{1}{z-a}\dd{z} &= \int_\gamma\frac{1}{z}\frac{1}{1-a/z}\dd{z}\\
+                &= \int_\gamma\frac{1}{z}\sum_{k=0}^\infty\left( \frac{a}{z} \right)^k\dd{z}\\
+                &= \int_\gamma\sum_{k=0}^\infty\frac{a^k}{z^{k+1}}\dd{z}\\
+                &= \sum_{k=0}^\infty\int_\gamma\frac{a^k}{z^{k+1}}\dd{z}\\
+                &= \cdots\\
+                &= \int_\gamma\frac{1}{z}\dd{z}
+            \end{align*}
+            \item We have the second equality because the power series converges.
+            \item We have the fourth equality because of the lemma about integrable $f_n$ and the fact that the power series converges.
+            \item The dots indicate some more steps that we will need to work out for ourselves on PSet 1.
+        \end{itemize}
+    \end{itemize}
+    \item Lemma (from real analysis): If $f_n\to f$ locally uniformly and $f_n'\to g$ locally uniformly, then $f$ is differentiable and $f'=g$.
+    \begin{itemize}
+        \item This is true for both differentiable and holomorphic functions.
+    \end{itemize}
+    \item Claim: This lemma implies that convergent power series are holomorphic.
+    \begin{proof}
+        If
+        \begin{equation*}
+            f_N = \sum_{k=0}^Na_kz^k
+        \end{equation*}
+        then
+        \begin{equation*}
+            f_N' = \sum_{k=0}^Nk\cdot a_kz^{k-1}
+        \end{equation*}
+        We want to show that $\{f_N'\}$ converges (locally absolutely uniformly). \textcite{bib:FischerLieb} do this by hand. We can also use the Cauchy-Hadamard formula, which we will do presently.\par
+        Let's look at $\limsup(k\cdot a_k)^{1/k}$. But this is just equal to
+        \begin{equation*}
+            \limsup|k\cdot a_k|^{1/k} %= \limsup(k^{1/k}\cdot|a_k|^{1/k})
+            \leq \limsup(|k|^{1/k})\cdot\limsup(|a_k|^{1/k})
+            = 1\cdot\limsup(|a_k|^{1/k})
+            = \limsup|a_k|^{1/k}
+        \end{equation*}
+        Moreover, equality holds because that $k^{1/k}$ factor just decays toward 1; think about how $k$ increases linearly and the $k^\text{th}$ root decays faster.
+    \end{proof}
+    \item Proposition: Any convergent power series is holomorphic (on its disk) and its derivative is also a power series with the same radius of convergence. It follows that power series are analytic functions and are $C^\infty$.
+    \item Spoiler: Every holomorphic function is analytic.
+    \item Corollary: Power series representations are unique.
+    \begin{enumerate}
+        \item If $P(z)=\sum a_kz^k$ is convergent, then
+        \begin{equation*}
+            a_k = \frac{1}{k!}P^{(k)}(0)
+        \end{equation*}
+        \item If $P(z)=0$ in a neighborhood of zero, then $a_k=0$ for all $k$.
+        \item If $P(z)=Q(z)$ (where $Q(z)=\sum b_kz^k$) in a neighborhood of 0, then $a_k=b_k$ for all $k$.
+    \end{enumerate}
+    \item Let's now return to the exponential function, which got this whole discussion started.
+    \item We now know that the definition
+    \begin{equation*}
+        \exp(z) = \sum_{k=0}^\infty\frac{z^k}{k!}
+    \end{equation*}
+    makes sense.
+    \item By manipulating this power series, we can get lots of fun properties.
+    \begin{enumerate}
+        \item $\exp(z)=[\exp(z)]'$.
+        \begin{itemize}
+            \item We obtain this via term-by-term differentiability.
+            \item This is just our favorite formula $\dv*{t}(\e[t])=\e[t]$ from calculus.
+        \end{itemize}
+        \item $\overline{\exp(z)}=\exp(\bar{z})$.
+        \item $\exp(a+b)=\exp(a)\cdot\exp(b)$.
+        \item $|\exp(z)|=\exp[\re(z)]$.
+    \end{enumerate}
+    \item \textbf{Complex cosine}: The complex function defined as follows. \emph{Denoted by} $\textbf{cos}\bm{(z)}$. \emph{Given by}
+    \begin{equation*}
+        \cos(z) := \frac{1}{2}(\e[iz]+\e[-iz])
+    \end{equation*}
+    \item \textbf{Complex sine}: The complex function defined as follows. \emph{Denoted by} $\textbf{sin}\bm{(z)}$. \emph{Given by}
+    \begin{equation*}
+        \sin(z) := \frac{1}{2i}(\e[iz]-\e[-iz])
+    \end{equation*}
+    \item \textbf{Complex hyperbolic cosine}: The complex function defined as follows. \emph{Denoted by} $\textbf{cosh}\bm{(z)}$. \emph{Given by}
+    \begin{equation*}
+        \cosh(z) := \cos(iz)
+    \end{equation*}
+    \item \textbf{Complex hyperbolic sine}: The complex function defined as follows. \emph{Denoted by} $\textbf{sinh}\bm{(z)}$. \emph{Given by}
+    \begin{equation*}
+        \sinh(z) := i\sin(iz)
+    \end{equation*}
+    \item We also have
+    \begin{equation*}
+        \e[iz] = \cos(z)+i\sin(z)
+    \end{equation*}
+    \begin{itemize}
+        \item If $z$ is real and in $[0,2\pi]$, then this simplifies to Euler's formula
+        \begin{equation*}
+            \e[i\theta] = \cos(\theta)+i\sin(\theta)
+        \end{equation*}
+    \end{itemize}
+    \item Calderon draws some mappings of the exponential function but doesn't linger on what's going on.
+    \item These are the preliminaries; now, we'll dive into the meat of the course.
+\end{itemize}
+
+
+
 
 \end{document}
