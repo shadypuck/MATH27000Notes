@@ -36,11 +36,13 @@
 \deffootnotemark{\textsuperscript{\textup{[}\thefootnotemark\textup{]}}}
 \deffootnote[1.8em]{0em}{0em}{\textsuperscript{\thefootnote}}
 
-\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.markings,calc,intersections,backgrounds}
 \colorlet{rex}{red!80!black!90!orange!80}
 \colorlet{rey}{red!80!black!90!orange!50}
 \colorlet{blx}{blue!90!green!80}
 \colorlet{bly}{blue!90!green!50}
+\colorlet{yex}{yellow!50!orange}
+\colorlet{orx}{orange!80!black!90!yellow!80}
 
 \graphicspath{{../ExtFiles/}}
 
@@ -48,6 +50,8 @@
 \DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\diam}{diam}
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\R}{\mathbb{R}}

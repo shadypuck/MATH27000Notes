@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Consequences of Power Series}
 \section{Office Hours}
 \begin{itemize}
     \item \marginnote{3/25:}What exactly are the Wirtinger derivatives?
@@ -251,6 +251,465 @@
     \end{itemize}
     \item Calderon draws some mappings of the exponential function but doesn't linger on what's going on.
     \item These are the preliminaries; now, we'll dive into the meat of the course.
+\end{itemize}
+
+
+
+\section{Cauchy's Theorem}
+\begin{itemize}
+    \item \marginnote{3/28:}The last three classes have been real analysis with complex numbers; now we get into \emph{complex} analysis.
+    \item \textbf{Domain}: A connected, open set $U\subset\C$.
+    \item Recall.
+    \begin{itemize}
+        \item $\gamma:[a,b]\to\C$ is a piecewise $C^1$ curve.
+        \item $f:\C\to\C$ is continuous.
+        \item We define
+        \begin{equation*}
+            \int_\gamma f\dd{z} := \int_a^bf(\gamma(t))\cdot\gamma'(t)\dd{t}
+        \end{equation*}
+        \item FTC: If $f=F'$ (i.e., $F$ is a \textbf{primitive} of $f$) on a domain $U\subset\C$, then for all paths $\gamma$ in $U$,
+        \begin{equation*}
+            \int_\gamma f\dd{z} = F(\gamma(b))-F(\gamma(a))
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Primitive} (of $f$): A differentiable function whose derivative is equal to the original function $f$. \emph{Also known as} \textbf{antiderivative}, \textbf{indefinite integral}. \emph{Denoted by} $\bm{F}$.
+    \item Corollary to the FTC: If $f=F'$, then for any closed curve $\gamma$ in $U$,
+    \begin{equation*}
+        \int_\gamma f\dd{z} = 0
+    \end{equation*}
+    \begin{itemize}
+        \item To see why this is true intuitively, look at an example such as $f(z)=1/z\in\mathcal{O}(\C^*)$, which doesn't have a primitive and
+        \begin{equation*}
+            \int_\gamma\frac{1}{z}\dd{z} \neq 0
+        \end{equation*}
+    \end{itemize}
+    \item Example: Find a primitive of the convergent power series
+    \begin{equation*}
+        P(z) = \sum_{k=1}^\infty a_kz^k
+    \end{equation*}
+    \begin{itemize}
+        \item Via term-by-term integration, we obtain
+        \begin{equation*}
+            \sum_{k=0}^\infty\frac{a_k}{k+1}z^{k+1}
+        \end{equation*}
+    \end{itemize}
+    \item If $\gamma$ is any closed loop in the disk of convergence,
+    \begin{equation*}
+        \int_\gamma P(z)\dd{z} = 0
+    \end{equation*}
+    \begin{itemize}
+        \item It follows since they are defined in terms of convergent power series that for all closed loops $\gamma$,
+        \begin{equation*}
+            \int_\gamma\e[z]\dd{z} = \int_\gamma\sin(z)\dd{z}
+            = \int_\gamma\cos(z)\dd{z}
+            = 0
+        \end{equation*}
+    \end{itemize}
+    \item Question: When is there a primitive?
+    \begin{itemize}
+        \item $f:\R\to\R$ continuous always has a primitive by the FTC, specifically that defined by
+        \begin{equation*}
+            F(x) := \int_a^xf(t)\dd{t}
+        \end{equation*}
+        which is differentiable with $F'=f$.
+    \end{itemize}
+    \item Proposition: If $f:U\to\C$ is continuous and $\int_\gamma f\dd{z}=0$ for every closed loop in $U$, then $f$ has a primitive on $U$.
+    \begin{proof}
+        Let's try the most na\"{i}ve thing: The FTC. Consider a domain.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[
+                every node/.style=black,
+                scale=1.3
+            ]
+                \footnotesize
+                \draw [xscale=2,name path=U] plot[smooth cycle] coordinates {
+                    ($(0:1)+(0.15*rand,0.3*rand)$)
+                    ($(45:1.2)+(0.15*rand,0.3*rand)$)
+                    % ($(60:1)+(0.15*rand,0.3*rand)$)
+                    ($(90:1.2)+(0.15*rand,0.3*rand)$)
+                    ($(135:1.2)+(0.15*rand,0.3*rand)$)
+                    % ($(150:1)+(0.15*rand,0.3*rand)$)
+                    ($(180:1)+(0.15*rand,0.3*rand)$)
+                    ($(225:1.2)+(0.15*rand,0.3*rand)$)
+                    % ($(240:1)+(0.15*rand,0.3*rand)$)
+                    ($(270:1.3)+(0.15*rand,0.3*rand)$)
+                    ($(315:1)+(0.15*rand,0.3*rand)$)
+                    % ($(330:1)+(0.15*rand,0.3*rand)$)
+                };
+                \path [name path=Utrace] (0,0) -- (45:1.8);
+                \path [name intersections={of=U and Utrace}] (intersection-1) node[above right=-1pt]{$U$};
+                \draw [scale=0.3,xscale=2,xshift=1cm,yshift=0.5cm] plot[smooth cycle] coordinates {
+                    ($(0:1)+(0.15*rand,0.3*rand)$)
+                    ($(45:1)+(0.15*rand,0.3*rand)$)
+                    % ($(60:1)+(0.15*rand,0.3*rand)$)
+                    ($(90:1)+(0.15*rand,0.3*rand)$)
+                    ($(135:1)+(0.15*rand,0.3*rand)$)
+                    % ($(150:1)+(0.15*rand,0.3*rand)$)
+                    ($(180:0.8)+(0.15*rand,0.3*rand)$)
+                    ($(225:0.8)+(0.15*rand,0.3*rand)$)
+                    % ($(240:1)+(0.15*rand,0.3*rand)$)
+                    ($(270:1)+(0.15*rand,0.3*rand)$)
+                    ($(315:1)+(0.15*rand,0.3*rand)$)
+                    % ($(330:1)+(0.15*rand,0.3*rand)$)
+                };
+                \path [name path=slit] (-0.3,-0.3) -- ++(-1,-1);
+                \draw [name intersections={of=U and slit}] (intersection-1) -- (-0.3,-0.3);
+                \node at (-0.9,-0.3) {*};
+        
+                \fill [rex] (0,-0.6) coordinate (a) circle (2pt) node[below=2pt]{$a$};
+                \fill [rex] (-1.3,0.4) coordinate (z) circle (2pt) node[left=1pt]{$z$};
+                \fill [rex] (-0.7,0.1) coordinate (z') circle (1.5pt) node[above right=-1pt,yshift=-1pt]{$z'$};
+        
+                \begin{scope}[on background layer]
+                    \draw [yex,thick,decoration={
+                        markings,
+                        mark=at position 0.4 with \arrow{>},
+                        mark=at position 0.7 with {\node[below left]{$\gamma_1^{}$};}
+                    },postaction={decorate}] plot[smooth] coordinates {(a) (0.1,-0.3) (-0.1,-0.1) (-0.4,-0.1) (-0.7,0.1) (-1.4,-0.2) (z)};
+                    \draw [bly,thick,decoration={
+                        markings,
+                        mark=at position 0.5 with \arrow{>},
+                        mark=at position 0.4 with {\node[above right=-2pt]{$\gamma_2^{}$};}
+                    },postaction={decorate}] plot[smooth] coordinates {(a) (0.2,-0.4) (0.8,-0.4) (1.5,0) (0.8,0.7) (-0.5,0.4) (z)};
+                    \draw [orx,decoration={
+                        markings,
+                        mark=at position 0.5 with \arrow{>},
+                        mark=at position 0.5 with {\node[below left=-1pt]{$\delta$};}
+                    },postaction={decorate}] (z) -- (z');
+                \end{scope}
+            \end{tikzpicture}
+            \caption{Continuous and zero closed-loop integrals implies integrable.}
+            \label{fig:contLoopInteg}
+        \end{figure}
+        Doesn't have to be simply connected; it can have a \textbf{hole}, \textbf{slit}, and/or \textbf{puncture}. Essentially, to define $F(z)$, choose $a\in U$ and $\gamma$ connecting $a$ and $z$ and define
+        \begin{equation*}
+            F(z) = \int_\gamma f\dd{z}
+        \end{equation*}
+        Claim: This definition is well-defined regardless of the choice of $a$ and $\gamma$. In particular, the integral is independent of choice of $\gamma$ because any two $\gamma$ can be paired into a closed loop, and we have by hypothesis that the integral over any closed loop is zero.\par
+        We now need to show that $F$ is differentiable with $F'=f$. Take $z,z'$ close enough that they can be connected by a straight line path $\delta$. Consider
+        \begin{equation*}
+            \lim_{z'\to z}\frac{F(z')-F(z)}{z'-z}
+        \end{equation*}
+        Now we know that
+        \begin{equation*}
+            F(z')-F(z) = \int_\delta f\dd{z}
+        \end{equation*}
+        Let $\gamma:[0,1]\to\C$ be defined by $t\mapsto tz'+(1-t)z$; a parameterization we can choose arbitrarily. Then
+        \begin{equation*}
+            F(z')-F(z) = \int_\delta f\dd{z}
+            = \int_0^1f[tz+(1-t)z']\cdot(z'-z)\dd{t}
+        \end{equation*}
+        % Therefore,
+        % \begin{equation*}
+        %     \frac{F(z')-F(z)}{z'-z} = \int_\delta f\dd{z}
+        %     = \int_0^1f[tz+(1-t)z']\dd{t}
+        % \end{equation*}
+        so dividing both sides by $z'-z$ and taking the limit yields
+        \begin{align*}
+            \lim_{z'\to z}\frac{F(z')-F(z)}{z'-z} &= \lim_{z'\to z}\int_0^1f[tz+(1-t)z']\dd{t}\\
+            &= \int_0^1\lim_{z'\to z}f(tz+z'-tz')\dd{t}\\
+            &= \int_0^1f(tz+z-tz)\dd{t}\\
+            &= \int_0^1f(z)\dd{t}\\
+            &= f(z)\int_0^1\dd{t}\\
+            % &= f(z)\cdot 1\\
+            &= f(z)
+        \end{align*}
+        and we have everything we wanted.
+    \end{proof}
+    \item What allows us to interchange the limit and the integral in the final set of equations?
+    \begin{itemize}
+        \item Roughly speaking, uniform convergence.
+    \end{itemize}
+    \item \textbf{Star-shaped} (domain): A domain $U\subset\C$ for which there exists $a\in U$ such that for all $z\in U$, the segment $a\to z$ is in $U$.
+    \begin{figure}[h!]
+        \centering
+        \vspace{-1em}
+        \begin{tikzpicture}
+            \footnotesize
+            \draw [semithick,name path=U] plot[smooth cycle] coordinates {
+                ($(0  :1)+(0.2*rand,0.2*rand)$)
+                ($(30 :1)+(0.2*rand,0.2*rand)$)
+                ($(60 :1)+(0.2*rand,0.2*rand)$)
+                ($(90 :1)+(0.2*rand,0.2*rand)$)
+                ($(120:1.1)+(0.2*rand,0.2*rand)$)
+                ($(150:0.7)+(0.2*rand,0.2*rand)$)
+                ($(180:0.7)+(0.2*rand,0.2*rand)$)
+                ($(210:0.7)+(0.2*rand,0.2*rand)$)
+                ($(240:1.1)+(0.2*rand,0.2*rand)$)
+                ($(270:1)+(0.2*rand,0.2*rand)$)
+                ($(300:1)+(0.2*rand,0.2*rand)$)
+                ($(330:1)+(0.2*rand,0.2*rand)$)
+            };
+    
+            \fill [rex] (0.3,-0.3) coordinate (a) circle (2pt) node[black,below=2pt]{$a$};
+    
+            \begin{scope}[on background layer]
+                \foreach \x in {0,15,...,345} {
+                    \path [name path=\x] (a) -- ++(\x:2);
+                    \draw [rey,name intersections={of=U and \x}] (a) -- (intersection-1);
+                }
+            \end{scope}
+        \end{tikzpicture}
+        \vspace{-3em}
+        \caption{Star-shaped domain.}
+        \label{fig:starShapedDomain}
+    \end{figure}
+    \vspace{-1em}
+    \begin{itemize}
+        \item There are star-shaped regions that are not \textbf{convex}, such as the one in Figure \ref{fig:starShapedDomain}!
+        \begin{itemize}
+            \item Convex implies star-shaped, but not vice versa.
+        \end{itemize}
+        \item Examples of domains that are \emph{not} star-shaped.
+        \begin{enumerate}
+            \item The annulus of two circles.
+            \item Puncturing the unit disk.
+        \end{enumerate}
+        \item Star-shaped implies \textbf{simply connected}.
+        \item Star-shaped is nice because we don't have to check every single curve; see the following lemma.
+    \end{itemize}
+    \item Lemma: If $U$ is star-shaped and for every triangle with one vertex at $a$, we have $\int_\triangle f\dd{z}=0$, then $F$ has a primitive in $U$.
+    \begin{figure}[h!]
+        \centering
+        \vspace{-1em}
+        \begin{tikzpicture}
+            \footnotesize
+            \draw [semithick,name path=U] plot[smooth cycle] coordinates {
+                ($(0  :1)+(0.2*rand,0.2*rand)$)
+                ($(30 :1)+(0.2*rand,0.2*rand)$)
+                ($(60 :1)+(0.2*rand,0.2*rand)$)
+                ($(90 :1)+(0.2*rand,0.2*rand)$)
+                ($(120:1.1)+(0.2*rand,0.2*rand)$)
+                ($(150:0.7)+(0.2*rand,0.2*rand)$)
+                ($(180:0.5)+(0.2*rand,0.2*rand)$)
+                ($(210:0.7)+(0.2*rand,0.2*rand)$)
+                ($(240:1.1)+(0.2*rand,0.2*rand)$)
+                ($(270:1)+(0.2*rand,0.2*rand)$)
+                ($(300:1)+(0.2*rand,0.2*rand)$)
+                ($(330:1)+(0.2*rand,0.2*rand)$)
+            };
+    
+            \fill [orx] (0.3,-0.3) coordinate (a) circle (2pt) node[black,below=2pt]{$a$};
+    
+            \begin{scope}[on background layer]
+                \foreach \x in {0,15,...,345} {
+                    \path [name path=\x] (a) -- ++(\x:2);
+                    \draw [help lines,name intersections={of=U and \x}] (a) -- (intersection-1);
+                }
+    
+                \fill [orx] ($(a)+(120:1)$) coordinate (b) circle (2pt);
+                \fill [orx] ($(a)+(105:0.7)$) coordinate (c) circle (2pt);
+                \draw [orx,very thick] (a) -- (b) -- (c) -- cycle;
+            \end{scope}
+        \end{tikzpicture}
+        \vspace{-3em}
+        \caption{A triangle in a star-shaped domain.}
+        \label{fig:triangleStar}
+    \end{figure}
+    \vspace{-1em}
+    \begin{proof}
+        What should be our candidate for $F(z)$? Define
+        \begin{equation*}
+            F(z) = \int_\gamma f\dd{z}
+        \end{equation*}
+        where $\gamma$ is the line segment from $a\to z$ that we know exists because $U$ is star-shaped.\par
+        We now have to show that $F$ is holomorphic with $F'=f$, but we just do this as before by constructing a "closed loop," except our closed loop this time will just be a triangle as drawn in Figure \ref{fig:triangleStar}.
+    \end{proof}
+    \item With these definitions, we now state and prove one of the two main theorems in this class.
+    \item \textbf{Cauchy Integral Theorem}: Suppose $U$ is a star-shaped domain and $f:U\to\C$ is holomorphic. Then $\int_\gamma f\dd{z}=0$ for any closed loop $\gamma$ in $U$.
+    \begin{itemize}
+        \item Whereas the FTC says if you have an \emph{integral}, then the integral around a closed loop is zero. This theorem says that if you have a \emph{derivative}, then the integral around a closed loop is zero.
+        \item This is Round 1 of the theorem. In round 2, we'll swap the "star-shaped" hypothesis for "simply connected."
+    \end{itemize}
+    \item Today we're at least going to prove this, and possibly look at an application, too. If we don't get to the application today, we'll see it next Tuesday.
+    \item Proof idea: Prove that $f$ has a primitive.
+    \begin{proof}
+        In order to prove this theorem, we'll use the preceding lemma. Thus, all we need to show is that for every triangle with one vertex on the center of the star, $\int_\triangle f\dd{z}=0$. Since we only have to check this for \emph{triangles}, we can use a really lovely result called \textbf{Goursat's lemma}.
+    \end{proof}
+    \item \textbf{Goursat's lemma}: If $f$ is holomorphic in a neighborhood of a triangle including the interior, then $\int_\triangle f\dd{z}=0$.
+    \begin{proof}
+        Idea: Estimate the integral.\par
+        \begin{figure}[h!]
+            \centering
+            \begin{subfigure}[b]{0.3\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \fill [rey!15,xshift=-0.866cm,yshift=-0.5cm] (90:1) -- (210:1) -- (330:1) -- cycle;
+                    \draw [rex,thick] (30:1) -- (150:1) -- (270:1) -- cycle;
+        
+                    \draw [thick] (90:2) -- (210:2) -- (330:2) -- cycle;
+        
+                    \draw [orx,semithick,->,shorten >=3pt,yshift=1cm] (90:0.7) -- (210:0.7) -- (330:0.7) -- (90:0.7);
+                    \draw [orx,semithick,->,shorten >=3pt] (30:0.7) -- (150:0.7) -- (270:0.7) -- (30:0.7);
+                    \draw [orx,semithick,->,shorten >=3pt,xshift=0.866cm,yshift=-0.5cm] (90:0.7) -- (210:0.7) -- (330:0.7) -- (90:0.7);
+                    \draw [orx,semithick,->,shorten >=3pt,xshift=-0.866cm,yshift=-0.5cm] (90:0.7) -- (210:0.7) -- (330:0.7) -- (90:0.7);
+                \end{tikzpicture}
+                \caption{Picking $\triangle_1$.}
+                \label{fig:goursata}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.3\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \fill [rey!15,xshift=-0.866cm,yshift=-0.5cm] (90:1) -- (210:1) -- (330:1) -- cycle;
+                    \draw [rex,thick] (30:1) -- (150:1) -- (270:1) -- cycle;
+                    \fill [bly!30,xshift=-0.866cm,yshift=-0.5cm] (30:0.5) -- (150:0.5) -- (270:0.5) -- cycle;
+                    \draw [blx,thick,xshift=-0.866cm,yshift=-0.5cm] (30:0.5) -- (150:0.5) -- (270:0.5) -- cycle;
+        
+                    \draw [thick] (90:2) -- (210:2) -- (330:2) -- cycle;
+                \end{tikzpicture}
+                \caption{Picking $\triangle_2$.}
+                \label{fig:goursatb}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.3\linewidth}
+                \centering
+                \begin{tikzpicture}
+                    \fill [rey!15,xshift=-0.866cm,yshift=-0.5cm] (90:1) -- (210:1) -- (330:1) -- cycle;
+                    \draw [rex,thick] (30:1) -- (150:1) -- (270:1) -- cycle;
+                    \fill [bly!30,xshift=-0.866cm,yshift=-0.5cm] (30:0.5) -- (150:0.5) -- (270:0.5) -- cycle;
+                    \draw [blx,thick,xshift=-0.866cm,yshift=-0.5cm] (30:0.5) -- (150:0.5) -- (270:0.5) -- cycle;
+                    \fill [orx!30,xshift=-0.866cm,yshift=-0.5cm,xshift=0.217cm,yshift=0.125cm] (30:0.25) -- (150:0.25) -- (270:0.25) -- cycle;
+                    \draw [orx,thick,xshift=-0.866cm,yshift=-0.5cm,xshift=0.217cm,yshift=0.125cm] (30:0.25) -- (150:0.25) -- (270:0.25) -- cycle;
+        
+                    \draw [thick] (90:2) -- (210:2) -- (330:2) -- cycle;
+                \end{tikzpicture}
+                \caption{Picking $\triangle_3$.}
+                \label{fig:goursatc}
+            \end{subfigure}
+            \caption{Proving Goursat's lemma.}
+            \label{fig:goursat}
+        \end{figure}
+        Fix some $z_0\in\blacktriangle$ (the exact value will be determined later). We know that $f$ is holomorphic at $z_0$, which implies that there exists a linear approximation
+        \begin{equation*}
+            f(z) = \underbrace{f(z_0)+f'(z_0)\cdot(z-z_0)}_\text{linear}+E(z)\cdot(z-z_0)
+        \end{equation*}
+        where our error function $E(z)\to 0$ as $z\to z_0$. Now the underlined linear portion above is a (stupid) power series, but since it technically \emph{is} a "convergent power series," our previous results imply that it has primitives. In particular, its integral around a closed loop (like a triangle) will be zero. This means that
+        \begin{equation*}
+            \int_\triangle f\dd{z} = \underbrace{\int_\triangle[f(z_0)+f'(z_0)\cdot(z-z_0)]\dd{z}}_0+\int_\triangle E(z)\cdot(z-z_0)\dd{z}
+            = \int_\triangle E(z)\cdot(z-z_0)\dd{z}
+        \end{equation*}
+        Goursat's idea: Choose a good $z_0$. To do this, we'll subdivide the original black triangle (see Figure \ref{fig:goursata}) by choosing midpoints and breaking it into four triangles. Keep using the counterclockwise orientation in all cases. All of the red segments get cancelled out from integrating in both directions, so
+        \begin{equation*}
+            \int_{\triangle_0}f\dd{z} = \sum\int_{4\text{ sub }\triangle\text{'s}}f\dd{z}
+        \end{equation*}
+        Choose $\triangle_1$ in first stage such that $|\int_{\triangle_1}f\dd{z}|$ is the greatest among the first stage sub-triangles. Thus,
+        \begin{equation*}
+            \left| \int_\triangle f\dd{z} \right| \leq 4\cdot\left| \int_{\triangle_1}f\dd{z} \right|
+        \end{equation*}
+        Now subdivide $\triangle_1$ and choose $\triangle_2$ the same way (see Figure \ref{fig:goursatb}), so that
+        \begin{equation*}
+            \left| \int_\triangle f\dd{z} \right| \leq 4\cdot\left| \int_{\triangle_1}f\dd{z} \right|
+            \leq 4\cdot 4\cdot\left| \int_{\triangle_2}f\dd{z} \right|
+        \end{equation*}
+        Iterating this process, we obtain
+        \begin{equation*}
+            \left| \int_\triangle f\dd{z} \right| \leq 4^n\cdot\left| \int_{\triangle_n}f\dd{z} \right|
+        \end{equation*}
+        First thing to observe:
+        \begin{align*}
+            \len(\triangle_n) &= 2^{-n}\cdot\len(\triangle_0)&
+            \diam(\triangle_n) &= 2^{-n}\cdot\diam(\triangle_0)
+        \end{align*}
+        Now fix $\varepsilon>0$ and take $n$ big enough such that on all of $\triangle_n$,
+        \begin{equation*}
+            |E(z)| < \frac{\varepsilon}{\len(\triangle_0)\cdot\diam(\triangle_0)}
+        \end{equation*}
+        Choose $z_0\in\bigcap_{n=1}^\infty\blacktriangle_n$. Then
+        \begin{align*}
+            \left| \int_\triangle f\dd{z} \right| &\leq 4^n\cdot\left| \int_{\triangle_n}f\dd{z} \right|\\
+            &= 4^n\cdot\left| \int_{\triangle_n}E(z)\cdot(z-z_0)\dd{z} \right|\\
+            &\leq 4^n\cdot\len(\triangle_n)\cdot\max_{\triangle_n}|E(z)\cdot(z-z_0)|\\
+            &= 4^n\cdot\len(\triangle_n)\cdot\max|E(z)|\cdot\max|z-z_0|\\
+            &\leq 4^n\cdot\len(\triangle_n)\cdot\diam(\triangle_n)\cdot\max|E(z)|\\
+            &= 4^n\cdot 2^{-n}\len(\triangle_0)\cdot 2^{-n}\diam(\triangle_0)\cdot\max|E(z)|\\
+            &= \len(\triangle_0)\cdot\diam(\triangle_0)\cdot\max|E(z)|\\
+            &< \varepsilon
+        \end{align*}
+        Since we can choose $\varepsilon$ arbitrarily small, we can thus send the original integral of $f$ over $\triangle$ to zero.
+    \end{proof}
+    \item We now end class with an example of how complex analysis can be useful, even in calculus!
+    \item Example: Evaluate the following \textbf{Dirichlet integral} using complex analysis.
+    \begin{equation*}
+        \int_0^\infty\frac{\sin(x)}{x}\dd{x}
+    \end{equation*}
+    \begin{itemize}
+        \item We will do so via a focused analysis of the function $f:\C\to\C$ defined by
+        \begin{equation*}
+            z \mapsto \frac{\e[iz]}{z}
+        \end{equation*}
+        \begin{itemize}
+            \item This function is not holomorphic everywhere, but it is on the punctured plane $\mathcal{O}(\C^*)$.
+            \item However, we only need the upper half $\mathcal{O}(\Hh)$ presently.
+        \end{itemize}
+        \item More specifically, define $U$ to be a domain containing $\gamma$ as defined as in Figure \ref{fig:dirichletIntegral}.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[
+                every node/.style=black,
+                text height=1.5ex,text depth=0.25ex
+            ]
+                \small
+                \draw (-2.5,0) -- (2.5,0) node[right]{$\R$};
+                \draw (0,-0.5) -- (0,2.5) node[above]{$i\R$};
+        
+                \node at (-0.7,1.5) {$\gamma$};
+                \node at (-2.2,0.3) {$U$};
+        
+                \footnotesize
+                \draw [rex,thick,decoration={
+                    markings,
+                    mark=at position 0.09 with \arrow{>},
+                    mark=at position 0.09 with {\node[above=2pt]{$\gamma_1^{}$};},
+                    mark=at position 0.19 with \arrow{>},
+                    mark=at position 0.19 with {\node[above left=1pt]{$\gamma_2^{}$};},
+                    mark=at position 0.33 with \arrow{>},
+                    mark=at position 0.33 with {\node[above=2pt]{$\gamma_3^{}$};},
+                    mark=at position 0.65 with \arrow{>},
+                    mark=at position 0.65 with {\node[below]{$\gamma_4^{}$};}
+                },postaction={decorate}] (-2,0) node[below]{$-R$}
+                    -- (-0.3,0) node[below]{$-r$}
+                    arc[start angle=180,end angle=0,radius=3mm] node[below]{$r$}
+                    -- (2,0) node[below]{$R$}
+                    arc[start angle=0,end angle=180,radius=2cm] -- cycle
+                ;
+            \end{tikzpicture}
+            \caption{Dirichlet integral.}
+            \label{fig:dirichletIntegral}
+        \end{figure}
+        % \item Now take $\int_\gamma f(z)\dd{z}$.
+        % \item Consider the region of a half annulus.
+        \item By the Cauchy integral theorem and our decomposition of $\gamma$,
+        \begin{equation*}
+            0 = \int_\gamma f(z)\dd{z} = \sum_{i=1}^4\int_{\gamma_i}f\dd{z}
+        \end{equation*}
+        \item We now integrate the segments one at a time.
+        \begin{itemize}
+            \item $\gamma_1$ and $\gamma_3$: Recalling our definition of $\sin(z)$ from last class, we have that
+            \begin{align*}
+                \int_{\gamma_1\gamma_3}\frac{\e[ix]}{x}\dd{x} &= \int_{-R}^{-r}\frac{\e[ix]}{x}\dd{x}+\int_r^R\frac{\e[ix]}{x}\dd{x}\\
+                &= \int_{-r}^{-R}-\frac{\e[ix]}{x}\dd{x}+\int_r^R\frac{\e[ix]}{x}\dd{x}\\
+                &= \int_r^R-\frac{\e[-ix]}{x}\dd{x}+\int_r^R\frac{\e[ix]}{x}\dd{x}\\
+                &= \int_r^R\frac{\e[ix]-\e[-ix]}{x}\dd{x}\\
+                &= 2i\int_r^R\frac{\sin(x)}{x}\dd{x}
+            \end{align*}
+            \item $\gamma_2$: We can explicitly compute this integral as $r\to 0$, using the parameterization $\gamma_2:[0,\pi]\to\C$ defined by $\theta\mapsto r\e[i(\pi-\theta)]$.
+            \begin{align*}
+                \lim_{r\to 0}\int_{\gamma_2}\frac{\e[iz]}{z}\dd{z} &= \lim_{r\to 0}\int_0^\pi\frac{\e[{ir\e[i(\pi-\theta)]}]}{r\e[i(\pi-\theta)]}\cdot -ir\e[i(\pi-\theta)]\dd{\theta}\\
+                &= -i\lim_{r\to 0}\int_0^\pi\e[{ir\e[i(\pi-\theta)]}]\dd{\theta}\\
+                &= -i\int_0^\pi\e[0]\dd{\theta}\\
+                &= -i\pi
+            \end{align*}
+            \item $\gamma_4$: We need to bound the $R\e[i\theta]$ term as $R\to\infty$; see his notes!
+            \begin{equation*}
+                \int_0^\pi\e[{iR\e[i\theta]}]i\dd\theta \to 0
+            \end{equation*}
+        \end{itemize}
+        \item Therefore, by transitivity,
+        \begin{align*}
+            2i\int_0^\infty\frac{\sin(x)}{x}\dd{x}-i\pi &= 0\\
+            \int_0^\infty\frac{\sin(x)}{x}\dd{x} &= \frac{\pi}{2}
+        \end{align*}
+    \end{itemize}
 \end{itemize}
 
 
