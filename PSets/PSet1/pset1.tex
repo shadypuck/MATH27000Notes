@@ -10,11 +10,26 @@
 
 \section{Holomorphicity}
 \subsection*{Set A: Graded for Completion}
-\begin{enumerate}
+\begin{enumerate}[ref={A.\arabic*}]
     \item \marginnote{3/29:}\textcite{bib:FischerLieb}, QI.2.1. Formulate and prove the chain rule for Wirtinger derivatives. Furthermore, show that
     \begin{equation*}
         \overline{\pdv{f}{z}} = \pdv{\bar{f}}{\bar{z}}
     \end{equation*}
+    \begin{proof}
+        % See textbook/wikipedia.
+
+        Extrapolating from \textcite[11]{bib:FischerLieb}, the full chain rule for the Wirtinger derivatives would be
+        \begin{equation*}
+            \boxed{\pdv{t}(f\circ g)(z) = f_z(g(z))g_z(z)+f_{\bar{z}}(g(z))\bar{g}_{\bar{z}}(z)}
+        \end{equation*}
+        Additionally, since the complex conjugate of the sum or product of two complex numbers is the sum or product of the complex conjugates, we have that
+        \begin{align*}
+            \overline{\pdv{f}{z}} &= \overline{\frac{1}{2}(f_x+if_y)}\\
+            &= \frac{1}{2}(\bar{f}_x+\overline{if_y})\\
+            &= \frac{1}{2}(\bar{f}_x-i\bar{f}_y)\\
+            &= \pdv{\bar{f}}{\bar{z}}
+        \end{align*}
+    \end{proof}
     \item Let $\inp{(x_1,y_1),(x_2,y_2)}=x_1x_2+y_1y_2$ denote the usual inner product on $\R^2$. We can also define the \textbf{Hermitian inner product} on $\C$ via
     \begin{equation*}
         (z,w) = z\bar{w}
@@ -23,19 +38,149 @@
     \begin{equation*}
         \inp{z,w} = \frac{1}{2}[(z,w)+(w,z)] = \re(z,w)
     \end{equation*}
-    \item For any integer $n$, compute the line integral $\int_\gamma z^n\dd{z}$ where $\gamma$ is any circle centered at the origin with counterclockwise orientation. Do not use Cauchy's theorem.
+    \begin{proof}
+        % Should just be straight equalities.
+
+        We have that
+        \begin{align*}
+            \frac{1}{2}[(z,w)+(w,z)] &= \frac{1}{2}[z\bar{w}+w\bar{z}]\\
+            &= \frac{1}{2}[(z_1+iz_2)(w_1-iw_2)+(w_1+iw_2)(z_1-iz_2)]\\
+            &= \frac{1}{2}[(z_1w_1+z_2w_2+i(z_2w_1-z_1w_2))+(w_1z_1+w_2z_2+i(w_2z_1-w_1z_2))]\\
+            &= z_1w_1+z_2w_2\\
+            &= \inp{(z_1,z_2),(w_1,w_2)}\\
+            &= \inp{z,w}
+        \end{align*}
+        and
+        \begin{align*}
+            \re(z,w) &= \re(z\bar{w})\\
+            &= \re[(z_1+iz_2)(w_1-iw_2)]\\
+            &= \re[z_1w_1+z_2w_2+i(z_2w_1-z_1w_2)]\\
+            &= z_1w_1+z_2w_2\\
+            &= \inp{(z_1,z_2),(w_1,w_2)}\\
+            &= \inp{z,w}
+        \end{align*}
+        as desired.
+    \end{proof}
+    \item \label{prb:1.A.3}For any integer $n$, compute the line integral $\int_\gamma z^n\dd{z}$ where $\gamma$ is any circle centered at the origin with counterclockwise orientation. Do not use Cauchy's theorem.
+    \begin{proof}
+        % Looks like they'd all be zero and we just have to verify this using the definition of integration over a path.
+
+        To evaluate such a line integral over a circle centered at the origin with counterclockwise orientation, we may use the parameterization $\gamma:[0,2\pi)\to\C$ defined by
+        \begin{equation*}
+            \gamma(t) = a\e[it]
+        \end{equation*}
+        where $a$ is an arbitrary positive real number. Thus, since $\gamma'(t)=ai\e[it]$, we have the following when $n\neq -1$.
+        \begin{align*}
+            \int_\gamma z^n\dd{z} &= \int_0^{2\pi}(a\e[it])^n\cdot ai\e[it]\dd{t}\\
+            &= a^{n+1}i\int_0^{2\pi}\e[i(n+1)t]\dd{t}\\
+            &= a^{n+1}i\left[ \frac{\e[i(n+1)t]}{i(n+1)} \right]_0^{2\pi}\\
+            &= a^{n+1}i\left[ \frac{1}{i(n+1)}-\frac{1}{i(n+1)} \right]\\
+            \Aboxed{\int_\gamma z^n\dd{z} &= 0}\tag{$n\neq -1$}
+        \end{align*}
+        When $n=-1$, we have
+        \begin{align*}
+            \int_\gamma\frac{1}{z}\dd{z} &= \int_0^{2\pi}a^{-1}\e[-it]\cdot ai\e[it]\dd{t}\\
+            &= \int_0^{2\pi}i\dd{t}\\
+            \Aboxed{\int_\gamma z^{-1}\dd{z} &= 2\pi i}
+        \end{align*}
+    \end{proof}
     \item Without using Cauchy's theorem, show that for any $|a|<1<|b|$,
     \begin{equation*}
         \int_\gamma\frac{1}{(z-a)(z-b)}\dd{z} = \frac{2\pi i}{a-b}
     \end{equation*}
     where $\gamma$ is the circle of radius 1 centered about the origin, oriented counterclockwise.
+    \begin{proof}
+        % Method of partial fractions.
+        % Then check out the method from 3/26 class and go from there.
+        
+        % I might want to put the most effort into this since Panteleymon struggled so much unless something else later is harder.
+
+
+        Using the method of partial fractions, we set
+        \begin{equation*}
+            \frac{0z+1}{(z-a)(z-b)} = \frac{A}{z-a}+\frac{B}{z-b}
+            = \frac{A(z-b)+B(z-a)}{(z-a)(z-b)}
+            = \frac{(A+B)z+(-Ab-Ba)}{(z-a)(z-b)}
+        \end{equation*}
+        to obtain the two-variable, two-equation system
+        \begin{align*}
+            0 &= A+B\\
+            1 &= -Ab-Ba
+        \end{align*}
+        with solution
+        \begin{align*}
+            A &= \frac{1}{a-b}&
+            B &= \frac{1}{b-a}
+        \end{align*}
+        Thus,
+        \begin{equation*}
+            \int_\gamma\frac{1}{(z-a)(z-b)}\dd{z} = \frac{1}{a-b}\left[ \int_\gamma\frac{1}{z-a}\dd{z}-\int_\gamma\frac{1}{z-b}\dd{z} \right]
+        \end{equation*}
+        We will evaluate the left integral first, followed by the right one.\par
+        Let's parameterize the circle by $\gamma:[0,2\pi)\to\C$ defined by $t\mapsto\e[it]$. Since $|a|<1$ by hypothesis and $|\gamma(t)|=1$ for all $t\in[0,2\pi)$, we know that $|a/z|=|a/\gamma(t)|<1$; this will allow us to replace a certain expression with the corresponding convergent geometric power series.. Thus, we have that
+        \begin{align*}
+            \int_\gamma\frac{1}{z-a}\dd{z} &= \int_\gamma\frac{1}{z}\frac{1}{1-a/z}\dd{z}\\
+            &= \int_\gamma\frac{1}{z}\sum_{k=0}^\infty\left( \frac{a}{z} \right)^k\dd{z}\\
+            &= \int_\gamma\sum_{k=0}^\infty\frac{a^k}{z^{k+1}}\dd{z}\\
+            &= \sum_{k=0}^\infty\int_\gamma\frac{a^k}{z^{k+1}}\dd{z}\\
+            &= \sum_{k=0}^\infty a^k\int_\gamma z^{-(k+1)}\dd{z}\\
+        \end{align*}
+        Note that we are able to exchange the summation and the integral because of the lemma from the 3/26 class regarding convergent series of integrable functions. Additionally, it follows by Problem \ref{prb:1.A.3} that only the $k=0$ term in the above sum will not evaluate to zero. In particular, this $k=0$ term will evaluate to $2\pi i$, so overall,
+        \begin{equation*}
+            \int_\gamma\frac{1}{z-a}\dd{z} = 2\pi i
+        \end{equation*}
+        For the right integral, we can apply the fundamental theorem of calculus. We have that
+        \begin{equation*}
+            \int_\gamma\frac{1}{z-b}\dd{z} = \int_0^{2\pi}\frac{i\e[it]}{\e[it]-b}\dd{t}
+            = \left[ \ln|\e[it]-b| \right]_0^{2\pi}
+            = 0
+        \end{equation*}
+        Therefore, we have that
+        \begin{align*}
+            \int_\gamma\frac{1}{(z-a)(z-b)}\dd{z} &= \frac{1}{a-b}\left[ \int_\gamma\frac{1}{z-a}\dd{z}-\int_\gamma\frac{1}{z-b}\dd{z} \right]\\
+            &= \frac{1}{a-b}[2\pi i-0]\\
+            &= \frac{2\pi i}{a-b}
+        \end{align*}
+        as desired.
+    \end{proof}
     \item Determine the image of the following sets under the following conformal mappings. Use level curves to illustrate the geometry of these mappings.
-    \begin{enumerate}
+    \begin{enumerate}[ref={A.\theenumi\alph*}]
         \item The unit disk $\D=\{z:|z|<1\}$ under $z\mapsto 1/z$.
+        \begin{proof}
+            This map inverts the modulus of the real part and flips the imaginary part over the real axis. Because of the radial symmetry of the unit disk, the radial symmetry of the final region will be preserved. However, the final region will consist of all points of magnitude $1/r$ ($r<1$), that is, of magnitude $r>1$. Thus,
+            \begin{equation*}
+                \boxed{\im(\D) = \C\setminus\overline{\D}}
+            \end{equation*}
+            Some polar level curves map as follows.
+        \end{proof}
         \item $\D\setminus\{0\}$ under $z\mapsto z^2$.
+        \begin{proof}
+            This map squares the radius and doubles the argument of a complex number in polar form. Because of the radial symmetry of this disk and the fact that it only contains complex numbers with modulus that shrink when squared, all it will do is map to itself:
+            \begin{equation*}
+                \boxed{\im(\D\setminus\{0\}) = \D\setminus\{0\}}
+            \end{equation*}
+        \end{proof}
         \item The strip $S=\{z:\Im(z)\in(0,2\pi)\}$ under $z\mapsto\e[z]$.
+        \begin{proof}
+            Let $z=x+iy$. Then $\e[z]=\e[a]\e[ib]$. By the definition of $S$, we know that $a\in\R$ and $b\in(0,2\pi)$. Thus, since the image of the real exponential function is $(0,\infty)$, by picking various values of $a$, we can reach a complex number of any modulus save zero. Additionally, by picking various values of $b$, we can reach a complex number of any argument save zero. This means that we can get anywhere in the complex plane except $[0,\infty)$; we can't even access this region by picking $b=\pi$ and a negative modulus because $\e[a]>0$. Therefore,
+            \begin{equation*}
+                \boxed{\im(S) = \C\setminus[0,\infty)}
+            \end{equation*}
+        \end{proof}
         \item The upper half-plane $\Hh=\{z:\Im(z)>0\}$ under $z\mapsto z^2$,
-        \item The half disk $\D\cap\Hh$ under $z\mapsto(1+z)/(1-z)$.
+        \begin{proof}
+            As in part (b), we're squaring the modulus and doubling the argument. This means that we can get anywhere except, coincidentally, the same set we miss in part (c). Therefore,
+            \begin{equation*}
+                \boxed{\im(\Hh) = \C\setminus[0,\infty)}
+            \end{equation*}
+        \end{proof}
+        \item \label{prb:1.A.5e}The half disk $\D\cap\Hh$ under $z\mapsto(1+z)/(1-z)$.
+        \begin{proof}
+            Via the applet, it appears that
+            \begin{equation*}
+                \boxed{\im(\D\cap\Hh) = \{z\in\C^*:\arg(z)\in(0,\pi/2)\}}
+            \end{equation*}
+        \end{proof}
     \end{enumerate}
 \end{enumerate}
 
@@ -51,12 +196,61 @@
         \end{cases}
     \end{equation*}
     Extend $f$ to a function on $\C$ using the same formula (replacing $x$'s with $z$'s). Is it holomorphic at the origin?
+    \begin{proof}
+        % Should be able to prove this without too much difficulty.
+
+        % By the theorem from the end of class on 3/19, to determine if $f$ is holomorphic at the origin, it will suffice to check if
+        % \begin{equation*}
+        %     \eval{\pdv{f}{\bar{z}}}_0 = 0
+        % \end{equation*}
+        % First off, note that
+        % \begin{align*}
+        %     z^2\sin(1/z)
+        % \end{align*}
+
+
+        As a first step in investigating the complex version of $f$, let's look at its behavior along the imaginary axis, i.e., for complex numbers $ix$, $x\in\R$. Since $\sin(ix)=i\sinh(x)$, we have that
+        \begin{equation*}
+            (ix)^2\sin(\frac{1}{ix}) = -x^2\sin(i\cdot -\frac{1}{x})
+            = -ix^2\sinh(-\frac{1}{x})
+        \end{equation*}
+        Investigating $x^2\sinh(-1/x)$, we find that this function is not even continuous at zero, let alone differentiable or holomorphic. Therefore, \fbox{$f$ is not holomorphic at the origin.}
+    \end{proof}
     \item Show that if $f$ is holomorphic on a domain $U\subset\C$ and takes only real values, then it is constant.
+    \begin{proof}
+        % Should be able to prove this.
+
+        Suppose $f$ sends $(x,y)$ to $(g(x,y),h(x,y))$. If $f$ takes only real values, then $h(x,y)=0$ for all $(x,y)\in U$. Thus,
+        \begin{equation*}
+            h_x = h_y = 0
+        \end{equation*}
+        on $U$. Additionally, since $f$ is holomorphic on $U$, it satisfies the Cauchy-Riemann equations. This combined with the above equation implies that
+        \begin{align*}
+            g_x &= h_y = 0&
+            g_y &= -h_x = 0
+        \end{align*}
+        Consequently, $f'=0$ on $U$, so $f$ must be constant on $U$.
+    \end{proof}
     \item Find a conformal map that takes the upper half-plane onto the "Pac-Man" given by
     \begin{equation*}
         \{z:|z|<1\,\text{ and }\arg(z)\in(\pi/4,7\pi/4)\}
     \end{equation*}
     Explain how you obtained this map. \emph{Hint}: Do completion problem 5 first.
+    \begin{proof}
+        % Shouldn't be too hard.
+
+        % Halve the argument, use the inverse of the A.5e map, distort the argument.
+
+
+        Define $f,g,h:\C\to\C$ by
+        \begin{alignat*}{2}
+            f&:r\e[i\theta] &&\mapsto r\e[i\theta/2]\\
+            g&:z            &&\mapsto \frac{z-1}{z+1}\\
+            h&:r\e[i\theta] &&\mapsto r\e[3i\theta/2+\pi/4]
+        \end{alignat*}
+        where $f,h$ take $\theta\in[0,2\pi)$ to avoid ambiguity. Then the desired conformal map is $h\circ g\circ f$. The bijectivity of $f,h$ follows from the bijectivity of the linear manipulations of the arguments, while the bijectivity of $g$ follows from the fact that it is the inverse of the function in Problem \ref{prb:1.A.5e}. $g,g^{-1}$ are holomorphic as rational functions with no poles in the domain, and $f,f^{-1},h,h^{-1}$ are holomorphic because their derivatives are rotation maps at every point.\par
+        The trickiest part of obtaining this map was figuring out how to get the infinite rectangle into some kind of arc (the job that $g$ does). I toyed around with translating the block up by $i$ and using $1/z$ or something like that to pull it in, but I couldn't work out how to introduce polar-ness. Then, taking the hint, I thought back to Problem \ref{prb:1.A.5e} and realized that I could hijack this after some pre- and post-transformations. The use of rotation maps was important, too, for $f,g$ because of their smoothness, as opposed to some kind of $x+iy\mapsto|x|+iy$ map for $f$, for instance. Then it was just a matter of tweaking numbers.
+    \end{proof}
 \end{enumerate}
 
 
