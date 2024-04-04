@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Fundamental Theorems}
 \section{Cauchy Integral Formula}
 \begin{itemize}
     \item \marginnote{4/2:}Last time.
@@ -551,6 +551,179 @@
         \end{equation*}
         The maximum is bounded and $R$ is really big, so as $R\to\infty$, the derivative gets arbitrarily small. So if we've got an arbitrary function with zero derivative, then we've got a constant function.
     \end{proof}
+    \item \textbf{Entire} (function): A complex-valued function that is holomorphic on the whole complex plane.
+\end{itemize}
+
+
+
+\section{Analytic Continuation and Removable Singularities}
+\begin{itemize}
+    \item \marginnote{4/4:}Last time.
+    \begin{itemize}
+        \item Cauchy integral formula: Let $U$ be any domain, $f\in\mathcal{O}(U)$, $D\subset\subset U$, and $z\in D$. Then
+        \begin{equation*}
+            f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+        \end{equation*}
+        \item Implies that holomorphic functions are $C^\infty$.
+        \item Implies Cauchy's inequalities: If $D$ is a disk centered at $z_0$ of radius $R$, then
+        \begin{equation*}
+            |f^{(n)}(z_0)| \leq \frac{n!}{R^n}\sup_{\partial D}|f(\zeta)|
+        \end{equation*}
+        \item Implies Liouville's theorem: Any bounded entire function is constant.
+    \end{itemize}
+    \item Our focus today is on results we can get out of power series.
+    \item Observe that if
+    \begin{equation*}
+        P(z) = \sum_{k=0}^\infty a_k(z-z_0)^k
+    \end{equation*}
+    is a convergent power series centered at $z_0$, then
+    \begin{equation*}
+        P^{(n)}(z_0) = n!a_n
+    \end{equation*}
+    \item Now let $f\in\mathcal{O}(U)$.
+    \begin{itemize}
+        \item TPS: What should the power series for $f$ look like?
+        \begin{itemize}
+            \item Rearranging the above, we want
+            \begin{equation*}
+                a_k = \frac{f^{(k)}(z_0)}{k!}
+            \end{equation*}
+            \item The following power series formally has the right derivatives.
+            \begin{equation*}
+                P(z) = \sum_{k=0}^\infty\frac{f^{(k)}(z_0)}{k!}(z-z_0)^k
+            \end{equation*}
+        \end{itemize}
+        \item Does this power series converge though, and if so, where?
+        \begin{itemize}
+            \item Recall that the Cauchy-Hadamard formula tells us that the radius of convergence $r$ satisfies
+            \begin{equation*}
+                r = \left( \limsup_{k\to\infty}|a_k|^{1/k} \right)^{-1}
+            \end{equation*}
+            \item Pick a $z_0\in U$ and a disk $D\subset\subset U$ of radius $R$. Then by the Cauchy inequalities,
+            \begin{equation*}
+                |a_k|^{1/k} = \left| \frac{f^{(k)}(z_0)}{k!} \right|^{1/k}
+                \leq \frac{|\sup_{\partial D}f(\zeta)|^{1/k}}{R}
+                \to \frac{1}{R}
+            \end{equation*}
+            \item Thus, returning to the Cauchy-Hadamard formula, the radius of convergence is $\geq R$.
+        \end{itemize}
+        \item So we've got a convergent power series, but why does this power series equal $f(z)$?
+        \begin{itemize}
+            \item We know that $P(z)$ and $f(z)$ have all the same derivatives.
+            \item However, over $\R$, this is not enough! Recall the example of $\e[-1/x^2]$, which has the same derivatives as its power series at zero but is not equal to it.
+            \item Over $\C$, however, we claim that having the same derivatives \emph{is} enough.
+            \item Use CIF and expand $1/(\zeta-z)$.
+            \item Note: To keep all of our $z$'s straight, recall that $z_0$ is a point, $\zeta$ lies on $\partial D$ where $D$ is centered at $z_0$, and $z$ is somewhere in $\mathring{D}$.
+            \item Doing this, we obtain
+            \begin{equation*}
+                \frac{1}{\zeta-z} = \frac{1}{\zeta-z_0}\cdot\frac{1}{1-\left( \frac{z-z_0}{\zeta-z_0} \right)}
+                = \frac{1}{\zeta-z_0}\sum_{k=0}^\infty\left( \frac{z-z_0}{\zeta-z_0} \right)^k
+            \end{equation*}
+            \item Thus,
+            \begin{align*}
+                f(z) &= \frac{1}{2\pi i}\int_{\partial D}\sum_{k=0}^\infty\frac{f(\zeta)}{(\zeta-z_0)^{n+1}}(z-z_0)^n\dd\zeta\\
+                &= \sum_{k=0}^\infty\underbrace{\frac{1}{2\pi i}\int\frac{f(\zeta)}{(\zeta-z_0)^{n+1}}\dd\zeta}_{f^{(n)}(z_0)/n!}(z-z_0)^n\\
+                &= P(z)
+            \end{align*}
+            \item Recall that we can bring the sum outside of the integral because of uniform convergence and our lemma about integrable functions from the 3/26 class.
+        \end{itemize}
+        \item All in all, we've shown that any holomorphic function has a power series representation on any disk that fits within the domain, and the power series representation is the one we think it should be.
+    \end{itemize}
+    \item We now discuss an important corollary to this result.
+    \item The Identity Theorem: If two holomorphic functions $f,g\in\mathcal{O}(U)$ agree on an open set in $U$, then $f=g$.
+    \begin{proof}
+        This is true for power series.\par
+        For every point, there's a power series representation around that series so we can do something with a covering of open sets, though we do not need compactness for $U$.
+    \end{proof}
+    \begin{itemize}
+        \item An analogous result does not hold on the reals. For example, there are plenty of functions that are zero for a while, then bump up to 1 for a while, so they're 0 and 1 on open sets without being either 0 or 1.
+        \item Implication: "Holomorphic functions are very rigid."
+    \end{itemize}
+    \item In fact, more is true: If $z_n\to z_0$ where each $z_n$ is distinct and $f(z_n)=g(z_n)$ for all $n$, then $f=g$.
+    \begin{itemize}
+        \item So we don't even need an open set; all we need is an \textbf{accumulation point}.
+    \end{itemize}
+    \item \textbf{Analytic continuation} (of $f$): The function $g\in\mathcal{O}(V)$ where $f\in\mathcal{O}(U)$, $V\supset U$, and $f=g$ on $U$.
+    \begin{itemize}
+        \item Note that we get to say "\emph{the} function $g$\dots" because of the identity theorem.
+        \item Formally, $g_1,g_2$ analytic continuations of $f$ and $g_1=g_2$ on $U$ open implies $g_1=g_2$.
+    \end{itemize}
+    \item Example: Consider $f(z)=z$ with $f\in\mathcal{O}(\C^*)$. Then $g(z)=z$ with $g\in\mathcal{O}(\C)$ is an analytic continuation of $f$.
+    \item What we're essentially doing is taking the power series (which we get via "analytic") and extending them out into $V$.
+    \item Example: The Riemann zeta function is defined by
+    \begin{equation*}
+        \zeta(s) = \sum_{n=1}^\infty n^{-s}
+        = \sum_{n=1}^\infty\e[-s\log n]
+    \end{equation*}
+    Where does this make sense, i.e., where does the series converge?
+    \begin{itemize}
+        \item We have $|n^{-s}|=n^{-\re(s)}$.
+        \item Thus, the series converges only when $\re(s)>1$.
+        \item The Riemann hypothesis predicts where $\zeta(s)=0$. We know that it has some zeroes at the negative even integers, and the RH predicts that the rest of them fall on the line $\re(s)=1/2$.
+        \item But $\zeta$ is only defined on a part of the complex plane not including these regions! Thus, to make sense of the RH, we need to analytically continue $\zeta$.
+    \end{itemize}
+    \item Given $f\in\mathcal{O}(U)$, what is the "biggest" $V$ on which $f\in\mathcal{O}(V)$? In layman's terms, where should $f$ live?
+    \item Example: $1/z\in\mathcal{O}(\C^*)$ and $1/z\notin\mathcal{O}(\C)$.
+    \begin{itemize}
+        \item Note that we know the latter statement because if you're holomorphic, the integral around any closed loop in the domain is zero but the integral of this function on the unit circle is $2\pi i$, so it can't be holomorphic on $\C$. Contradiction.
+    \end{itemize}
+    \item Example: $\sin(1/z)\in\mathcal{O}(\C^*)$, but is it in $\mathcal{O}(\C)$?
+    \begin{itemize}
+        \item No; recall from PSet 1 that it's not even \emph{continuous} at 0.
+    \end{itemize}
+    \item Example: $\sin(z)/z\in\mathcal{O}(\C^*)$, but is it in $\mathcal{O}(\C)$?
+    \item Recall Goursat's lemma: $f\in\mathcal{O}(\text{nbhd}(\triangle))$ implies $\int_\triangle f\dd{z}=0$.
+    \begin{itemize}
+        \item If $U$ is star-shaped and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ has a primitive.
+        \begin{itemize}
+            \item Note that we do not need $f$ holomorphic for this result!
+        \end{itemize}
+        \item This latter result has a converse!
+    \end{itemize}
+    \item Morera's Theorem: If $U$ is any domain, $f:U\to\C$ is continuous, and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ is holomorphic.
+    \begin{proof}
+        Fix a disk $D\subset\subset U$. Disks are star-shaped! This combined with the fact that the integral over all triangles is zero implies that $f$ has a primitive $F\in\mathcal{O}(U)$ by the result a couple lines up. But since $F$ is holomorphic, by our result from last class, $F'=f\in\mathcal{O}(U)$, too.
+    \end{proof}
+    \item \textbf{Riemann's removable singularity theorem}: Suppose $U$ is a domain, $z\in U$, $f\in\mathcal{O}(U\setminus\{z\})$, and $f$ is bounded near $z$. Then there exists a unique analytic continuation $\hat{f}\in\mathcal{O}(U)$. \emph{Also known as} \textbf{Riemann extension theorem}.
+    \begin{itemize}
+        \item In this case, we call $z$ a \textbf{removable singularity}.
+        \item Note: The contrapositive of this says that if there is not an analytic continuation (i.e., the function is honestly not holomorphic at a point and can't be extended to one, e.g., $1/z$), then $|f|$ has to blow up as you approach $z$ (in some direction).
+    \end{itemize}
+    \item \textbf{Singularity} (of $f$): A point $z_0$ such that $f\in\mathcal{O}(U\setminus\{z_0\})$.
+    \item \textbf{Removable} (singularity): A singularity of a function that that satisfies the hypotheses of Riemann's removable singularity theorem.
+    \item If a singularity is not removable, then $f$ is not bounded near $z_0$. This leads to additional definitions.
+    \item \textbf{Pole}: A non-removable singularity $z_0$ of a function $f$ for which $|f(z)|\to\infty$ as $z\to z_0$.
+    \begin{itemize}
+        \item So-named because of real analysis where a pole is an asymptote, and asymptotes kind of look like poles!
+    \end{itemize}
+    \item \textbf{Essential} (singularity): A non-removable singularity that is not a pole; equivalently, a singularity $z_0$ for which there exist sequences $z_n\to z_0$ and $w_n\to z_0$ such that $|f(z_n)|\to\infty$ and $|f(w_n)|$ stays bounded.
+    \item Proving Riemann's removable singularity theorem.
+    \begin{proof}
+        Set
+        \begin{equation*}
+            F(\zeta) =
+            \begin{cases}
+                f(\zeta)(\zeta-z) & \zeta\neq z\\
+                0 & \zeta=z
+            \end{cases}
+        \end{equation*}
+        Then $F\in\mathcal{O}(U\setminus\{z\})$ so $F$ is continuous at $z$.\par
+        We want to show that $F$ is holomorphic (using Morera's theorem). To do this, we'll need to show that the integral over all triangles is zero. More specifically, all we need to do is show that $F$ is holomorphic in a little ball $D$ about $z$. Now we need to do some casework.\par
+        Case 1: If $\triangle\not\ni z$, then we can draw a star-shaped domain surrounding the triangle on which $f$ will be holomorphic and invoke the CIT to imply that the integral is zero.\par
+        Case 2: If $\triangle\ni z$, then $\int F\dd{z}$ is arbitrarily small. Recall that we get this by using homotopy to replace the integral over the triangle with the integral over some tiny $\gamma_\varepsilon$. Arbitrarily small because $f$ is bounded.\par
+        Morera then tells us that $F\in\mathcal{O}(U)$, so $F'=f\in\mathcal{O}(U)$. Note that $F'=f$ because
+        \begin{equation*}
+            F'(z) = \lim_{\zeta\to z}\frac{F(\zeta)-F(z)}{\zeta-z}
+            = \lim_{\zeta\to z}\frac{f(\zeta)(\zeta-z)-0}{\zeta-z}
+            = \lim_{\zeta\to z}f(\zeta)
+            = f(z)
+        \end{equation*}
+    \end{proof}
+    \item Go back and add a $z_0$ everywhere and then it should all be ok.
+    \item With the removable singularity theorem, we can now confirm that $\sin(z)/z$ has a removable singularity because although $1/z$ diverges, sine converges faster so this function is bounded near zero.
+    \begin{itemize}
+        \item We can prove boundedness with the Taylor series of $\sin(z)/z$.
+    \end{itemize}
 \end{itemize}
 
 
