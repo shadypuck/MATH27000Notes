@@ -1,0 +1,559 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{2}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{Cauchy Integral Formula}
+\begin{itemize}
+    \item \marginnote{4/2:}Last time.
+    \begin{itemize}
+        \item Definition of star-shaped.
+        \item Cauchy integral theorem: $U$ star-shaped, $f\in\mathcal{O}(U)$ implies $\int_\gamma f\dd{z}=0$ for all closed (piecewise $C^1$) loops $\gamma$.
+        \begin{enumerate}
+            \item It suffices to prove the theorem for triangles.
+            \item Apply Goursat's lemma to treat this triangle case.
+        \end{enumerate}
+        \item For Goursat's lemma, apply a clever estimate. Subdivide the big triangle into smaller ones, then
+        \begin{align*}
+            \left| \int_{\text{small }\triangle} f\dd{z} \right| = \left| \int_a^bf(\gamma(t))\cdot\gamma'(t)\dd{t} \right|
+            \leq \int_a^b|f(\gamma(t))|\cdot|\gamma'(t)|\dd{t}
+            % &\leq \max_{z\in\partial\triangle}|f|\int|\gamma'(t)|\dd{t}\\
+            \leq \max_{z\in\partial\triangle}|f(z)|\cdot\len(\partial\triangle)
+        \end{align*}
+    \end{itemize}
+    \item We'll now do a couple exercises to practice applying the concepts we've learned so far.
+    \item TPS: Suppose $f\in\mathcal{O}(\C)$. Let $A:=\int_0^1f(x)\dd{x}=F(1)-F(0)$, where to be clear we take the integral along the real axis. Let $\gamma$ be the piecewise $C^1$ path in yellow in Figure \ref{fig:CITexr1}. What is $\int_\gamma f\dd{z}$?
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style=black
+        ]
+            \footnotesize
+            \draw
+                (-0.5,0) -- (1.5,0)
+                (0,-0.5) -- (0,1.5)
+            ;
+            \draw (0.1,1) -- ++(-0.2,0) node[left]{$i$};
+    
+            \draw [grx,thick,decoration={
+                markings,
+                mark=at position 0.55 with \arrow{>}
+            },postaction=decorate] (0,0) -- node[above=1pt]{$\delta$} (1,0);
+            \draw [yex,thick,decoration={
+                markings,
+                mark=at position 0.19 with \arrow{>},
+                mark=at position 0.52 with \arrow{>},
+                mark=at position 0.84 with \arrow{>}
+            },postaction=decorate] (0,0) -- (0,1) -- node[above=1pt]{$\gamma$} (1,1) -- (1,0);
+    
+            \fill [rex]       circle (2pt) node[below left]{$0$};
+            \fill [rex] (1,0) circle (2pt) node[below]     {$1$};
+        \end{tikzpicture}
+        \caption{Practicing with the Cauchy Integral Theorem (1).}
+        \label{fig:CITexr1}
+    \end{figure}
+    \begin{itemize}
+        \item Define $\delta$ such that $\int_\delta f\dd{z}=\int_0^1f(x)\dd{x}$.
+        \item Then $\delta^{-1}\gamma$ is a closed loop, so
+        \begin{equation*}
+            0 = \int_{\delta^{-1}\gamma}f\dd{z}
+        \end{equation*}
+        \item Additionally, we have by definition that
+        \begin{equation*}
+            \int_{\delta^{-1}\gamma}f\dd{z} = \int_\gamma f\dd{z}-\int_\delta f\dd{z}
+        \end{equation*}
+        \item Thus, by transitivity and a bit of algebraic rearrangement,
+        \begin{equation*}
+            \int_\gamma f\dd{z} = \int_\delta f\dd{z} = A
+        \end{equation*}
+    \end{itemize}
+    \pagebreak
+    \item TPS: Now suppose $f\in\mathcal{O}(\C^*)$, where we must note that $\C^*$ is \emph{not} star-shaped due to the hole at the origin. Suppose we know that $\int_\delta f\dd{z}=0$. What is $\int_\gamma f\dd{z}$? The paths $\gamma$ and $\delta$ are visualized in Figure \ref{fig:CITexr2a}. \emph{Hint}: It should be $-\int_\delta f\dd{z}$.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}[
+                every node/.style=black
+            ]
+                \footnotesize
+                \draw
+                    (-1.5,0) -- (1.5,0)
+                    (0,-1.5) -- (0,1.5)
+                ;
+                \filldraw [fill=white] circle (1.5pt);
+        
+                \draw [grx,thick,decoration={
+                    markings,
+                    mark=at position 0.35 with \arrow{>},
+                    mark=at position 0.67 with \arrow{>},
+                    mark=at position 0.3 with {\node{$\delta$};}
+                },postaction=decorate] (-60:1) arc[start angle=-60,end angle=240,radius=1cm];
+                \draw [yex,thick,decoration={
+                    markings,
+                    mark=at position 0.25 with \arrow{>},
+                    mark=at position 0.79 with \arrow{>}
+                },postaction=decorate] (240:1) -- (0,0.5) -- (-60:1);
+                \node at (-0.35,0.25) {$\gamma_1^{}$};
+                \node at (0.35,0.25) {$\gamma_2^{}$};
+            \end{tikzpicture}
+            \caption{Original setup.}
+            \label{fig:CITexr2a}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}[
+                every node/.style={black,text height=1.5ex,text depth=0.25ex}
+            ]
+                \footnotesize
+                \path (0,1.5) -- (0,-1.5);
+    
+                \begin{scope}[xshift=-3mm]
+                    \draw [grx,thick,decoration={
+                        markings,
+                        mark=at position 0.52 with \arrow{>},
+                        mark=at position 0.1 with {\node[above left]{$\delta_2$};}
+                    },postaction=decorate] (90:1) arc[start angle=90,end angle=240,radius=1cm];
+                    \draw [yex,thick,decoration={
+                        markings,
+                        mark=at position 0.52 with \arrow{>},
+                        mark=at position 0.3 with {\node[below right]{$\gamma_1^{}$};}
+                    },postaction=decorate] (240:1) -- (0,0.5);
+                    \draw [blx,thick,decoration={
+                        markings,
+                        mark=at position 0.6 with \arrow{>},
+                        mark=at position 0.5 with {\node[below left,yshift=2pt]{$\alpha$};}
+                    },postaction=decorate] (0,0.5) -- (0,1);
+                    \node at (-0.5,0.25) {$L$};
+    
+                    \draw [help lines] plot[smooth cycle] coordinates {(0.2,0) (90:1.5) (135:1.5) (180:1.5) (223:1.5) (266:1.5)};
+                    \node [below left] at (215:1.5) {$U$};
+                \end{scope}
+    
+                \begin{scope}[xshift=3mm]
+                    \draw [grx,thick,decoration={
+                        markings,
+                        mark=at position 0.52 with \arrow{>},
+                        mark=at position 0.9 with {\node[above right]{$\delta_1$};}
+                    },postaction=decorate] (-60:1) arc[start angle=-60,end angle=90,radius=1cm];
+                    \draw [yex,thick,decoration={
+                        markings,
+                        mark=at position 0.52 with \arrow{>},
+                        mark=at position 0.7 with {\node[below left]{$\gamma_2^{}$};}
+                    },postaction=decorate] (0,0.5) -- (-60:1);
+                    \draw [blx,thick,decoration={
+                        markings,
+                        mark=at position 0.6 with \arrow{>},
+                        mark=at position 0.5 with {\node[below right,yshift=2pt]{$\alpha^{-1}$};}
+                    },postaction=decorate] (0,1) -- (0,0.5);
+                    \node at (0.5,0.25) {$R$};
+    
+                    \draw [help lines] plot[smooth cycle] coordinates {(-0.2,0) (90:1.5) (45:1.5) (0:1.5) (-43:1.5) (-86:1.5)};
+                    \node [below right] at (-35:1.5) {$V$};
+                \end{scope}
+            \end{tikzpicture}
+            \caption{Solution: Break in two.}
+            \label{fig:CITexr2b}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}[
+                every node/.style=black
+            ]
+                \footnotesize
+                \path (0,1.5) -- (0,-1.5);
+    
+                \draw [grx,thick,decoration={
+                    markings,
+                    mark=at position 0.35 with \arrow{>},
+                    mark=at position 0.67 with \arrow{>},
+                    mark=at position 0.3 with {\node{$\delta$};}
+                },postaction=decorate] (-60:1) arc[start angle=-60,end angle=240,radius=1cm];
+                \draw [yex,thick,decoration={
+                    markings,
+                    mark=at position 0.25 with \arrow{>},
+                    mark=at position 0.79 with \arrow{>}
+                },postaction=decorate] (240:1) -- (0,0.5) -- (-60:1);
+                \node at (-0.35,0.25) {$\gamma_1^{}$};
+                \node at (0.35,0.25) {$\gamma_2^{}$};
+    
+                \draw [help lines] plot[smooth] coordinates {(0,0) (-70:1.5) (-35:1.5) (0:1.5) (45:1.5) (90:1.5) (135:1.5) (180:1.5) (215:1.5) (250:1.5) (0,0)};
+                \node [below left] at (215:1.5) {$W$};
+            \end{tikzpicture}
+            \caption{Solution: Pizza pie.}
+            \label{fig:CITexr2c}
+        \end{subfigure}
+        \caption{Practicing with the Cauchy Integral Theorem (2).}
+        \label{fig:CITexr2}
+    \end{figure}
+    \begin{itemize}
+        \item There are multiple ways to visualize why the domain does not see the hole/puncture. Here are some examples.
+        \item Solution 1 (Figure \ref{fig:CITexr2b}): Cut the loop into two loops in star-shaped domains and add them.
+        \begin{itemize}
+            \item Draw a straight-line path $\alpha$ from $i/2$ up to $i$.
+            \item Since $U$ and $V$ are both star-shaped domains, consecutive applications of the Cauchy Integral Theorem imply that
+            \begin{align*}
+                \int_{\delta_2\gamma_1\alpha}f\dd{z} = \int_Lf\dd{z} &= 0&
+                \int_{\delta_1\alpha^{-1}\gamma_2}f\dd{z} = \int_Rf\dd{z} &= 0
+            \end{align*}
+            \item Additionally, we know that the sum of the two integrals above is equal to the integral along the entire path in Figure \ref{fig:CITexr2a} because the $\alpha$ and $\alpha^{-1}$ portions cancel. Mathematically,
+            \begin{equation*}
+                \int_\delta f\dd{z}+\int_\gamma f\dd{z} = \int_{\delta\gamma}f\dd{z}
+                = \underbrace{\int_Lf\dd{z}}_0+\underbrace{\int_Rf\dd{z}}_0
+                = 0
+            \end{equation*}
+            \item Therefore,
+            \begin{equation*}
+                \int_\gamma f\dd{z} = -\int_\delta f\dd{z} = 0
+            \end{equation*}
+        \end{itemize}
+        \item Solution 2 (Figure \ref{fig:CITexr2c}): The pizza pie is star-shaped!
+        \begin{itemize}
+            \item We can actually draw a star-shaped domain $W$ encapsulating the entire path $\delta\gamma$.
+            \item Thus, by the Cauchy Integral Theorem,
+            \begin{equation*}
+                \int_{\delta\gamma}f\dd{z} = 0
+            \end{equation*}
+            \item From here, we may proceed as before through
+            \begin{align*}
+                \int_\gamma f\dd{z}+\int_\delta f\dd{z} &= 0\\
+                \int_\gamma f\dd{z} &= -\int_\delta f\dd{z} = 0
+            \end{align*}
+        \end{itemize}
+    \end{itemize}
+    \newpage
+    \item We now investigate a more general principal than the Cauchy integral theorem called \textbf{homotopy}.
+    \begin{itemize}
+        \item Algebraic topologists would be insulted by the definition of this term that Calderon is about to give, but it will suffice for our purposes.
+    \end{itemize}
+    \item \textbf{Homotopic} (paths): Two paths $\gamma,\tilde{\gamma}\subset U$ a domain such that $\tilde{\gamma}$ is obtained from $\gamma$ by modifying $\gamma$ on a small disk $D\subset U$, keeping the endpoints fixed.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style={black,opacity=1},
+            scale=1.3
+        ]
+            \footnotesize
+            \draw [xscale=2,name path=U] plot[smooth cycle] coordinates {
+                ($(0:1)+(0.15*rand,0.3*rand)$)
+                ($(45:1.2)+(0.15*rand,0.3*rand)$)
+                ($(90:1.2)+(0.15*rand,0.3*rand)$)
+                ($(135:1.2)+(0.15*rand,0.3*rand)$)
+                ($(180:1)+(0.15*rand,0.3*rand)$)
+                ($(225:1.2)+(0.15*rand,0.3*rand)$)
+                ($(270:1.3)+(0.15*rand,0.3*rand)$)
+                ($(315:1)+(0.15*rand,0.3*rand)$)
+            };
+            \path [name path=Utrace] (0,0) -- (45:1.8);
+            \path [name intersections={of=U and Utrace}] (intersection-1) node[above right=-1pt]{$U$};
+            \draw [scale=0.3,xscale=2,xshift=1cm,yshift=-0.5cm] plot[smooth cycle] coordinates {
+                ($(0:1)+(0.15*rand,0.3*rand)$)
+                ($(45:1)+(0.15*rand,0.3*rand)$)
+                ($(90:1)+(0.15*rand,0.3*rand)$)
+                ($(135:1)+(0.15*rand,0.3*rand)$)
+                ($(180:0.8)+(0.15*rand,0.3*rand)$)
+                ($(225:0.8)+(0.15*rand,0.3*rand)$)
+                ($(270:1)+(0.15*rand,0.3*rand)$)
+                ($(315:1)+(0.15*rand,0.3*rand)$)
+            };
+            \node at (-0.9,-0.3) {*};
+            \node at (0.2,0.8) {*};
+    
+            \draw [rex,opacity=0.5,thick] (-1.5,-0.4)
+                to[out=65,in=-130] (-1.2,0.1)
+                to[out=50,in=-160] (-0.8,0.4) node[above]{$\gamma$}
+                to[out=20,in=170] (-0.3,0.4)
+                to[out=-10,in=-170] (0.3,0.37)
+                to[out=10,in=-160] (1,0.6)
+            ;
+            \draw [blx,opacity=0.5,thick] (-1.5,-0.4)
+                to[out=65,in=-130] (-1.2,0.1)
+                to[out=50,in=-160] (-0.8,0) node[above]{$\tilde{\gamma}$}
+                to[out=20,in=170] (-0.3,0.4)
+                to[out=-10,in=-170] (0.3,0.37)
+                to[out=10,in=-160] (1,0.6)
+            ;
+    
+            \draw [yex] (-0.8,0.4) circle (5mm) node[below right=4mm]{$D$};
+            \fill [yex] (-1.2,0.1) circle (1pt);
+            \fill [yex] (-0.3,0.4) circle (1pt);
+        \end{tikzpicture}
+        \caption{Homotopic paths.}
+        \label{fig:homotopicPaths}
+    \end{figure}
+    \item More generally, $\gamma$ and $\tilde{\gamma}$ are \textbf{homotopic} if there exists a finite sequence $\gamma=\gamma_0,\gamma_1,\dots,\gamma_n=\tilde{\gamma}$ such that $\gamma_i\to\gamma_{i+1}$ is obtained by modifying on a small ball.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.33\linewidth}
+            \centering
+            \begin{tikzpicture}[
+                every node/.style={black,opacity=1},
+                scale=1.3
+            ]
+                \footnotesize
+                \node at (-1.9,-0.8) {*};
+                \node at (-0.6,-1) {*};
+                \node at (-0.4,1) {*};
+                \node at (1.3,0.8) {*};
+        
+                \draw [rex,opacity=0.5,thick] (-1.5,-0.4)
+                    to[out=65,in=-130] (-1.2,0.1) node[above left]{$\gamma_0^{}$}
+                    to[out=50,in=-160] (-0.8,0.4)
+                    to[out=20,in=170] (-0.3,0.4)
+                    to[out=-10,in=-170] (0.3,0.37)
+                    to[out=10,in=-160] (1,0.6)
+                ;
+                \draw [blx,opacity=0.5,thick] (-1.5,-0.4)
+                    to[out=5,in=175] (-0.8,-0.35) node[above]{$\gamma_1^{}$}
+                    to[out=-5,in=170] (-0.3,0.4)
+                    to[out=-10,in=-170] (0.3,0.37)
+                    to[out=10,in=-160] (1,0.6)
+                ;
+                % \draw [thick,opacity=0.5] plot[smooth] coordinates {(-1.5,-0.4) (-0.8,-0.35) (0.7,-0.5) (1,0.6)};
+        
+                \fill [yex]
+                    (-1.5,-0.4) circle (1pt)
+                    (-0.3,0.4) circle (1pt)
+                ;
+                \draw [yex] (-1.04,0.1) circle (8mm);
+            \end{tikzpicture}
+            \caption{Stage 1.}
+            \label{fig:homotopicGenerala}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.32\linewidth}
+            \centering
+            \begin{tikzpicture}[
+                every node/.style={black,opacity=1},
+                scale=1.3
+            ]
+                \footnotesize
+                \node at (-1.9,-0.8) {*};
+                \node at (-0.6,-1) {*};
+                \node at (-0.4,1) {*};
+                \node at (1.3,0.8) {*};
+        
+                \draw [rex,opacity=0.5,thick] (-1.5,-0.4)
+                    to[out=65,in=-130] (-1.2,0.1) node[above left]{$\gamma_0^{}$}
+                    to[out=50,in=-160] (-0.8,0.4)
+                    to[out=20,in=170] (-0.3,0.4)
+                    to[out=-10,in=-170] (0.3,0.37)
+                    to[out=10,in=-160] (1,0.6)
+                ;
+                \draw [blx,opacity=0.5,thick] (-1.5,-0.4)
+                    to[out=5,in=175] (-0.8,-0.35) node[above]{$\gamma_2^{}$}
+                    to[out=-5,in=170] (-0.3,0.4)
+                    to[out=-10,in=-145] (0.7,-0.5)
+                    to[out=35,in=-95,out looseness=0.6] (1,0.6)
+                ;
+                % \draw [thick,opacity=0.5] plot[smooth] coordinates {(-1.5,-0.4) (-0.8,-0.35) (0.7,-0.5) (1,0.6)};
+        
+                \fill [yex]
+                    (-0.3,0.4) circle (1pt)
+                    (1,0.6) circle (1pt)
+                ;
+                \draw [yex] (0.48,0.2) circle (8mm);
+            \end{tikzpicture}
+            \caption{Stage 2.}
+            \label{fig:homotopicGeneralb}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.33\linewidth}
+            \centering
+            \begin{tikzpicture}[
+                every node/.style={black,opacity=1},
+                scale=1.3
+            ]
+                \footnotesize
+                \node at (-1.9,-0.8) {*};
+                \node at (-0.6,-1) {*};
+                \node at (-0.4,1) {*};
+                \node at (1.3,0.8) {*};
+        
+                \draw [rex,opacity=0.5,thick] (-1.5,-0.4)
+                    to[out=65,in=-130] (-1.2,0.1) node[above left]{$\gamma_0^{}$}
+                    to[out=50,in=-160] (-0.8,0.4)
+                    to[out=20,in=170] (-0.3,0.4)
+                    to[out=-10,in=-170] (0.3,0.37)
+                    to[out=10,in=-160] (1,0.6)
+                ;
+                \draw [blx,opacity=0.5,thick] (-1.5,-0.4)
+                    to[out=5,in=175] (-0.8,-0.35) node[above right]{$\gamma_3^{}$}
+                    to[out=-5,in=170] (-0.3,-0.43)
+                    to[out=-10,in=-145,in looseness=0.5] (0.7,-0.5)
+                    to[out=35,in=-95,out looseness=0.5] (1,0.6)
+                ;
+                % \draw [thick,opacity=0.5] plot[smooth] coordinates {(-1.5,-0.4) (-0.8,-0.35) (0.7,-0.5) (1,0.6)};
+        
+                \fill [yex]
+                    (-0.8,-0.35) circle (1pt)
+                    (0.7,-0.5) circle (1pt)
+                ;
+                \draw [yex] (-0.02,-0.15) circle (8mm);
+            \end{tikzpicture}
+            \caption{Stage 3.}
+            \label{fig:homotopicGeneralc}
+        \end{subfigure}
+        \caption{A more general homotopy.}
+        \label{fig:homotopicGeneral}
+    \end{figure}
+    \item Claim/TPS: This argument shows that if $\gamma$ and $\tilde{\gamma}$ are homotopic in $U$ and $f\in\mathcal{O}(U)$, then
+    \begin{equation*}
+        \int_\gamma f\dd{z} = \int_{\tilde{\gamma}}f\dd{z}
+    \end{equation*}
+    \emph{Hint}: Just go one little bump at a time.
+    \begin{proof}
+        The start- and endpoints of the bump form a closed loop within a ball (a star-shaped domain), so the bump loop integrates to zero by the CIT. Thus, the integrals within the ball are the same. Additionally, the paths are literally the same outside of the bump, so the integrals there are the same, too. Therefore, the overall integrals are the same, too.
+    \end{proof}
+    \item Reality check: Let $f\in\mathcal{O}(\C^*)$. As a particular example, consider $f(z)=1/z$. Now we know that
+    \begin{equation*}
+        \int_\circ\frac{1}{z}\dd{z} = 2\pi i \neq 0
+    \end{equation*}
+    even though we can break the unit circle into the sum of two paths. What's going on?
+    \begin{itemize}
+        \item The paths are not homotopic; we can't pull them through the hole in the plane.
+        \item If we consider the upper hemi-circle and the lower hemi-circle, the two cannot be continuously deformed into each other because we always get stuck at the puncture.
+    \end{itemize}
+    \pagebreak
+    \item We now prove a slightly stronger version of the Cauchy integral theorem.
+    \item Corollary: Let $U$ be any domain, $D$ be a disk in $U$, and $z\in\mathring{D}$. Suppose $f\in\mathcal{O}(U\setminus\{z\})$ and is bounded near $z$. Then
+    \begin{equation*}
+        \int_{\partial D}f\dd{z} = 0
+    \end{equation*}
+    \begin{proof}
+        Step 1: Use homotopy.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[
+                every node/.style=black,
+                scale=1.3
+            ]
+                \footnotesize
+                \draw [xscale=2,name path=U] plot[smooth cycle] coordinates {
+                    ($(0:1)+(0.15*rand,0.3*rand)$)
+                    ($(45:1.2)+(0.15*rand,0.3*rand)$)
+                    ($(90:1.2)+(0.15*rand,0.3*rand)$)
+                    ($(135:1.2)+(0.15*rand,0.3*rand)$)
+                    ($(180:1)+(0.15*rand,0.3*rand)$)
+                    ($(225:1.2)+(0.15*rand,0.3*rand)$)
+                    ($(270:1.3)+(0.15*rand,0.3*rand)$)
+                    ($(315:1)+(0.15*rand,0.3*rand)$)
+                };
+                \path [name path=Utrace] (0,0) -- (45:1.8);
+                \path [name intersections={of=U and Utrace}] (intersection-1) node[above right=-1pt]{$U$};
+                \draw [scale=0.3,xscale=2,xshift=1cm,yshift=0.5cm] plot[smooth cycle] coordinates {
+                    ($(0:1)+(0.15*rand,0.3*rand)$)
+                    ($(45:1)+(0.15*rand,0.3*rand)$)
+                    ($(90:1)+(0.15*rand,0.3*rand)$)
+                    ($(135:1)+(0.15*rand,0.3*rand)$)
+                    ($(180:0.8)+(0.15*rand,0.3*rand)$)
+                    ($(225:0.8)+(0.15*rand,0.3*rand)$)
+                    ($(270:1)+(0.15*rand,0.3*rand)$)
+                    ($(315:1)+(0.15*rand,0.3*rand)$)
+                };
+                \path [name path=slit] (-0.3,-0.3) -- ++(-1,-1);
+                \draw [name intersections={of=U and slit}] (intersection-1) -- (-0.3,-0.3);
+                \node at (-0.1,-0.7) {*};
+        
+                \draw [blx,thick] (-1,0) circle (6mm) node[above right=5mm]{$D$};
+                \draw [orx,thick] (-0.8,-0.2) circle (2mm) node[above left=1mm]{$\gamma_\varepsilon$};
+                \fill [yex] (-0.8,-0.2) circle (1pt) node[below=-1pt]{$z$};
+            \end{tikzpicture}
+            \caption{Bounded holomorphic functions integrate to zero on disk boundaries.}
+            \label{fig:holDiskBound}
+        \end{figure}
+        Via the above claim,
+        \begin{equation*}
+            \int_{\partial D}f\dd{z} = \int_{\gamma_\varepsilon}f\dd{z}
+        \end{equation*}
+        where $\gamma_\varepsilon$ is a circle around $z$ within the region where $f$ is bounded\footnote{We could also turn the plane into the sum of two star-shaped domains again.}.\par
+        Step 2: We have that
+        \begin{equation*}
+            \left| \int_{\gamma_\varepsilon}f\dd{z} \right| \leq \max_{z\in\gamma_\varepsilon}|f(z)|\cdot\len(\gamma_\varepsilon)
+        \end{equation*}
+        Since $f$ is bounded near $z$, the maximum is finite. Additionally, the length term is just $2\pi\varepsilon$, so we can send $\varepsilon\to 0$ and thus send the integral to zero.
+    \end{proof}
+    \item We now look into the \textbf{Cauchy Integral Formula}.
+    \item \textbf{Cauchy Integral Formula}: Suppose $U$ is any domain, $D\subset U$ is a disk (i.e., $D\subset\subset U$ or $\overline{D}\subset U$), $f\in\mathcal{O}(U)$, and $z\in D$. Then
+    \begin{equation*}
+        f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+    \end{equation*}
+    \begin{proof}
+        We're going to try to use the corollary and define a function. In particular, define
+        \begin{equation*}
+            g(\zeta) =
+            \begin{cases}
+                \frac{f(\zeta)-f(z)}{\zeta-z} & \zeta\neq z\\
+                f'(z) & \zeta=z
+            \end{cases}
+        \end{equation*}
+        Because $f$ is holomorphic at $z$, $g$ is continuous at $z$ and hence bounded near $z$. We can also see that since $g$ is a rational function of holomorphic functions on $U\setminus\{z\}$, we have $g\in\mathcal{O}(U\setminus\{z\})$.\par
+        Now the corollary says that
+        \begin{equation*}
+            \int_{\partial D}g\dd{\zeta} = 0
+        \end{equation*}
+        Additionally, by the definition of $g$, we have that
+        \begin{equation*}
+            \int_{\partial D}g\dd{\zeta} = \int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd{\zeta}-\int_{\partial D}\frac{f(z)}{\zeta-z}\dd{\zeta}
+        \end{equation*}
+        $f(z)$ is just a complex number, so we can pull it out of the rightmost integral above. Additionally, under a change of variables and invoking PSet 1, QA.4, we have that
+        \begin{equation*}
+            \int_{\partial D}\frac{f(z)}{\zeta-z}\dd{\zeta} = f(z)\int_{\partial D}\frac{1}{\zeta-z}\dd{\zeta}
+            = \int_\text{unit circle}\frac{1}{z-a}\dd{z}
+            = 2\pi if(z)
+        \end{equation*}
+        Note: Another way to evaluate this integral is as follows. If $z$ is the center of the disk, then we win and can get $2\pi i$ using PSet 1, QA.4 directly. If $z$ isn't at the center of the disk, we are allowed to slide it. Here's why: Think about the integrand as a function of $z$, so
+        \begin{equation*}
+            \pdv{z}(\int_{\partial D}\frac{1}{\zeta-z}\dd{\zeta}) = \int_{\partial D}\pdv{z}(\frac{1}{\zeta-z})\dd{\zeta}
+            = \int_{\partial D}\frac{1}{(\zeta-z)^2}\dd{\zeta}
+            = 0
+        \end{equation*}
+        Since we're taking the integral and the limit with respect to different things, we can exchange them. Since the second integrand has a primitive, it equals zero. But this means that the integral does not change even as $z$ changes, which is equivalent to saying we can move $z$ around to wherever we want in the disk and the integral will still be $2\pi i$! In other words, if $z$ is somewhere where we can't evaluate the integral directly, we can move $z$ to somewhere where we \emph{can} evaluate the integral directly with no consequence.
+    \end{proof}
+    \item Implication of Cauchy's Integral Theorem: The values of the function are completely determined by the values on the boundary, i.e., holomorphic functions are determined by boundary values.
+    \item Let's now prove another theorem.
+    \item Theorem: Let $U$ be any domain, $f\in\mathcal{O}(U)$. Then $f'\in\mathcal{O}(U)$, $f''\in\mathcal{O}(U)$, on and on.
+    \begin{proof}
+        Let's use the Cauchy integral formula. We have that
+        \begin{equation*}
+            f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+        \end{equation*}
+        Now let's take the derivative, which we know exists because $f$ is holomorphic.
+        \begin{equation*}
+            \pdv{f}{z} = \frac{1}{2\pi i}\int_{\partial D}\pdv{z}(\frac{f(\zeta)}{\zeta-z})\dd\zeta
+            = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{(\zeta-z)^2}\dd\zeta
+        \end{equation*}
+        Thus, the derivative has a Cauchy integral formula. We can keep taking derivatives on the inside because the integrand is infinitely differentiable. Thus, we can keep taking derivatives on the outside. And that's the proof.
+    \end{proof}
+    \item Corollary: Holomorphic functions are $C^\infty$.
+    \item Corollary: In general,
+    \begin{equation*}
+        f^{(n)}(z) = \frac{n!}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{(\zeta-z)^{n+1}}\dd\zeta
+    \end{equation*}
+    \item This last result allows us to bound things really easily, giving us \textbf{Cauchy's inequalities}.
+    \begin{itemize}
+        \item Essentially, let $D$ have radius $R$ and let $z$ be the center of $D$. Then
+        \begin{equation*}
+            |f^{(n)}(z)| \leq \frac{n!}{2\pi i}\max_{\partial D}\left| \frac{f(\zeta)}{R^{n+1}} \right|\cdot 2\pi R
+            = \frac{n!}{R^n}\max_{\partial D}|f(\zeta)|
+        \end{equation*}
+    \end{itemize}
+    \item Liouville's Theorem: Suppose $f\in\mathcal{O}(\C)$ (i.e., $f$ is \textbf{entire}) and $f$ is bounded. Then it's constant.
+    \begin{proof}
+        Take a point $z\in\C$. Take a huge ball with radius $R$. Cauchy's inequality says that if we take the derivative, then
+        \begin{equation*}
+            |f'(z)| \leq \frac{1}{R}\cdot\max_{\partial D}|f(\zeta)|
+        \end{equation*}
+        The maximum is bounded and $R$ is really big, so as $R\to\infty$, the derivative gets arbitrarily small. So if we've got an arbitrary function with zero derivative, then we've got a constant function.
+    \end{proof}
+\end{itemize}
+
+
+
+
+\end{document}
