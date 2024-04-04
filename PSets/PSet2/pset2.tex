@@ -1,0 +1,75 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\stepcounter{section}
+
+\begin{document}
+
+
+
+
+\section{Power Series and Cauchy's Theorem}
+\subsection*{Set A: Graded for Completion}
+\begin{enumerate}[ref={A.\arabic*}]
+    \item \marginnote{4/5:}\textcite{bib:FischerLieb}, QI.3.2. Prove the Cauchy-Hadamard formula, which states that the radius of convergence $r$ is equal to
+    \begin{equation*}
+        r = \frac{1}{\limsup_{k\to\infty}\sqrt[k]{|a_k|}}
+    \end{equation*}
+    \item \textcite{bib:FischerLieb}, QI.4.4. Show that the function $\tan z$ never takes on the values $\pm i$ and that therefore,
+    \begin{equation*}
+        \dv{z}(\tan z) \neq 0
+    \end{equation*}
+    everywhere. Show that the tangent function maps the strip $S_0=\{z:-\pi/2<\re z<\pi/2\}$ biholomorphically onto $\C\setminus\{it:t\in\R,\ t\geq 1\}$.\par
+    Also use level sets to illustrate the conformal mapping.
+    \item Fix $a,b,c\in\C$ so that $c$ is not a negative integer or 0. Show that the \textbf{hypergeometric} function
+    \begin{equation*}
+        F(a,b,c;z) := \sum_{k=0}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^k}{k!}
+    \end{equation*}
+    converges on the unit disk and satisfies the differential equation
+    \begin{equation*}
+        z(1-z)F''(z)+[c-(a+b+1)z]F'(z)-abF(z) = 0
+    \end{equation*}
+\end{enumerate}
+
+
+\subsection*{Set B: Graded for Content}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item \textcite{bib:FischerLieb}, QII.2.3. Compute the \textbf{Fresnel integrals}
+    \begin{equation*}
+        \int_0^\infty\cos(x^2)\dd{x} = \sqrt{\frac{\pi}{8}}
+        = \int_0^\infty\sin(x^2)\dd{x}
+    \end{equation*}
+    \emph{Hint}: Apply the Cauchy integral theorem to sectors with center 0 and corners given by $R$ and $\e[i\pi/4]R$, where $R\to\infty$.
+    \item These problems illustrate the geometric intuition for the radius of convergence of a power series. Do the parts in order.
+    \begin{enumerate}
+        \item For each nonzero natural number $n\in\N$, compute the power series expansion for the function $1/z$ around the point $1/n$. What are their radii of convergence?
+        \item Describe the set of points $w\in\C$ such that the power series expansion for $1/z$ about $w$ has radius of convergence equal to 1.
+        \item Suppose that 
+        \begin{equation*}
+            f(z) = \frac{1}{z(z-1)(z-i)(z-1-i)}
+        \end{equation*}
+        Find the unique point $w$ in the unit square $\{\re(z),\im(z)\in[0,1]\}$ such that the radius of convergence of the power series for $w$ is maximal. Justify your answer.
+    \end{enumerate}
+    \item This problem is to hint at the general formulation of the Cauchy integral theorem. Please solve this problem only using things we have seen in class to this point.
+    \begin{enumerate}
+        \item Show that the "L-shaped" domain
+        \begin{equation*}
+            L = \{z:\re(z),\im(z)\in(0,2)\text{ and not both }\re(z),\im(z)\in(0,1]\}
+        \end{equation*}
+        is star-shaped (hence the Cauchy integral theorem applies).
+        \item Show that the "double L-shaped" domain
+        \begin{equation*}
+            U = \{z:|\re(z)|,\im(z)\in(0,2)\text{ and not both }|\re(z)|,\im(z)\in(0,1]\}
+        \end{equation*}
+        is not star-shaped.
+        \item Nevertheless, by breaking up $U$ into two copies of $L$ and using the Cauchy integral theorem for the resultant star-shaped domains, show that for any closed curve $\gamma$ in $U$ and any $f\in\mathcal{O}(U)$, we have that $\int_\gamma f\dd{z}=0$.
+        \item Show that $\C^*:=\C\setminus\{0\}$ can be written as the union of two star-shaped domains.
+        \item Why doesn't your proof for part (c) show that $\int_\gamma f\dd{z}=0$ for any $f\in\mathcal{O}(\C^*)$ and any closed curve $\gamma$ in $\C^*$?
+    \end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}
