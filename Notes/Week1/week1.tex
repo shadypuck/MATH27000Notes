@@ -843,6 +843,49 @@
     \end{equation*}
     \item \textbf{Relatively open} (set in $M$): The intersection of an open set $U$ with an arbitrary set $M$. \emph{Also known as} \textbf{open} (set in $M$).
     \item \textbf{Relatively closed} (set in $M$): The intersection of a closed set $U$ with an arbitrary set $M$. \emph{Also known as} \textbf{open} (set in $M$).
+    \item \marginnote{4/4:}\textcite{bib:FischerLieb} define \textbf{convergent series} and their \textbf{limits} in the usual way.
+    \begin{itemize}
+        \item Sum, product, and reciprocal rules stated.
+    \end{itemize}
+    \item \textbf{Accumulation point} (of $M\subset\C$): A point $z_0\in\C$ for which there is a sequence $\{z_n\}\subset M\setminus\{z_0\}$ with $\lim z_n=z_0$.
+    \item \textbf{Bounded} (set): A set $K$ for which $|z|\leq R$ for some $R$ and all $z\in K$.
+    \item \textbf{Compact} (set): A closed, bounded set.
+    \begin{itemize}
+        \item Each sequence in a compact set contains convergent subsequences with limit in the set.
+    \end{itemize}
+    \item \textbf{Relatively compact} (set in $V$): A set $U$ for which $\overline{U}$ is a compact subset of $V$. \emph{Denoted by} $\bm{U\subset\subset V}$.
+    \item Definition of a \textbf{complex-valued function}.
+    \item \textbf{Continuous} (function at $z_0$): A function $f:U\to\C$ such that for each neighborhood $M$ of $w_0=f(z_0)$, there is a neighborhood $N$ of $z_0$ with $f(U\cap N)\subset M$; equivalently, the following holds true for all convergent sequences $\{z_n\}\subset U$.
+    \begin{equation*}
+        f\left( \lim_{n\to\infty}z_n \right) = \lim_{n\to\infty}f(z_n)
+    \end{equation*}
+    \item \textbf{Real part} (of $f:U\to\C$): The real-valued function $g$ such that $f=g+ih$.
+    \item \textbf{Imaginary part} (of $f:U\to\C$): The complex-valued function $h$ such that $f=g+ih$.
+    \item Continuity results.
+    \begin{itemize}
+        \item $f$ is continuous iff its real and imaginary parts are.
+        \item The \textbf{composition} of continuous functions is continuous.
+        \item Example of a continuous function: Any polynomial in $z,\bar{z}$, i.e., any function of the form
+        \begin{equation*}
+            f(z) = \sum_{j,k=0}^Na_{jk}z^j\bar{z}^k
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Path}: A continuous map from a closed finite interval into the complex plane. \emph{Denoted by} $\bm{\gamma:[a,b]\to\pmb{\C}}$.
+    \begin{itemize}
+        \item We say that $\gamma$ \textbf{connects} its \textbf{initial point} and \textbf{end point}.
+    \end{itemize}
+    \item \textbf{Trace} (of a path): The image set $\gamma([a,b])$. \emph{Denoted by} $\bm{\textbf{tr}\,u}$.
+    \item \textbf{Initial point} (of a path): The point $\gamma(a)$.
+    \item \textbf{End point} (of a path): The point $\gamma(b)$.
+    \item \textbf{Connected} (set): A set $U$ for which any two points of $U$ can be connected by a path whose trace lies in $U$. \emph{Also known as} \textbf{pathwise connected}.
+    \item \textbf{Domain}: A connected open set.
+    \begin{itemize}
+        \item "An open set $U$ is a domain if and only if no decomposition of $U$ into disjoint nonempty subsets exists" \parencite[3]{bib:FischerLieb}.
+    \end{itemize}
+    \item Images of compact (resp. connected) sets under continuous functions are again compact (resp. connected).
+    \item Images of open (resp. closed) sets under continuous functions are \emph{not necessarily} open (resp. closed).
+    \item Preimages of open (resp. closed) sets under continuous functions are again open (resp. closed).
+    \item Note that the above definitions make sense in higher-dimensional vector spaces upon replacing the absolute value with the \textbf{Euclidean norm}.
 \end{itemize}
 
 
