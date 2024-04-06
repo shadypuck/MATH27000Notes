@@ -15,7 +15,7 @@
     \item \marginnote{4/2:}Last time.
     \begin{itemize}
         \item Definition of star-shaped.
-        \item Cauchy integral theorem: $U$ star-shaped, $f\in\mathcal{O}(U)$ implies $\int_\gamma f\dd{z}=0$ for all closed (piecewise $C^1$) loops $\gamma$.
+        \item Cauchy integral theorem: $U$ star-shaped, $f\in\mO(U)$ implies $\int_\gamma f\dd{z}=0$ for all closed (piecewise $C^1$) loops $\gamma$.
         \begin{enumerate}
             \item It suffices to prove the theorem for triangles.
             \item Apply Goursat's lemma to treat this triangle case.
@@ -29,7 +29,7 @@
         \end{align*}
     \end{itemize}
     \item We'll now do a couple exercises to practice applying the concepts we've learned so far.
-    \item TPS: Suppose $f\in\mathcal{O}(\C)$. Let $A:=\int_0^1f(x)\dd{x}=F(1)-F(0)$, where to be clear we take the integral along the real axis. Let $\gamma$ be the piecewise $C^1$ path in yellow in Figure \ref{fig:CITexr1}. What is $\int_\gamma f\dd{z}$?
+    \item TPS: Suppose $f\in\mO(\C)$. Let $A:=\int_0^1f(x)\dd{x}=F(1)-F(0)$, where to be clear we take the integral along the real axis. Let $\gamma$ be the piecewise $C^1$ path in yellow in Figure \ref{fig:CITexr1}. What is $\int_\gamma f\dd{z}$?
     \begin{figure}[h!]
         \centering
         \begin{tikzpicture}[
@@ -75,7 +75,7 @@
         \end{equation*}
     \end{itemize}
     \pagebreak
-    \item TPS: Now suppose $f\in\mathcal{O}(\C^*)$, where we must note that $\C^*$ is \emph{not} star-shaped due to the hole at the origin. Suppose we know that $\int_\delta f\dd{z}=0$. What is $\int_\gamma f\dd{z}$? The paths $\gamma$ and $\delta$ are visualized in Figure \ref{fig:CITexr2a}. \emph{Hint}: It should be $-\int_\delta f\dd{z}$.
+    \item TPS: Now suppose $f\in\mO(\C^*)$, where we must note that $\C^*$ is \emph{not} star-shaped due to the hole at the origin. Suppose we know that $\int_\delta f\dd{z}=0$. What is $\int_\gamma f\dd{z}$? The paths $\gamma$ and $\delta$ are visualized in Figure \ref{fig:CITexr2a}. \emph{Hint}: It should be $-\int_\delta f\dd{z}$.
     \begin{figure}[h!]
         \centering
         \begin{subfigure}[b]{0.3\linewidth}
@@ -402,7 +402,7 @@
         \caption{A more general homotopy.}
         \label{fig:homotopicGeneral}
     \end{figure}
-    \item Claim/TPS: This argument shows that if $\gamma$ and $\tilde{\gamma}$ are homotopic in $U$ and $f\in\mathcal{O}(U)$, then
+    \item Claim/TPS: This argument shows that if $\gamma$ and $\tilde{\gamma}$ are homotopic in $U$ and $f\in\mO(U)$, then
     \begin{equation*}
         \int_\gamma f\dd{z} = \int_{\tilde{\gamma}}f\dd{z}
     \end{equation*}
@@ -410,7 +410,7 @@
     \begin{proof}
         The start- and endpoints of the bump form a closed loop within a ball (a star-shaped domain), so the bump loop integrates to zero by the CIT. Thus, the integrals within the ball are the same. Additionally, the paths are literally the same outside of the bump, so the integrals there are the same, too. Therefore, the overall integrals are the same, too.
     \end{proof}
-    \item Reality check: Let $f\in\mathcal{O}(\C^*)$. As a particular example, consider $f(z)=1/z$. Now we know that
+    \item Reality check: Let $f\in\mO(\C^*)$. As a particular example, consider $f(z)=1/z$. Now we know that
     \begin{equation*}
         \int_\circ\frac{1}{z}\dd{z} = 2\pi i \neq 0
     \end{equation*}
@@ -421,7 +421,7 @@
     \end{itemize}
     \pagebreak
     \item We now prove a slightly stronger version of the Cauchy integral theorem.
-    \item Corollary: Let $U$ be any domain, $D$ be a disk in $U$, and $z\in\mathring{D}$. Suppose $f\in\mathcal{O}(U\setminus\{z\})$ and is bounded near $z$. Then
+    \item Corollary: Let $U$ be any domain, $D$ be a disk in $U$, and $z\in\mathring{D}$. Suppose $f\in\mO(U\setminus\{z\})$ and is bounded near $z$. Then
     \begin{equation*}
         \int_{\partial D}f\dd{z} = 0
     \end{equation*}
@@ -479,7 +479,7 @@
         Since $f$ is bounded near $z$, the maximum is finite. Additionally, the length term is just $2\pi\varepsilon$, so we can send $\varepsilon\to 0$ and thus send the integral to zero.
     \end{proof}
     \item We now look into the \textbf{Cauchy Integral Formula}.
-    \item \textbf{Cauchy Integral Formula}: Suppose $U$ is any domain, $D\subset U$ is a disk (i.e., $D\subset\subset U$ or $\overline{D}\subset U$), $f\in\mathcal{O}(U)$, and $z\in D$. Then
+    \item \textbf{Cauchy Integral Formula}: Suppose $U$ is any domain, $D\subset U$ is a disk (i.e., $D\subset\subset U$ or $\overline{D}\subset U$), $f\in\mO(U)$, and $z\in D$. Then
     \begin{equation*}
         f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
     \end{equation*}
@@ -492,7 +492,7 @@
                 f'(z) & \zeta=z
             \end{cases}
         \end{equation*}
-        Because $f$ is holomorphic at $z$, $g$ is continuous at $z$ and hence bounded near $z$. We can also see that since $g$ is a rational function of holomorphic functions on $U\setminus\{z\}$, we have $g\in\mathcal{O}(U\setminus\{z\})$.\par
+        Because $f$ is holomorphic at $z$, $g$ is continuous at $z$ and hence bounded near $z$. We can also see that since $g$ is a rational function of holomorphic functions on $U\setminus\{z\}$, we have $g\in\mO(U\setminus\{z\})$.\par
         Now the corollary says that
         \begin{equation*}
             \int_{\partial D}g\dd{\zeta} = 0
@@ -517,7 +517,7 @@
     \end{proof}
     \item Implication of Cauchy's Integral Theorem: The values of the function are completely determined by the values on the boundary, i.e., holomorphic functions are determined by boundary values.
     \item Let's now prove another theorem.
-    \item Theorem: Let $U$ be any domain, $f\in\mathcal{O}(U)$. Then $f'\in\mathcal{O}(U)$, $f''\in\mathcal{O}(U)$, on and on.
+    \item Theorem: Let $U$ be any domain, $f\in\mO(U)$. Then $f'\in\mO(U)$, $f''\in\mO(U)$, on and on.
     \begin{proof}
         Let's use the Cauchy integral formula. We have that
         \begin{equation*}
@@ -543,7 +543,7 @@
             = \frac{n!}{R^n}\max_{\partial D}|f(\zeta)|
         \end{equation*}
     \end{itemize}
-    \item Liouville's Theorem: Suppose $f\in\mathcal{O}(\C)$ (i.e., $f$ is \textbf{entire}) and $f$ is bounded. Then it's constant.
+    \item Liouville's Theorem: Suppose $f\in\mO(\C)$ (i.e., $f$ is \textbf{entire}) and $f$ is bounded. Then it's constant.
     \begin{proof}
         Take a point $z\in\C$. Take a huge ball with radius $R$. Cauchy's inequality says that if we take the derivative, then
         \begin{equation*}
@@ -560,7 +560,7 @@
 \begin{itemize}
     \item \marginnote{4/4:}Last time.
     \begin{itemize}
-        \item Cauchy integral formula: Let $U$ be any domain, $f\in\mathcal{O}(U)$, $D\subset\subset U$, and $z\in D$. Then
+        \item Cauchy integral formula: Let $U$ be any domain, $f\in\mO(U)$, $D\subset\subset U$, and $z\in D$. Then
         \begin{equation*}
             f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
         \end{equation*}
@@ -580,7 +580,7 @@
     \begin{equation*}
         P^{(n)}(z_0) = n!a_n
     \end{equation*}
-    \item Now let $f\in\mathcal{O}(U)$.
+    \item Now let $f\in\mO(U)$.
     \begin{itemize}
         \item TPS: What should the power series for $f$ look like?
         \begin{itemize}
@@ -630,7 +630,7 @@
         \item All in all, we've shown that any holomorphic function has a power series representation on any disk that fits within the domain, and the power series representation is the one we think it should be.
     \end{itemize}
     \item We now discuss an important corollary to this result.
-    \item The Identity Theorem: If two holomorphic functions $f,g\in\mathcal{O}(U)$ agree on an open set in $U$, then $f=g$.
+    \item The Identity Theorem: If two holomorphic functions $f,g\in\mO(U)$ agree on an open set in $U$, then $f=g$.
     \begin{proof}
         This is true for power series.\par
         For every point, there's a power series representation around that series so we can do something with a covering of open sets, though we do not need compactness for $U$.
@@ -643,12 +643,12 @@
     \begin{itemize}
         \item So we don't even need an open set; all we need is an \textbf{accumulation point}.
     \end{itemize}
-    \item \textbf{Analytic continuation} (of $f$): The function $g\in\mathcal{O}(V)$ where $f\in\mathcal{O}(U)$, $V\supset U$, and $f=g$ on $U$.
+    \item \textbf{Analytic continuation} (of $f$): The function $g\in\mO(V)$ where $f\in\mO(U)$, $V\supset U$, and $f=g$ on $U$.
     \begin{itemize}
         \item Note that we get to say "\emph{the} function $g$\dots" because of the identity theorem.
         \item Formally, $g_1,g_2$ analytic continuations of $f$ and $g_1=g_2$ on $U$ open implies $g_1=g_2$.
     \end{itemize}
-    \item Example: Consider $f(z)=z$ with $f\in\mathcal{O}(\C^*)$. Then $g(z)=z$ with $g\in\mathcal{O}(\C)$ is an analytic continuation of $f$.
+    \item Example: Consider $f(z)=z$ with $f\in\mO(\C^*)$. Then $g(z)=z$ with $g\in\mO(\C)$ is an analytic continuation of $f$.
     \item What we're essentially doing is taking the power series (which we get via "analytic") and extending them out into $V$.
     \item Example: The Riemann zeta function is defined by
     \begin{equation*}
@@ -662,17 +662,17 @@
         \item The Riemann hypothesis predicts where $\zeta(s)=0$. We know that it has some zeroes at the negative even integers, and the RH predicts that the rest of them fall on the line $\re(s)=1/2$.
         \item But $\zeta$ is only defined on a part of the complex plane not including these regions! Thus, to make sense of the RH, we need to analytically continue $\zeta$.
     \end{itemize}
-    \item Given $f\in\mathcal{O}(U)$, what is the "biggest" $V$ on which $f\in\mathcal{O}(V)$? In layman's terms, where should $f$ live?
-    \item Example: $1/z\in\mathcal{O}(\C^*)$ and $1/z\notin\mathcal{O}(\C)$.
+    \item Given $f\in\mO(U)$, what is the "biggest" $V$ on which $f\in\mO(V)$? In layman's terms, where should $f$ live?
+    \item Example: $1/z\in\mO(\C^*)$ and $1/z\notin\mO(\C)$.
     \begin{itemize}
         \item Note that we know the latter statement because if you're holomorphic, the integral around any closed loop in the domain is zero but the integral of this function on the unit circle is $2\pi i$, so it can't be holomorphic on $\C$. Contradiction.
     \end{itemize}
-    \item Example: $\sin(1/z)\in\mathcal{O}(\C^*)$, but is it in $\mathcal{O}(\C)$?
+    \item Example: $\sin(1/z)\in\mO(\C^*)$, but is it in $\mO(\C)$?
     \begin{itemize}
         \item No; recall from PSet 1 that it's not even \emph{continuous} at 0.
     \end{itemize}
-    \item Example: $\sin(z)/z\in\mathcal{O}(\C^*)$, but is it in $\mathcal{O}(\C)$?
-    \item Recall Goursat's lemma: $f\in\mathcal{O}(\text{nbhd}(\triangle))$ implies $\int_\triangle f\dd{z}=0$.
+    \item Example: $\sin(z)/z\in\mO(\C^*)$, but is it in $\mO(\C)$?
+    \item Recall Goursat's lemma: $f\in\mO(\text{nbhd}(\triangle))$ implies $\int_\triangle f\dd{z}=0$.
     \begin{itemize}
         \item If $U$ is star-shaped and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ has a primitive.
         \begin{itemize}
@@ -682,14 +682,14 @@
     \end{itemize}
     \item Morera's Theorem: If $U$ is any domain, $f:U\to\C$ is continuous, and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ is holomorphic.
     \begin{proof}
-        Fix a disk $D\subset\subset U$. Disks are star-shaped! This combined with the fact that the integral over all triangles is zero implies that $f$ has a primitive $F\in\mathcal{O}(U)$ by the result a couple lines up. But since $F$ is holomorphic, by our result from last class, $F'=f\in\mathcal{O}(U)$, too.
+        Fix a disk $D\subset\subset U$. Disks are star-shaped! This combined with the fact that the integral over all triangles is zero implies that $f$ has a primitive $F\in\mO(U)$ by the result a couple lines up. But since $F$ is holomorphic, by our result from last class, $F'=f\in\mO(U)$, too.
     \end{proof}
-    \item \textbf{Riemann's removable singularity theorem}: Suppose $U$ is a domain, $z\in U$, $f\in\mathcal{O}(U\setminus\{z\})$, and $f$ is bounded near $z$. Then there exists a unique analytic continuation $\hat{f}\in\mathcal{O}(U)$. \emph{Also known as} \textbf{Riemann extension theorem}.
+    \item \textbf{Riemann's removable singularity theorem}: Suppose $U$ is a domain, $z\in U$, $f\in\mO(U\setminus\{z\})$, and $f$ is bounded near $z$. Then there exists a unique analytic continuation $\hat{f}\in\mO(U)$. \emph{Also known as} \textbf{Riemann extension theorem}.
     \begin{itemize}
         \item In this case, we call $z$ a \textbf{removable singularity}.
         \item Note: The contrapositive of this says that if there is not an analytic continuation (i.e., the function is honestly not holomorphic at a point and can't be extended to one, e.g., $1/z$), then $|f|$ has to blow up as you approach $z$ (in some direction).
     \end{itemize}
-    \item \textbf{Singularity} (of $f$): A point $z_0$ such that $f\in\mathcal{O}(U\setminus\{z_0\})$.
+    \item \textbf{Singularity} (of $f$): A point $z_0$ such that $f\in\mO(U\setminus\{z_0\})$.
     \item \textbf{Removable} (singularity): A singularity of a function that that satisfies the hypotheses of Riemann's removable singularity theorem.
     \item If a singularity is not removable, then $f$ is not bounded near $z_0$. This leads to additional definitions.
     \item \textbf{Pole}: A non-removable singularity $z_0$ of a function $f$ for which $|f(z)|\to\infty$ as $z\to z_0$.
@@ -707,11 +707,11 @@
                 0 & \zeta=z
             \end{cases}
         \end{equation*}
-        Then $F\in\mathcal{O}(U\setminus\{z\})$ so $F$ is continuous at $z$.\par
+        Then $F\in\mO(U\setminus\{z\})$ so $F$ is continuous at $z$.\par
         We want to show that $F$ is holomorphic (using Morera's theorem). To do this, we'll need to show that the integral over all triangles is zero. More specifically, all we need to do is show that $F$ is holomorphic in a little ball $D$ about $z$. Now we need to do some casework.\par
         Case 1: If $\triangle\not\ni z$, then we can draw a star-shaped domain surrounding the triangle on which $f$ will be holomorphic and invoke the CIT to imply that the integral is zero.\par
         Case 2: If $\triangle\ni z$, then $\int F\dd{z}$ is arbitrarily small. Recall that we get this by using homotopy to replace the integral over the triangle with the integral over some tiny $\gamma_\varepsilon$. Arbitrarily small because $f$ is bounded.\par
-        Morera then tells us that $F\in\mathcal{O}(U)$, so $F'=f\in\mathcal{O}(U)$. Note that $F'=f$ because
+        Morera then tells us that $F\in\mO(U)$, so $F'=f\in\mO(U)$. Note that $F'=f$ because
         \begin{equation*}
             F'(z) = \lim_{\zeta\to z}\frac{F(\zeta)-F(z)}{\zeta-z}
             = \lim_{\zeta\to z}\frac{f(\zeta)(\zeta-z)-0}{\zeta-z}

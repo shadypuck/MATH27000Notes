@@ -38,8 +38,8 @@
 \begin{itemize}
     \item \marginnote{3/26:}Recall: We already know that\dots
     \begin{itemize}
-        \item Polynomials are elements of $\mathcal{O}(\C)$;
-        \item Rational functions $P(z)/Q(z)$ are elements of $\mathcal{O}(\C\setminus V(Q))$.
+        \item Polynomials are elements of $\mO(\C)$;
+        \item Rational functions $P(z)/Q(z)$ are elements of $\mO(\C\setminus V(Q))$.
     \end{itemize}
     \item \textbf{Affine algebraic set}: The set of solutions in an algebraically closed field $K$ of a system of polynomial equations with coefficients in $K$. \emph{Also known as} \textbf{variety}. \emph{Denoted by} $\bm{V(f_1,\ldots,f_n)}$.
     \item Today, we want to determine how the other elementary functions behave over the complex numbers.
@@ -51,7 +51,7 @@
     \begin{equation*}
         \e[z] = \exp(z) := \sum_{k=0}^\infty\frac{z^k}{k!}
     \end{equation*}
-    \item Na\"{i}vely, this power series is just be a polynomial $P(z)\in\mathcal{O}(\C)$.
+    \item Na\"{i}vely, this power series is just be a polynomial $P(z)\in\mO(\C)$.
     \item More rigorously, however, we must specify which kind of convergence we mean for the power series.
     \begin{itemize}
         \item As one example, we could say that for all $z$,
@@ -136,13 +136,13 @@
     \item This example generalizes somewhat into the following lemma.
     \item Lemma: Let $P(z)$ be a power series about 0. If there exists $z_1\neq 0$ such that $|a_kz_1^k|\leq M$ for all $k$, then $P(z)=\sum a_kz^k$ converges on the disk $|z|<|z_1|$.
     \begin{proof}
-        Uses standard series convergence results from real analysis. May be in \textcite{bib:FischerLieb}??
+        Uses standard series convergence results from real analysis. See \textcite[15-16]{bib:FischerLieb}.
     \end{proof}
     \item \textbf{Disk of convergence}: The largest disk centered at zero on which you converge.
-    \item \textbf{Radius of convergence}: The radius of the disk of convergence.
+    \item \textbf{Radius of convergence}: The radius of the disk of convergence. \emph{Denoted by} $\bm{r}$.
     \item \textbf{Cauchy-Hadamard formula}: The radius of convergence is given by
     \begin{equation*}
-        \text{rad} = (\limsup|a_k|^{1/k})^{-1}
+        r = (\limsup|a_k|^{1/k})^{-1}
     \end{equation*}
     \begin{itemize}
         \item We will be using this result on PSet 2.
@@ -278,7 +278,7 @@
         \int_\gamma f\dd{z} = 0
     \end{equation*}
     \begin{itemize}
-        \item To see why this is true intuitively, look at an example such as $f(z)=1/z\in\mathcal{O}(\C^*)$, which doesn't have a primitive and
+        \item To see why this is true intuitively, look at an example such as $f(z)=1/z\in\mO(\C^*)$, which doesn't have a primitive and
         \begin{equation*}
             \int_\gamma\frac{1}{z}\dd{z} \neq 0
         \end{equation*}
@@ -638,8 +638,8 @@
             z \mapsto \frac{\e[iz]}{z}
         \end{equation*}
         \begin{itemize}
-            \item This function is not holomorphic everywhere, but it is on the punctured plane $\mathcal{O}(\C^*)$.
-            \item However, we only need the upper half $\mathcal{O}(\Hh)$ presently.
+            \item This function is not holomorphic everywhere, but it is on the punctured plane $\mO(\C^*)$.
+            \item However, we only need the upper half $\mO(\Hh)$ presently.
         \end{itemize}
         \item More specifically, define $U$ to be a domain containing $\gamma$ as defined as in Figure \ref{fig:dirichletIntegral}.
         \begin{figure}[H]
@@ -726,6 +726,153 @@
         \item Yes.
     \end{itemize}
     \item We have to give him a heads up before the PSet due date that we want to use a PSet extension.
+\end{itemize}
+
+
+
+\section{Chapter I: Analysis in the Complex Plane}
+\emph{From \textcite{bib:FischerLieb}.}
+\subsection*{Section I.3: Uniform Convergence and Power Series}
+\begin{itemize}
+    \item \marginnote{4/5:}Definition of \textbf{convergent}, \textbf{absolutely convergent}, \textbf{comparison test}, \textbf{ratio test}, \textbf{root test}, and \textbf{geometric series test}.
+    \item \textbf{Unconditionally} (convergent $\{f_n\}$): A series that will remain convergent (with the same sum) upon any reordering of its terms.
+    \begin{itemize}
+        \item Absolutely convergent implies unconditionally convergent.
+    \end{itemize}
+    \item Hint at hypergeometric series here?
+    \item Definition of \textbf{pointwise convergent}, \textbf{uniformly convergent}, and \textbf{compactly convergent}.
+    \item Covers implications of uniform convergence from class.
+    \item Introduction of the \textbf{Cauchy convergence test}.
+    \item \textbf{Majorant test}: If $\sum_{k=0}^\infty a_k$ is a convergent series with positive terms and if for almost all $k$ and all $z\in M$ we have $|f_k(z)|\leq a_k$, then $\sum_{k=0}^\infty f_k$ is absolutely uniformly convergent on $M$.
+    \item \textbf{Power series} (with base point $z_0$ and coefficients $a_k$): An infinite series of the following form, where $a_k\in\C$ ($k=0,\dots,\infty$) and $z_0\in\C$. \emph{Denoted by} $\bm{P(z-z_0)}$. \emph{Given by}
+    \begin{equation*}
+        P(z-z_0) := \sum_{k=0}^\infty a_k(z-z_0)^k
+    \end{equation*}
+    \item Definition of the \textbf{radius of convergence} and \textbf{disk of convergence}.
+    \item \textbf{Nowhere convergent} (power series): A power series with $r=0$.
+    \item \textbf{Everywhere convergent} (power series): A power series with $r=\infty$.
+    \item Proposition 3.5: Assume that for some point $z_1\neq 0$, the terms of the power series $\sum_{k=0}^\infty a_kz^k$ are bounded, that is $|a_kz_1^k|\leq M$ independently of $k$. Then the series converges absolutely locally uniformly in the disk $D_{|z_1|}(0)=\{z:|z|<|z_1|\}$.
+    \begin{proof}
+        By hypothesis,
+        \begin{equation*}
+            |a_k||z_1|^k \leq M
+        \end{equation*}
+        for all $k$. Pick $z_2$ such that $0<|z_2|<|z_1|$. Then for all $|z|\leq|z_2|$, we have
+        \begin{equation*}
+            |a_k||z|^k \leq |a_k||z_2|^k
+            = |a_k||z_1|^k\left| \frac{z_2}{z_1} \right|^k
+            \leq Mq^k
+        \end{equation*}
+        where $q=|z_2/z_1|<1$. By the geometric series test, $\sum_{k=0}^\infty Mq^k$ converges. Thus, by the majorant test, $\sum_{k=0}^\infty a_kz^k$ converges absolutely uniformly on $D_{|z_2|}(0)$. Progressively increasing $|z_2|$ guarantees local absolute uniform convergence over all of $D_{|z_1|}(0)$.
+    \end{proof}
+    \item Definition of the \textbf{Cauchy-Hadamard formula}.
+    \item \textcite{bib:FischerLieb} prove that power series are holomorphic.
+    \item \textcite{bib:FischerLieb} prove the identity theorem (for power series).
+    \item Compute the closed form of the derivatives of power series by differentiating the geometric series.
+    \begin{equation*}
+        \sum_{n=k}^\infty n(n-1)\cdots(n-k+1)z^{n-k} = \dv[k]{z}\sum_{n=0}^\infty z^n
+        = \dv[k]{z}\frac{1}{1-z}
+        = \frac{k!}{(1-z)^{k+1}}
+    \end{equation*}
+    \item Concludes with a few questions that will be answered in the coming sections.
+\end{itemize}
+
+
+\subsection*{Section I.4: Elementary Functions}
+\begin{itemize}
+    \item \textbf{Elementary functions}: The exponential functions, trigonometric functions, and hyperbolic functions.
+    \item Complex analysis unifies the elementary functions as special cases of the complex exponential function, making clear that they do have more to do with each other than real analysis would suggest.
+    \item \textcite{bib:FischerLieb} define $\exp z$ and beautifully build its properties almost solely from this axiom.
+    \item Summary of the properties of the exponential function \parencite[20]{bib:FischerLieb}.
+    \begin{itemize}
+        \item "The exponential function is a group homomorphism from $\C$ into $\C^*$ that maps the subgroups $\R$ into $\R_{>0}$ and the subgroup $i\R$ into $\Ss$."
+        \item "The group operation on $\C$, $\R$, and $i\R$ is addition and the group operation on $\C^*$, $\R_{>0}$, and $\Ss$ is multiplication."
+        \item "The three homomorphisms $\exp:\C\to\C^*$, $\exp:\R\to\R_{>0}$, and $\exp:i\R\to\Ss$ are surjective."
+    \end{itemize}
+    \item Notable new(ish) properties:
+    \begin{itemize}
+        \item Since $|\e[z]|=\e[\re z]$, we can see that "the exponential function\dots maps vertical lines $\re z=c$ to circles" \parencite[20]{bib:FischerLieb}.
+        \item In particular, $\exp(i\R)=\partial\D=\Ss$.
+    \end{itemize}
+    \item Investigation of the \textbf{kernel} of $\exp:\C\to\C^*$.
+    \begin{itemize}
+        \item Notably, \textcite{bib:FischerLieb} prove that it contains only the multiples of $2\pi i$.
+    \end{itemize}
+    \item \textcite{bib:FischerLieb} defines $\pi$ via the complex exponential function and Euler's identity lol!
+    \item Proposition 4.4:
+    \begin{enumerate}[label={\roman*.}]
+        \item The exponential function is periodic with period $2\pi i$.
+        \item If a domain contains at most one member of each congruence class modulo $2\pi i$, then the exponential function maps it biholomorphically onto its image in $\C^*$.
+    \end{enumerate}
+    \item The key mapping properties of $\exp z$.
+    \begin{enumerate}
+        \item The mapping $t\mapsto\e[t]$ maps $\R$ onto $\R_{>0}$ bijectively.
+        \item The mapping $t\mapsto\e[it]$ maps $[0,2\pi)$ onto $\Ss$ bijectively.
+    \end{enumerate}
+    \item Implications.
+    \begin{itemize}
+        \item A horizontal line $z=x+iy_0$ is mapped bijectively onto the open ray $L_{y_0}$ that begins at 0 and passes through the point $\e[iy_0]$ on the unit circle.
+        \item A vertical line $z=x_0+iy$ is mapped onto the circle centered at 0 and of radius $\e[x_0]$.
+        \begin{itemize}
+            \item An interval of length less than $2\pi$ on this line is mapped injectively into this circle.
+        \end{itemize}
+        \item Every half-open horizontal strip
+        \begin{equation*}
+            S_{y_0} = \{z=x+iy:y_0\leq y<y_0+2\pi\}
+        \end{equation*}
+        is mapped bijectively onto $\C^*$.
+        \begin{itemize}
+            \item The line $z=x+iy_0$ is mapped to the ray $L_{y_0}$.
+            \item The remaining open strip (i.e., $S_{y_0}$ minus its lower boundary) is mapped biholomorphically onto the "slit" plane $\C^*\setminus L_{y_0}$.
+        \end{itemize}
+    \end{itemize}
+    \item Definition of the \textbf{complex cosine}, \textbf{complex sine}, \textbf{complex hyperbolic cosine}, and \textbf{complex hyperbolic sine} functions.
+    \item Proposition 4.5:
+    \begin{enumerate}[label={\roman*.}]
+        \item The functions $\cos z$ and $\sin z$ are periodic with period $2\pi$; $\cosh z$ and $\sinh z$ are periodic with period $2\pi i$.
+        \item 
+        \begin{align*}
+            \dv{z}(\sin z) &= \cos z&
+                \dv{z}(\cos z) &= -\sin z\\
+            \dv{z}(\sinh z) &= \cosh z&
+                \dv{z}(\cosh z) &= \sinh z
+        \end{align*}
+        \item 
+        \begin{align*}
+            \sin(z+w) &= \sin z\cos w+\cos z\sin w\\
+            \cos(z+w) &= \cos z\cos w-\sin z\sin w\\
+            \sinh(z+w) &= \sinh z\cosh w+\cosh z\sinh w\\
+            \cosh(z+w) &= \cosh z\cosh w+\sinh z\sinh w
+        \end{align*}
+        \item For each of the above functions, $f(\bar{z})=\overline{f(z)}$.
+        \item 
+        \begin{align*}
+            \cos z &= \sum_{k=0}^\infty(-1)^k\frac{z^{2k}}{(2k)!}&
+                \sin z &= \sum_{k=0}^\infty(-1)^k\frac{z^{2k+1}}{(2k+1)!}\\
+            \cosh z &= \sum_{k=0}^\infty\frac{z^{2k}}{(2k)!}&
+                \sinh z &= \sum_{k=0}^\infty\frac{z^{2k+1}}{(2k+1)!}
+        \end{align*}
+        \item $\e[iz]=\cos z+i\sin z$.
+        \item 
+        \begin{align*}
+            \sin^2z+\cos^2z &= 1&
+            \cosh^2z-\sinh^2z &= 1
+        \end{align*}
+    \end{enumerate}
+    \item Decomposition of $\e[z]$ into its real and imaginary parts:
+    \begin{equation*}
+        \e[z] = \e[x+iy] = \e[x](\cos y+i\sin y)
+    \end{equation*}
+    \item The zeroes of the complex sine are just those of the real sine; $\sin z\neq 0$ for any nonreal $z$.
+    \item Introduction of the \textbf{roots of unity}.
+    \item The remaining trigonometric and hyperbolic functions are defined in the usual way, are holomorphic everywhere except at the zeros of their denominators, and have periods $\pi$ or $\pi i$ (in the hyperbolic case).
+    \begin{align*}
+        \tan z &= \frac{\sin z}{\cos z}&
+            \cot z &= \frac{\cos z}{\sin z}\\
+        \tanh z &= \frac{\sinh z}{\cosh z}&
+            \coth z &= \frac{\cosh z}{\sinh z}\\
+    \end{align*}
+    \item Preview: We will show later that this extension of the real analytic functions to holomorphic functions on the complex plane is unique, not arbitrary.
 \end{itemize}
 
 

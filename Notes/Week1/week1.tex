@@ -74,7 +74,7 @@
     \end{itemize}
     \item Properties of holomorphic functions: Let $U\subset\C$ be open.
     \begin{enumerate}
-        \item The holomorphic functions on $U$ form a ring $\bm{\mathcal{O}(U)}$.
+        \item The holomorphic functions on $U$ form a ring $\bm{\mO(U)}$.
         \begin{itemize}
             \item Equivalently, the $\C$-differentiation operator is $\C$-linear.
             \item Equivalently, if $f,g$ are holomorphic, then $f+g$ and $fg$ are holomorphic, too.
@@ -886,6 +886,129 @@
     \item Images of open (resp. closed) sets under continuous functions are \emph{not necessarily} open (resp. closed).
     \item Preimages of open (resp. closed) sets under continuous functions are again open (resp. closed).
     \item Note that the above definitions make sense in higher-dimensional vector spaces upon replacing the absolute value with the \textbf{Euclidean norm}.
+\end{itemize}
+
+
+\subsection*{Section I.1: Holomorphic Functions}
+\begin{itemize}
+    \item \marginnote{4/5:}Definition of \textbf{holomorphic}.
+    \item Examples and nonexamples of holomorphic functions: Constant, identity, and complex conjugate functions.
+    \item Further comments on the complex conjugate function.
+    \begin{itemize}
+        \item It's everywhere continuous but nowhere complex differentiable.
+        \item It's very hard to find real examples of such functions, but we found a complex example like that!
+    \end{itemize}
+    \item For the basic properties of complex differentiation (e.g., holomorphic implies continuous, sum and product rules), the proofs are symmetric to the real ones.
+    \item $\mO(U)$ is a ring, but it is more technically a $\C$-algebra.
+    \item \textbf{Chain rule}: If $f:U\to V$ and $g:V\to\C$ are mappings of open subsets of $\C$ that are holomorphic at $z_0\in U$ and $f(z_0)=w_0\in V$, respectively, then $g\circ f:U\to\C$ is holomorphic at $z_0$ and
+    \begin{equation*}
+        (g\circ f)'(z_0) = g'(w_0)f'(z_0)
+    \end{equation*}
+    \item Definition of \textbf{biholomorphic}.
+    \item \textcite{bib:FischerLieb} prove some elementary properties of complex functions in places with nonzero derivatives (e.g., locally one-to-one).
+    \begin{itemize}
+        \item This leads into the \textbf{complex inverse function theorem}.
+        \item Preview: This leads to the result that "bijective holomorphic maps are biholomorphic," i.e., if we have a bijective holomorophic map, we don't also need to prove that $f^{-1}$ is holomorphic \parencite[6]{bib:FischerLieb}.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection*{Section I.2: Real and Complex Differentiability}
+\begin{itemize}
+    \item Definition of \textbf{$\bm{\pmb{\R}^2}$-differentiable function}.
+    \item Definition of \textbf{Wirtinger derivatives}.
+    \begin{itemize}
+        \item \textcite{bib:FischerLieb} arrive here from a slightly different angle than in class.
+    \end{itemize}
+    \item \textcite{bib:FischerLieb} prove the $\pdv*{f}{\bar{z}}=0$ condition.
+    \item \textbf{Cauchy-Riemann operator}: The differential operator defined as follows. \emph{Denoted by} $\bm{\partial/\partial\bar{z}}$. \emph{Given by}
+    \begin{equation*}
+        \pdv{\bar{z}} := \frac{1}{2}\left( \pdv{x}+i\pdv{y} \right)
+    \end{equation*}
+    \item "In requiring that a function be complex differentiable we thus simultaneously require
+    that a certain partial differential equation be satisfied. In other words, \emph{holomorphic
+    functions are the differentiable solutions of the Cauchy-Riemann equation}" given as follows \parencite[9]{bib:FischerLieb}.
+    \begin{equation*}
+        {\pdv{f}{\bar{z}}}(z) = 0
+    \end{equation*}
+    \item \textbf{Laplace operator}: The real differential operator defined as follows. \emph{Also known as} \textbf{Laplacian}. \emph{Denoted by} $\bm{\Delta}$. \emph{Given by}
+    \begin{equation*}
+        \Delta := \pdv[2]{x}+\pdv[2]{y}
+    \end{equation*}
+    \begin{itemize}
+        \item As a real differential operator,
+        \begin{equation*}
+            \Delta\bar{f} = \overline{\Delta f}
+        \end{equation*}
+        \item More on this operator in Section VII.6.
+    \end{itemize}
+    \item Definition of a \textbf{harmonic function}, the \textbf{Cauchy-Riemann equations} (in real form).
+    \item On the CR equations: "The gradients and, consequently, the equipotential lines of g and h are thus perpendicular to one another at all points where the gradients do not vanish" \parencite[10]{bib:FischerLieb}.
+    \item We now investigate a special case of the chain rule for the Wirtinger derivatives.
+    \item Lemma 2.4: Let $f:U\to\C$ be a real differentiable function defined on an open set $U\subset\C$ and let $w:[a,b]\to U$ be a differentiable map (i.e., a differentiable path in $U$). Then for all $t\in[a,b]$,
+    \begin{equation*}
+        \pdv{t}(f\circ w)(t) =
+        \begin{pmatrix}
+            f_z(w(t)) & f_{\bar{z}}(w(t))\\
+        \end{pmatrix}
+        \begin{pmatrix}
+            \dot{w}(t)\\
+            \dot{\bar{w}}(t)\\
+        \end{pmatrix}
+        = f_z(w(t))\dot{w}(t)+f_{\bar{z}}(w(t))\dot{\bar{w}}(t)
+    \end{equation*}
+    Here we denote $\pdv*{w}{t}$ by $\dot{w}$ and use matrix multiplication.
+    \begin{proof}
+        Left to the reader.
+    \end{proof}
+    \item \textbf{Complex linear map}: A map $l:\C\to\C$ characterized by the following. \emph{Constraints}
+    \begin{enumerate}
+        \item $l(z+w)=l(z)+l(w)$;
+        \item $l(rz)=rl(z)$;
+    \end{enumerate}
+    for $z,w,r\in\C$.
+    \begin{itemize}
+        \item Every complex linear map is of the form
+        \begin{equation*}
+            w = l(z) = az
+        \end{equation*}
+        for a unique $a\in\C$.
+    \end{itemize}
+    \item \textbf{Real linear map}: A map $l:\C\to\C$ characterized by the following. \emph{Constraints}
+    \begin{enumerate}
+        \item $l(z+w)=l(z)+l(w)$;
+        \item $l(rz)=rl(z)$;
+    \end{enumerate}
+    for $z,w\in\C$ and $r\in\R$.
+    \begin{itemize}
+        \item Every real linear map is of the form
+        \begin{equation*}
+            w = l(z)
+            = az+b\bar{z}
+            =
+            \begin{pmatrix}
+                a & b\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                z\\
+                \bar{z}\\
+            \end{pmatrix}
+        \end{equation*}
+        for a unique pair $
+            \begin{pmatrix}
+                a & b\\
+            \end{pmatrix}
+            \in\C^2
+        $.
+        \item Implication: $l$ is complex linear iff $b=0$.
+    \end{itemize}
+    \item \textbf{Tangent map} (of $f$ at $z_0$): The real linear map from $\C\to\C$ determined by the vector $
+        \begin{pmatrix}
+            f_z(z_0) & f_{\bar{z}}(z_0)\\
+        \end{pmatrix}
+    $.
+    \item Proposition: $f$ is holomorphic at $z_0$ iff its tangent map at $z_0$ is complex linear.
+    \item \textcite{bib:FischerLieb} discuss angle preservation, per Figure \ref{fig:holomorphicAngles}.
 \end{itemize}
 
 
