@@ -876,6 +876,104 @@
 \end{itemize}
 
 
+\subsection*{Section I.5: Integration}
+\begin{itemize}
+    \item \marginnote{4/6:}We can define integration on \emph{generally} continuous functions, i.e., recall that a function need only be \textbf{piecewise continuous} in order to be integrable.
+    \item Allusion to \textbf{Praffian forms}, e.g., referring to $f(z)\dd{z}$ as a "one-form."
+    \item Integration in the mold of Figure \ref{fig:intCR}.
+    \item \textbf{Piecewise continuous} (function): A function $f:[a,b]\to\C$ for which there exists a partition $a=t_0<\cdots<t_n=b$ of the interval $[a,b]$ into subintervals $[t_{k-1},t_k]$ such that the restriction of $f$ to $(t_{k-1},t_k)$\dots
+    \begin{enumerate}
+        \item Is continuous for all $k=1,\dots,n$;
+        \item Admits a continuous extension to the endpoints $t_{k-1}$ and $t_k$.
+    \end{enumerate}
+    \item Define the \textbf{functional}
+    \begin{equation*}
+        I(f) = \int_a^bf(t)\dd{t}
+    \end{equation*}
+    \begin{itemize}
+        \item This functional is complex linear.
+        \item It also satisfies
+        \begin{equation*}
+            I(\bar{f}) = \overline{I(f)}
+        \end{equation*}
+        \item Therefore, we have that
+        \begin{align*}
+            I(\re f) &= \re I(f)&
+            I(\im f) &= \im I(f)
+        \end{align*}
+    \end{itemize}
+    \item $|\int_a^bf(t)\dd{t}|\leq\int_a^b|f(t)|\dd{t}$.
+    \item The central theorems of integral calculus (that is, the FTC and $u$-substitution) still hold:
+    \begin{itemize}
+        \item \emph{FTC}: Let $f$ be continuously differentiable on $[a,b]$. Then
+        \begin{equation*}
+            \int_a^bf'(t)\dd{t} = f(b)-f(a)
+        \end{equation*}
+        \item \emph{$u$-substitution}: Let $f$ be piecewise continuous on $[a,b]$ and let $h:[c,d]\to[a,b]$ be a continuous, nondecreasing, and piecewise continuously differentiable bijection. Then
+        \begin{equation*}
+            \int_a^bf(s)\dd{s} = \int_c^df(h(t))h'(t)\dd{t}
+        \end{equation*}
+    \end{itemize}
+    \item \textbf{Path of integration}: A continuous and piecewise continuously differentiable map $\gamma:[a,b]\to U$.
+    \item \textbf{Parameter interval}: The functional domain of a path of integration.
+    \item Proposition 5.3: Paths of integration are rectifiable, and their length is given by
+    \begin{equation*}
+        \len(\gamma) = \int_a^b|\gamma'(t)|\dd{t}
+    \end{equation*}
+    \item Integration in the mold of Figure \ref{fig:intGamma}.
+    \item \textbf{Segment} (joining $a$ to $b$): The path of integration defined as follows, where $a,b\in\C$ and $\gamma:[0,1]\to\C$ is the path defined by $\gamma(t)=a+t(b-a)$. \emph{Denoted by} $\bm{[a,b]}$. \emph{Given by} 
+    \begin{equation*}
+        [a,b] := \gamma
+    \end{equation*}
+    \item \textbf{Circle} (with center $z_0$ and radius $r$): The path of integration defined as follows, where $z_0\in\C$, $r>0$, and $-\pi\leq t\leq\pi$. \emph{Also known as} \textbf{positively oriented circle}. \emph{Denoted by} $\bm{\kappa(r;z_0)}$. \emph{Given by}
+    \begin{equation*}
+        \kappa(r;z_0)(t) := z_0+r\e[it]
+    \end{equation*}
+    \item $\bm{\partial D_r(z_0)}$: The trace of the positively oriented circle with center $z_0$ and radius $r$.
+    \item \textcite{bib:FischerLieb} uses Proposition 5.3 to prove that the length of a circle is $2\pi r$, thus connecting the abstractly defined $\pi$ of Section I.4 with the definition with which we're familiar.
+    \item An important integral.
+    \begin{equation*}
+        \int_{\kappa(r;z_0)}\frac{\dd{z}}{z-z_0} = 2\pi i
+    \end{equation*}
+    \item Discussion of a \textbf{parameter transformation} and \textbf{reparameterization}.
+    \begin{itemize}
+        \item Simply, these concepts describe the same path using two different functions with on different intervals $[a,b]$.
+        \item \textcite{bib:FischerLieb} use these concepts to prove that integrals are invariant under reparameterization.
+        \item "In light of this, we will identify two paths of integration if they are reparametrizations of each other. To be pedantic: a path of integration is an equivalence class of (parametrized) paths of integration with respect to the aforementioned equivalence relation" \parencite[28]{bib:FischerLieb}.
+    \end{itemize}
+    \item Sum rule along consecutive paths.
+    \item You can \textbf{subdivide} paths with partitions and consider the \textbf{reverse} path.
+    \begin{itemize}
+        \item The integral over the reverse path is the negative integral over the path.
+    \end{itemize}
+    \item \textbf{Constant} paths have zero integrals.
+    \item \textbf{Closed} (path): A path for which the initial and end points coincide.
+    \item More common integrals.
+    \begin{align*}
+        \int_{\kappa(1;0)}z^n\dd{z} &= i\int_{-\pi}^\pi\e[i(n+1)t]\dd{t} = 0\tag{$n\neq -1$}\\
+        \int_{\kappa(1;0)}\bar{z}\dd{z} &= \int_{\kappa(1;0)}\frac{\dd{z}}{z} = 2\pi i
+    \end{align*}
+    \item The standard estimate: Let $f$ be continuous on the trace of $\gamma$. Then
+    \begin{equation*}
+        \left| \int_\gamma f(z)\dd{z} \right| \leq \max_{z\in\tr\gamma}|f(z)|\cdot\len(\gamma)
+    \end{equation*}
+    \begin{proof}
+        Given.
+    \end{proof}
+    \item Limits and integrals are interchangeable for uniformly convergent sequences of functions.
+    \begin{proof}
+        Given.
+    \end{proof}
+    \item \textcite{bib:FischerLieb} state some multivariable carryovers from real analysis, including \textbf{Fubini's theorem}.
+\end{itemize}
+
+
+\subsection*{Section I.6: Several Complex Variables}
+\begin{itemize}
+    \item The concepts given elsewhere in this chapter are briefly extended to the multivariable case.
+\end{itemize}
+
+
 
 
 \end{document}
