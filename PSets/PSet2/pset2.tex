@@ -16,12 +16,91 @@
     \begin{equation*}
         r = \frac{1}{\limsup_{k\to\infty}\sqrt[k]{|a_k|}}
     \end{equation*}
+    \begin{proof}
+        By definition, the radius of convergence is the largest number $|z_1|$ for which a power series $\sum_{k=0}^\infty a_kz^k$ converges locally absolutely uniformly on $D_{|z_1|}(0)$. Equivalently, we have by the Lemma from class on 3/26 that the radius of convergence is the largest number $|z_1|$ for which there exists a positive $M\in\R$ such that $|a_kz_1^k|\leq M$ for all $k$. Rearranging this latter condition, we learn that
+        \begin{align*}
+            |a_k||z_1|^k &\leq M\\
+            \sqrt[k]{|a_k|} &\leq \frac{\sqrt[k]{M}}{|z_1|}
+        \end{align*}
+        for all $k$. Now since the limit superior and limit inferior of a sequence of real numbers always exist, we have that
+        \begin{equation*}
+            \limsup_{k\to\infty}\sqrt[k]{|a_k|} \leq \limsup_{k\to\infty}\frac{\sqrt[k]{M}}{|z_1|}
+            = \frac{1}{|z_1|}\limsup_{k\to\infty}\sqrt[k]{M}
+            = \frac{1}{|z_1|}\cdot 1
+            = \frac{1}{|z_1|}
+        \end{equation*}
+        and
+        \begin{equation*}
+            \liminf_{k\to\infty}\sqrt[k]{|a_k|} \leq \liminf_{k\to\infty}\frac{\sqrt[k]{M}}{|z_1|}
+            = \frac{1}{|z_1|}\liminf_{k\to\infty}\sqrt[k]{M}
+            = \frac{1}{|z_1|}\cdot 1
+            = \frac{1}{|z_1|}
+        \end{equation*}
+        Consequently, we have
+        \begin{align*}
+            |z_1| &\leq \frac{1}{\limsup_{k\to\infty}\sqrt[k]{|a_k|}}&
+            |z_1| &\leq \frac{1}{\liminf_{k\to\infty}\sqrt[k]{|a_k|}}
+        \end{align*}
+        Moreover, since the limit superior is always greater than or equal to the limit inferior of a sequence of real numbers and hence the reciprocal of the limit superior is less than or equal to the limit inferior, the left statement above is the stronger condition. Therefore, we have a well-defined upper bound on $|z_1|$ in the extended real numbers, which should be exactly the radius of convergence by definition. This verifies the Cauchy-Hadamard formula.
+    \end{proof}
     \item \textcite{bib:FischerLieb}, QI.4.4. Show that the function $\tan z$ never takes on the values $\pm i$ and that therefore,
     \begin{equation*}
         \dv{z}(\tan z) \neq 0
     \end{equation*}
-    everywhere. Show that the tangent function maps the strip $S_0=\{z:-\pi/2<\re z<\pi/2\}$ biholomorphically onto $\C\setminus\{it:t\in\R,\ t\geq 1\}$.\par
+    everywhere. Show that the tangent function maps the strip $S_0=\{z:-\pi/2<\re z<\pi/2\}$ biholomorphically onto $\C\setminus\{it:t\in\R,\ |t|\geq 1\}$.\par
     Also use level sets to illustrate the conformal mapping.
+    \begin{proof}
+        % \emph{Hint}: To study the mapping properties, decompose $\tan z=g(h(z))$ with $\zeta=h(z)=\e[2iz]$ and $g(\zeta)=(\zeta-1)/i(\zeta+1)$.
+
+        Suppose for the sake of contradiction that $z\in\C$ satisfies $\tan z=i$. Then
+        \begin{equation*}
+            i = \tan z
+            = \frac{\sin z}{\cos z}
+            = \frac{\frac{1}{2i}(\e[iz]-\e[-iz])}{\frac{1}{2}(\e[iz]+\e[-iz])}
+            = \frac{\e[iz]-\e[-iz]}{i(\e[iz]+\e[-iz])}
+            = \frac{\e[2iz]-1}{i(\e[2iz]+1)}
+        \end{equation*}
+        so
+        \begin{align*}
+            i^2(\e[2iz]+1) &= \e[2iz]-1\\
+            -\e[2iz]-1 &= \e[2iz]-1\\
+            0 &= \e[2iz]
+        \end{align*}
+        Now if the complex number $\e[2iz]$ equals zero, then $|\e[2iz]|=\e[\re(z)]$ equals zero, too. Thus, $\re(z)=\log(0)$, but $\log(0)$ is undefined, a contradiction.\par
+        Suppose for the sake of contradiction that $z\in\C$ satisfies $\tan z=-i$. Then, similarly to before,
+        \begin{equation*}
+            -i = \frac{\e[2iz]-1}{i(\e[2iz]+1)}
+        \end{equation*}
+        so
+        \begin{align*}
+            -i^2(\e[2iz]+1) &= \e[2iz]-1\\
+            \e[2iz]+1 &= \e[2iz]-1\\
+            2 &= 0
+        \end{align*}
+        a contradiction.\par
+        Suppose for the sake of contradiction that the derivative of $\tan z$ is everywhere zero. Then $\tan z$ is constant. However, $\tan 0=0$ and $\tan(\pi/4)=1$ for instance, so $\tan z$ is not constant, a contradiction.\par
+        To prove that $\tan z$ maps $S_0$ biholomorphically onto $\C\setminus\{it:t\in\R,\ |t|\geq 1\}$, \textcite[6]{bib:FischerLieb} tells us that it will suffice to show that the map is bijective and holomorphic. The holomorphicity condition comes immediately since \textcite{bib:FischerLieb} states that $\tan z$ is holomorphic everywhere except at the zeroes of $\cos z$ and these zeroes ($\pi/2\pm \pi n$) are all outside of $S_0$. Bijectivity, on the other hand, takes a bit more work. To show it, we will decompose $\tan z$ into the composition of four mappings, each of which is individually bijective and the overall composition of which maps the right domain to the right codomain. Explicitly, let $\tan z=\phi(h(g(f(z))))$ where
+        \begin{align*}
+            f(z) &:= 2iz&
+            g(z) &:= \e[z]&
+            h(z) &:= \frac{z-1}{z+1}&
+            \phi(z) &:= -iz
+        \end{align*}
+        As a "multiply by $w\in\C$" function, $f$ is complex linear and nontrivial, hence bijective. It also maps $S_0$ to $S_{-\pi}=\{z=x+iy:-\pi<y<\pi\}$. By \textcite[21]{bib:FischerLieb}, $g$ maps $S_{-\pi}$ bijectively onto $\C\setminus\R_{\leq 0}$. $h$ is bijective because we can derive the explicit formula
+        \begin{equation*}
+            h^{-1}(z) = -\frac{z+1}{z-1}
+        \end{equation*}
+        and confirm that
+        \begin{equation*}
+            h(h^{-1}(z)) = h^{-1}(h(z)) = z
+        \end{equation*}
+        In particular, $h(\R_{\leq 0})=\{t:t\in\R,\ |t|\geq 1\}$. We can see this because via polynomial division,
+        \begin{equation*}
+            h(x) = \frac{x-1}{x+1}
+            = 1-\frac{2}{x+1}
+        \end{equation*}
+        and this function starts at $-1=h(0)$, decreases asymptotically toward $-\infty$ as $0\to -1$, and then decreases asymptotically from $\infty$ toward 1 as $x$ goes from $-1^-\to -\infty$. Lastly, $\phi$ is bijective for the same reason as $f$, and $\phi$ maps $\{t:t\in\R,\ |t|\geq 1\}$ to $\{it:t\in\R,\ |t|\geq 1\}$, the final set that we desire to cut out of $\C$.
+    \end{proof}
     \item Fix $a,b,c\in\C$ so that $c$ is not a negative integer or 0. Show that the \textbf{hypergeometric} function
     \begin{equation*}
         F(a,b,c;z) := \sum_{k=0}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^k}{k!}
@@ -30,6 +109,150 @@
     \begin{equation*}
         z(1-z)F''(z)+[c-(a+b+1)z]F'(z)-abF(z) = 0
     \end{equation*}
+    \begin{proof}
+        % Could use the Cauchy-Hadamard formula...
+
+        % Calculating derivatives using term-by-term differentiation, we have that
+        % % \begin{align*}
+        % %     F'(z) &= \sum_{k=0}^\infty\frac{a(a+1)\cdots(a+k)b(b+1)\cdots(b+k)k}{c(c+1)\cdots(c+k)}\frac{z^k}{k!}\\
+        % %     F''(z) &= \sum_{k=0}^\infty\frac{a(a+1)\cdots(a+k+1)b(b+1)\cdots(b+k+1)k(k-1)}{c(c+1)\cdots(c+k+1)}\frac{z^k}{k!}
+        % % \end{align*}
+        % \begin{align*}
+        %     F'(z) &= \sum_{k=1}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^{k-1}}{(k-1)!}\\
+        %     &= \sum_{k=0}^\infty\frac{a(a+1)\cdots(a+k)b(b+1)\cdots(b+k)}{c(c+1)\cdots(c+k)}\frac{z^k}{k!}\\
+        %     &= \frac{ab}{c}\sum_{k=0}^\infty\frac{(a+1)\cdots(a+1+k-1)(b+1)\cdots(b+1+k-1)}{(c+1)\cdots(c+1+k-1)}\frac{z^k}{k!}\\
+        %     &= \frac{(a)_1(b)_1}{(c)_1}F(a+1,b+1,c+1;z)
+        % \end{align*}
+        % and
+        % \begin{align*}
+        %     F''(z) &= \dv{z}[F'(z)]\\
+        %     &= \frac{ab}{c}F'(a+1,b+1,c+1;z)\\
+        %     &= \frac{ab}{c}\cdot\frac{(a+1)(b+1)}{c+1}F(a+2,b+2,c+2;z)\\
+        %     &= \frac{(a)_2(b)_2}{(c)_2}F(a+2,b+2,c+2;z)
+        % \end{align*}
+        % Thus,
+        % \begin{align*}
+        %     z(1-z)F''(z) ={}& (1-z)\sum_{k=2}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^{k-1}}{(k-2)!}\\
+        %     \begin{split}
+        %         ={}& \sum_{k=2}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^{k-1}}{(k-2)!}\\
+        %         & -\sum_{k=2}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^k}{(k-2)!}
+        %     \end{split}
+        % \end{align*}
+        % and
+        % \begin{align*}
+        %     \begin{split}
+        %         [c-(a+b+1)z]F'(z) ={}& \sum_{k=1}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k)}\frac{z^{k-1}}{(k-1)!}\\
+        %         & -\sum_{k=1}^\infty\frac{a(a+1)\cdots(a+k)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^k}{(k-1)!}\\
+        %         & -\sum_{k=1}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k)}{c(c+1)\cdots(c+k-1)}\frac{z^k}{(k-1)!}\\
+        %         & -\sum_{k=1}^\infty\frac{a(a+1)\cdots(a+k-1)b(b+1)\cdots(b+k-1)}{c(c+1)\cdots(c+k-1)}\frac{z^k}{(k-1)!}
+        %     \end{split}
+        % \end{align*}
+        % and
+        % \begin{equation*}
+        %     -abF(z) = -\sum_{k=0}^\infty\frac{a(a+1)\cdots(a+k)b(b+1)\cdots(b+k)}{c(c+1)\cdots(c+k-1)}\frac{z^k}{k!}
+        % \end{equation*}
+
+        Before we begin properly, we will introduce the \textbf{Pochhammer symbol} $(q)_k$, defined by
+        \begin{equation*}
+            (q)_k =
+            \begin{cases}
+                1 & k=0\\
+                q(q+1)\cdots(q+k-1) & k>0
+            \end{cases}
+        \end{equation*}
+        as shorthand for $a(a+1)\cdots(a+k-1)$, etc. Making use of this notation, we will also preliminarily observe that
+        \begin{align*}
+            F'(z) &= \sum_{k=1}^\infty\frac{(a)_k(b)_k}{(c)_k}\frac{z^{k-1}}{(k-1)!}\\
+            &= \sum_{k=0}^\infty\frac{(a)_{k+1}(b)_{k+1}}{(c)_{k+1}}\frac{z^k}{k!}\\
+            &= \frac{ab}{c}\sum_{k=0}^\infty\frac{(a+1)_k(b+1)_k}{(c+1)_k}\frac{z^k}{k!}\\
+            &= \frac{(a)_1(b)_1}{(c)_1}F(a+1,b+1,c+1;z)
+        \end{align*}
+        and
+        \begin{align*}
+            F''(z) &= \dv{z}[F'(z)]\\
+            &= \frac{(a)_1(b)_1}{(c)_1}F'(a+1,b+1,c+1;z)\\
+            &= \frac{(a)_1(b)_1}{(c)_1}\cdot\frac{(a+1)_1(b+1)_1}{(c+1)_1}F(a+2,b+2,c+2;z)\\
+            &= \frac{(a)_2(b)_2}{(c)_2}F(a+2,b+2,c+2;z)
+        \end{align*}
+        These formulas will be useful later.\par
+        We now begin our argument that the hypergeometric function satisfies the given differential equation in earnest. Upon expanding the given differential equation, we will obtain a sum of terms that can be sorted by the power of $z$ present in the term. In particular, the coefficients $a_k$ of each $z^k$ term must cancel to zero independently, so let's derive a general formula for the coefficient of the $k^\text{th}$ term.\par
+        For the first term, we have
+        \begin{align*}
+            z(1-z)F''(z) &= z(1-z)\frac{(a)_2(b)_2}{(c)_2}F(a+2,b+2,c+2;z)\\
+            &= (1-z)\cdot\frac{(a)_2(b)_2}{(c)_2}z\left[ 1+\frac{(a+2)(b+2)}{c+2}z+\frac{(a+2)_2(b+2)_2}{(c+2)_2}\frac{z^2}{2}+\cdots \right]\\
+            &= (1-z)\left[ \frac{(a)_2(b)_2}{(c)_2\cdot 0!}z+\frac{(a)_3(b)_3}{(c)_3\cdot 1!}z^2+\frac{(a)_4(b)_4}{(c)_4\cdot 2!}z^3+\cdots \right]\\
+            &= \frac{(a)_2(b)_2}{(c)_2\cdot 0!}z+\left[ \frac{(a)_3(b)_3}{(c)_3\cdot 1!}-\frac{(a)_2(b)_2}{(c)_2\cdot 0!} \right]z^2+\left[ \frac{(a)_4(b)_4}{(c)_4\cdot 2!}-\frac{(a)_3(b)_3}{(c)_3\cdot 1!} \right]z^3+\cdots\\
+            &= 0+\frac{(a)_2(b)_2}{(c)_2\cdot 0!}z+\sum_{k=2}^\infty\left[ \frac{(a)_{k+1}(b)_{k+1}}{(c)_{k+1}(k-1)!}-\frac{(a)_k(b)_k}{(c)_k(k-2)!} \right]z^k\\
+            &= 0+\frac{(a)_2(b)_2}{(c)_2\cdot 0!}z+\sum_{k=2}^\infty\frac{(a)_k(b)_k}{(c)_k(k-2)!}\left[ \frac{(a+k)(b+k)}{(c+k)(k-1)}-1 \right]z^k
+        \end{align*}
+        For the second term, we have
+        \begin{align*}
+            [c-(a+b+1)z]F'(z) &= [c-(a+b+1)z]\frac{(a)_1(b)_1}{(c)_1}F(a+1,b+1,c+1;z)\\
+            &= [c-(a+b+1)z]\cdot\frac{(a)_1(b)_1}{(c)_1}\left[ 1+\frac{(a+1)(b+1)}{c+1}z+\frac{(a+1)_2(b+1)_2}{(c+1)_2}\frac{z^2}{2}+\cdots \right]\\
+            &= [c-(a+b+1)z]\left[ \frac{(a)_1(b)_1}{(c)_1\cdot 0!}+\frac{(a)_2(b)_2}{(c)_2\cdot 1!}z+\frac{(a)_3(b)_3}{(c)_3\cdot 2!}z^2+\cdots \right]\\
+            &= \frac{(a)_1(b)_1c}{(c)_1\cdot 0!}+\left[ \frac{(a)_2(b)_2c}{(c)_2\cdot 1!}-\frac{(a)_1(b)_1(a+b+1)}{(c)_1\cdot 0!} \right]z+\cdots\\
+            &= \frac{(a)_1(b)_1c}{(c)_1\cdot 0!}+\sum_{k=1}^\infty\left[ \frac{(a)_{k+1}(b)_{k+1}c}{(c)_{k+1}\cdot k!}-\frac{(a)_k(b)_k(a+b+1)}{(c)_k\cdot(k-1)!} \right]z^k\\
+            &= \frac{(a)_1(b)_1c}{(c)_1\cdot 0!}+\sum_{k=1}^\infty\frac{(a)_k(b)_k}{(c)_k(k-2)!}\left[ \frac{(a+k)(b+k)c}{k(k-1)(c+k)}-\frac{a+b+1}{k-1} \right]z^k
+        \end{align*}
+        And for the third term, we have
+        \begin{align*}
+            -abF(z) &= -abF(a,b,c;z)\\
+            &= -ab\sum_{k=0}^\infty\frac{(a)_k(b)_k}{(c)_kk!}z^k\\
+            &= \sum_{k=0}^\infty\frac{(a)_k(b)_k}{(c)_k(k-2)!}\left[ -\frac{ab}{k(k-1)} \right]z^k
+        \end{align*}
+        Adding these three infinite series together, we can see that the constant ($z^0$) term will have the coefficient
+        \begin{equation*}
+            a_0 = 0+\frac{(a)_1(b)_1c}{(c)_1\cdot 0!}-ab\cdot\frac{(a)_0(b)_0}{(c)_0\cdot 0!}
+            = \frac{abc}{c}-ab\cdot\frac{1}{1}
+            = 0
+        \end{equation*}
+        as desired. We can also see that the $z^1$ term will have coefficient
+        \begin{align*}
+            a_1 &= \frac{(a)_2(b)_2}{(c)_2\cdot 0!}+\frac{(a)_2(b)_2c}{(c)_2\cdot 1!}-\frac{(a)_1(b)_1(a+b+1)}{(c)_1\cdot 0!}-ab\cdot\frac{(a)_1(b)_1}{(c)_1\cdot 1!}\\
+            &= \frac{a(a+1)b(b+1)}{c(c+1)}+\frac{a(a+1)b(b+1)c}{c(c+1)}-\frac{ab(a+b+1)}{c}-\frac{a^2b^2}{c}\\
+            &= \frac{ab(a+1)(b+1)}{c(c+1)}+\frac{abc(a+1)(b+1)}{c(c+1)}-\frac{ab(a+b+1)(c+1)}{c(c+1)}-\frac{a^2b^2(c+1)}{c(c+1)}\\
+            &= \frac{ab(a+1)(b+1)+abc(a+1)(b+1)-ab(a+b+1)(c+1)-a^2b^2(c+1)}{c(c+1)}
+        \end{align*}
+        Now to show that $a_1=0$, it will suffice to show that the numerator of the above fraction equals zero, which we can do as follows.
+        \begin{align*}
+            N(a_1) ={}& ab(a+1)(b+1)+abc(a+1)(b+1)-ab(a+b+1)(c+1)-a^2b^2(c+1)\\
+            \begin{split}
+                ={}& ab(ab+a+b+1)+abc(ab+a+b+1)\\
+                & -abc(a+b+1)-ab(a+b+1)-a^2b^2c-a^2b^2
+            \end{split}\\
+            \begin{split}
+                ={}& abab+ab(a+b+1)+abcab+abc(a+b+1)\\
+                & -abc(a+b+1)-ab(a+b+1)-abcab-abab
+            \end{split}\\
+            ={}& 0
+        \end{align*}
+        To conclude, we show that the coefficients $a_k$ ($k\geq 2$) are equal to zero all at once, as follows.
+        \begin{align*}
+            a_k \propto{}& \frac{(a+k)(b+k)}{(c+k)(k-1)}-1+\frac{(a+k)(b+k)c}{k(k-1)(c+k)}-\frac{a+b+1}{k-1}-\frac{ab}{k(k-1)}\\
+            ={}& \frac{k(a+k)(b+k)}{k(k-1)(c+k)}-\frac{k(k-1)(c+k)}{k(k-1)(c+k)}+\frac{(a+k)(b+k)c}{k(k-1)(c+k)}-\frac{k(a+b+1)(c+k)}{k(k-1)(c+k)}-\frac{ab(c+k)}{k(k-1)(c+k)}\\
+            ={}& \frac{k(a+k)(b+k)-k(k-1)(c+k)+(a+k)(b+k)c-k(a+b+1)(c+k)-ab(c+k)}{k(k-1)(c+k)}
+        \end{align*}
+        And as before, we'll focus on the numerator from here on out.
+        \begin{align*}
+            N(a_k) ={}& k(a+k)(b+k)-k(k-1)(c+k)+(a+k)(b+k)c-k(a+b+1)(c+k)-ab(c+k)\\
+            \begin{split}
+                ={}& k(ab+ak+bk+k^2)\\
+                & -k(ck-c-k+k^2)\\
+                & +(ab+ak+bk+k^2)c\\
+                & -k(ac+bc+c+ak+bk+k)\\
+                & -ab(c+k)
+            \end{split}\\
+            \begin{split}
+                ={}& abk+ak^2+bk^2+k^3\\
+                & -ck^2+ck+k^2-k^3\\
+                & +abc+ack+bck+ck^2\\
+                & -ack-bck-ck-ak^2-bk^2-k^2\\
+                & -abc-abk
+            \end{split}\\
+            ={}& 0
+        \end{align*}
+        As to convergence on the unit disk, applying the Cauchy-Hadamard formula, we can see that $k!\to\infty$ faster than anything else, so the limit superior will go to zero and the radius of convergence will be $\infty$.
+    \end{proof}
 \end{enumerate}
 
 
@@ -41,15 +264,106 @@
         = \int_0^\infty\sin(x^2)\dd{x}
     \end{equation*}
     \emph{Hint}: Apply the Cauchy integral theorem to sectors with center 0 and corners given by $R$ and $\e[i\pi/4]R$, where $R\to\infty$.
+    \begin{proof}
+        % $\cos(z^2)=\frac{1}{2}(\e[iz^2]+\e[-iz^2])$
+        % $\gamma=\gamma_1+\gamma_2+\gamma_3$.
+        % $0=\int_\gamma\cos(z^2)\dd{z}$.
+        % $\int_{\gamma_2}\cos(z^2)\dd{z}=...$.
+        % \begin{align*}
+        %     \int_{\gamma_3}\cos(z^2)\dd{z} &= -\e[i\pi/4]\int_0^R\cos[(\e[i\pi/4]t)^2]\dd{t}\\
+        %     &= -\e[i\pi/4]\int_0^R\cos(\e[i\pi/2]t^2)\dd{t}\\
+        %     &= -\e[i\pi/4]\int_0^R\frac{1}{2}(\e[{i\e[i\pi/2]t^2}]+\e[{-i\e[i\pi/2]t^2}])\dd{t}
+        % \end{align*}
+
+        As in the case of the Dirichlet integral, we will analyze the complex exponential functions composing the complex cosine and then combine our results into the final answer. Let's begin.\par
+        Let $\gamma$ be the sector described in the hint oriented counterclockwise, and let $\gamma=\gamma_1+\gamma_2+\gamma_3$ where $\gamma_1$ is the segment along the real axis, $\gamma_2$ is the curved portion, and $\gamma_3$ is the segment between 0 and $R\e[i\pi/4]$. Then by the Cauchy integral theorem,
+        \begin{equation*}
+            \int_\gamma\e[-iz^2]\dd{z} = 0
+        \end{equation*}
+        Note that we begin our explorations here because this integral closely resembles the Gaussian integral, so we may be able to use that to our advantage. And indeed, for $\gamma_1$, $\int_0^R\e[-it^2]\dd{t}$ can be expressed in terms of the Gaussian integral as $R\to\infty$ since the Gaussian distribution is even:
+        \begin{equation*}
+            \lim_{R\to\infty}\int_0^R\e[-it^2]\dd{t} = \frac{1}{2}\int_{-\infty}^\infty\e[-it^2]\dd{t}
+            = \frac{\sqrt{\pi}}{2}
+        \end{equation*}
+        Bounding the integral over $\gamma_2$ takes more work, just like in the case of the Dirichlet integral. However, if we first attempt to get a bound on its magnitude, we can end up proving that it converges to zero.
+        \begin{align*}
+            \left| \int_{\gamma_2}\e[-z^2]\dd{z} \right| &= \left| \int_0^{\pi/4}\e[{-(R\e[it])^2}]\cdot iR\e[it]\dd{t} \right|\\
+            &= \left| \int_0^{\pi/4}R\e[{-R^2\e[i\cdot 2t]}]\cdot i\e[it]\dd{t} \right|\\
+            &= \left| \int_0^{\pi/4}R\e[-R^2\cos(2t)]\cdot i\e[i(t-R^2\sin(2t))]\dd{t} \right|\\
+            &\leq \int_0^{\pi/4}\left| R\e[-R^2\cos(2t)]\cdot i\e[i(t-R^2\sin(2t))] \right|\dd{t}\\
+            &= \int_0^{\pi/4}R\e[-R^2\cos(2t)]\dd{t}
+        \end{align*}
+        At this point, we'd like to find a way to bound $\cos(2t)$ so that we can evaluate the integral directly, without bounding it so loosely that we lose the convergence. One such way is by noting that $\cos(2t)$ is just slightly greater than the (much simpler) linear function $1-4t/\pi$ on the interval $[0,\pi/4]$, and thus the negative exponential of the cosine is slightly less than the negative exponential of the linear. Continuing to evaluate, we obtain an integral that can be computed explicitly:
+        \begin{align*}
+            \int_0^{\pi/4}R\e[-R^2\cos(2t)]\dd{t} &\leq \int_0^{\pi/4}R\e[-R^2(1-4t/\pi)]\dd{t}\\
+            &= -\frac{\pi(\e[-R^2]-1)}{4R}
+        \end{align*}
+        This expression has the form $c/\infty$ in the limit and thus equals zero.\par
+        Combining the last several results, we have that
+        \begin{align*}
+            0 &= \sum_{k=1}^3\int_{\gamma_k}\e[-z^2]\dd{z}\\
+            \int_{\gamma_3}\e[-z^2]\dd{z} &= -\int_{\gamma_1}\e[-z^2]\dd{z} = -\frac{\sqrt{\pi}}{2}
+        \end{align*}
+        This puts us in an interesting and different place from the Dirichlet integral. There, our integral over the real axis was still an unknown, and here, we've already evaluated it. How can we use this situation to our advantage? Well, let's start expanding the $\gamma_3$ integral and go from there.
+        \begin{align*}
+            \int_{-\gamma_3}\e[-z^2]\dd{z} &= \int_0^\infty\e[{-\e[i\pi/2]t^2}]\cdot\e[i\pi/4]\dd{t}\\
+            &= \int_0^\infty\e[-it^2]\cdot\e[i\pi/4]\dd{t}\\
+            &= \int_0^\infty[\cos(t^2)-i\sin(t^2)]\cdot\frac{\sqrt{2}}{2}(1+i)\dd{t}\\
+            &= \frac{\sqrt{2}}{2}\int_0^\infty[\cos(t^2)+\sin(t^2)+i(\cos(t^2)-\sin(t^2))]\dd{t}\\
+            &= \frac{\sqrt{2}}{2}\left[ \int_0^\infty\cos(t^2)\dd{t}+\int_0^\infty\sin(t^2)\dd{t}+i\left( \int_0^\infty\cos(t^2)\dd{t}-\int_0^\infty\sin(t^2)\dd{t} \right) \right]
+        \end{align*}
+        What it appears that we have now obtained actually is the two-variable system of equations
+        \begin{equation*}
+            \frac{\sqrt{2}}{2}\left[ \int_0^\infty\cos(t^2)\dd{t}+\int_0^\infty\sin(t^2)\dd{t}+i\left( \int_0^\infty\cos(t^2)\dd{t}-\int_0^\infty\sin(t^2)\dd{t} \right) \right] = \frac{\sqrt{\pi}}{2}+i(0)
+        \end{equation*}
+        or
+        \begin{align*}
+            \int_0^\infty\cos(t^2)\dd{t}+\int_0^\infty\sin(t^2)\dd{t} &= \sqrt{\frac{\pi}{2}}&
+            \int_0^\infty\cos(t^2)\dd{t}-\int_0^\infty\sin(t^2)\dd{t} &= 0
+        \end{align*}
+        which we can solve for the desired result.
+    \end{proof}
     \item These problems illustrate the geometric intuition for the radius of convergence of a power series. Do the parts in order.
     \begin{enumerate}
         \item For each nonzero natural number $n\in\N$, compute the power series expansion for the function $1/z$ around the point $1/n$. What are their radii of convergence?
+        \begin{proof}
+            The desired power series will be of the form
+            \begin{equation*}
+                P_n(z) = \sum_{k=0}^\infty\frac{f^{(k)}(1/n)}{k!}(z-1/n)^k
+            \end{equation*}
+            where $f(z)=1/z=z^{-1}$. Now by the power rule,
+            \begin{equation*}
+                f^{(k)}(z) = (-1)^kk!z^{-(k+1)}
+            \end{equation*}
+            Therefore, combining the last two results,
+            \begin{equation*}
+                \boxed{P_n(z) = \sum_{k=0}^\infty(-1)^kn^{k+1}(z-1/n)^k}
+            \end{equation*}
+            By the Cauchy-Hadamard formula,
+            \begin{align*}
+                r &= \frac{1}{\limsup_{k\to\infty}|(-1)^kn^{k+1}|^{1/k}}\\
+                &= \frac{1}{\limsup_{k\to\infty}n^{k+1/k}}\\
+                \Aboxed{r &= \frac{1}{n}}
+            \end{align*}
+        \end{proof}
         \item Describe the set of points $w\in\C$ such that the power series expansion for $1/z$ about $w$ has radius of convergence equal to 1.
+        \begin{proof}
+            Working backward in part (a), we start off by finding $n\in\C$ such that $\limsup_{k\to\infty}|(-1)^kn^{k+1}|^{1/k}=1$. This will happen if $|n|=1$. Then working backwards, we want $w=1/n$. But this is still just the set of points of magnitude 1. Therefore, the desired set is
+            \begin{equation*}
+                \boxed{\{w\in\C:|w|=1\}}
+            \end{equation*}
+        \end{proof}
         \item Suppose that 
         \begin{equation*}
             f(z) = \frac{1}{z(z-1)(z-i)(z-1-i)}
         \end{equation*}
         Find the unique point $w$ in the unit square $\{\re(z),\im(z)\in[0,1]\}$ such that the radius of convergence of the power series for $w$ is maximal. Justify your answer.
+        \begin{proof}
+            The definition of $f$ singles out the four corners of the unit square as singularities. Thus, the disk of convergence cannot include any of these corners, so we need the point in the unit square that's farthest away from all four corners. This would be
+            \begin{equation*}
+                \boxed{w = \frac{1}{2}(1+i)}
+            \end{equation*}
+        \end{proof}
     \end{enumerate}
     \item This problem is to hint at the general formulation of the Cauchy integral theorem. Please solve this problem only using things we have seen in class to this point.
     \begin{enumerate}
@@ -58,14 +372,50 @@
             L = \{z:\re(z),\im(z)\in(0,2)\text{ and not both }\re(z),\im(z)\in(0,1]\}
         \end{equation*}
         is star-shaped (hence the Cauchy integral theorem applies).
+        \begin{proof}
+            Choose
+            \begin{equation*}
+                a = \frac{3}{2}(1+i)
+            \end{equation*}
+            Then
+            \begin{center}
+                \begin{tikzpicture}
+                    \footnotesize
+                    \path [name path=U] (1,0) -- (2,0) -- (2,2) -- (0,2) -- (0,1) -- (1,1) -- cycle;
+                    \fill [gray!10] (1,0) -- (2,0) -- (2,2) -- (0,2) -- (0,1) -- (1,1) -- cycle;
+                    \fill [rex] (1.5,1.5) coordinate (a) circle (2pt) node[black,below=2pt]{$a$};
+                    \foreach \x in {0,15,...,345} {
+                        \path [name path=\x] (a) -- ++(\x:2);
+                        \draw [rey,name intersections={of=U and \x}] (a) -- (intersection-1);
+                    }
+            
+                    \draw
+                        (-0.5,0) -- (2.5,0)
+                        (0,-0.5) -- (0,2.5)
+                    ;
+                \end{tikzpicture}
+            \end{center}
+        \end{proof}
         \item Show that the "double L-shaped" domain
         \begin{equation*}
             U = \{z:|\re(z)|,\im(z)\in(0,2)\text{ and not both }|\re(z)|,\im(z)\in(0,1]\}
         \end{equation*}
         is not star-shaped.
+        \begin{proof}
+            We can do this by casework. If we pick $a$ to be any point in the right "$L$," straight-line paths to $(-1.5,0.1)$ will go outside of $U$ and vice versa for the left "$L$."
+        \end{proof}
         \item Nevertheless, by breaking up $U$ into two copies of $L$ and using the Cauchy integral theorem for the resultant star-shaped domains, show that for any closed curve $\gamma$ in $U$ and any $f\in\mathcal{O}(U)$, we have that $\int_\gamma f\dd{z}=0$.
+        \begin{proof}
+            Any time the curve crosses the imaginary axis once, it will have to cross the imaginary axis at least one more time on the way back since the loop is closed. Thus, when it crosses the imaginary axis, choose the next time it crosses the imaginary axis as we proceed along the path and draw a segment between these two points. Integrate around the loop on the right side and the left side; the integrals along the segment will cancel and the sum will be the original integral. Meanwhile, the one-sided loops in the individual star-shaped domains will evaluate to zero.
+        \end{proof}
         \item Show that $\C^*:=\C\setminus\{0\}$ can be written as the union of two star-shaped domains.
+        \begin{proof}
+            Choose $\C$ without the upper-right quartile and $\C$ without the lower left quartile.
+        \end{proof}
         \item Why doesn't your proof for part (c) show that $\int_\gamma f\dd{z}=0$ for any $f\in\mathcal{O}(\C^*)$ and any closed curve $\gamma$ in $\C^*$?
+        \begin{proof}
+            The two sets in part (d) are not (and cannot be) disjoint.
+        \end{proof}
     \end{enumerate}
 \end{enumerate}
 
