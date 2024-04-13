@@ -1,0 +1,216 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{3}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{Poles and Maximum Moduli}
+\begin{itemize}
+    \item \marginnote{4/9:}Announcement.
+    \begin{itemize}
+        \item Midterm next week in class.
+        \item Material up through today, though probably not much on today's content.
+    \end{itemize}
+    \item Last time.
+    \begin{itemize}
+        \item Cauchy integral formula: If $U$ is a domain, $D\subset\subset U$, and $z\in D$, then
+        \begin{equation*}
+            f(z) = \frac{1}{2\pi i}\int_\gamma\frac{f(\zeta)}{\zeta-z}\dd{\zeta}
+        \end{equation*}
+        \item This implies Riemann's removable singularity theorem, which states that if $f\in\mO(U\setminus\{z_0\})$ and $f$ is bounded near $z_0$, then there exists a $\hat{f}\in\mO(U)$ which continues $f$ at $z_0$.
+        \begin{itemize}
+            \item Example: $\sin(z)/z\in\mO(\C^*)$ has a continuation to $\C$.
+            \item In particular, take the Taylor series at zero and evaluate:
+            \begin{equation*}
+                \widehat{\frac{\sin(z)}{z}}(0) = 1-\frac{0^3}{3!}+\frac{0^5}{5!}-\cdots = 1
+            \end{equation*}
+        \end{itemize}
+        \item Alternatively, if $f\in\mO(U\setminus\{z_0\})$ and $|f(z)|\to\infty$ as $z\to z_0$, then $z_0$ is a \textbf{pole} of $f$.
+    \end{itemize}
+    \item Today.
+    \begin{itemize}
+        \item Finish up what we couldn't last time.
+        \item Say something about harmonic functions.
+    \end{itemize}
+    \item \textbf{Meromorphic} (function): A function $f:U\to\C$ such that $f\in\mO(U\setminus P)$ and each $p\in P$ is a pole, where $P\subset U$ is a finite set of points.
+    \item Example: Consider $1/z\in\mO(\C^*)$.
+    \begin{itemize}
+        \item This has a pole at zero.
+        \item Thus, $1/z$ is \emph{holomorphic} on the punctured plane $\C^*$, but \emph{meromorphic} on the whole complex plane $\C$.
+    \end{itemize}
+    \item Example: The same argument applies to $1/z^k$ ($k\in\N$).
+    \item Example: The function from PSet 2, Q2c:
+    \begin{equation*}
+        f(z) = \frac{1}{z(z-1)(z-i)(z-1-i)}
+    \end{equation*}
+    \item It follows that
+    \begin{equation*}
+        \{f:f\text{ is holomorphic}\} \subset \{f:f\text{ is meromorphic}\}
+    \end{equation*}
+    \item Fact: All of the examples kind of look the same.
+    \begin{itemize}
+        \item More generally, suppose $f$ has a pole at $p$ and is holomorphic on $U\setminus\{p\}$. Pick a disk $D\ni p$ such that $f\neq 0$ on $D$. Then $g=1/f\in\mO(D\setminus\{p\})$ and as $z\to p$, $g(z)\to 0$.
+        \item Thus, we've got a function that's holomorphic and bounded near a point, so by Riemann's removable singularity theorem, it has a unique holomorphic extension $\hat{g}\in\mO(D)$.
+        \begin{itemize}
+            \item In particular, $g(p)=0$.
+        \end{itemize}
+        \item Note: We do \emph{not} need to choose $D$ small enough such that it contains only one point in $P$. However, we will for the time being just to simplify things. The reason we can do this is because singularities --- as points of a finite set --- are isolated.
+    \end{itemize}
+    \item There exists a power series for $g$ about $p$ such that
+    \begin{equation*}
+        g(z) = \sum_{k=0}^\infty a_k(z-p)^k
+    \end{equation*}
+    \begin{itemize}
+        \item We know that $a_0=0$ because $g(p)=0$.
+        \item It can also happen such that some (or [potentially infinitely] many) of the remaining $a_i$ are zero.
+        \begin{itemize}
+            \item Example: if $f=1/z^3$, then $g=z^3$ and $a_i=0$ ($i>3$).
+        \end{itemize}
+        \item Now let $L$ be the largest natural number such that $a_i=0$ for all $0\leq i<L$.
+        \begin{itemize}
+            \item Because $a_0=0$, $L\geq 1$.
+            \item Additionally, $a_L\neq 0$.
+        \end{itemize}
+        \item Then we can rewrite the power series as
+        \begin{equation*}
+            g(z) = (z-p)^Lh(z)
+        \end{equation*}
+        where\dots
+        \begin{enumerate}
+            \item $h(z)=\sum_{k=L}^\infty a_k(z-p)^{k-L}$;
+            \item $h(p)\neq 0$ (and $h$ is nonzero near $p$).
+        \end{enumerate}
+        \item We say that $g$ has a \textbf{zero} (of order $L$ at $p$).
+        \begin{itemize}
+            \item Similarly, we say that $f$ has a \textbf{pole} (of order $L$ at $p$).
+        \end{itemize}
+        \item Thus,
+        \begin{equation*}
+            f(z) = \frac{1}{(z-p)^L}\frac{1}{h(z)}
+        \end{equation*}
+        where, moreover, $1/h\in\mO(D')$ for some smaller disk $D'$.
+        \item Example: $1/(z^2+z)$ goes to $z(z+1)$.
+        \item Takeaway: Near any pole $p$, $f$ must look like
+        \begin{equation*}
+            \frac{1}{(z-p)^L}\cdot\phi(z)
+        \end{equation*}
+        where $\phi$ is holomorphic around $p$.
+        \begin{itemize}
+            \item This implies that there exists a \textbf{Laurent series} expansion around any pole.
+            \item In particular, near $p$,
+            \begin{equation*}
+                f(z) = \sum_{k=-L}^\infty a_k(z-p)^k
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Zero} (of order $L$ at $p$): A point $p$ of a holomorphic complex function $g$ such that $g(p)=0$ and $g(z)=(z-p)^Lh(z)$ where $h(p)\neq 0$.
+    \item \textbf{Pole} (of order $L$ at $p$): A point $p$ of a holomorphic complex function $f$ such that $1/f(p)=0$ and $f(z)=1/(z-p)^Lh(z)$ where $h(p)\neq 0$.
+    \item \textbf{Laurent series}: A power series including a finite number of negative coefficients. \emph{Given by}
+    \begin{equation*}
+        \sum_{k=-L}^\infty a_k(z-p)^k
+    \end{equation*}
+    \item TPS: Consider $\cot(z)=\cos(z)/\sin(z)$, which has a pole at zero. What is the order of the pole? What is the Laurent series?
+    \begin{itemize}
+        \item The pole is order 1.
+        \begin{itemize}
+            \item One way to see this is to observe how $\tan z$ has a nonzero tangent at 0, so $\tan z=z+\cdots$. Thus, we can only divide one $z$ out of its power series.
+            \item Alternatively, we have
+            \begin{equation*}
+                \cot(z) = \frac{1}{z}\cdot\frac{z}{\sin(z)}\cdot\cos(z)
+            \end{equation*}
+            from which we can observe that $\cos(z)\in\mO(\C)$, and $\sin(z)/z\in\mO(\C)$ (at zero, the extension gives 1) so $z/\sin(z)$ is holomorphic near zero. Thus, we can define $\phi(z)=z\cos(z)/\sin(z)$.
+            \begin{itemize}
+                \item What if we tried $\tilde{\phi}(z)=z^2\cos(z)/\sin(z)$? What's different? Well, $\tilde{\phi}$ is still holomorphic, but $\tilde{\phi}(0)=0$, which is a problem. Notice that $\phi(0)=1$!
+            \end{itemize}
+            \item As a last way, we could investigate the power series of $\cot(z)^-1=\tan(z)$ directly:
+            \begin{equation*}
+                \tan z = z+\frac{z^3}{3}+\frac{2z^5}{15}
+            \end{equation*}
+        \end{itemize}
+        \item The Laurent series was not discussed in class, but here's some comments.
+        \begin{itemize}
+            \item It would begin from $k=-1$.
+            \item We could construct it from the power series for cosine and sine using Calderon's formula above.
+            \item Figuring out the formula for the power series of an inverted power series is a good exercise!!
+        \end{itemize}
+    \end{itemize}
+    \item What if $|f(z)|\to\infty$ as $|z|\to\infty$? Then we say that $f$ has a \textbf{pole} (at $\infty$).
+    \begin{itemize}
+        \item Otherwise, there exist sequences $z_n\to\infty$ and $w_n\to\infty$ such that $f(z_n)\to\infty$ and $f(w_n)$ stays bounded. This is an \textbf{essential singularity} (at $\infty$).
+        \item We can mull over this until Thursday when we introduce the solution, the \textbf{Riemann sphere}.
+        \item If $f(z)$ stays bounded, then $f$ has a \textbf{removable singularity} (at $\infty$).
+    \end{itemize}
+    \item \textbf{Pole} (at $\infty$): A function $f$ such that $|f(z)|\to\infty$ as $|z|\to\infty$.
+    \item \textbf{Essential singularity} (at $\infty$): A function $f$ for which there exist sequences $z_n\to\infty$ and $w_n\to\infty$ such that $f(z_n)\to\infty$ and $f(w_n)$ stays bounded.
+    \item \textbf{Removable singularity} (at $\infty$): A function $f$ that stays bounded as $|z|\to\infty$.
+    \item We're now going to switch to a completely different topic.
+    \item Suppose $f\in\mO(U)$. When does $|f(z)|$ get the biggest? Equivalently, where does $|f(z)|$ take a local max? \emph{Hint}: Look at the Cauchy integral formula!
+    \begin{itemize}
+        \item There are no such points, at least on the interior of $U$!
+    \end{itemize}
+    \item Theorem (maximum modulus principle): Let $f\in\mO(U)$. If $|f(z)|$ has a local maximum on $U$, then $f$ is constant.
+    \begin{proof}
+        Let $z_0$ be a local maximum of $|f(z)|$. Pick $D\ni z_0$ small enough such that $|f(z)|\leq|f(z_0)|$ for all $z\in D$. Let $r$ be the radius of $D$. Now invoking the CIF,
+        \begin{align*}
+            |f(z_0)| &= \left| \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z_0}\dd\zeta \right|\\
+            &= \frac{1}{2\pi}\left| \int_{\partial D}\frac{f(\zeta)}{\zeta-z_0}\dd\zeta \right|\\
+            &\leq \frac{1}{2\pi}\int_{\partial D}\left| \frac{f(\zeta)}{\zeta-z_0} \right|\dd\zeta\\
+            &= \frac{1}{2\pi}\int_0^{2\pi}\left| \frac{f(z_0+r\e[i\theta])}{r\e[i\theta]}\cdot ir\e[i\theta] \right|\dd\theta\\
+            &= \frac{1}{2\pi}\int_0^{2\pi}|f(z_0+r\e[i\theta])|\dd\theta\\
+            &\leq \frac{1}{2\pi}\cdot 2\pi\cdot\max_{\partial D}|f(\zeta)|\\
+            &= \max_{\partial D}|f(\zeta)|\\
+            &\leq |f(z_0)|
+        \end{align*}
+        But since the above inequality begins and ends with the same value, all $\leq$'s must be $=$'s. Thus, in particular,
+        \begin{align*}
+            \frac{1}{2\pi}\int_0^{2\pi}|f(z_0+r\e[i\theta])|\dd\theta &= |f(z_0)|\\
+            \frac{1}{2\pi}\int_0^{2\pi}\big( |f(z_0+r\e[i\theta])|-|f(z_0)| \big)\dd\theta &= 0
+        \end{align*}
+        Combining this with the fact that the above integrand is always $\leq 0$ because $f(z_0)$ is a local maximum, we have that
+        \begin{align*}
+            |f(z_0+r\e[i\theta])|-|f(z_0)| &= 0\\
+            |f(\zeta)| &= |f(z_0)|
+        \end{align*}
+        on $\partial D$. Note that this is true for all small $\partial D$'s centered at $z_0$.\par
+        Now since $|f|$ is constant on $\partial D$, we must have that $|f|^2=f\cdot\bar{f}$ is constant on $\partial D$. Taking the Wirtinger derivative and using its product rule gets us
+        \begin{equation*}
+            0 = \pdv{z}(f\cdot\bar{f}) = f_z\cdot\bar{f}+f\cdot\bar{f}_z
+        \end{equation*}
+        Since $f$ is holomorphic (hence satisfies the CR equations) and $f_{\bar{z}}=\bar{f}_z$, we have that
+        \begin{equation*}
+            \bar{f}_z = f_{\bar{z}} = 0
+        \end{equation*}
+        Thus,
+        \begin{equation*}
+            0 = f_z\cdot\bar{f}+f\cdot 0 = f_z\cdot\bar{f}
+        \end{equation*}
+        By the zero-product property, either $f_z=0$ and $\bar{f}=0$. In the first case, this means that $f$ is constant, as desired. In the second case, this means that $f$ is zero (and hence constant), as desired.\par
+        At this point, we have shown that $f$ is constant on a small disk. Therefore, we need only invoke the identity theorem, which tells us that since the function is constant for a little bit somewhere, it is constant everywhere.
+    \end{proof}
+    \item Another way to prove this is by considering the derivative of the Cauchy integral formula and where it's equal to zero.
+    \item Corollary (minimum modulus principle): If $f\in\mO(U)$, $f\neq 0$ on $U$ (hence $1/f\in\mO(U)$), and $|f(z)|$ takes a minimum in $U$, then $f$ is constant.
+    \item Application of the maximum modulus principle (the fundamental theorem of algebra): If $p$ is a polynomial of degree $d$ in $\C$, then $p$ has $d$ roots in $\C$ (counted with multiplicity).
+    \begin{proof}
+        Suppose inductively that $d\geq 1$.\par
+        Step 1 (show that there exists one root): Suppose for the sake of contradiction that $p$ has no zeros. Since $p$ is a polynomial, we know that $|p(z)|\to\infty$ as $|z|\to\infty$. Thus, there exists $R>0$ such that for all $z$ with $|z|>R$, $|p(z)|\geq|p(0)|$. Then $|p(z)|$ must take a minimum on $\overline{D_R}$. But to keep $p$ from being constant by the minimum modulus principle, the minimum has to be on $\partial D_R$. Now take a slightly bigger disk; our global minimum is now in the interior, so $p$ is constant, a contradiction. It follows that $p$ must have a zero in $D_R$.\par
+        Step 2: Suppose $p$ has a root at $z_0$. Then power series for $p$ at $z_0$ is $p(z)=(z-z_0)p_1(z)$. $p_1$ is a polynomial of degree $d-1$.\par
+        Step 3: Now iterate to find that $p$ is a product of monomials.
+    \end{proof}
+    \item Algebraists love to prove this with only algebra, but in reality, the proof is complex analysis.\footnote{How did this proof work??}
+    \item We did not get to say something about harmonic functions today, but Calderon will leave the content in his notes in case we want to look at it.
+    \begin{itemize}
+        \item The statement: Harmonic functions follow a version of the CIF.
+        \item There's a related PSet problem.
+    \end{itemize}
+\end{itemize}
+
+
+
+
+\end{document}
