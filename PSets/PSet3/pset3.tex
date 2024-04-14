@@ -1,0 +1,78 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{2}
+
+\begin{document}
+
+
+
+
+\section{Cauchy's Integral Formula}
+\subsection*{Set A: Graded for Completion}
+\begin{enumerate}[ref={A.\arabic*}]
+    \item \marginnote{4/12:}\textcite{bib:FischerLieb}, QII.3.1. Using the Cauchy integral formulas, compute the following integrals.
+    \begin{enumerate}
+        \item $\displaystyle\int_{|z+1|=1}\frac{\dd{z}}{(z+1)(z-1)^3}$.
+        \item $\displaystyle\int_{|z-i|=3}\frac{\dd{z}}{z^2+\pi^2}$.
+        \item $\displaystyle\int_{|z|=1/2}\frac{\e[1-z]}{z^3(1-z)}\dd{z}$.
+        \item $\displaystyle\int_{|z-1|=1}\left( \frac{z}{z-1} \right)^n\dd{z}$ for any $n\geq 1$.
+    \end{enumerate}
+    \item \textcite{bib:FischerLieb}, QII.4.2. Assume that the power series $f(z)=\sum_{k=0}^\infty a_kz^k$ converges on $D=D_r(0)$.
+    \begin{enumerate}
+        \item Show that if $f$ is real-valued on $\R\cap D$, then all $a_k$ are real.
+        \item Show that if $f$ is an even (resp. odd) function, then $a_k=0$ for all odd (resp. even) $k$.
+        \item Show that if $f(iz)=f(z)$, then $a_k$ can only be nonzero if $k$ is divisible by 4.
+        \item Discuss the equation $f(\rho z)=\mu f(z)$, where $\rho,\mu\in\C\setminus\{0\}$ are given.
+    \end{enumerate}
+    \item \textcite{bib:FischerLieb}, QII.6.1. Determine the type of singularity that each of the following functions has at $z_0$. If the singularity is removable, calculate the limit as $z\to z_0$; if the singularity is a pole, find its order and the principal part of $f$ at $z_0$.
+    \begin{enumerate}
+        \item $(1-\e[z])^{-1}$ at $z_0=0$.
+        \item $(z-\sin z)^{-1}$ at $z_0=0$.
+        \item $z\e[iz]/(z^2+b^2)^2$ at $z_0=ib$ ($b>0$).
+        \item $(\sin z+\cos z-1)^{-2}$ at $z_0=0$.
+    \end{enumerate}
+    \item Let $\D$ denote the unit disk and suppose that $f\in\mO(\D)$.
+    \begin{enumerate}
+        \item Prove that for any $R\in(0,1)$ and any $z$ with $|z|<R$, we have that
+        \begin{equation*}
+            f(z) = \frac{1}{2\pi}\int_0^{2\pi}f(R\e[i\theta])\re\left( \frac{R\e[i\theta]+z}{R\e[i\theta]-z} \right)\dd\theta
+        \end{equation*}
+        \emph{Hint}: Observe that setting $w=R^2/\bar{z}$, we have that the integral of $f(\zeta)/(\zeta-w)$ over the circle of radius $R$ centered at the origin is 0.
+        \item Compute that
+        \begin{equation*}
+            \re\left( \frac{R\e[i\theta]+r}{R\e[i\theta]-r} \right) = \frac{R^2-r^2}{R^2-2Rr\cos\theta+r^2}
+        \end{equation*}
+        \item Now suppose that $u=\re(f)$, so $u$ is a harmonic function. Deduce the \textbf{Poisson integral representation formula}: For $z=r\e[i\theta]$, we have
+        \begin{equation*}
+            u(z) = \frac{1}{2\pi}\int_0^{2\pi}P_r(\theta-\phi)u(\phi)\dd\phi
+        \end{equation*}
+        where $P_r(\psi)$ is the \textbf{Poisson kernel} for the disk, given by
+        \begin{equation*}
+            P_r(\psi) = \frac{1-r^2}{1-2r\cos\psi+r^2}
+        \end{equation*}
+    \end{enumerate}
+\end{enumerate}
+
+
+\subsection*{Set B: Graded for Content}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item \textcite{bib:FischerLieb}, QII.4.6.
+    \begin{enumerate}
+        \item Suppose the domain $G$ is symmetric with respect to the real axis and that $f$ is holomorphic on $G$ and real-valued on $G\cap\R$. Show that $f(\bar{z})=\overline{f(z)}$ for all $z\in G$.
+        \item Suppose $G=D_r(0)$ and $f$ is holomorphic on $G$ and real-valued on $G\cap\R$. Show that if $f$ is even (resp. odd), then the values of $f$ on $G\cap i\R$ are real (resp. imaginary). Prove this without using the power series expansion of $f$.
+    \end{enumerate}
+    \item Some setup: Suppose that $f$ is holomorphic on the unit disk $\D=\{|z|<1\}$. A point $w$ on the circle $\partial D=\{|z|=1\}$ is \textbf{regular} if there is an open neighborhood $U$ of $w$ and an analytic function $g$ on $U$ such that $f=g$ on $U\cap\D$. Notice that $f$ can be analytically continued outside the boundary of $\D$ if and only if there is a point $w$ on $\partial D$ that is regular for $f$.\par
+    Now define the function
+    \begin{equation*}
+        f(z) = \sum_{k=1}^\infty z^{2^k}
+    \end{equation*}
+    Show that $f$ converges on $\D$, and that it cannot be analytically continued past $\D$.
+    \item Suppose that $f$ is an entire function and that, for all sufficiently large $z$, we have $|f(z)|\leq|z|^n$. Prove that $f$ must be a polynomial.
+\end{enumerate}
+
+
+
+
+\end{document}
