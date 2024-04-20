@@ -728,5 +728,89 @@
 
 
 
+\section{Chapter II: The Fundamental Theorems of Complex Analysis}
+\emph{From \textcite{bib:FischerLieb}.}
+\subsection*{Section II.3: The Cauchy Integral Formula}
+\begin{itemize}
+    \item \marginnote{4/13:}Statement and proof of the CIF.
+    \begin{itemize}
+        \item \textcite{bib:FischerLieb} come at it in a slightly more complicated way than class.
+    \end{itemize}
+    \item Derivatives of the CIF.
+    \item Holomorphic implies $C^\infty$.
+    \item Morera's theorem and proof.
+    \item The Riemann extension theorem and proof.
+\end{itemize}
+
+
+\subsection*{Section II.4: Power Series Expansions of Holomorphic Functions}
+\begin{itemize}
+    \item Proof of the typical power series formula.
+    \item Power series examples.
+    \begin{enumerate}
+        \item $(z-a)^{-1}$.
+        \begin{itemize}
+            \item Has a standard power series.
+            \item $(z-a)^{-n}$ is computed via term-by-term differentiation of this base power series and corresponding adjustments.
+            \item More complicated rational functions are handled via partial fraction decomposition and then the above method.
+        \end{itemize}
+        \item Products of holomorphic functions.
+        \begin{itemize}
+            \item Use \textbf{Leibniz's rule}.
+        \end{itemize}
+        \item Inverse of a power series.
+        \begin{itemize}
+            \item Suppose $f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n$ in a neighborhood of $z_0$, and assume that $f(z_0)=a_0\neq 0$.
+            \item Then $1/f$ is holomorphic near $z_0$.
+            \item Moreover, the coefficients of the expansion
+            \begin{equation*}
+                \frac{1}{f(z)} = \sum_{n=0}^\infty b_n(z-z_0)^n
+            \end{equation*}
+            can be determined.
+            \item To do so, compare coefficients in
+            \begin{equation*}
+                1 = \frac{1}{f(z)}\cdot f(z)
+                = \sum_{n=0}^\infty\left( \sum_{m=0}^nb_ma_{n-m} \right)(z-z_0)^n
+            \end{equation*}
+            \item This yields $b_0a_0=1$ and hence $b_0=a_0^{-1}$. Continuing, $b_0a_1+b_1a_0=0$, so $b_1=-b_0a_1a_0^{-1}=-a_1a_0^{-2}$. We can continue this computation as far as we like.
+        \end{itemize}
+        \item $\tan z$.
+        \begin{itemize}
+            \item Observe that $\tan z$ is odd, and hence the even-powered terms disappear.
+            \item Substitute the power series for cosine, sine, and the undetermined one for tangent into the equation $\cos z\cdot\tan z=\sin z$ and compare coefficients.
+            \item We could also do $\sin z/\tan z$ using the method of Examples 2-3 above.
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Leibniz's rule}: The derivative of the product $fg$ of two functions $f,g$ that are both holomorphic in a neighborhood of $z_0$ is given by
+    \begin{equation*}
+        \frac{(fg)^{(n)}(z_0)}{n!} = \sum_{m=0}^n\frac{f^{(m)}(z_0)}{m!}\cdot\frac{g^{(n-m)}(z_0)}{(n-m)!}
+    \end{equation*}
+    \begin{itemize}
+        \item This is just the Cauchy product of the two formal power series!
+    \end{itemize}
+    \item "In order to determine the derivatives $f^{(n)}(z_0)$ of a function $f$ that is holomorphic at $z_0$, one only needs to know the values $f(z)$ on, say, a segment $(z_0-\delta,z_0+\delta)$ parallel to the real axis" \parencite[52]{bib:FischerLieb}.
+    \item Build up to, statement of, and proof of the identity theorem.
+    \item Consequence of the identity theorem: Holomorphic functions on $U$ are completely determined by their values on any \textbf{nondiscrete} set in $U$.
+    \begin{itemize}
+        \item "Properties that can be expressed via identities between holomorphic functions on [$G$] thus only need to be veriﬁed on a nondiscrete set in [$G$]" \parencite[53]{bib:FischerLieb}.
+        \item Example: $\cot(\pi z)$ and $\cot(\pi z+\pi)$ coincide on the nondiscrete set $\C\setminus\Z$, and thus are equal; therefore, the periodicity of cotangent on the real numbers implies it on the complex numbers.
+        \item This also means that the exponential function and those derived from it (e.g., sine and cosine) can only be extended from the real to the complex numbers in one way since $\R$ is nondiscrete in $\C$.
+    \end{itemize}
+    \item \textbf{Nondiscrete} (set in $U$): A set $M\subset U$ that contains an accumulation point of $M$.
+    \item \textbf{Discrete} (set in $U$): A set $M\subset U$ that is not nondiscrete.
+    \item Defines a \textbf{zero} (of order $L$), tapping into next week's content.
+    \item Since constancy on a nondiscrete set would imply constancy everywhere (for a holomorphic function), the set $f^{-1}(w)$ of points at which a nonconstant holomorphic function takes on the same value $w\in\C$ is discrete.
+    \item Characterizing holomorphicity: Let $f:U\to\C$ be a function defined on an open set $U\subset\C$. The following are equivalent:
+    \begin{enumerate}[label={\roman*.}]
+        \item $f$ is holomorphic.
+        \item $f$ is real differentiable and satisfies the Cauchy-Riemann equations.
+        \item $f$ admits a power series expansion about every point in $U$.
+        \item $f$ has local primitives.
+        \item $f$ is continuous, and for every closed triangle $\triangle\subset U$, $\int_{\partial\triangle}f(z)\dd{z}=0$.
+    \end{enumerate}
+\end{itemize}
+
+
+
 
 \end{document}
