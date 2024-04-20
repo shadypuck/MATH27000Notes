@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Extrema}
 \section{Poles and Maximum Moduli}
 \begin{itemize}
     \item \marginnote{4/9:}Announcement.
@@ -207,6 +207,219 @@
     \begin{itemize}
         \item The statement: Harmonic functions follow a version of the CIF.
         \item There's a related PSet problem.
+    \end{itemize}
+\end{itemize}
+
+
+
+\section{Modulus Principles and Harmonic Functions}
+\begin{itemize}
+    \item \marginnote{4/11:}Last time.
+    \begin{itemize}
+        \item Maximum modulus principle: If $f\in\mO(U)$, $f(z)\neq 0$ for all $z\in U$, and $|f|$ takes a max inside $U$, then $f$ is constant.
+        \begin{itemize}
+            \item Analogous result: The minimum modulus principle.
+        \end{itemize}
+        \item This result implies the fundamental theorem of algebra.
+        \begin{itemize}
+            \item Proof idea: $|f(z)|<|f(\zeta)|$ for $\zeta\in\partial D$, so $f$ must have a zero.
+        \end{itemize}
+    \end{itemize}
+    \item Another corollary: We have a better understanding of the mapping properties of holomorphic functions.
+    \item Recall that conformal (angle-preserving diffeomorphism) iff biholomorphic (bijective, $f,f^{-1}$ holomorphic).
+    \item In real analysis, we have the \textbf{inverse function theorem}.
+    \item \textbf{Inverse function theorem}: If $f:\R^2\to\R^2$ is $C^1$ and $Df(x)\neq 0$, then $f$ is locally a diffeomorphism from $x\in U$ to $V\ni f(x)$.
+    \item So for $f\in\mO(U)$\dots
+    \begin{itemize}
+        \item If $f'$ is never 0 on $U$, then $f(U)$ is open;
+        \item If $f'$ is never 0 on $U$ and $f:U\to f(U)$ is a bijection, then $f$ is biholomorphic.
+    \end{itemize}
+    \item Claim: The "if $f'$ is never 0 on $U$" condition is actually unnecessary!
+    \item Theorem: Let $f\in\mO(U)$.
+    \begin{enumerate}
+        \item Open mapping theorem: If $f$ is nonconstant, then $f(U)$ is open.
+        \begin{proof}
+            To prove that $f(U)$ is open, it will suffice to show that every $w_0\in f(U)$ is contained in some neighborhood that's a subset of $f(U)$. Let $w_0=f(z_0)$. Pick a disk $D\subset\subset U$ such that $f(z)-w_0\neq 0$ on $\partial D$; this is possible because the zeroes of a nonconstant holomorphic function (like $f-w_0$) must be isolated, or otherwise $f$ would be constant. Thus, we may define the positive number
+            \begin{equation*}
+                \delta := \inf_{z\in\partial D}|f(z)-w_0|
+            \end{equation*}
+            Now pick $w$ such that $|w-w_0|<\delta/2$. Then by the triangle inequality, we have that for all $z\in\partial D$,
+            \begin{equation*}
+                |f(z)-w| \geq |f(z)-w_0|-|w-w_0|
+                \geq \delta-|w-w_0|
+                > \delta-\frac{\delta}{2}
+                = \frac{\delta}{2}
+            \end{equation*}
+            This means that $|f-w|$ is always greater than the number $\delta/2$ on the boundary of $D$, but since
+            \begin{equation*}
+                |f(z_0)-w| = |w-w_0|
+                < \frac{\delta}{2}
+            \end{equation*}
+            $|f-w|$ does not obtain its minimum on the boundary of $D$. Thus, since all other hypotheses of the minimum modulus principle are satisfied, there must be a zero of $|f-w|$ on $U$. This means that there exists a $z\in U$ such that $f(z)=w$, and hence $w\in f(U)$. Therefore, since the choice of $w\in D_{\delta/2}(w_0)$ was arbitrary, we know that $D_{\delta/w}(w_0)\subset f(U)$, as desired.
+        \end{proof}
+        \item Complex inverse function theorem: If $f$ is bijective, it's biholomorphic.
+        \begin{proof}
+            % {\color{white}hi}
+            % \begin{itemize}
+            %     \item $Z:=\{z\in U\mid f'(z)=0\}$.
+            %     \item $f:U\setminus Z\to f(U)\setminus f(Z)$ is biholomorphic.
+            %     \begin{itemize}
+            %         \item $f:\C\to\C$ is holomorphic: $(f:\R^2\to\R^2)\in C^\infty\subset C^1$.
+            %         \item $Df(x)\neq 0$ at all $x\in U\setminus Z$ + IFT: $f$ is a diffeomorphism at all $x\in U\setminus Z$.
+            %         \item Thus, $f^{-1}:f(U)\setminus f(Z)\to U\setminus Z$ is differentiable, and hence holomorphic.
+            %         \item $f$ is bijective, $f$ is holomorphic, and $f^{-1}$ is holomorphic: $f$ is biholomorphic.
+            %     \end{itemize}
+            %     \item $f(U)$ is a domain.
+            %     \begin{itemize}
+            %         \item $f(U)$ is connected.
+            %         \begin{itemize}
+            %             \item $f$ is holomorphic: $f$ is continuous.
+            %             \item $U$ is a domain: $U$ is connected.
+            %             \item Theorem 9.11: $f(U)$ is connected.
+            %         \end{itemize}
+            %         \item $f(U)$ is open.
+            %         \begin{itemize}
+            %             \item $U$ is a domain.
+            %             \item $f$ is bijective: $f$ is nonconstant.
+            %             \item Open mapping theorem: $f(U)$ is open.
+            %         \end{itemize}
+            %     \end{itemize}
+            %     \item $f(Z)$ is discrete in $f(U)$.
+            %     \begin{itemize}
+            %         \item $f$ is nonconstant: $f'$ is nonzero.
+            %         \item If $Z$ were not discrete, then since $f'$ is holomorphic, $f'$ would be zero: $Z$ is discrete.
+            %         \item Open mapping theorem: Each $z\in Z$ is surrounded by an open neighborhood containing no other elements of $Z$, that gets mapped to an open neighborhood. These open neighborhood images cannot coincide; otherwise $f$ would not be bijective. Thus, $f(Z)$ is discrete.
+            %     \end{itemize}
+            %     \item Thus, $f(U)\setminus f(Z)$ is a domain.
+            %     \begin{itemize}
+            %         \item Just punctured now, if it was not already.
+            %     \end{itemize}
+            %     \item $f^{-1}:f(U)\to U$ is continuous.
+            %     \begin{itemize}
+            %         \item Let $X\subset U$ be open.
+            %         \item Open mapping theorem: $(f^{-1})^{-1}(X)=f(X)$ is open.
+            %         \item Therefore, $f^{-1}$ is continuous.
+            %     \end{itemize}
+            %     \item $f^{-1}$ is bounded near $z\in f(Z)$.
+            %     \begin{itemize}
+            %         \item $f^{-1}$ is continuous: $f^{-1}$ maps bounded sets to bounded sets.
+            %     \end{itemize}
+            %     \item Riemann's removable singularity theorem: There exists an analytic continuation of $f^{-1}$ to $f(U)$.
+            %     \item Therefore, $f$ is bijective and holomorphic and $f^{-1}$ is holomorphic, so $f$ is biholomorphic.
+            % \end{itemize}
+
+
+            Define the set
+            \begin{equation*}
+                Z := \{z\in U\mid f'(z)=0\}
+            \end{equation*}
+            of zeroes of $f'$. To prove that $f$ is biholomorphic, we will quickly show that $f:U\setminus Z\to f(U)\setminus f(Z)$ is biholomorphic and then build up to the point where we can use Riemann's removable singularity theorem to analytically continue this restriction. Let's begin.\par
+            Since $f\in\mO(U)$ by hypothesis, $f\in C^\infty\subset C^1$. Additionally, by the definition of $z$, $Df(x)\neq 0$ at all $x\in U\setminus Z$. Thus, by the real inverse function theorem, $f$ is a diffeomorphism at all $x\in U\setminus Z$. Consequently, $f^{-1}:f(U)\setminus f(Z)\to U\setminus Z$ is differentiable, and hence holomorphic. This combined with the hypothesis that $f:U\setminus Z\to f(U)\setminus f(Z)$ is bijective and holomorphic implies that $f:U\setminus Z\to f(U)\setminus f(Z)$ is biholomorphic.\par
+            Now the first part of the plan is complete. The next step involves building up to the point that we can apply Riemann's removable singularity theorem to $f^{-1}:f(U)\setminus f(Z)\to U\setminus Z$. To do so, we need only verify that $f(U)\setminus f(Z)$ is a domain and $f^{-1}$ is bounded near any $f(z)\in f(Z)$, since $f(z)\in f(Z)\subset f(U)$ by definition and we have just shown that $f^{-1}\in\mO(f(U)\setminus f(Z))$.\par
+            First, we verify that $f(U)\setminus f(Z)$ is a domain. To do so, we begin by checking that $f(U)$ is a domain. Since $U$ is a domain (hence connected) and $f$ is holomorphic (hence continuous), Theorem 9.11\footnote{See MATH 16210 Honors Calculus II notes.} tells us that $f(U)$ is connected. Additionally, since $U$ is a domain (hence open) and $f$ is bijective (hence nonconstant), the open mapping theorem implies that $f(U)$ is open. But since $f(U)$ is connected and open, it must be a domain, as desired. Next, we check that $f(Z)$ is discrete in $f(U)$. Since $f$ is nonconstant (per the above), $f'$ is nonzero. It follows since $f'$ is holomorphic that $Z$ must be discrete (otherwise, $f'$ holomorphic would be zero on a nondiscrete set, and hence would be zero everywhere, a contradiction). Thus, every $z\in Z$ is contained in an open neighborhood $N_z\subset U$ disjoint from all other $N_{z'}$. It follows by the open mapping theorem that each $f(N_z)$ is an \emph{open} neighborhood of $f(z)$, and by the fact that $f$ is bijective that the set of $f(N_z)$ is pairwise disjoint. Thus, $f(Z)$ is discrete in $f(U)$, as desired. Therefore, $f(U)\setminus f(Z)$ is a (punctured) domain, as desired.\par
+            Second, we verify that $f^{-1}$ is bounded near any $f(z)\in f(Z)$. To do so, we begin by checking that $f^{-1}:f(U)\to U$ is continuous. Let $X\subset U$ be open. Since $f$ is bijective, $(f^{-1})^{-1}(X)=f(X)$. By the open mapping theorem, $f(X)$ is open. Thus, by the open-set definition of continuity, $f^{-1}$ is continuous, as desired. But then since $f^{-1}$ is continuous, it maps compact sets to compact sets. Therefore, a closed and bounded neighborhood of $f(z)$ will maps to a closed and bounded neighborhood of $z$, as desired.\par
+            At this point, we may invoke Riemann's removable singularity theorem to analytically continue $f^{-1}:f(U)\setminus f(Z)\to U\setminus Z$ to $f(U)$. Therefore, since $f:U\to f(U)$ is bijective and holomorphic by hypothesis and $f^{-1}:f(U)\to U$ is holomorphic, $f$ is biholomorphic by definition, as desired.
+        \end{proof}
+    \end{enumerate}
+    \item Preview: There is also a geometric reason why $f\in\mO(U)$ with zeros can't be injective.
+    \item So the maximum modulus principle gets us a lot, and in fact, these kinds of arguments can be used to say even more!
+    \item Example: Where do $\re(f)$ and $\im(f)$ take their max?
+    \item Recall that $h:U\to\R$ is \emph{harmonic} if $\Delta h=0$, where
+    \begin{equation*}
+        \Delta := \pdv[2]{x}+\pdv[2]{y}
+        = 4\cdot\pdv{}{z}{\bar{z}}
+    \end{equation*}
+    \begin{itemize}
+        \item Examples of harmonic functions: $f\in\mO(U)$, $\re(f)$, $\im(f)$.
+        \item Nonexample: $|f|$ is not! Take $f(z)=z$; then $\Delta|f|=1/|z|$.
+    \end{itemize}
+    \item Where do harmonic functions take their maxima?
+    \begin{itemize}
+        \item This is essentially equivalent to asking about $\re(f)$ for the following reason.
+    \end{itemize}
+    \item A characterization: If $u:U\to\R$ is $C^2$ and harmonic where $U$ is convex, then there exists $f\in\mO(U)$ such that $u=\re(f)$.
+    \begin{proof}
+        Since $u$ is harmonic,
+        \begin{equation*}
+            0 = \Delta u
+            = \pdv{\bar{z}}(\pdv{u}{z})
+        \end{equation*}
+        This means that $u_z$ is holomorphic! This combined with the fact that $U$ is convex (hence star-shaped) implies by the CIT that $\int_\gamma u_z\dd{z}=0$ for any closed loop $\gamma\subset U$. Thus, by the proposition associated with Figure \ref{fig:contLoopInteg}, there exists a primitive $g$ for $u_z$ on $U$. From here, it follows by the rules of complex differentiation that
+        \begin{equation*}
+            \pdv{z}(\re g) = \pdv{z}\left[ \frac{1}{2}(g+\bar{g}) \right]
+            = \frac{1}{2}\pdv{g}{z}
+            = \frac{1}{2}u_z
+        \end{equation*}
+        and
+        \begin{equation*}
+            \pdv{\bar{z}}(\re g) = \frac{1}{2}\overline{g_z}
+            = \frac{1}{2}u_{\bar{z}}
+        \end{equation*}
+        Therefore, $u=\re(2g)+C$, as desired.
+    \end{proof}
+    \item Harmonic functions also satisfy a version of the Cauchy Integral Formula!
+    \begin{itemize}
+        \item Let $D$ be a disk centered at $z$ of radius $R$.
+        \item Then
+        \begin{align*}
+            u(z) &= \re f(z)\\
+            &= \re\left[ \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta \right]\\
+            &= \frac{1}{2\pi}\im\left[ \int_0^{2\pi}i\cdot f(z+R\e[i\theta])\dd\theta \right]\\
+            &= \frac{1}{2\pi}\int_0^{2\pi}\re f(z+R\e[i\theta])\dd\theta\\
+            &= \frac{1}{2\pi}\int_0^{2\pi}u(z+R\e[i\theta])\dd\theta
+        \end{align*}
+        \item This is called the "mean value property for harmonic functions."
+        \item On the PSet, we'll prove a version for any disk containing $z$ of radius $R$, namely
+        \begin{equation*}
+            u(z) = \int_0^{2\pi}u(\zeta)P_R(\zeta,z)\dd\theta
+        \end{equation*}
+        \begin{itemize}
+            \item $P_R$ is the Poisson kernel defined by
+            \begin{equation*}
+                P_R(\zeta,z) = \frac{1}{2\pi}\re\left( \frac{\zeta+z}{\zeta-z} \right)
+            \end{equation*}
+            \item Note that by definition, the Poisson kernel is harmonic!
+        \end{itemize}
+    \end{itemize}
+    \item Theorem (Maximum modulus principle for harmonic functions): Suppose $h:U\to\R$ is harmonic. If $h$ takes a local maximum (or minimum) at $z_0\in U$, then $h$ must be \emph{locally constant}, that is, constant in a neighborhood of $z_0$.
+    \begin{proof}
+        We use the same strategy as we did for the holomorphic version.\par
+        In particular, suppose $z_0$ is a local maximum. Pick a disk $D_R(z_0)$ about $z_0$ such that $h(z_0)\geq h(z)$ for all $z\in D_R(z_0)$. Using our new CIF, we have that for all $r<R$,
+        \begin{equation*}
+            h(z_0) = \frac{1}{2\pi}\int_0^{2\pi}h(z_0+r\e[i\theta])\dd\theta
+        \end{equation*}
+        By a similar integrand argument to before (noting that $h$ is real, so we don't need absolute values), we can conclude that
+        \begin{equation*}
+            h(z_0) = h(z_0+r\e[i\theta])
+        \end{equation*}
+        for all $r<R$. Therefore, $h$ is constant on $D_R(z_0)$, as desired.
+    \end{proof}
+    \item Corollary: Suppose $f\in\mO(U)$. If $\re(f)$ or $\im(f)$ take a maximum in $U$, then $f$ must be everywhere constant.
+    \item Corollary: If $U$ is bounded, then $h$ is either constant or takes its maximum and minimum on $\partial U$.
+    \item Application: Dirichlet problem (on a disk).
+    \begin{itemize}
+        \item Let $U$ be a convex domain, and let $g$ be a function on $\partial U$. Does there exist a function $u$ such that $u=g$ on $\partial D$ and $\Delta u=0$ (i.e., $u$ is harmonic)?
+        \item This is like finding a steady state for the heat equation.
+        \item If $U$ is a disk, the answer is yes, and the function is unique!
+        \item Existence.
+        \begin{itemize}
+            \item Set
+            \begin{equation*}
+                u(z) := \int_0^{2\pi}g(\zeta)P_R(\zeta,z)\dd\theta
+            \end{equation*}
+            \item Then
+            \begin{equation*}
+                \Delta_zu = \Delta_z\int_0^{2\pi}g(\zeta)P_R(\zeta,z)\dd\theta
+                = \int_0^{2\pi}g(\zeta)\underbrace{\Delta_zP_R(\zeta,z)}_0\dd\theta
+                = 0
+            \end{equation*}
+            \item Note that $\Delta_zP_R(\zeta,z)=0$ because $P_R$ is harmonic, as mentioned earlier.
+            \item The only hard part here is showing that $u$ has a continuous extension to $\partial D_R$.
+        \end{itemize}
+        \item Uniqueness.
+        \begin{itemize}
+            \item Suppose that there exist two solutions $g_1,g_2$. Then $g_1-g_2$ is harmonic and $g_1-g_2=0$ on $\partial D$. But then by the maximum (and minimum) modulus principles, $g_1-g_2=0$ on $U$. Therefore, $g_1=g_2$ on $U$, as desired.
+        \end{itemize}
     \end{itemize}
 \end{itemize}
 
