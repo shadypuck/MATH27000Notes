@@ -15,23 +15,204 @@
     \item \marginnote{4/12:}\textcite{bib:FischerLieb}, QII.3.1. Using the Cauchy integral formulas, compute the following integrals.
     \begin{enumerate}
         \item $\displaystyle\int_{|z+1|=1}\frac{\dd{z}}{(z+1)(z-1)^3}$.
+        \begin{proof}
+            % By the method of partial fractions,
+            % \begin{equation*}
+            %     \frac{1}{(z+1)(z-1)^3} = \frac{1}{8(z-1)}-\frac{1}{4(z-1)^2}+\frac{1}{2(z-1)^3}-\frac{1}{8(z+1)}
+            % \end{equation*}
+            % We now evaluate the integral of each of these four terms separately using the CIF. I'll give a couple of examples, and then the rest of the results (obtained in an analogous fashion) will simply be stated.\par
+            % Example 1: Let $f(z)=1/8$. Then by the CIF,
+            % \begin{equation*}
+            %     \frac{1}{8} = f(1)
+            %     = \frac{1}{2\pi i}\int_{|\zeta+1|=1}\frac{f(\zeta)}{\zeta-1}\dd\zeta
+            %     = \frac{1}{2\pi i}\int_{|\zeta+1|=1}\frac{1/8}{\zeta-1}\dd\zeta
+            % \end{equation*}
+            % so multiplying both sides by $2\pi i$, we learn that
+            % \begin{equation*}
+            %     \int_{|z+1|=1}\frac{1}{8(z-1)}\dd{z} = \frac{\pi i}{4}
+            % \end{equation*}
+            % Example 2: Let $f(z)=1/2$. Then by the CIF,
+            % \begin{equation*}
+            %     0 = f''(1) = \frac{2!}{2\pi i}\int_{|z+1|=1}\frac{1/2}{(z-1)^3}\dd{z}
+            % \end{equation*}
+            % so
+            % \begin{equation*}
+            %     \int_{|z+1|=1}\frac{1}{2(z-1)^3}\dd{z} = 0
+            % \end{equation*}
+
+
+            Let
+            \begin{equation*}
+                f(z) = \frac{1}{(z-1)^3}
+            \end{equation*}
+            Then by the CIF,
+            \begin{align*}
+                f(-1) &= \frac{1}{2\pi i}\int_{|\zeta+1|=1}\frac{f(\zeta)}{\zeta+1}\dd\zeta\\
+                -\frac{1}{8} &= \frac{1}{2\pi i}\int_{|z+1|=1}\frac{f(z)}{z+1}\dd{z}\\
+                \Aboxed{-\frac{\pi i}{4} &= \int_{|z+1|=1}\frac{\dd{z}}{(z+1)(z-1)^3}}
+            \end{align*}
+        \end{proof}
         \item $\displaystyle\int_{|z-i|=3}\frac{\dd{z}}{z^2+\pi^2}$.
+        \begin{proof}
+            We know that
+            \begin{equation*}
+                \frac{1}{z^2+\pi^2} = \frac{1}{(z-\pi i)(z+\pi i)}
+            \end{equation*}
+            Thus, let
+            \begin{equation*}
+                f(z) = \frac{1}{z+\pi i}
+            \end{equation*}
+            Then by the CIF,
+            \begin{align*}
+                f(\pi i) &= \frac{1}{2\pi i}\int_{|z-i|=3}\frac{f(z)}{z-\pi i}\dd{z}\\
+                \frac{1}{2\pi i} &= \frac{1}{2\pi i}\int_{|z-i|=3}\frac{1}{(z-\pi i)(z+\pi i)}\dd{z}\\
+                \Aboxed{1 &= \int_{|z-i|=3}\frac{\dd{z}}{z^2+\pi^2}}
+            \end{align*}
+        \end{proof}
         \item $\displaystyle\int_{|z|=1/2}\frac{\e[1-z]}{z^3(1-z)}\dd{z}$.
+        \begin{proof}
+            Let
+            \begin{equation*}
+                f(z) = \frac{\e[1-z]}{1-z}
+            \end{equation*}
+            Consequently,
+            \begin{equation*}
+                f'(z) = \frac{(1-z)\cdot -\e[1-z]-\e[1-z]\cdot -1}{(1-z)^2}
+                = \frac{z\e[1-z]}{(1-z)^2}
+            \end{equation*}
+            and
+            \begin{equation*}
+                f''(z) = \frac{(1-z)^2\cdot(\e[1-z]-z\e[1-z])-z\e[1-z]\cdot 2(1-z)^1\cdot -1}{(1-z)^4}
+                % = \frac{(1-z)(\e[1-z]-z\e[1-z])+2z\e[1-z]}{(1-z)^3}
+                = \frac{(1+z^2)\e[1-z]}{(1-z)^3}
+            \end{equation*}
+            Then by the second derivative of the CIF,
+            \begin{align*}
+                f''(0) &= \frac{2!}{2\pi i}\int_{|z|=1/2}\frac{f(z)}{(z-0)^{2+1}}\dd{z}\\
+                \e &= \frac{1}{\pi i}\int_{|z|=1/2}\frac{f(z)}{z^3}\dd{z}\\
+                \Aboxed{\pi i\e &= \int_{|z|=1/2}\frac{\e[1-z]}{z^3(1-z)}\dd{z}}
+            \end{align*}
+        \end{proof}
         \item $\displaystyle\int_{|z-1|=1}\left( \frac{z}{z-1} \right)^n\dd{z}$ for any $n\geq 1$.
+        \begin{proof}
+            Let
+            \begin{equation*}
+                f(z) = z^n
+            \end{equation*}
+            Then by the $(n-1)^\text{th}$ derivative of the CIF,
+            \begin{align*}
+                f^{(n-1)}(1) &= \frac{(n-1)!}{2\pi i}\int_{|z-1|=1}\frac{f(z)}{(z-1)^n}\dd{z}\\
+                n! &= \frac{(n-1)!}{2\pi i}\int_{|z-1|=1}\frac{z^n}{(z-1)^n}\dd{z}\\
+                \Aboxed{2\pi ni &= \int_{|z-1|=1}\left( \frac{z}{z-1} \right)^n\dd{z}}
+            \end{align*}
+        \end{proof}
     \end{enumerate}
     \item \textcite{bib:FischerLieb}, QII.4.2. Assume that the power series $f(z)=\sum_{k=0}^\infty a_kz^k$ converges on $D=D_r(0)$.
     \begin{enumerate}
         \item Show that if $f$ is real-valued on $\R\cap D$, then all $a_k$ are real.
+        \begin{proof}
+            Suppose for the sake of contradiction that $a_k$ is complex. By hypothesis, $f$ is a convergent power series in a neighborhood of 0. Thus, by the proposition from the 3/26 class, $f$ is holomorphic in a neighborhood of zero. Consequently, $f$ is $C^\infty$. This means that in particular, $f$ is $C^k$ with
+            \begin{equation*}
+                f^{(k)}(0) = k!a_k
+            \end{equation*}
+            But since $a_k$ is complex, this means that the $k^\text{th}$ derivative of $f$ is complex, a contradiction for a real-valued function.
+        \end{proof}
         \item Show that if $f$ is an even (resp. odd) function, then $a_k=0$ for all odd (resp. even) $k$.
+        \begin{proof}
+            Suppose $f$ is even. Then $f(z)=f(-z)$. Thus,
+            \begin{align*}
+                \sum_{k=0}^\infty a_kz^k &= \sum_{k=0}^\infty a_k(-z)^k\\
+                \sum_{k=0}^\infty a_{2k}z^{2k}+\sum_{k=0}^\infty a_{2k+1}z^{2k+1} &= \sum_{k=0}^\infty a_{2k}z^{2k}-\sum_{k=0}^\infty a_{2k+1}z^{2k+1}\\
+                2\sum_{k=0}^\infty a_{2k+1}z^{2k+1} &= 0
+            \end{align*}
+            Now the whole power series on the left above cancelling out implies that each term individually goes to zero as well. Therefore, we have proven that all of the odd coefficients go to zero.\par
+            The proof is symmetric in the other case.
+        \end{proof}
         \item Show that if $f(iz)=f(z)$, then $a_k$ can only be nonzero if $k$ is divisible by 4.
+        \begin{proof}
+            As in part (b), we have that
+            \begin{align*}
+                \sum_{k=0}^\infty a_k(iz)^k &= \sum_{k=0}^\infty a_kz^k\\
+                \sum_{k=0}^\infty a_{4k}z^{4k}+i\sum_{k=0}^\infty a_{4k+1}z^{4k+1}-\sum_{k=0}^\infty a_{4k+2}z^{4k+2}-i\sum_{k=0}^\infty a_{4k+3}z^{4k+3} &= \sum_{j=0}^3\sum_{k=0}^\infty a_{4k+j}z^{4k+j}\\
+                (i-1)\sum_{k=0}^\infty a_{4k+1}z^{4k+1}-2\sum_{k=0}^\infty a_{4k+2}z^{4k+2}-(i+1)\sum_{k=0}^\infty a_{4k+3}z^{4k+3} &= 0
+            \end{align*}
+            Indeed, via term-by-term cancellation again, we see that all terms with $k\pmod 4\not\equiv 0$ go to zero.
+        \end{proof}
         \item Discuss the equation $f(\rho z)=\mu f(z)$, where $\rho,\mu\in\C\setminus\{0\}$ are given.
+        \begin{proof}
+            As in part (c), if $\rho$ is a root of unity and $\mu=1$, then $a_k$ can only be nonzero if $k$ is divisible by the denominator of $\arg\rho$ in reduced form. If $\rho$ has an irrational argument, the equation may not add much of any new information. More generally, power series that satisfy this equation tend to be determined on $\C$ by their values on some subset of $\C$, be it half the plane (as in $f(-z)=f(z)$ or $f(-z)=2f(z)$), one quadrant (as in $f(iz)=f(z)$), or some other region.
+        \end{proof}
     \end{enumerate}
     \item \textcite{bib:FischerLieb}, QII.6.1. Determine the type of singularity that each of the following functions has at $z_0$. If the singularity is removable, calculate the limit as $z\to z_0$; if the singularity is a pole, find its order and the principal part of $f$ at $z_0$.
     \begin{enumerate}
         \item $(1-\e[z])^{-1}$ at $z_0=0$.
+        \begin{proof}
+            As $z\to z_0=0$, $\e[z]\to 1$ and hence $1-\e[z]\to 0$. Thus, as $z\to z_0$, $|1/(1-\e[z])|\to\infty$. Therefore, the singularity is a \fbox{pole.}\par
+            If $f(z)=(1-\e[z])^{-1}$, then $g(z)=1-\e[z]$ and $g^{(n)}(z)=-\e[z]$ ($n\geq 1$). Thus,
+            \begin{equation*}
+                g(z) = \sum_{k=1}^\infty -\frac{1}{n!}z^n
+                = -z\sum_{k=0}^\infty\frac{1}{(n+1)!}z^n
+            \end{equation*}
+            so \fbox{the order is 1.} Moreover, the principal part of $f$ at $z_0$ is
+            \begin{equation*}
+                \boxed{-\frac{1}{z}}
+            \end{equation*}
+        \end{proof}
         \item $(z-\sin z)^{-1}$ at $z_0=0$.
+        \begin{proof}
+            As in part (a), the denominator goes to zero as we go to $z_0=0$, so the singularity is a \fbox{pole.}\par
+            Also as before, we can calculate that
+            \begin{equation*}
+                g(z) = \sum_{k=1}^\infty(-1)^{k+1}\frac{z^{2k+1}}{(2k+1)!}
+                = z^3\sum_{k=0}^\infty(-1)^k\frac{z^{2k}}{(2k+3)!}
+            \end{equation*}
+            so \fbox{the order is 3.} Inverting this back again to determine the principal part, we must use the coefficient formulae on \textcite[51]{bib:FischerLieb} to find the Laurent series expansion for $f$. In particular,
+            \begin{align*}
+                b_0 &= a_0^{-1} = 3! = 6\\
+                b_1 &= -a_1a_0^{-2} = 0\\
+                b_2 &= (a_1^2-a_0a_2)a_0^{-3} = \frac{3}{10}
+            \end{align*}
+            so the principal part of $f$ at $z_0$ is
+            \begin{equation*}
+                \boxed{6x^{-3}+\frac{3}{10}x^{-1}}
+            \end{equation*}
+        \end{proof}
         \item $z\e[iz]/(z^2+b^2)^2$ at $z_0=ib$ ($b>0$).
+        \begin{proof}
+            % Unlike in parts (a) and (b), when we invert $f$ and differentiate, the numerator will always be of the form $u\cdot(z^2+b^2)$ for some expression $u$. Thus, the power series expansion of $g$ about $ib$ is 0
+
+            As in parts (a) and (b), the singularity is a \fbox{pole.}\par
+            As in part (b), we can calculate that
+            \begin{equation*}
+                g(z) = 0+0z+4ib\e[b]z^2+24b\e[b]z^3+\cdots
+            \end{equation*}
+            so \fbox{the order is 2.} Inverting this back again, we learn that
+            \begin{align*}
+                b_0 &= -\frac{i}{4b\e[b]}&
+                b_1 &= \frac{3}{2b\e[b]}
+            \end{align*}
+            so the principal part of $f$ at $z_0$ is
+            \begin{equation*}
+                \boxed{-\frac{i}{4b\e[b]}z^{-2}+\frac{3}{2b\e[b]}z^{-1}}
+            \end{equation*}
+        \end{proof}
         \item $(\sin z+\cos z-1)^{-2}$ at $z_0=0$.
+        \begin{proof}
+            As in parts (a)-(c), the singularity is a \fbox{pole.}\par
+            Once again, we can calculate that
+            \begin{equation*}
+                g(z) = 0+0z+z^2-z^3
+            \end{equation*}
+            so \fbox{the order is 2.} And once again,
+            \begin{align*}
+                b_0 &= 1&
+                b_1 &= 1
+            \end{align*}
+            so we have
+            \begin{equation*}
+                \boxed{z^{-2}+z^{-1}}
+            \end{equation*}
+        \end{proof}
     \end{enumerate}
     \item Let $\D$ denote the unit disk and suppose that $f\in\mO(\D)$.
     \begin{enumerate}
@@ -40,10 +221,34 @@
             f(z) = \frac{1}{2\pi}\int_0^{2\pi}f(R\e[i\theta])\re\left( \frac{R\e[i\theta]+z}{R\e[i\theta]-z} \right)\dd\theta
         \end{equation*}
         \emph{Hint}: Observe that setting $w=R^2/\bar{z}$, we have that the integral of $f(\zeta)/(\zeta-w)$ over the circle of radius $R$ centered at the origin is 0.
+        \begin{proof}
+            Since $f\in\mO(\D)$, $D:=D_R(0)\subset\subset\D$, and $z\in D$, the CIF tells us that
+            \begin{equation*}
+                f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+            \end{equation*}
+            Parameterize $\partial D$ by $\zeta=R\e[i\theta]$ for $\theta\in[0,2\pi]$. Then, substituting into the above,
+            \begin{align*}
+                f(z) &= \frac{1}{2\pi i}\int_0^{2\pi}f(R\e[i\theta])\frac{1}{R\e[i\theta]-z}\cdot iR\e[i\theta]\dd\theta\\
+                &= \frac{1}{2\pi}\int_0^{2\pi}f(R\e[i\theta])\frac{R\e[i\theta]}{R\e[i\theta]-z}\dd\theta
+            \end{align*}
+        \end{proof}
         \item Compute that
         \begin{equation*}
             \re\left( \frac{R\e[i\theta]+r}{R\e[i\theta]-r} \right) = \frac{R^2-r^2}{R^2-2Rr\cos\theta+r^2}
         \end{equation*}
+        where $R,r,\theta\in\R$.
+        \begin{proof}
+            We have that
+            \begin{align*}
+                \re\left( \frac{R\e[i\theta]+r}{R\e[i\theta]-r} \right) &= \frac{1}{2}\left[ \frac{R\e[i\theta]+r}{R\e[i\theta]-r}+\overline{\frac{R\e[i\theta]+r}{R\e[i\theta]-r}} \right]\\
+                &= \frac{1}{2}\left[ \frac{R\e[i\theta]+r}{R\e[i\theta]-r}+\frac{R\e[-i\theta]+r}{R\e[-i\theta]-r} \right]\\
+                &= \frac{1}{2}\left[ \frac{(R\e[i\theta]+r)(R\e[-i\theta]-r)+(R\e[i\theta]-r)(R\e[-i\theta]+r)}{(R\e[i\theta]-r)(R\e[-i\theta]-r)} \right]\\
+                &= \frac{1}{2}\left[ \frac{(R^2-Rr\e[i\theta]+Rr\e[-i\theta]-r^2)+(R^2+Rr\e[i\theta]-Rr\e[-i\theta]-r^2)}{R^2-Rr\e[i\theta]-Rr\e[-i\theta]+r^2} \right]\\
+                &= \frac{1}{2}\left[ \frac{2R^2-2r^2}{R^2-Rr(\e[i\theta]+\e[-i\theta])+r^2} \right]\\
+                &= \frac{R^2-r^2}{R^2-2Rr\cos\theta+r^2}
+            \end{align*}
+            as desired.
+        \end{proof}
         \item Now suppose that $u=\re(f)$, so $u$ is a harmonic function. Deduce the \textbf{Poisson integral representation formula}: For $z=r\e[i\theta]$, we have
         \begin{equation*}
             u(z) = \frac{1}{2\pi}\int_0^{2\pi}P_r(\theta-\phi)u(\phi)\dd\phi
@@ -52,6 +257,15 @@
         \begin{equation*}
             P_r(\psi) = \frac{1-r^2}{1-2r\cos\psi+r^2}
         \end{equation*}
+        \begin{proof}
+            \begin{align*}
+                f(z) &= \frac{1}{2\pi}\int_0^{2\pi}f(R\e[i\theta])\re\left( \frac{R\e[i\theta]+z}{R\e[i\theta]-z} \right)\dd\theta\\
+                f(z) &= \frac{1}{2\pi}\int_0^{2\pi}f(R\e[i\theta])\frac{R^2-r^2}{R^2-2Rr\cos\theta+r^2}\dd\theta\\
+                %
+                u(z) &= \frac{1}{2\pi}\int_0^{2\pi}P_r(\theta-\phi)u(\phi)\dd\phi\\
+                u(z) &= \frac{1}{2\pi}\int_0^{2\pi}\frac{1-r^2}{1-2r\cos(\theta-\phi)+r^2}u(\phi)\dd\phi
+            \end{align*}
+        \end{proof}
     \end{enumerate}
 \end{enumerate}
 
@@ -61,7 +275,49 @@
     \item \textcite{bib:FischerLieb}, QII.4.6.
     \begin{enumerate}
         \item Suppose the domain $G$ is symmetric with respect to the real axis and that $f$ is holomorphic on $G$ and real-valued on $G\cap\R$. Show that $f(\bar{z})=\overline{f(z)}$ for all $z\in G$.
+        \begin{proof}
+            Since $f$ is holomorphic, $f$ has a power series representation
+            \begin{equation*}
+                \sum_{k=0}^\infty a_kz^k
+            \end{equation*}
+            on $G$. It follows by QA.2a that the coefficients $a_k$ of this power series are real. Therefore, we have that
+            \begin{align*}
+                f(\bar{z}) &= \sum_{k=0}^\infty a_k\bar{z}^k\\
+                &= \sum_{k=0}^\infty a_k\overline{z^k}\\
+                &= \sum_{k=0}^\infty\overline{a_kz^k}\\
+                &= \overline{\sum_{k=0}^\infty a_kz^k}\\
+                &= \overline{f(z)}
+            \end{align*}
+            as desired. Note that we know that a $\bar{z}\in G$ corresponds to each $z\in G$ because of the hypothesis that $G$ is symmetric with respect to the real axis.
+        \end{proof}
         \item Suppose $G=D_r(0)$ and $f$ is holomorphic on $G$ and real-valued on $G\cap\R$. Show that if $f$ is even (resp. odd), then the values of $f$ on $G\cap i\R$ are real (resp. imaginary). Prove this without using the power series expansion of $f$.
+        \begin{proof}
+            Suppose first that $f$ is even. Let $ib\in G\cap i\R$ be an arbitrary imaginary number. Since $f$ is even,
+            \begin{equation*}
+                f(ib) = f(-ib)
+            \end{equation*}
+            Additionally, by part (a),
+            \begin{equation*}
+                f(-ib) = \overline{f(ib)}
+            \end{equation*}
+            Thus, by transitivity,
+            \begin{equation*}
+                f(ib) = \overline{f(ib)}
+            \end{equation*}
+            But for a complex number to equal its complex conjugate, that complex number must be real, as desired.\par
+            Now suppose that $f$ is odd. Then
+            \begin{equation*}
+                f(ib) = -f(-ib)
+            \end{equation*}
+            We still have in addition that $f(-ib)=\overline{f(ib)}$, so by transitivity,
+            \begin{align*}
+                f(ib) &= -\overline{f(ib)}\\
+                f(ib)+\overline{f(ib)} &= 0\\
+                2\re[f(ib)] &= 0\\
+                \re[f(ib)] &= 0
+            \end{align*}
+            Therefore, $f(ib)$ must be purely imaginary, as desired.
+        \end{proof}
     \end{enumerate}
     \item Some setup: Suppose that $f$ is holomorphic on the unit disk $\D=\{|z|<1\}$. A point $w$ on the circle $\partial D=\{|z|=1\}$ is \textbf{regular} if there is an open neighborhood $U$ of $w$ and an analytic function $g$ on $U$ such that $f=g$ on $U\cap\D$. Notice that $f$ can be analytically continued outside the boundary of $\D$ if and only if there is a point $w$ on $\partial D$ that is regular for $f$.\par
     Now define the function
@@ -69,7 +325,28 @@
         f(z) = \sum_{k=1}^\infty z^{2^k}
     \end{equation*}
     Show that $f$ converges on $\D$, and that it cannot be analytically continued past $\D$.
+    \begin{proof}
+        Let $z$ with $|z|<1$ be arbitrary. By the geometric series test, $\sum_{k=0}^\infty z^k$ converges on $\D$, and then $f$ converges via the comparison test.\par
+        Now suppose for the sake of contradiction that There is a regular point on $\partial\D$ and corresponding function $g:U\to\C$. Since $f=g$ on $\D\cap U$, the identity theorem tells us that $f,g$ have the same power series (i.e., the one defined above). Now let $z\in U$ with $|z|>1$. By the ratio test,
+        \begin{equation*}
+            \lim_{k\to\infty}\left| \frac{z^{2^{k+1}}}{z^{2^k}} \right| = \lim_{k\to\infty}\frac{|z|^{2\cdot 2^k}}{|z|^{2^k}}
+            = \lim_{k\to\infty}|z|^{2^k}
+            = \infty
+            > 1
+        \end{equation*} 
+        so the series diverges at $z$, contradicting the existence of $g$.
+    \end{proof}
     \item Suppose that $f$ is an entire function and that, for all sufficiently large $z$, we have $|f(z)|\leq|z|^n$. Prove that $f$ must be a polynomial.
+    \begin{proof}
+        Since $f$ is entire (and hence holomorphic), it has a power series. Proving that $f$ is a polynomial is then just a matter of proving that this power series is finite, i.e., truncates somewhere. Combining Cauchy's inequalities with the given condition, we have that
+        \begin{equation*}
+            \frac{|f^{(m)}(z)|}{m!} \leq \frac{1}{R^m}\max_{\partial D}|f(\zeta)|
+            \leq \frac{1}{R^m}\max_{\partial D}|z|^n
+            = \frac{1}{R^m}\cdot R^n
+            = R^{n-m}
+        \end{equation*}
+        for all $m\in\N_0$. Evidently, then, for all $m>n$, we can send $R\to\infty$ and shrink $a_m=|f^{(m)}(z)|/m!\to 0$, as desired.
+    \end{proof}
 \end{enumerate}
 
 
