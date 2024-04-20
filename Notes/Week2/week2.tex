@@ -337,7 +337,7 @@
                     ($(315:1)+(0.15*rand,0.3*rand)$)
                     % ($(330:1)+(0.15*rand,0.3*rand)$)
                 };
-                \path [name path=Utrace] (0,0) -- (45:1.8);
+                \path [name path=Utrace] (0,0) -- (45:1.9);
                 \path [name intersections={of=U and Utrace}] (intersection-1) node[above right=-1pt]{$U$};
                 \draw [scale=0.3,xscale=2,xshift=1cm,yshift=0.5cm] plot[smooth cycle] coordinates {
                     ($(0:1)+(0.15*rand,0.3*rand)$)
@@ -469,7 +469,7 @@
         \item Star-shaped implies \textbf{simply connected}.
         \item Star-shaped is nice because we don't have to check every single curve; see the following lemma.
     \end{itemize}
-    \item Lemma: If $U$ is star-shaped and for every triangle with one vertex at $a$, we have $\int_\triangle f\dd{z}=0$, then $F$ has a primitive in $U$.
+    \item Lemma: If $U$ is star-shaped and for every triangle with one vertex at $a$, we have $\int_\triangle f\dd{z}=0$, then $f$ has a primitive in $U$.
     \begin{figure}[h!]
         \centering
         \vspace{-1em}
@@ -879,7 +879,7 @@
 \subsection*{Section I.5: Integration}
 \begin{itemize}
     \item \marginnote{4/6:}We can define integration on \emph{generally} continuous functions, i.e., recall that a function need only be \textbf{piecewise continuous} in order to be integrable.
-    \item Allusion to \textbf{Praffian forms}, e.g., referring to $f(z)\dd{z}$ as a "one-form."
+    \item Allusion to \textbf{Pfaffian forms}, e.g., referring to $f(z)\dd{z}$ as a "one-form."
     \item Integration in the mold of Figure \ref{fig:intCR}.
     \item \textbf{Piecewise continuous} (function): A function $f:[a,b]\to\C$ for which there exists a partition $a=t_0<\cdots<t_n=b$ of the interval $[a,b]$ into subintervals $[t_{k-1},t_k]$ such that the restriction of $f$ to $(t_{k-1},t_k)$\dots
     \begin{enumerate}

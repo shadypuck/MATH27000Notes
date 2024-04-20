@@ -484,7 +484,7 @@
         f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
     \end{equation*}
     \begin{proof}
-        We're going to try to use the corollary and define a function. In particular, define
+        We're going to define a function and apply the corollary to it. In particular, define
         \begin{equation*}
             g(\zeta) =
             \begin{cases}
@@ -492,8 +492,7 @@
                 f'(z) & \zeta=z
             \end{cases}
         \end{equation*}
-        Because $f$ is holomorphic at $z$, $g$ is continuous at $z$ and hence bounded near $z$. We can also see that since $g$ is a rational function of holomorphic functions on $U\setminus\{z\}$, we have $g\in\mO(U\setminus\{z\})$.\par
-        Now the corollary says that
+        The fact that $f$ is holomorphic at $z$ implies that $g$ is continuous at $z$ and, hence, bounded near $z$. Additionally, since $g$ is a rational function of holomorphic functions on $U\setminus\{z\}$, we have $g\in\mO(U\setminus\{z\})$. Thus, the corollary says that
         \begin{equation*}
             \int_{\partial D}g\dd{\zeta} = 0
         \end{equation*}
@@ -515,7 +514,7 @@
         \end{equation*}
         Since we're taking the integral and the limit with respect to different things, we can exchange them. Since the second integrand has a primitive, it equals zero. But this means that the integral does not change even as $z$ changes, which is equivalent to saying we can move $z$ around to wherever we want in the disk and the integral will still be $2\pi i$! In other words, if $z$ is somewhere where we can't evaluate the integral directly, we can move $z$ to somewhere where we \emph{can} evaluate the integral directly with no consequence.
     \end{proof}
-    \item Implication of Cauchy's Integral Theorem: The values of the function are completely determined by the values on the boundary, i.e., holomorphic functions are determined by boundary values.
+    \item Implication of Cauchy's Integral Formula: The values of the function are completely determined by the values on the boundary, i.e., holomorphic functions are determined by boundary values.
     \item Let's now prove another theorem.
     \item Theorem: Let $U$ be any domain, $f\in\mO(U)$. Then $f'\in\mO(U)$, $f''\in\mO(U)$, on and on.
     \begin{proof}
@@ -673,12 +672,10 @@
     \end{itemize}
     \item Example: $\sin(z)/z\in\mO(\C^*)$, but is it in $\mO(\C)$?
     \item Recall Goursat's lemma: $f\in\mO(\text{nbhd}(\triangle))$ implies $\int_\triangle f\dd{z}=0$.
+    \item Recall the lemma from 3/28: If $U$ is star-shaped and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ has a primitive.
     \begin{itemize}
-        \item If $U$ is star-shaped and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ has a primitive.
-        \begin{itemize}
-            \item Note that we do not need $f$ holomorphic for this result!
-        \end{itemize}
-        \item This latter result has a converse!
+        \item Note that we do not need $f$ holomorphic for this result.
+        \item This result has a converse!
     \end{itemize}
     \item Morera's Theorem: If $U$ is any domain, $f:U\to\C$ is continuous, and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ is holomorphic.
     \begin{proof}

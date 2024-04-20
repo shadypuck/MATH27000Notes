@@ -23,5 +23,329 @@
 
 
 
+\section{Midterm Review Sheet}
+\begin{itemize}
+    \item \marginnote{4/16:}Properties of complex numbers.
+    \item \textbf{Holomorphic} ($f$ at $z_0$): A function $f:\C\to\C$ for which the following limit exists. \emph{Also known as} \textbf{$\pmb{\C}$-differentiable}. \emph{Constraints}
+    \begin{equation*}
+        \lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0} =: f'(z_0)
+        \qquad\Longleftrightarrow\qquad
+        f(z) = f(z_0)+\Delta(z)(z-z_0)
+    \end{equation*}
+    where $\Delta$ is continuous at $z_0$ and $\Delta(z_0)=f'(z_0)$.
+    \begin{itemize}
+        \item Sum rule, product rule, quotient rule.
+        \item Chain rule.
+        \item Holomorphic implies continuous.
+    \end{itemize}
+    \item Every $\C$-linear map is just multiplication by a complex number; the matrix must compute with $\mathcal{M}(i)$.
+    \item \textbf{Cauchy-Riemann equations}: The following two equations, which identify when a complex function $(x,y)\mapsto(g,h)$ is holomorphic. \emph{Also known as} \textbf{CR equations}. \emph{Given by}
+    \begin{align*}
+        g_x &= h_y\\
+        g_y &= -h_x
+    \end{align*}
+    \item \textbf{Wirtinger derivatives}: The two differential operators defined as follows. \emph{Denoted by} $\bm{\partial/\partial z,\partial/\partial\bar{z}}$. \emph{Given by}
+    \begin{align*}
+        \pdv{\bar{z}} &:= \frac{1}{2}\left( \pdv{x}+i\pdv{y} \right)&
+        \pdv{z} &:= \frac{1}{2}\left( \pdv{x}-i\pdv{y} \right)
+    \end{align*}
+    \item Theorem: The $\R$-differentiable function $f:U\to\C$ is holomorphic iff $\pdv*{f}{\bar{z}}=0$. Moreover, if it is, then
+    \begin{equation*}
+        f'(z_0) = \eval{\pdv{f}{z}}_{z_0}
+    \end{equation*}
+    \item \textbf{Laplacian}: The differential operator defined as follows. \emph{Denoted by} $\bm{\Delta}$. \emph{Given by}
+    \begin{equation*}
+        \Delta := \pdv[2]{x}+\pdv[2]{y}
+    \end{equation*}
+    \item \textbf{Harmonic} (function): A function $f:\R^2\to\C$ such that $\Delta f=0$.
+    \item Corollary: The real and imaginary parts of a $C^2$ holomorphic function are harmonic.
+    \begin{proof}
+        $\Delta(u+iv)=\Delta u+i\Delta v$.
+    \end{proof}
+    \item \textbf{Harmonic conjugates}: Two functions $u,v:\R^2\to\R$ that satisfy the CR equations.
+    \item Path integration:
+    \begin{equation*}
+        \int_\gamma f\dd{z} = \int_a^bf(\gamma(t))\cdot\gamma'(t)\dd{t}
+    \end{equation*}
+    \item FTC: Suppose $F'=f$ on $U\subset\C$, and let $\gamma$ be a \textbf{path} inside of $U$. Then
+    \begin{equation*}
+        \int_\gamma f\dd{z} = F(\gamma(b))-F(\gamma(a))
+    \end{equation*}
+    \item Factoring into rotation and scaling matrices.
+    \begin{equation*}
+        \begin{pmatrix}
+            a & -b\\
+            b & a\\
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+            \cos\theta & -\sin\theta\\
+            \sin\theta & \cos\theta\\
+        \end{pmatrix}
+        \begin{pmatrix}
+            \lambda & 0\\
+            0 & \lambda\\
+        \end{pmatrix}
+        \tag{$\lambda,\theta\in\R$}
+    \end{equation*}
+    \item Lemma: Holomorphic maps preserve angles.
+    \begin{proof}
+        Look at the argument at the intersection point and use the chain rule.
+    \end{proof}
+    \item \textbf{Conformal} (map): A function $f:U\to V$, where $U,V\subset\C$, that satisfies the following two constraints. \emph{Constraints}
+    \begin{enumerate}
+        \item $f$ is a diffeomorphism.
+        \item $f$ preserves angles.
+    \end{enumerate}
+    \item \textbf{Diffeomorphism}: A homeomorphism for which $f,f^{-1}$ are differentiable.
+    \item \textbf{Biholomorphic} (map): A function $f:U\to V$ that is bijective, holomorphic, and for which $f^{-1}$ is holomorphic.
+    \item Theorem/observation: Biholomorphic iff conformal.
+    \item Chain rule:
+    \begin{equation*}
+        \pdv{t}(f\circ g)(z) = f_z(g(z))g_z(z)+f_{\bar{z}}(g(z))\bar{g}_{\bar{z}}(z)
+    \end{equation*}
+    \item \textbf{Complex linear map}: A map $l:\C\to\C$ characterized by the following. \emph{Constraints}
+    \begin{enumerate}
+        \item $l(z+w)=l(z)+l(w)$;
+        \item $l(rz)=rl(z)$;
+    \end{enumerate}
+    for $z,w,r\in\C$.
+    \begin{itemize}
+        \item Every complex linear map is of the form
+        \begin{equation*}
+            w = l(z) = az
+        \end{equation*}
+        for a unique $a\in\C$.
+    \end{itemize}
+    \item \textbf{Real linear map}: A map $l:\C\to\C$ characterized by the following. \emph{Constraints}
+    \begin{enumerate}
+        \item $l(z+w)=l(z)+l(w)$;
+        \item $l(rz)=rl(z)$;
+    \end{enumerate}
+    for $z,w\in\C$ and $r\in\R$.
+    \begin{itemize}
+        \item Every real linear map is of the form
+        \begin{equation*}
+            w = l(z)
+            = az+b\bar{z}
+            =
+            \begin{pmatrix}
+                a & b\\
+            \end{pmatrix}
+            \begin{pmatrix}
+                z\\
+                \bar{z}\\
+            \end{pmatrix}
+        \end{equation*}
+        for a unique pair $
+            \begin{pmatrix}
+                a & b\\
+            \end{pmatrix}
+            \in\C^2
+        $.
+        \item Implication: $l$ is complex linear iff $b=0$.
+    \end{itemize}
+    \item \textbf{Tangent map} (of $f$ at $z_0$): The real linear map from $\C\to\C$ determined by the vector $
+        \begin{pmatrix}
+            f_z(z_0) & f_{\bar{z}}(z_0)\\
+        \end{pmatrix}
+    $.
+    \item Proposition: $f$ is holomorphic at $z_0$ iff its tangent map at $z_0$ is complex linear.
+    \item \textbf{Exponential function}: The complex function defined as follows. \emph{Denoted by} $\textbf{e}^{\bm{z}}$, $\textbf{exp}\bm{(z)}$. \emph{Given by}
+    \begin{equation*}
+        \e[z] = \exp(z) := \sum_{k=0}^\infty\frac{z^k}{k!}
+    \end{equation*}
+    \item \textbf{Pointwise} (convergent $\{f_n\}$): A sequence of functions $f_n:\C\to\C$ such that for all $z\in\C$, we have $f_n(z)\to f(z)$.
+    \item \textbf{Locally uniformly} (convergent $\{f_n\}$): A sequence of functions $f_n:U\to\C$ and a function $f:U\to\C$ such that for all compact $K\subset U$,
+    \begin{equation*}
+        \sup_{z\in K}|f_n(z)-f(z)| \to 0
+    \end{equation*}
+    \item Lemma: If $f_n\to f$ locally uniformly and the $f_n$ are continuous (or integrable; \emph{not} differentiable), then so is $f$.
+    \item \textbf{Taylor's theorem}: If $f:\R\to\R$ is $C^{k+1}$ and $P_\alpha^k(x)$ is the $k^\text{th}$ Taylor polynomial about $\alpha\in\R$, then for all $\beta\in\R$, there exists some $x\in(\alpha,\beta)$ such that
+    \begin{equation*}
+        f(\beta)-P_\alpha^k(\beta) = \frac{(\beta-\alpha)^{k+1}}{(k+1)!}f^{(k+1)}(x)
+    \end{equation*}
+    \item \textbf{Analytic} (function): A function $f:\R\to\R$ for which the Taylor polynomials converge (locally uniformly) to $f$.
+    \item \textbf{Absolutely} (locally uniformly convergent power series): A power series $P(z)=\sum_{k=0}^\infty a_kz^k$ for which $A_N:\C\to\R$ locally uniformly converges, where
+    \begin{equation*}
+        A_N(z) := \sum_{k=0}^N|a_kz^k|
+    \end{equation*}
+    \item \textbf{Geometric series test}: If $|z|<1$, then
+    \begin{equation*}
+        \sum_{k=0}^\infty z^k \to \frac{1}{1-z}
+    \end{equation*}
+    \item Lemma: Let $P(z)$ be a power series about 0. If there exists $z_1\neq 0$ such that $|a_kz_1^k|\leq M$ for all $k$, then $P(z)=\sum a_kz^k$ converges on the disk $|z|<|z_1|$.
+    \begin{proof}
+        Choice of $z_1,z_2$, and their ratio.
+    \end{proof}
+    \item \textbf{Disk of convergence}: The largest disk centered at zero on which you converge.
+    \item \textbf{Radius of convergence}: The radius of the disk of convergence. \emph{Denoted by} $\bm{r}$.
+    \item \textbf{Cauchy-Hadamard formula}: The radius of convergence is given by
+    \begin{equation*}
+        r = (\limsup|a_k|^{1/k})^{-1}
+    \end{equation*}
+    \item Lemma (from real analysis): If $f_n\to f$ locally uniformly and $f_n'\to g$ locally uniformly, then $f$ is differentiable and $f'=g$.
+    \begin{itemize}
+        \item Implication: Convergent power series are holomorphic.
+    \end{itemize}
+    \item Corollary: Power series representations are unique.
+    \begin{enumerate}
+        \item If $P(z)=\sum a_kz^k$ is convergent, then
+        \begin{equation*}
+            a_k = \frac{1}{k!}P^{(k)}(0)
+        \end{equation*}
+        \item If $P(z)=0$ in a neighborhood of zero, then $a_k=0$ for all $k$.
+        \item If $P(z)=Q(z)$ (where $Q(z)=\sum b_kz^k$) in a neighborhood of 0, then $a_k=b_k$ for all $k$.
+    \end{enumerate}
+    \item Properties of the complex exponential.
+    \begin{enumerate}
+        \item $\exp(z)=[\exp(z)]'$.
+        \begin{itemize}
+            \item We obtain this via term-by-term differentiability.
+            \item This is just our favorite formula $\dv*{t}(\e[t])=\e[t]$ from calculus.
+        \end{itemize}
+        \item $\overline{\exp(z)}=\exp(\bar{z})$.
+        \item $\exp(a+b)=\exp(a)\cdot\exp(b)$.
+        \item $|\exp(z)|=\exp[\re(z)]$.
+        \item $\e[iz] = \cos(z)+i\sin(z)$.
+    \end{enumerate}
+    \item Complex trigonometric functions.
+    \begin{align*}
+        \cos(z) &:= \frac{1}{2}(\e[iz]+\e[-iz])&
+        \sin(z) &:= \frac{1}{2i}(\e[iz]-\e[-iz])\\
+        \cosh(z) &:= \cos(iz)&
+        \sinh(z) &:= i\sin(iz)
+    \end{align*}
+    \item \textbf{Domain}: A connected, open set $U\subset\C$.
+    \item \textbf{Primitive} (of $f$): A differentiable function whose derivative is equal to the original function $f$. \emph{Also known as} \textbf{antiderivative}, \textbf{indefinite integral}. \emph{Denoted by} $\bm{F}$.
+    \item Corollary to the FTC: If $f=F'$, then for any closed curve $\gamma$ in $U$,
+    \begin{equation*}
+        \int_\gamma f\dd{z} = 0
+    \end{equation*}
+    \item Proposition: If $f:U\to\C$ is continuous and $\int_\gamma f\dd{z}=0$ for every closed loop in $U$, then $f$ has a primitive on $U$.
+    \begin{proof}
+        Step 1: Choose the integral along arbitrary $\gamma$.\par
+        Step 2: Choice of $\gamma$ doesn't matter (closed loop condition).\par
+        Step 3: Correct derivative; apply FTC along $\delta$ and take limit.
+    \end{proof}
+    \item \textbf{Star-shaped} (domain): A domain $U\subset\C$ for which there exists $a\in U$ such that for all $z\in U$, the segment $a\to z$ is in $U$.
+    \item Lemma: If $U$ is star-shaped and for every triangle with one vertex at $a$, we have $\int_\triangle f\dd{z}=0$, then $f$ has a primitive in $U$.
+    \item \textbf{Cauchy Integral Theorem}: Suppose $U$ is a star-shaped domain and $f:U\to\C$ is holomorphic. Then $\int_\gamma f\dd{z}=0$ for any closed loop $\gamma$ in $U$.
+    \begin{proof}
+        Step 1: Prove $f$ has a primitive via lemma \& Goursat's lemma.\par
+        Step 2: Apply FTC.
+    \end{proof}
+    \item \textbf{Goursat's lemma}: If $f$ is holomorphic in a neighborhood of a triangle including the interior, then $\int_\triangle f\dd{z}=0$.
+    \begin{proof}
+        Subdividing triangles and inequalities.
+    \end{proof}
+    \item Evaluating integrals using the complex functions and various paths.
+    \item \textbf{Ratio test}: For $\sum a_n$, think about
+    \begin{equation*}
+        \lim_{n\to\infty}\left| \frac{a_{n+1}}{a_n} \right|
+    \end{equation*}
+    \item \textbf{Root test}: For $\sum a_n$, think about
+    \begin{equation*}
+        \lim_{n\to\infty}\left| a_n \right|^{1/n}
+    \end{equation*}
+    \item \textbf{Majorant test}: If $\sum_{k=0}^\infty a_k$ is a convergent series with positive terms and if for almost all $k$ and all $z\in M$ we have $|f_k(z)|\leq a_k$, then $\sum_{k=0}^\infty f_k$ is absolutely uniformly convergent on $M$.
+    \item Exponential mappings.
+    \begin{itemize}
+        \item $z=x+iy_0$ maps onto the open ray beginning at 0 and passing through $\e[iy_0]$.
+        \item $z=x_0+iy$ maps onto the circle of radius $\e[x_0]$.
+        \item Half-open horizontal strips map bijectively onto $\C^*$.
+    \end{itemize}
+    \item \textbf{Homotopic} (paths): Two paths $\gamma,\tilde{\gamma}\subset U$ a domain such that $\tilde{\gamma}$ is obtained from $\gamma$ by modifying $\gamma$ on a small disk $D\subset U$, keeping the endpoints fixed.
+    \item Claim/TPS: This argument shows that if $\gamma$ and $\tilde{\gamma}$ are homotopic in $U$ and $f\in\mO(U)$, then
+    \begin{equation*}
+        \int_\gamma f\dd{z} = \int_{\tilde{\gamma}}f\dd{z}
+    \end{equation*}
+    \begin{proof}
+        Each bump is a closed loop for the CIT.
+    \end{proof}
+    \item Corollary: Let $U$ be any domain, $D$ be a disk in $U$, and $z\in\mathring{D}$. Suppose $f\in\mO(U\setminus\{z\})$ and is bounded near $z$. Then
+    \begin{equation*}
+        \int_{\partial D}f\dd{z} = 0
+    \end{equation*}
+    \begin{proof}
+        Homotopy and $\gamma_\varepsilon$.
+    \end{proof}
+    \item \textbf{Cauchy Integral Formula}: Suppose $U$ is any domain, $D\subset U$ is a disk (i.e., $D\subset\subset U$ or $\overline{D}\subset U$), $f\in\mO(U)$, and $z\in D$. Then
+    \begin{equation*}
+        f(z) = \frac{1}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+    \end{equation*}
+    \begin{proof}
+        Define the helper function
+        \begin{equation*}
+            g(\zeta) =
+            \begin{cases}
+                \frac{f(\zeta)-f(z)}{\zeta-z} & \zeta\neq z\\
+                f'(z) & \zeta=z
+            \end{cases}
+        \end{equation*}
+        It integrates to zero on $\partial D$ and then splits into the two sides of the CIF.
+    \end{proof}
+    \item Corollary: Holomorphic functions are $C^\infty$.
+    \item Corollary: In general,
+    \begin{equation*}
+        f^{(n)}(z) = \frac{n!}{2\pi i}\int_{\partial D}\frac{f(\zeta)}{(\zeta-z)^{n+1}}\dd\zeta
+    \end{equation*}
+    \item \textbf{Cauchy's inequalities}:
+    \begin{equation*}
+        |f^{(n)}(z)| \leq \frac{n!}{R^n}\max_{\partial D}|f(\zeta)|
+    \end{equation*}
+    \item Liouville's Theorem: Suppose $f\in\mO(\C)$ (i.e., $f$ is \textbf{entire}) and $f$ is bounded. Then it's constant.
+    \begin{proof}
+        Cauchy's inequalities on a really big disk to limit $|f'|$.
+    \end{proof}
+    \item \textbf{Entire} (function): A complex-valued function that is holomorphic on the whole complex plane.
+    \item The Identity Theorem: If two holomorphic functions $f,g\in\mO(U)$ agree on an open set in $U$, then $f=g$.
+    \begin{proof}
+        True for power series.
+    \end{proof}
+    \begin{itemize}
+        \item In fact, more is true: If $z_n\to z_0$ where each $z_n$ is distinct and $f(z_n)=g(z_n)$ for all $n$, then $f=g$.
+    \end{itemize}
+    \item \textbf{Analytic continuation} (of $f$): The function $g\in\mO(V)$ where $f\in\mO(U)$, $V\supset U$, and $f=g$ on $U$.
+    \item Morera's Theorem: If $U$ is any domain, $f:U\to\C$ is continuous, and $\int_\triangle f\dd{z}=0$ for all triangles, then $f$ is holomorphic.
+    \begin{proof}
+        The primitive exists. The primitive is holomorphic. Therefore, $F'=f$ is holomorphic.
+    \end{proof}
+    \item \textbf{Riemann's removable singularity theorem}: Suppose $U$ is a domain, $z\in U$, $f\in\mO(U\setminus\{z\})$, and $f$ is bounded near $z$. Then there exists a unique analytic continuation $\hat{f}\in\mO(U)$. \emph{Also known as} \textbf{Riemann extension theorem}.
+    \begin{proof}
+        Define a helper function
+        \begin{equation*}
+            F(\zeta) =
+            \begin{cases}
+                f(\zeta)(\zeta-z) & \zeta\neq z\\
+                0 & \zeta=z
+            \end{cases}
+        \end{equation*}
+        Use Morera's theorem: $F$ is continuous, triangles in two cases (CIT and $\gamma_\varepsilon$), and $F'=f$ via the limit definition.
+    \end{proof}
+    \item \textbf{Singularity} (of $f$): A point $z_0$ such that $f\in\mO(U\setminus\{z_0\})$.
+    \item \textbf{Removable} (singularity): A singularity of a function that that satisfies the hypotheses of Riemann's removable singularity theorem.
+    \item If a singularity is not removable, then $f$ is not bounded near $z_0$. This leads to additional definitions.
+    \item \textbf{Pole}: A non-removable singularity $z_0$ of a function $f$ for which $|f(z)|\to\infty$ as $z\to z_0$.
+    \begin{itemize}
+        \item So-named because of real analysis where a pole is an asymptote, and asymptotes kind of look like poles!
+    \end{itemize}
+    \item \textbf{Essential} (singularity): A non-removable singularity that is not a pole; equivalently, a singularity $z_0$ for which there exist sequences $z_n\to z_0$ and $w_n\to z_0$ such that $|f(z_n)|\to\infty$ and $|f(w_n)|$ stays bounded.
+    \item \textbf{Meromorphic} (function): A function $f:U\to\C$ such that $f\in\mO(U\setminus P)$ and each $p\in P$ is a pole, where $P\subset U$ is a finite set of points.
+    \item Orders of zeros and poles.
+    \begin{itemize}
+        \item Invert the function, find a power series, divide $(z-p)^L$ out, find the power series of $h$, invert, find the principal part of the \textbf{Laurent series}.
+    \end{itemize}
+    \item Theorem (maximum modulus principle): Let $f\in\mO(U)$. If $|f(z)|$ has a local maximum on $U$, then $f$ is constant.
+    \begin{proof}
+        Step 1: Long inequality through the CIF that becomes equality.\par
+        Step 2: Subtract and get integrand equal to zero; $|f|$ is constant on $\partial D$.\par
+        Step 3: $|f|^2$ is constant on $\partial D$, differentiate, casework to $f$ is constant or zero.
+    \end{proof}
+    \item Corollary (minimum modulus principle): If $f\in\mO(U)$, $f\neq 0$ on $U$ (hence $1/f\in\mO(U)$), and $|f(z)|$ takes a minimum in $U$, then $f$ is constant.
+\end{itemize}
+
+
+
 
 \end{document}
