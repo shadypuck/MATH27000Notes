@@ -347,5 +347,57 @@
 
 
 
+\section{Midterm}
+\subsection*{T/F: 5 points each (1 for answer, 4 for explanation)}
+Indicate whether each of the following are true or false, and give a complete answer as to why.
+\begin{enumerate}
+    \item Any entire function (i.e., any $f\in\mO(\C)$) is the derivative of another entire function.
+    \item Let $U$ be a domain, let $z$ be a point in $U$, and let $f\in\mO(U\setminus\{z\})$. Suppose that $\int_\gamma f\dd{z}=0$ for every closed curve $\gamma$ in $U\setminus\{z\}$. Then $f\in\mO(U)$.
+    \item If $f,g\in\mO(\C)$ and there are two distinct points $z_1,z_2\in\C$ such that
+    \begin{equation*}
+        f(z_1)-g(z_1) \neq f(z_2)-g(z_2)
+    \end{equation*}
+    then there is a sequence of points $z_n\in\C$ such that $|f(z_n)-g(z_n)|\to\infty$.
+    \item For any sequence of positive real numbers $\{a_k\}$ and any point $z\in\C$, there is a function $f$, holomorphic in a neighborhood of $z$, such that $|f^{(k)}(z)|=a_k$.
+    \item There is a conformal map that does all of the following.
+    \begin{itemize}
+        \item Takes the first quadrant $Q=\{z:\re(z),\im(z)>0\}$ to the strip $S=\{z:\im(z)\in(-2,2)\}$.
+        \item Takes the ray $\{z\in Q:\re=\im(z)\}$ to the "sine graph," i.e., $\{z:\im(z)=\sin[\re(z)]\}$.
+        \item Takes the segment $\{z\in Q:\re(z)+\im(z)=1\}$ to $S\cap i\R$.
+    \end{itemize}
+\end{enumerate}
+
+
+\subsection*{Problems: 5 points each}
+In the following, please \emph{fully explain your reasoning} in addition to doing any relevant computations. A correct answer without explanation will receive at most one point on the problem.
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item Show that $u(x+iy)=\e[2x]\sin(2y)+2x$ is harmonic on $\C$ and find a harmonic conjugate. \emph{Bonus (1pt)}: If $v$ is your harmonic conjugate, express the holomorphic function $f=u+iv$ in terms of $z$.
+    \item Suppose that $U$ is a domain, $P$ is a countable set of points in $U$, and that $f\in\mO(U\setminus P)$. Suppose further that $f$ has a pole at each point of $P$. Prove that $P$ is discrete in $U$ (i.e., $P$ does not have any accumulation points in $U$).
+    \item Suppose I tell you that $f(z)=1/(z-a)$, but I don't tell you what $a$ is. Suppose that you know the real and imaginary parts of $a$ are irrational and that you have an oracle that can compute $\int_\gamma f\dd{z}$ over any path such that the real and imaginary parts of $\gamma(t)$ are always rational (i.e., any $\gamma$ that lives in $\Q+i\Q$). How would you go about estimating the value of $a$?
+    \item 
+    \begin{enumerate}
+        \item Show that if $\{a_k\}$ is a sequence of non-zero complex numbers, then
+        \begin{equation*}
+            \lim_{k\to\infty}\frac{|a_k|}{|a_{k-1}|} = L
+            \qquad\Longrightarrow\qquad
+            \lim_{k\to\infty}|a_k|^{1/k} = L
+        \end{equation*}
+        \item Find the radius of convergence of the \textbf{order 0 Bessel function}
+        \begin{equation*}
+            J_0(z) = \sum_{n=0}^\infty\frac{(-1)^n}{2^{2n}(n!)^2}z^{2n}
+        \end{equation*}
+    \end{enumerate}
+    \item Suppose that $f$ is a function on $\C$ such that\dots
+    \begin{enumerate}
+        \item $f$ is ($+i$) anti-periodic, that is, if $f$ is defined at $z$ then it is defined at $z+i$ and $f(z)=-f(z+i)$;
+        \item $f$ is holomorphic in the strip $\{z\mid\im(z)\in(-0.1,1.1)\}$ except at the point $z=i/2$;
+        \item If $\gamma$ denotes a \emph{clockwise} circle of radius $1/2$ centered at $i/2$, then $\int_\gamma f\dd{z}=17$;
+        \item $|f(z)|\to 0$ as $\re(z)\to\pm\infty$.
+    \end{enumerate}
+    Compute $\int_{-\infty}^\infty f(x)\dd{x}$.
+\end{enumerate}
+
+
+
 
 \end{document}
