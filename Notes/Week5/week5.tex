@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Consequences of Defining Infinity}
 \section{Office Hours}
 \begin{itemize}
     \item \marginnote{4/15:}There will not be anything explicit about Thursday's content, but knowing it is helpful for understanding conformal maps.
@@ -396,6 +396,244 @@ In the following, please \emph{fully explain your reasoning} in addition to doin
     \end{enumerate}
     Compute $\int_{-\infty}^\infty f(x)\dd{x}$.
 \end{enumerate}
+
+
+
+\section{The Riemann Sphere}
+\begin{itemize}
+    \item \marginnote{4/18:}Midterms are 2/3 graded.
+    \item Project proposal due on Monday by the end of the day.
+    \begin{itemize}
+        \item Completion points; Calderon just wants to give us feedback.
+    \end{itemize}
+    \item PSets 4 and 5 will be pushed back by 1 week.
+    \begin{itemize}
+        \item Get started on your final project in the intervening time!
+    \end{itemize}
+    \item Today.
+    \begin{itemize}
+        \item More holomorphic and meromorphic functions.
+        \item Definition of the logarithm.
+    \end{itemize}
+    \item Example: Consider
+    \begin{equation*}
+        f(z) = \frac{1}{z}
+        \in \mO(\C^*)
+    \end{equation*}
+    How does this look as a conformal map, e.g., where does it send the following two sets?
+    \begin{align*}
+        \D\setminus\{0\}&&
+        \{r\e[i\theta]\mid\theta\text{ fixed}\}
+    \end{align*}
+    \begin{itemize}
+        \item $\D\setminus\{0\}$ goes to $\C\setminus\overline{\D}$.
+        \item $\{r\e[i\theta]\mid\theta\text{ fixed}\}$ goes to the line opposite itself at $\theta+\ang{180}$.
+        \begin{itemize}
+            \item This is because $1/z$ takes $r\e[i\theta]$ to $r^{-1}\e[-i\theta]$.
+            \item Moreover, as $r\to\infty$ in the initial set, $r^{-1}\to 0$ in the image.
+        \end{itemize}
+        \item Observe that
+        \begin{align*}
+            \lim_{z\to 0}|f(z)| &= \infty&
+            \lim_{|z|\to\infty}f(z) &= 0
+        \end{align*}
+        \item So can't we just say that $f(0)=\infty$ and $f(\infty)=0$?
+        \begin{itemize}
+            \item Sure! Add in $\infty$ like with the extended real numbers.
+            \item We just stated that we can define $i:=\sqrt{-1}$ to be a thing, so why not $\infty$ as well?
+        \end{itemize}
+        \item We now make this definition a bit more rigorous.
+    \end{itemize}
+    \item \textbf{Riemann sphere}: The $S^2$-like manifold defined as follows. \emph{Denoted by} $\bm{\hat{\pmb{\C}}}$. \emph{Given by}
+    \begin{equation*}
+        \hat{\C} := \C\cup\{\infty\}
+    \end{equation*}
+    \begin{itemize}
+        \item We can thus define a \textbf{neighborhood} (of $\infty$).
+    \end{itemize}
+    \item \textbf{Neighborhood} (of $\infty$): The set defined as follows. \emph{Given by}
+    \begin{equation*}
+        \{|z|>R\}\cup\{\infty\}
+    \end{equation*}
+    \begin{itemize}
+        \item Equivalently, take $\{|1/z|<R\}$.
+    \end{itemize}
+    \item Let's visualize this sphere and neighborhood.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style=black
+        ]
+            \footnotesize
+            \fill [orz] (120:1)
+                arc[start angle=-180,end angle=0,x radius=5mm,y radius=1mm]
+                arc[start angle=60,end angle=120,radius=1cm]
+            ;
+            \draw [orx] (120:1) arc[start angle=-180,end angle=0,x radius=5mm,y radius=1mm];
+    
+            \draw circle (1cm);
+            \draw (-1,0) arc[start angle=-180,end angle=0,x radius=1cm,y radius=2mm] node[right]{$\C$};
+            \draw [dashed] (-1,0) arc[start angle=180,end angle=0,x radius=1cm,y radius=2mm];
+    
+            \fill [cyan] (0,1) circle (2pt) node[above right]{$\infty$};
+            \fill [orx] (0,-1) circle (2pt) node[below right]{$0$};
+        \end{tikzpicture}
+        \caption{The Riemann sphere.}
+        \label{fig:riemannSphere}
+    \end{figure}
+    \pagebreak
+    \item \textbf{Stereographic projection}: A mapping of the sphere (minus the north pole) to the plane. Take the line from $\infty$ through a point on the sphere and onto the plane (this sets up a one-to-one correspondence between the points of the sphere and those of the plane).
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[
+            scale=1.3,
+            every node/.style=black
+        ]
+            \footnotesize
+            \draw %(-1.1,-0.3) -- 
+                (-2,-0.3) -- (-3,-1.7) -- (2,-1.7) -- (3,-0.3)
+                % -- (1.1,-0.3)
+                -- cycle
+            ;
+            \draw [rex] (0,-1) ellipse (2cm and 4mm);
+            \node [inner sep=1pt] at (2.2,-0.55) {$|z|=1$}
+                edge [out=180,in=60,->] (1.5,-0.7)
+            ;
+            \draw [grx,-stealth,yshift=-1cm] (170:1.9) -- (170:-1.9) node[right]{$\R$};
+            \draw [blx,-stealth,yshift=-1cm] (25:-1.5) node[above left,yshift=-1mm]{$i\R$} -- (25:1.5);
+            \fill [white] circle (1.1cm);
+    
+            \draw [rex,name path=equator] (-1,0) arc[start angle=-180,end angle=0,x radius=1cm,y radius=2mm];
+            \draw [rex,dashed] (-1,0) arc[start angle=180,end angle=0,x radius=1cm,y radius=2mm];
+            \draw [grx,name path=real] (0,-1) arc[start angle=-90,end angle=90,x radius=7.7mm,y radius=1cm];
+            \draw [grx,dashed] (0,-1) arc[start angle=-90,end angle=-270,x radius=7.7mm,y radius=1cm];
+            \draw [blx,name path=imaginary] (0,-1) arc[start angle=-90,end angle=-270,x radius=4mm,y radius=1cm];
+            \draw [blx,dashed] (0,-1) arc[start angle=-90,end angle=90,x radius=4mm,y radius=1cm];
+    
+            % \path (-2,-1) arc[start angle=-180,end angle=-150,x radius=2cm,y radius=4mm] coordinate (p);
+            % \fill [rex] (p) circle (1pt);
+            % \draw [help lines,name path=p] (p) -- (0,1);
+            % \fill [rex,name intersections={of=equator and p}] (intersection-1) circle (1pt);
+            \path (-2,-1) arc[start angle=-180,end angle=-80,x radius=2cm,y radius=4mm] coordinate (q);
+            \fill [rex] (q) circle (1pt);
+            \draw [help lines,name path=q] (q) -- (0,1);
+            \fill [rex,name intersections={of=equator and q}] (intersection-1) circle (1pt);
+    
+            \coordinate (r) at ([yshift=-1cm]170:-1);
+            \fill [grx] (r) circle (1pt);
+            \draw [help lines,name path=r] (r) -- (0,1);
+            \fill [grx,name intersections={of=real and r}] (intersection-1) circle (1pt);
+    
+            \coordinate (s) at ([yshift=-1cm]25:-1.3);
+            \fill [blx] (s) circle (1pt);
+            \draw [help lines,name path=s] (s) -- (0,1);
+            \fill [blx,name intersections={of=imaginary and s}] (intersection-1) circle (1pt);
+    
+            \draw circle (1cm);
+            \fill [cyan] (0,1) circle (1.5pt) node[above=1pt]{$\infty$};
+            \fill [orx] (0,-1) circle (1.5pt) node[below=1pt]{$0$};
+        \end{tikzpicture}
+        \caption{Stereographic projection.}
+        \label{fig:stereographicProjection}
+    \end{figure}
+    \begin{itemize}
+        \item Put $\{0\}$ at the point of tangency.
+        \item The equator will get mapped to a circle, so the stereographic projection is actually conformal away from $\infty$!
+        \begin{itemize}
+            \item Moreover, we will identify this circle with the unit circle.
+        \end{itemize}
+        \item The real axis will become a line of longitude/great circle.
+        \item The imaginary axis will become the complementary line of longitude.
+        \item So the real and imaginary axes, and the unit circle become three perpendicular great circles on the Riemann sphere.
+    \end{itemize}
+    \item This allows us to give an alternate definition of being meromorphic: $f$ on $U\subset\C$ is meromorphic if $f:U\to\hat{\C}$ is such that $f^{-1}(\infty)$ is discrete and $f|_{U\setminus f^{-1}(\infty)}$ is holomorphic.
+    \item As a complex manifold: Let $f:U\ni\infty\to\C$ be a function. We say that $f$ is holomorphic at $\infty$ if
+    \begin{equation*}
+        f^*(z) :=
+        \begin{cases}
+            f(1/z) & z\neq 0\\
+            f(\infty) & z=0
+        \end{cases}
+    \end{equation*}
+    is holomorphic at zero.
+    \item Exercise: In Figure \ref{fig:stereographicProjection}, we projected the Riemann sphere down onto a plane tangent to the sphere at 0. What if we project the Riemann sphere up onto a plane tangent to the sphere at $\infty$? Clearly these two versions of the complex plane would be parallel, and it actually turns out that the map between them is just $z\mapsto 1/z$!
+    \item TPS: Verify that $1/(z-3)^2$ is holomorphic at $\infty$.
+    \begin{itemize}
+        \item Note: This is a pole of order 2 at $z=3$.
+        \item We have that
+        \begin{equation*}
+            f^*(z) =
+            \begin{cases}
+                \frac{z^2}{(1-3z)^2} & z\neq 0\\
+                0 & z=0
+            \end{cases}
+        \end{equation*}
+        \item Clearly, $\lim_{z\to 0}f^*(z)=0$, so we're done.
+        \item Comments.
+        \begin{itemize}
+            \item Saying something \emph{is} holomorphic at $\infty$ is just saying that it has an analytic continuation at $\infty$ (via Riemann's removable singularity theorem).
+            \item $f^*$ has a zero of order 2 at $\infty$.
+        \end{itemize}
+    \end{itemize}
+    \item In order to work with the Riemann sphere, you always put a patch of it on the plane and then say, "well, we know complex analysis on the plane."
+    \begin{itemize}
+        \item Thus, we have a notion of poles, zeroes, and holomorphisms at $\infty$.
+    \end{itemize}
+    \item The open mapping theorem still applies!
+    \begin{itemize}
+        \item If $U$ is a domain and $f:U\subset\hat{C}\to\C$ is holomorphic, then $f(U)$ is open.
+    \end{itemize}
+    \item More generally, we should do something about the Riemann sphere.
+    \item \textbf{Riemann surface}: A (real) two-manifold (locally like $\R^2$) equipped with an atlas of \textbf{charts}. \emph{Denoted by} $\bm{X}$.
+    \item \textbf{Chart}: A map from a domain $U$ on the Riemann surface in question down to the complex plane $\C$ that is locally biholomorphic. \emph{Denoted by} $\bm{\phi_U}$.
+    \item \textbf{Holomorphic} ($f$ at $z\in X$): A function $f:U\to\C$ for which $f\circ\phi_U^{-1}$ is holomorphic at $\phi_U(z)$, where $X$ is a Riemann surface and $z\in U\subset X$.
+    \item Suppose we map the bottom \emph{and} top halves of the Riemann sphere to the unit circle.
+    \begin{itemize}
+        \item The interconversion map is once again $1/z$.
+    \end{itemize}
+    \item We're now done \emph{defining} the Riemann sphere. We now start doing \emph{analysis} on the Riemann sphere.
+    \item Observation: $f$ is holomorphic at $\infty$ iff $f(1/z)$ is holomorphic at 0.
+    \begin{itemize}
+        \item Thus, $f:U\supset\hat{\C}\to\hat{\C}$ is meromorphic iff $f$ is a holomorphic map.
+    \end{itemize}
+    \item Theorem: Any holomorphic function $f:X\to\C$ on $\hat{\C}$ (or any compact Riemann surface $X$) is constant.
+    \begin{proof}
+        Since $f$ is holomorphic on $X$, $f$ is continuous on $X$. Thus, since continuous functions on compact spaces must take maximums, $|f|$ has to take a maximum on $X$. Suppose $z\in X$ is such that $|f(z)|$ is max. Take a neighborhood $U\ni z$ and its chart $\phi_U:U\to\C$. Then $\phi_U(z)$ is in the interior of $\phi_U(U)$. It follows that $f\circ\phi_U^{-1}$ is holomorphic on $\phi_U(U)\subset\subset\C$. Thus, by the maximum modulus principle, $f\circ\phi_U^{-1}$ is constant on $\phi_U(U)$. Thus, $f$ is constant on $U$. Now take overlapping coverings of $U$ to expand the constancy over all of $X$, i.e., invoke the identity theorem.
+    \end{proof}
+    \item Note: This method of proof (doing something on a chart and then expanding over) is common.
+    \item Corollary (Liouville's theorem): If $f\in\mO(\C)$ and bounded, then $f$ is constant.
+    \begin{proof}
+        If it's bounded on $\C$, then it's bounded in a neighborhood of $\infty$. Thus, we do the inversion to $f^*$ which has an analytic continuation to 0, so $f$ is holomorphic on $\hat{\C}$ and hence, by the previous theorem, $f$ is constant.
+    \end{proof}
+    \item Implication: Holomorphic functions on the Riemann sphere are constant (hence relatively uninteresting).
+    \item More interesting: Let's look at meromorphic functions on $\hat{\C}$.
+    \begin{itemize}
+        \item Examples: $1/z$, $z$, $z^2$, polynomials, rational functions.
+        \begin{itemize}
+            \item This is it!
+        \end{itemize}
+        \item Nonexample: The exponential map is \emph{not} meromorphic on $\hat{\C}$ because it actually has an essential singularity at $\infty$: $R\to\infty$ goes to $\infty$, but $R\to-\infty$ goes to 0.
+    \end{itemize}
+    \item Claim: Any meromorphic function on the Riemann sphere is a rational function.
+    \begin{proof}
+        Done next Tuesday.
+    \end{proof}
+    \item There are lots of meromorphic functions that are called rational functions on other compact Riemann surfaces.
+    \item Example: $zy^2=x^3+axz^2+bz^3$ gives a set of points in $\C^2$ or $\R^2$.
+    \begin{itemize}
+        \item Actually defines a genus 1 surface?? Could work for a final project!
+        \item The function $[x:y:z]\mapsto x/z$ is meromorphic. This map looks like skewering the torus and rotating it like a kebob.
+        \item What is going on here??
+    \end{itemize}
+    \item Proposition: Let $f:X\to\hat{\C}$ be meromorphic and nonconstant, where $X$ is a compact Riemann surface. Then $f$ is onto.
+    \begin{proof}
+        We want to show that $f(X)=\hat{\C}$. By the open mapping theorem, $f(X)$ is open. But $X$ is compact, which means that $f(X)$ is compact, which means that $f(X)$ is closed. Thus, $\hat{\C}\setminus f(X)$ is open. But then $f(X)$ and $\hat{\C}\setminus f(X)$ partition $\hat{\C}$ into disjoint open subsets, so since $\hat{\C}$ is connected, one of these sets must be empty. $f(X)$ is nonempty, so $\hat{\C}\setminus f(X)$ must be empty and therefore $f(X)=\hat{\C}$, as desired.
+    \end{proof}
+    \item Corollary: Fundamental Theorem of Algebra.
+    \begin{proof}
+        Given a polynomial, there exists a root. How does this work??
+    \end{proof}
+\end{itemize}
 
 
 
