@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Special Meromorphic Functions}
 \section{Meromorphic Functions and M\"{o}bius Transformations}
 \begin{itemize}
     \item \marginnote{4/23:}Last time.
@@ -167,7 +167,7 @@
         \item Can we have entire biholomorphisms? Can we have biholomorphisms $f:\hat{\C}\to\hat{\C}$.
         \item $\Aut(\C)=\Bihol(\C)$. On Thursday, we'll prove that
         \begin{equation*}
-            \Bihol(\C) = \{a\mapsto az+b\}
+            \Bihol(\C) = \{z\mapsto az+b\}
         \end{equation*}
         \item For the other one,
         \begin{equation*}
@@ -220,6 +220,480 @@
         \end{equation*}
         where we have two translations, an inversion, and a scaling/rotation.
     \end{proof}
+\end{itemize}
+
+
+
+\section{The Complex Logarithm}
+\begin{itemize}
+    \item \marginnote{4/25:}Review: What do certain complex analysis objects look like?
+    \begin{itemize}
+        \item Holomorphic functions look like conformal maps and branching.
+        \item Meromorphic functions look like conformal maps to $\hat{\C}$ and branching.
+        \item But what do essential singularities look like?
+        \begin{itemize}
+            \item Recall that an essential singularity is a singularity $z$ for which there exist $z_n\to z$ and $w_n\to z$ such that $f(z_n)$ stays bounded and $|f(w_n)|\to\infty$.
+        \end{itemize}
+    \end{itemize}
+    \item Theorem (Casorati-Weierstrass): Suppose $f\in\mO(U\setminus\{z_0\})$ where $z_0$ is an essential singularity. Then for all $w_0\in\C$, there exist $z_n\to z_0$ such that $f(z_n)\to w_0$.
+    \begin{proof}
+        Suppose for the sake of contradiction that there exists a $w_0\in\C$ for which every $z_n\to z_0$ is such that $|f(z_n)-w_0|>\varepsilon$. Pictorially, this means that no matter how close the points of the sequence $\{z_n\}$ get to $z_0$, $f(z_n)$ will always stay outside of a disk (of radius $\varepsilon$) around $w_0$. Define
+        \begin{equation*}
+            g(z) := \frac{1}{f(z)-w_0}
+        \end{equation*}
+        Since $f\in\mO(U\setminus\{z_0\})$ and $g$ is a rational function of $f$, we know that $g\in\mO(U\setminus\{z_0\})$. Additionally, let $\{z_n\}$ be an arbitrary sequence converging to $z_0$. Then
+        \begin{align*}
+            |f(z_n)-w_0| &> \varepsilon\\
+            \frac{1}{\varepsilon} &> \frac{1}{|f(z_n)-w_0|}\\
+            \frac{1}{\varepsilon} &> \left| \frac{1}{f(z_n)-w_0} \right|\\
+            \frac{1}{\varepsilon} &> |g(z_n)|
+        \end{align*}
+        Thus, we have shown that $g$ is bounded near $z_0$. This is the last condition we need to invoke Riemann's removable singularity theorem and learn that $g$ can be analytically continued to $z_0$. But if $\hat{g}\in\mO(U)$, then
+        \begin{equation*}
+            f = \frac{1}{g}+w_0
+        \end{equation*}
+        has either a removable singularity or a pole at $z_0$. This contradicts the assumption that $f$ has an essential singularity at $z_0$.
+    \end{proof}
+    \item Implication: $f(U\setminus\{z_0\})$ is dense in $\C$ and hence $f$ is \emph{very} not injective.
+    \item Example: $z\mapsto\e[z]$.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \begin{scope}[
+                xshift=-6cm,
+                yscale=0.333
+            ]
+                \draw [-stealth] (-2,0) -- (2,0) node[right]{$\R$};
+                \draw [-stealth] (0,-6) -- (0,6) node[above]{$i\R$};
+    
+                \draw [thick,pux]
+                    (0,{pi/16}) -- ++(1.8,0)
+                    (0,{pi/8}) -- ++(1.8,0)
+                    (0,{3*pi/16}) -- ++(1.8,0)
+                    (0,{pi/4}) -- ++(1.8,0)
+                ;
+                \draw [thick,blx]
+                    (0,{pi/16}) -- ++(-1.8,0)
+                    (0,{pi/8}) -- ++(-1.8,0)
+                    (0,{3*pi/16}) -- ++(-1.8,0)
+                    (0,{pi/4}) -- ++(-1.8,0)
+                ;
+                \draw [ultra thick,orx] (0,0) -- (0,{pi/4});
+                \draw [thick,grx]
+                    (-1.8,{-pi/16}) -- ++(3.6,0)
+                    (-1.8,{-pi/8}) -- ++(3.6,0)
+                    (-1.8,{-3*pi/16}) -- ++(3.6,0)
+                    (-1.8,{-pi/4}) -- ++(3.6,0)
+                ;
+    
+                \draw [yex,very thick] (1.1,{-pi}) -- (1.1,{2*pi});
+    
+                \filldraw [draw=orx,fill=orx!30] (1.3,-2) -- (1.5,-2) -- (1.5,-2.6) -- (1.3,-2.6) -- cycle;
+                \filldraw [draw=orx,fill=orx!30,yshift=6.28cm] (1.3,-2) -- (1.5,-2) -- (1.5,-2.6) -- (1.3,-2.6) -- cycle;
+            \end{scope}
+            \draw [semithick,|->] (-3.3,0) -- (-2.7,0);
+            \begin{scope}[z={(-0.2,-3)},yscale=0.2]
+                \draw [-stealth] (0,0,0) -- (2,0,0) node[right]{$\R^+$};
+                \draw [-stealth] (0,-10,0) -- (0,10,0) node[above]{$i\R$};
+    
+                \draw [pux,thick]
+                    ({0.333*cos(11.25)},{pi/16},{-0.333*sin(11.25)}) -- ({2.017*cos(11.25)},{pi/16},{-2.017*sin(11.25)})
+                    ({0.333*cos(22.5)},{pi/8},{-0.333*sin(22.5)}) -- ({2.017*cos(22.5)},{pi/8},{-2.017*sin(22.5)})
+                    ({0.333*cos(33.75)},{3*pi/16},{-0.333*sin(33.75)}) -- ({2.017*cos(33.75)},{3*pi/16},{-2.017*sin(33.75)})
+                    ({0.333*cos(45)},{pi/4},{-0.333*sin(45)}) -- ({2.017*cos(45)},{pi/4},{-2.017*sin(45)})
+                ;
+                \draw [blx,thick]
+                    (0,{pi/16},0) -- ({0.333*cos(11.25)},{pi/16},{-0.333*sin(11.25)})
+                    (0,{pi/8},0) -- ({0.333*cos(22.5)},{pi/8},{-0.333*sin(22.5)})
+                    (0,{3*pi/16},0) -- ({0.333*cos(33.75)},{3*pi/16},{-0.333*sin(33.75)})
+                    (0,{pi/4},0) -- ({0.333*cos(45)},{pi/4},{-0.333*sin(45)})
+                ;
+                \draw [grx,thick]
+                    (0,{-pi/16},0) -- ({2.017*cos(-11.25)},{-pi/16},{-2.017*sin(-11.25)})
+                    (0,{-pi/8},0) -- ({2.017*cos(-22.5)},{-pi/8},{-2.017*sin(-22.5)})
+                    (0,{-3*pi/16},0) -- ({2.017*cos(-33.75)},{-3*pi/16},{-2.017*sin(-33.75)})
+                    (0,{-pi/4},0) -- ({2.017*cos(-45)},{-pi/4},{-2.017*sin(-45)})
+                ;
+                \draw [orx,ultra thick] plot[domain=0:45] ({0.333*cos(\x)},{\x*pi/180},{-0.333*sin(\x)});
+    
+                % \draw [yex,very thick,dashed] plot[domain=-360:-180] ({cos(\x)},{\x*pi/180},{-sin(\x)});
+                \draw [yex,very thick] plot[domain=-180:-9] ({cos(\x)},{\x*pi/180},{-sin(\x)});
+                \draw [yex,very thick,dashed] plot[domain=-9:102] ({cos(\x)},{\x*pi/180},{-sin(\x)});
+                \draw [yex,very thick] plot[domain=102:360] ({cos(\x)},{\x*pi/180},{-sin(\x)});
+    
+                \filldraw [draw=orx,fill=orx!30]
+                    plot[domain=-149:-115] ({1.223*cos(\x)},{\x*pi/180},{-1.223*sin(\x)})
+                    -- ({1.494*cos(-115)},{-115*pi/180},{-1.494*sin(-115)}) --
+                    plot[domain=-115:-149] ({1.494*cos(\x)},{\x*pi/180},{-1.494*sin(\x)})
+                    -- cycle
+                ;
+                \filldraw [draw=orx,fill=orx!30]
+                    plot[domain=211:245] ({1.223*cos(\x)},{\x*pi/180},{-1.223*sin(\x)})
+                    -- ({1.494*cos(245)},{245*pi/180},{-1.494*sin(245)}) --
+                    plot[domain=245:211] ({1.494*cos(\x)},{\x*pi/180},{-1.494*sin(\x)})
+                    -- cycle
+                ;
+    
+                \draw (0,{-pi},0)
+                    -- (-2,{-pi},0)
+                    to[bend right=1.333] (-2,{-3*pi/4},2)
+                    to[bend right=20] (0,{-pi/2},2)
+                    to[bend left=20] (2,{-pi/4},2)
+                    to[bend right=1.333] (2,0,0)
+                    to[bend left=1.333] (2,{pi/4},-2)
+                    to[bend left=20] (0,{pi/2},-2)
+                    to[bend right=20] (-2,{3*pi/4},-2)
+                    to[bend left=1.333] (-2,{pi},0)
+                    to[bend right=1.333] (-2,{5*pi/4},2)
+                    to[bend right=20] (0,{3*pi/2},2)
+                    to[bend left=20] (2,{7*pi/4},2)
+                    to[bend right=1.333] (2,{2*pi},0)
+                    -- (0,{2*pi},0)
+                ;
+            \end{scope}
+            \draw [semithick,|->] (3,0) -- (3.6,0);
+            \begin{scope}[xshift=6cm]
+                \draw [-stealth] (-2,0) -- (2,0) node[right]{$\R$};
+                \draw [-stealth] (0,-2) -- (0,2) node[above]{$i\R$};
+                
+                \draw [thick,pux]
+                    (11.25:0.333) -- (11.25:2.017)
+                    (22.5:0.333) -- (22.5:2.017)
+                    (33.75:0.333) -- (33.75:2.017)
+                    (45:0.333) -- (45:2.017)
+                ;
+                \draw [thick,blx]
+                    (11.25:0.333) -- (0,0)
+                    (22.5:0.333) -- (0,0)
+                    (33.75:0.333) -- (0,0)
+                    (45:0.333) -- (0,0)
+                ;
+                \draw [ultra thick,orx] (0.333,0) arc[start angle=0,end angle=45,radius=0.333cm];
+                \draw [thick,grx]
+                    (0,0) -- (-11.25:2.017)
+                    (0,0) -- (-22.5:2.017)
+                    (0,0) -- (-33.75:2.017)
+                    (0,0) -- (-45:2.017)
+                ;
+    
+                \draw [yex,very thick] circle (1cm);
+    
+                \filldraw [draw=orx,fill=orx!30]
+                    plot[domain=-149:-115] ({1.223*cos(\x)},{1.223*sin(\x)})
+                    -- ({1.494*cos(-115)},{1.494*sin(-115)}) --
+                    plot[domain=-115:-149] ({1.494*cos(\x)},{1.494*sin(\x)})
+                    -- cycle
+                ;
+            \end{scope}
+        \end{tikzpicture}
+        \caption{The essential singularity of $\e[z]$.}
+        \label{fig:exponentialSingularity}
+    \end{figure}
+    \begin{itemize}
+        \item This function has an essential singularity at $\infty$.
+        \item Say we want to approach the positive real number $\e[a]$ ($a\in\R$). Then we can take the sequence of points $z_n:=a+2\pi ni$. As $n\to\infty$, $|a+2\pi ni|\to\infty$. Additionally,
+        \begin{equation*}
+            \e[a+2\pi ni] = \e[a]\cdot(\e[2\pi i])^n
+            = \e[a]\cdot 1^n
+            = \e[a]
+        \end{equation*}
+        \item For the negative real number $-\e[a]$, choose $z_n=a+\pi i+2\pi ni$. Then
+        \begin{equation*}
+            \e[a+\pi i+2\pi ni] = \e[a]\cdot\e[i\pi]\cdot(\e[2\pi i])^n
+            = \e[a]\cdot -1\cdot 1^n
+            = -\e[a]
+        \end{equation*}
+        \item For 0, choose $z_n=-n$.
+        \item How about the complex number $r\e[i\theta]$? Pick $a\in\R$ such that $r=\e[a]$. Then choose $z_n=a+i\theta+2\pi ni$.
+        \item What is shown in Figure \ref{fig:exponentialSingularity} is an \textbf{$\bm{\infty}$ branched cover}.
+    \end{itemize}
+    \item Theorem (Little Picard): If $f$ is entire and nonconstant, then $f(\C)$ equals $\C$, except maybe one point.
+    \item Theorem (Big Picard): For any neighborhood $U$ of an essential singularity $z_0$, $f(U\setminus\{z_0\})$ is all of $\C$ except maybe one point.
+    \item TPS: Verify that the big Picard theorem holds for $\exp$ and $\infty$.
+    \begin{itemize}
+        \item Let $U$ be a neighborhood of $\infty$, as defined when we discussed the Riemann sphere.
+        \item This is very much related to what was discussed above!
+        \item Indeed, let $r\e[i\theta]\in\C$ be arbitrary. Choose $n$ big enough so that $a+i\theta+2\pi ni\in U$. Then $\exp(a+i\theta+2\pi ni)=r\e[i\theta]$, as desired.
+        \item Here, 0 is our single point exception.
+    \end{itemize}
+    \item Corollary (of Casorati-Weierstrass):
+    \begin{equation*}
+        \Bihol(\C) = \{z\mapsto az+b\}
+    \end{equation*}
+    \begin{proof}
+        For the backwards inclusion, let $f(z)=az+b$ be an arbitrary linear map. $f$ is a polynomial (hence holomorphic). Its inverse
+        \begin{equation*}
+            f^{-1}(z) = a^{-1}z-a^{-1}b
+        \end{equation*}
+        is a polynomial (hence holomorphic). And
+        \begin{equation*}
+            f\circ f^{-1} = f^{-1}\circ f = \id
+        \end{equation*}
+        so $f$ is bijective. Therefore, $f$ is biholomorphic by definition.\par
+        For the forwards inclusion, suppose first that $f\in\Bihol(\C)$ has a pole at infinity. Then $f\in\Bihol(\hat{\C})$. It follows by the result from last time that there exist $a,b,c,d\in\C$ with $ad-bc\neq 0$ such that
+        \begin{equation*}
+            f(z) = \frac{az+b}{cz+d}
+        \end{equation*}
+        Additionally, since we know that $f(\infty)=\infty$, we must have $c=0$ (otherwise, $f(\infty)=a/c$). But if $c=0$, then
+        \begin{equation*}
+            f(z) = \frac{a}{d}z+\frac{b}{d} \in \{z\mapsto az+b\}
+        \end{equation*}
+        as desired.\par
+        Now suppose that $f\in\Bihol(\C)$ does not have a pole at infinity. Since $f\notin\Bihol(\hat{\C})$, this also means that $f$ does not have a removable singularity at infinity. Thus, $f$ has an essential singularity at infinity. Consequently, if we let $D$ be an open neighborhood of $\infty$, then the Casorati-Weierstrass theorem implies that $f(D)$ is dense in $\C$. Additionally, by the open mapping theorem, $f(D)$ is open. These last two results combined imply that $f(D)=\C$. But since $\C\setminus D$ is also in the domain of $f$ (i.e., $f$ must map some points in $\C\setminus D$ to points that it's already covered in $D$), $f$ is not injective, hence not bijective, hence not biholomorphic. This is a contradiction, and therefore biholomorphic functions can only have a \emph{pole} at infinity, a case in which we have shown they are linear.
+    \end{proof}
+    \item We now finally define a (\emph{not} the) logarithm.
+    \item \textbf{Logarithm} (of $z$): A point $w\in\C$ such that $\e[w]=z$, where $z\in\C$.
+    \begin{itemize}
+        \item Naturally, $w$ is only well-defined up to $\pm 2\pi in$ ($n\in\Z$).
+    \end{itemize}
+    \item Log identities don't always hold.
+    \item TPS: Which are always true and which are only true for the appropriate choice of log?
+    \begin{itemize}
+        \item $\exp(\log(z))=z$ is always true.
+        \item $\log(\exp(z))=z$ is only true if we happen to choose the correct complex number raised to the exponential.
+        \item $\log(zw)=\log(z)+\log(w)$ is similarly only true for the appropriate choices of log.
+    \end{itemize}
+    \item Setting aside well-definedness for now, let's define what it means to raise one complex number to the power of another.
+    \item $\bm{z^w}$: The complex number defined as follows. \emph{Given by}
+    \begin{equation*}
+        z^w := \e[w\log z]
+    \end{equation*}
+    \begin{itemize}
+        \item Such a definition requires a choice of the logarithm.
+        \item Such a choice is called a \textbf{branch} of the logarithm.
+    \end{itemize}
+    \item TPS: What do $z^n$ and $z^{1/n}$ give, where $n\in\N$?
+    \begin{itemize}
+        \item $z^n$ gives exactly one value.
+        \begin{equation*}
+            z^n = \e[n\log z]
+            = \e[n(a+bi+2\pi ik)]
+            = \e[na]\cdot\e[bni]\cdot(\e[2\pi in])^k
+            = \e[na]\e[bni]
+        \end{equation*}
+        \begin{itemize}
+            \item In the above, $k\in\Z$.
+            \item Additionally, it doesn't matter what exact $b$ we choose because if we increase or decrease it by $2\pi ik$, we will just multiply the value by $1^k=1$. Essentially, $\e[na]$ gives a unique magnitude for the result, and $bn$ gives a unique argument for the result.
+        \end{itemize}
+        \item $z^{1/n}$ gives $n$ values, each of which differs by $\e[2\pi i/n]$ (i.e., by an $n^\text{th}$ root of 1).
+        \begin{equation*}
+            z^{1/n} = (r\e[i\theta+2\pi ik])^{1/n}
+            = r^{1/n}\e[i\theta/n]\zeta_k
+        \end{equation*}
+        \begin{itemize}
+            \item In the above, the $\zeta_k=\e[k\cdot 2\pi i/n]$ are the $n^\text{th}$ roots of unity.
+        \end{itemize}
+    \end{itemize}
+    \item Example: We can now calculate $i^i$!
+    \begin{equation*}
+        i^i = \e[i\log i]
+        = \e[i(\pi i/2+2\pi ik)]
+        = \e[-\pi/2]\cdot\e[-2\pi k]
+    \end{equation*}
+    \item \textbf{Principal branch} (of log): The branch that is real for real numbers.
+    \item \textbf{Logarithm function} (on $U$): A continuous inverse to $\exp$, i.e., $\e[\log z]=z$.
+    \item Think of a logarithm function as lifting $U$ to the infinity spiral in the middle of Figure \ref{fig:exponentialSingularity}.
+    \begin{itemize}
+        \item Imagine $U$ is the orange domain in the top-down view on the right side of Figure \ref{fig:exponentialSingularity}.
+        \item Project $U$ up, down, or both onto a connected open subset of the infinity spiral.
+        \begin{itemize}
+            \item In the middle of Figure \ref{fig:exponentialSingularity}, we see $U$ projected up infinitely, but with a logarithm, we would have to make a \emph{choice} here.
+        \end{itemize}
+        \item Then invert $U$ back onto the original complex plane on the left side of Figure \ref{fig:exponentialSingularity}.
+    \end{itemize}
+    \pagebreak
+    \item Observe that\dots
+    \begin{itemize}
+        \item If $U\ni 0$, then no logarithm function exists on $U$;
+        \item If $U$ contains a loop $\gamma$ winding around $U$, then no logarithm function exists on $U$.
+    \end{itemize}
+    \item Proposition: If the logarithm makes sense on $U$, then it is holomorphic and
+    \begin{equation*}
+        \dv{z}\log(z) = \frac{1}{z}
+    \end{equation*}
+    \begin{proof}
+        See \textcite{bib:FischerLieb}.
+    \end{proof}
+    \item Observe that since the derivative of the logarithm is never zero, the logarithm must be injective. Therefore, it's biholomorphic!
+    \item Corollary: No log exists on $\C^*$.
+    \begin{proof}
+        Suppose for the sake of contradiction that a logarithm exists on $\C^*$. Then $1/z$ has a primitive on $\C^*$, so by the 3/28 lecture,
+        \begin{equation*}
+            \int_\gamma\frac{1}{z}\dd{z} = 0
+        \end{equation*}
+        for all loops $\gamma$. But since we know that
+        \begin{equation*}
+            \int_\gamma\frac{1}{z}\dd{z} = 2\pi i \neq 0
+        \end{equation*}
+        we have a contradiction.
+    \end{proof}
+    \item But, there are logs on domains covering $\C^*$.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}
+            \begin{scope}[z={(-0.2,-3)},yscale=0.2]
+                \draw [densely dashed] (0,0,0) -- (1.65,0,0);
+                \draw [-stealth] (1.65,0,0) -- (2,0,0) node[right]{$\R^+$};
+    
+                % \draw [densely dashed]
+                %     (0,-6,0) -- (0,{-pi/2},0)
+                %     (0,{3*pi/2},0) -- (0,-1,0)
+                % ;
+                % \draw (0,{-pi/2},0) -- (0,-1,0);
+                \draw [-stealth] (0,-6,0) -- (0,16,0) node[above]{$i\R$};
+    
+                % \draw (0,{-pi/2},0)
+                %     -- (0,{-pi/2},2)
+                %     to[bend left=20] (2,{-pi/4},2)
+                %     to[bend right=1.333] (2,0,0)
+                %     to[bend left=1.333] (2,{pi/4},-2)
+                %     to[bend left=20] (0,{pi/2},-2)
+                %     to[bend right=20] (-2,{3*pi/4},-2)
+                %     to[bend left=1.333] (-2,{pi},0)
+                %     to[bend right=1.333] (-2,{5*pi/4},2)
+                %     to[bend right=20] (0,{3*pi/2},2)
+                %     to[bend left=20] (2,{7*pi/4},2)
+                %     to[bend right=1.333] (2,{2*pi},0)
+                %     to[bend left=1.333] (2,{9*pi/4},-2)
+                %     to[bend left=20] (0,{5*pi/2},-2)
+                %     to[bend right=20] (-2,{11*pi/4},-2)
+                %     to[bend left=1.333] (-2,{12*pi/4},0)
+                %     to[bend right=1.333] (-2,{13*pi/4},2)
+                %     to[bend right=20] (0,{14*pi/4},2)
+                %     -- (0,{14*pi/4},0)
+                % ;
+    
+                \draw (0,{-pi/2},0)
+                    -- (0,{-pi/2},2)
+                    to[bend left=20] (2,{-pi/4},2)
+                    to[bend right=1.333] (2,0,0)
+                    to[bend left=1.333] (2,{pi/4},-2)
+                    to (1.62,0.81,-2)
+                ;
+                \draw [densely dashed] (1.62,0.81,-2)
+                    to[bend left=20] (0,{pi/2},-2)
+                    to[bend right=20] (-2,{3*pi/4},-2)
+                    to[bend left=1] (-2,2.68,-0.47)
+                ;
+                \draw (-2,2.68,-0.47)
+                    to[bend left=1.333] (-2,{pi},0)
+                    to[bend right=1.333] (-2,{5*pi/4},2)
+                    to[bend right=20] (0,{3*pi/2},2)
+                    to[bend left=20] (2,{7*pi/4},2)
+                    to[bend right=1.333] (2,{2*pi},0)
+                    to[bend left=1.333] (2,{9*pi/4},-2)
+                    to[bend left=20] (0,{5*pi/2},-2)
+                    to[bend right=20] (-2,{11*pi/4},-2)
+                    to[bend left=1.333] (-2,{12*pi/4},0)
+                    to[bend right=1.333] (-2,{13*pi/4},2)
+                    to[bend right=20] (0,{14*pi/4},2)
+                    -- (0,{14*pi/4},0)
+                ;
+    
+                \draw [orange,opacity=0.1,line width=3mm] plot[domain=-90:-45] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+                \draw [red,opacity=0.1,line width=3mm] plot[domain=-45:0] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+                \draw [blue,opacity=0.1,line width=3mm] plot[domain=0:215] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+                \draw [green!70!blue,opacity=0.1,line width=3mm] plot[domain=215:450] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+                \draw [purple,opacity=0.1,line width=3mm] plot[domain=450:630] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+    
+                \draw [yex,very thick] plot[domain=-90:-9] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+                \draw [yex,very thick,densely dashed] plot[domain=-9:102] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+                \draw [yex,very thick] plot[domain=102:630,samples=50,smooth] ({cos(\x)*(cos(90+\x/2)/2+1)},{\x*pi/180},{-sin(\x)*(cos(90+\x/2)/2+1)});
+            \end{scope}
+            \draw [semithick,|->] (3,0) -- (3.6,0);
+            \begin{scope}[xshift=6cm]
+                \draw [-stealth] (-2,0) -- (2,0) node[right]{$\R$};
+                \draw [-stealth] (0,-2) -- (0,2) node[above]{$i\R$};
+    
+                \draw [orange,opacity=0.1,line width=3mm] plot[domain=-90:-45] (\x:{cos(90+\x/2)/2+1});
+                \draw [red,opacity=0.1,line width=3mm] plot[domain=-45:0] (\x:{cos(90+\x/2)/2+1});
+                \draw [blue,opacity=0.1,line width=3mm] plot[domain=0:215] (\x:{cos(90+\x/2)/2+1});
+                \draw [green!70!blue,opacity=0.1,line width=3mm] plot[domain=215:450] (\x:{cos(90+\x/2)/2+1});
+                \draw [purple,opacity=0.1,line width=3mm] plot[domain=450:630] (\x:{cos(90+\x/2)/2+1});
+    
+                \draw [yex,very thick,decoration={
+                    markings,
+                    mark=at position 0.2 with \arrow{>}
+                },postaction={decorate}] plot[domain=-90:630,samples=50,smooth] (\x:{cos(90+\x/2)/2+1});
+            \end{scope}
+        \end{tikzpicture}
+        \caption{Motivating the winding number.}
+        \label{fig:windingNumberMotivation}
+    \end{figure}
+    \begin{itemize}
+        \item If a path $\gamma$ wraps around 0 more than once, we can break it into segments that individually have logarithms.
+        \item Then, we find that
+        \begin{equation*}
+            \int_\gamma\frac{\dd{z}}{z} = \sum\int_{\gamma_i}\frac{\dd{z}}{z}
+            = \text{total change of angle}
+        \end{equation*}
+        \item This leads into the following definition.
+    \end{itemize}
+    \item \textbf{Winding number} (of $\gamma$ about $z_0$): The number of times the curve $\gamma$ wraps around $z_0$ counterclockwise. \emph{Given by}
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma\frac{\dd{z}}{z-z_0}
+    \end{equation*}
+    \item Winding number examples.
+    \begin{figure}[H]
+        \centering
+        \begin{subfigure}[b]{0.25\linewidth}
+            \centering
+            \begin{tikzpicture}
+                \fill circle (2pt);
+    
+                \draw [yex,very thick,xscale=1.3,decoration={
+                    markings,
+                    mark=at position 0.2 with \arrow{>}
+                },postaction={decorate}] plot[domain=-90:630,samples=50,smooth] (\x:{(cos(45+\x/2)/3+1)});
+            \end{tikzpicture}
+            \caption{$\text{wn}=2$.}
+            \label{fig:windingNumberExa}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.25\linewidth}
+            \centering
+            \begin{tikzpicture}
+                \fill circle (2pt);
+    
+                \path (0,0) -- (0,{-4/3});
+                \draw [yex,very thick,decoration={
+                    markings,
+                    mark=at position 0.6 with \arrow{<}
+                },postaction={decorate}] circle (1cm);
+            \end{tikzpicture}
+            \caption{$\text{wn}=-1$.}
+            \label{fig:windingNumberExb}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.25\linewidth}
+            \centering
+            \begin{tikzpicture}
+                \fill circle (2pt);
+    
+                \draw [
+                    yex,very thick,xscale=1.2,
+                    decoration={
+                        markings,
+                        mark=at position 0.97 with \arrow{>}
+                    },postaction={decorate}
+                ]
+                    (0,0.6)
+                    to[out=170,in=180,looseness=2] (0,-0.7)
+                    to[out=0,in=0,looseness=2] (0,0.2)
+                    to[out=180,in=110,looseness=1.1] (-0.5,-0.5)
+                    to[out=-70,in=0] (-0.7,-0.7)
+                    to[out=180,in=180,in looseness=2] (0,0.4)
+                    to[out=0,in=0,looseness=2] (0,{-4/3})
+                    to[out=180,in=180,looseness=2] (0,1)
+                    to[out=0,in=90,in looseness=0.5] (1,0.5)
+                    to[out=-90,in=-10,out looseness=0.7] cycle
+                ;
+            \end{tikzpicture}
+            \caption{$\text{wn}=0$.}
+            \label{fig:windingNumberExc}
+        \end{subfigure}
+        \caption{Winding number examples.}
+        \label{fig:windingNumberEx}
+    \end{figure}
+    \item Reformulation: A branch of the logarithm exists on $U$ if and only if for all $\gamma\subset U$, the winding number of $\gamma$ about the origin is 0.
 \end{itemize}
 
 
