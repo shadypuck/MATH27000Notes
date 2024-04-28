@@ -1,0 +1,228 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{5}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{Meromorphic Functions and M\"{o}bius Transformations}
+\begin{itemize}
+    \item \marginnote{4/23:}Last time.
+    \begin{itemize}
+        \item We defined the Riemann sphere
+        \begin{equation*}
+            \hat{\C} := \C\cup\{\infty\}
+        \end{equation*}
+        \item When is a function $f:\hat{\C}\to\C$ "holomorphic at $\infty$?"
+        \begin{itemize}
+            \item Liouville: $f\in\mO(\hat{\C})$ is constant.
+        \end{itemize}
+        \item $f$ is a meromorphic function on $U\subset\hat{\C}$ if and only if $f$ is a holomorphic map to $\hat{\C}$.
+        \item $f^{-1}(\infty)$ gives the set of poles.
+    \end{itemize}
+    \item Note for people doing residues on their final project.
+    \begin{itemize}
+        \item Recall that if $f:U\to\hat{\C}$ is meromorphic, then it has a Laurent series around each pole $p$.
+        \item Essentially,
+        \begin{equation*}
+            f(z) = \frac{1}{(z-p)^k}h(z)
+        \end{equation*}
+        \begin{itemize}
+            \item $h$ is holomorphic.
+            \item $h(p)\neq 0$.
+            \item $k$ is the order of the pole.
+        \end{itemize}
+        \item Since $h$ is holomorphic, it has a power series expansion
+        \begin{equation*}
+            h(z) = \sum_{i=0}^\infty a_i(z-p)^i
+        \end{equation*}
+        with $a_0\neq 0$.
+        \item Thus,
+        \begin{align*}
+            f(z) &= \sum_{i=0}^\infty a_i(z-p)^{i-k}\\
+            &= \sum_{i=-k}^\infty a_i(z-p)^i
+        \end{align*}
+        \item This allows us to define the \textbf{principal part}.
+    \end{itemize}
+    \item \textbf{Principal part} (of a Laurent series): The sum of the terms with a negative exponent.
+    \item TPS: Suppose you have a pole $p$ in a disk $D$ within the radius of convergence of the Laurent series. Compute
+    \begin{equation*}
+        \int_{\partial D}f\dd{z}
+    \end{equation*}
+    \begin{itemize}
+        \item Because we are in the radius of convergence of the Laurent series, the series converges locally absolutely uniformly, so we can switch the sum and the integral in the following and evaluate.
+        \begin{align*}
+            \int_{\partial D}f\dd{z} &= \int_{\partial D}\sum_{j=-k}^\infty a_j(z-p)^j\dd{z}
+                = \sum_{j=-k}^\infty\int_{\partial D}a_j(z-p)^j\dd{z}\\
+            &= \sum_{\substack{j=-k\\j\neq -1}}^\infty 0+\int_{\partial D}\frac{a_{-1}}{z-p}\dd{z}
+                = a_{-1}\cdot 2\pi i
+        \end{align*}
+        \item This $a_{-1}$ coefficient is clearly special, so it gets a special name.
+    \end{itemize}
+    \item \textbf{Residue} (of $f$ at $p$): The $a_{-1}$ coefficient in the Laurent expansion of $f$ about a pole $p$. \emph{Denoted by} $\bm{\res_p(f)}$. \emph{Given by}
+    \begin{equation*}
+        \res_p(f) := a_{-1}
+    \end{equation*}
+    \item Corollary: $f$ has a primitive on $D$ (containing a single pole $p$) iff
+    \begin{equation*}
+        \res_p(f) = 0
+    \end{equation*}
+    \begin{proof}
+        This goes back to the proposition from the 3/28 class. If the residue is zero, then the closed loop integral is zero, so by homotopy, $f$ has a primitive on the disk?? And if it has a primitive, then it's holomorphic on $D$ and therefore the residue is zero.
+    \end{proof}
+    \item Theorem: Every meromorphic function $f:\hat{\C}\to\hat{\C}$ (by which we mean a meromorphic function on $\C$ that is either bounded or with a pole at $\infty$) is rational, i.e., $f=p/q$.
+    \begin{proof}
+        % Claim 1: The set of poles of $f$ (including $\infty$) is finite.
+        % \begin{proof}
+        %     The set of poles is discrete. We know this for the following reason. $1/f$ has zeroes at the poles, and we know that zeroes must be discrete (otherwise $f$ would be constant and zero).
+            
+        %     It is also compact (because it lives in $\hat{\C}$). Discrete + compact implies finite.
+        % \end{proof}
+        % Claim 2: Write $f$ minus the sum of the principal parts of all the poles of $f$, and call this $g$.
+        % \begin{proof}
+        %     The principal part is just what the pole looks like locally. But it is a function in its own right! Thus, we can subtract it off just like any other function. Now $g$ is not defined everywhere, but it has an analytic continuation to everywhere.
+            
+        %     The principal part about $p$ only has a pole at $p$, so we \emph{can} subtract it off without introducing any new poles.
+
+        %     How do we subtract a pole at $\infty$? If $f$ has a pole at $\infty$, then it is a polynomial. But $f$ having a pole at $\infty$ is equivalent to $f(1/z)$ having a pole at 0. So just take the principal part of $f(1/z)$ and then switch out all the $z$'s for $1/z$'s again and subtract that.
+        % \end{proof}
+        % Claim 3: $g$ is holomorphic on $\hat{\C}$, and therefore is constant.
+
+        We will prove this theorem by dividing it into three consecutive claims.
+        \begin{enumerate}
+            \item The set of poles of $f$ (including $\infty$) is finite.
+            \item Write $f$ minus the sum of the principal parts of all the poles of $f$, and call this $g$.
+            \item $g$ is holomorphic on $\hat{\C}$, and therefore is constant.
+        \end{enumerate}
+        Once we have Claim 3, we will know that $f=c+\sum\text{principal parts}$, where all principal parts are rational, meaning that $f$ is rational! Let's begin.\par
+        For claim 1, we will argue that the set of poles of $f$ is discrete and compact because it is a result of set theory that discrete compact sets are finite. To confirm that the set of poles is discrete, observe that $1/f$ has zeroes where $f$ has poles, and we know that these zeroes must be discrete because otherwise $1/f$ would be constant and zero (think power series). To confirm that the set of poles is also compact, observe that it lives in $\hat{\C}$ (which is compact) and is a closed set (since its discrete, it cannot be open).\par
+        For claim 2, it may seem unintuitive that we can subtract off a bunch of partial Laurent series about different points from a function defined more broadly than a Laurent series around a certain pole. However, observe that the principal part of a Laurent expansion around a certain pole is just is a function in its own right! Thus, we can subtract it off just like any other function. After doing this, $g$ is not defined everywhere, but it has an analytic continuation (claim 3) to everywhere, as desired. Note that the principal part of a Laurent expansion about $p$ only has a pole at $p$, so we \emph{can} subtract it off without introducing any new poles. Additionally, note that we can subtract off a pole at $\infty$ as follows. Essentially, if $f$ has a pole at $\infty$, then it is a polynomial. But $f$ having a pole at $\infty$ is equivalent to $f(1/z)$ having a pole at 0. So just take the principal part of the Laurent expansion of $f(1/z)$ at zero and then switch out all the $z$'s for $1/z$'s again and subtract that.
+    \end{proof}
+    \item To get a global picture of the poles of $f$, we need a global picture of the zeroes of $1/f$.
+    \item TPS.
+    \begin{enumerate}
+        \item For $k\in\N$, draw $x\mapsto x^k$ on $\R$. For $y$ near 0, how many preimages does $y$ have?
+        \begin{itemize}
+            \item If $k$ is odd, $y$ always has one preimage.
+            \item If $k$ is even, then $y>0$ has two preimages, $y=0$ has one preimage, and $y<0$ has no preimages.
+        \end{itemize}
+        \item Draw what happens to the sector $\{z\mid z\in r\e[i\theta],\ \theta\in(0,2\pi/k]\}$ under $z\mapsto z^k$.
+        \begin{itemize}
+            \item Maps to the circle of radius $r^k$ bijectively.
+            \item Additionally, the interior of the sector goes to the disk minus the slit along the positive real axis.
+        \end{itemize}
+        \item Do 1, but now for $z\mapsto z^k$ in $\C$.
+        \begin{itemize}
+            \item For $y\neq 0$, there are $k$ distinct roots of $y$.
+        \end{itemize}
+        \item Draw a "global" picture of $z\mapsto z^k$.
+        \begin{itemize}
+            \item For $z\mapsto z^2$, for instance, we cut $\C$ into an upper half plane and lower half plane and wrap them both around into circles.
+            \item \emph{See class pictures}.
+        \end{itemize}
+    \end{enumerate}
+    \item Last time.
+    \begin{itemize}
+        \item Proposition: If $X$ is a Riemann surface and $f:X\to\hat{\C}$ is meromorphic, then $f$ is onto.
+    \end{itemize}
+    \item Now we'll do a bit on M\"{o}bius transformations.
+    \begin{itemize}
+        \item One of Calderon's favorite topics; there will be a bit on the next problem set about these.
+    \end{itemize}
+    \item What we just saw is that if $p(z)=z^n$, then $\# p^{-1}(w)=n$\footnote{Recall that $\#$ denotes cardinality; in this case, cardinality of the preimage.} for $w$ near zero but nonzero.
+    \begin{itemize}
+        \item If $w=0$, then you still get $n$ preimages if you count with multiplicity.
+    \end{itemize}
+    \item If $p(z)$ is a general polynomial of degree $n$, we also know (by the FTA) that $\# p^{-1}(0)=n$.
+    \begin{itemize}
+        \item Moreover, for all $w\in\hat{\C}$, $\# p^{-1}(w)=n$ with multiplicity because $p(z)-w$ has $n$ roots.
+    \end{itemize}
+    \item Let $f(z)=p(z)/q(z)$ be a rational function, such as $z/(z-3)^2$.
+    \begin{itemize}
+        \item Here, $\# f^{-1}(\infty)=2$.
+        \item Here as well, $f^{-1}(0)=1$ on $\C$ and $=2$ on $\hat{\C}$.
+    \end{itemize}
+    \item \textbf{Degree} (of a rational function): The natural number defined as follows, where $f=p/q$ is a rational function representated with $p,q$ coprime. \emph{Denoted by} $\bm{\deg(f)}$. \emph{Given by}
+    \begin{equation*}
+        \deg(f) := \max(\deg(p),\deg(q))
+    \end{equation*}
+    \item Theorem: If $f=p/q$, then for all $w\in\hat{\C}$, $\# f^{-1}(w)=\deg(f)$ when counted with multiplicity.
+    \begin{proof}
+        Follows from the FTA. Proof in the notes.
+    \end{proof}
+    \item Example:
+    \begin{itemize}
+        \item If $f(z)=z/(z-3)^2$, then we count 3 twice with multiplicity (giving a pole at $\infty$). We can also count $0,\infty$ as two distinct poles that give us zero.
+        \item This just reiterates the previous example.
+    \end{itemize}
+    \item Holomorphic symmetries.
+    \begin{itemize}
+        \item What are all biholomorphisms?
+        \item They are kind of like change of coordinate maps.
+        \item Can we have entire biholomorphisms? Can we have biholomorphisms $f:\hat{\C}\to\hat{\C}$.
+        \item $\Aut(\C)=\Bihol(\C)$. On Thursday, we'll prove that
+        \begin{equation*}
+            \Bihol(\C) = \{a\mapsto az+b\}
+        \end{equation*}
+        \item For the other one,
+        \begin{equation*}
+            \Bihol(\hat{\C}) = \left\{ z\mapsto\frac{az+b}{cz+d}\mid a,b,c,d\in\C,\ ad-bc\neq 0 \right\}
+        \end{equation*}
+        \begin{itemize}
+            \item The condition $ad-bc\neq 0$ is the same as saying that the map is nonconstant.
+            \item This is the set of fractional linear transformations.
+            \item It is isomorphic to
+            \begin{equation*}
+                \PGL_2(\C) = \left\{
+                    \begin{pmatrix}
+                        a & b\\
+                        c & d\\
+                    \end{pmatrix}
+                    \mid \det\neq 0
+                \right\}
+            \end{equation*}
+            \begin{itemize}
+                \item This is the projective linear group.
+                \item This group acts on the projective linear space $\mathbb{P}^1(\C)=\hat{\C}$ (ask Calderon later??).
+            \end{itemize}
+        \end{itemize}
+        \begin{proof}
+            Let $f:\hat{\C}\to\hat{\C}$ be a biholomorphism. Thus, it is bijective and hence $\deg(f)=1$. Additionally, it is meromorphic and hence rational map. But a rational map with degree 1 is just a map of the given kind!
+        \end{proof}
+    \end{itemize}
+    \item A different geometric way of thinking about these \textbf{M\"{o}bius transformations}: Circle inversion.
+    \begin{itemize}
+        \item This is the map $r\e[i\theta]\mapsto r^{-1}\e[i\theta]$. In terms of $z$, this map is $z\mapsto 1/\bar{z}$.
+        \item This map is not holomorphic. In fact, it is \textbf{antiholomorphic} and \textbf{anticonformal}.
+        \item This is the projecting up and down map.
+        \item It can also be thought of as reflecting over the equator.
+        \item $\Mob^\pm$ (the \textbf{extended M\"{o}bius group}) is the group generated by circle inversions.
+        \item $\Mob$ is the orientation-preserving subgroup.
+    \end{itemize}
+    \item Four examples.
+    \begin{itemize}
+        \item Scaling $z\mapsto rz$ where $r\in\R$.
+        \item Translation.
+        \item Rotation.
+        \item One last one.
+    \end{itemize}
+    \item Theorem: $\Mob=\Bihol(\hat{\C})\cong\PGL_2(\C)$.
+    \begin{proof}
+        $\subset$: Obvious, once you've digested the definitions. This is just because circle inversions are anti-conformal. Two inversions implies conformal, which is equivalent to biholomorphic.\par
+        $\supset$: We have algebraically that
+        \begin{equation*}
+            \frac{az+b}{cz+d} = \frac{bc-ad}{c^2}\left( z+\frac{d}{c} \right)^{-1}+\frac{a}{c}
+        \end{equation*}
+        where we have two translations, an inversion, and a scaling/rotation.
+    \end{proof}
+\end{itemize}
+
+
+
+
+\end{document}
