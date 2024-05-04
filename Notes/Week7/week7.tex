@@ -1,0 +1,402 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{6}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{Generalized Cauchy Theorems}
+\begin{itemize}
+    \item \marginnote{4/30:}Questions.
+    \begin{itemize}
+        \item PSet 4, QA.4: III.5.1 instead of II.5.1?
+        \begin{itemize}
+            \item Yep, should be Chapter 3, not Chapter 2.
+        \end{itemize}
+        \item PSet 4, QB.4: "a holomorphic branch of the logarithm exists on $U$" or on $f(U)$?
+        \begin{itemize}
+            \item Yep, should be $f(U)$.
+            \item "Which one works, Steven?"
+        \end{itemize}
+    \end{itemize}
+    \item Recall.
+    \begin{itemize}
+        \item The winding number of a curve $\gamma$ about a point $z_0\in\C$ is
+        \begin{equation*}
+            \wn(\gamma,z_0) := \frac{1}{2\pi i}\int_\gamma\frac{1}{z-z_0}\dd{z}
+        \end{equation*}
+        \item We can also compute the winding number geometrically (see Figure \ref{fig:windingNumberEx}).
+    \end{itemize}
+    \item Additional properties of the winding number.
+    \begin{itemize}
+        \item The winding number is invariant under homotopies of $\gamma$.
+        \item Compute by counting how many times you pass a ray from $z_0$ going counterclockwise!
+        \begin{itemize}
+            \item Example: "I'm pointing in this direction, then I rotate, and eventually I point in this direction again, then I rotate, and eventually I'm back where I started so it's winding number 2."
+        \end{itemize}
+        \item We can also think of jumping to a higher plane on the infinity spiral every time we pass the ray.
+    \end{itemize}
+    \item TPS: Compute the winding number of $\gamma$ about the points in Figure \ref{fig:windingNumberTPS}.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style={black}
+        ]
+            \footnotesize
+            \draw [yex,thick,decoration={
+                markings,
+                mark=at position 0.005 with \arrow{>},
+                mark=at position 0.2 with \arrow{>},
+                mark=at position 0.6 with \arrow{>},
+                mark=at position 0.77 with \arrow{>},
+                mark=at position 0.91 with \arrow{>}
+            },postaction={decorate}] (0,0.7)
+                to[out=180,in=180,in looseness=2] (0.5,-1)
+                to[out=0,in=0,looseness=1.3] (0,1.2)
+                to[out=180,in=180,looseness=1.4] (-0.3,-2)
+                to[out=0,in=-20,looseness=2] (0.4,1.5)
+                to[out=160,in=0] (-1,1.8)
+                to[out=180,in=0] (-3.5,-1.7)
+                to[out=180,in=180,looseness=1.5] (-3.6,0)
+                to[out=0,in=180] (-1.2,-1)
+                to[out=0,in=0,out looseness=3] cycle
+            ;
+            \fill [rex] (-3.5,-0.8) circle (2pt) node[left=1pt]{$a$};
+            \fill [rex] (0,0.2) circle (2pt) node[above=1pt]{$b$};
+            \fill [rex] (-0.9,-0.1) circle (2pt) node[below=1pt]{$c$};
+            \fill [rex] (0.9,-0.3) circle (2pt) node[above=1pt]{$d$};
+            \fill [rex] (-0.8,0.5) circle (2pt) node[below=1pt]{$e$};
+            \fill [rex] (0.6,0.7) circle (2pt) node[below right=-1pt]{$f$};
+            \fill [rex] (0.1,-0.2) circle (2pt) node[below=1pt]{$g$};
+        \end{tikzpicture}
+        \caption{Winding number regions.}
+        \label{fig:windingNumberTPS}
+    \end{figure}
+    \begin{itemize}
+        \item We get
+        \begin{align*}
+            \wn(\gamma,a) &= -1&
+            \wn(\gamma,b) &= 3&
+            \wn(\gamma,c) &= 2
+        \end{align*}
+        \begin{align*}
+            \wn(\gamma,d) &= 2&
+            \wn(\gamma,e) &= 2&
+            \wn(\gamma,f) &= 2&
+            \wn(\gamma,g) &= 3
+        \end{align*}
+        \item Do we notice any patterns?
+        \begin{itemize}
+            \item Connected regions of the plane appear to yield the same winding number!
+            \item We formalize this notion via the following lemma.
+        \end{itemize}
+    \end{itemize}
+    \item Lemma: $\wn(\gamma,z_0)$ is constant on components of $\C\setminus\im(\gamma)$. It is also 0 on the unbounded component.
+    \begin{proof}
+        We address the two claims sequentially.\par
+        Claim 1: Treating $z_0$ as an argument, $\wn(\gamma,z_0)$ is a function from $\C\setminus\im(\gamma)$ to $\Z$ defined by
+        \begin{equation*}
+            z_0 \mapsto \frac{1}{2\pi i}\int_\gamma\frac{\dd{z}}{z-z_0}
+        \end{equation*}
+        This is a continuous function into a discrete space and therefore is constant.\par
+        Claim 2: Let $z_0$ get very big. Then we can make
+        \begin{equation*}
+            \left| \frac{1}{2\pi i}\int_\gamma\frac{\dd{z}}{z-z_0} \right|
+        \end{equation*}
+        arbitrarily small. But an integer that can be made arbitrarily small is just zero.
+    \end{proof}
+    \begin{itemize}
+        \item This is a complex analytic proof of a topological claim.
+        \item Justifying that the codomain of the winding number function is the integers: We've done this heuristically using homotopy, but we could formalize it, too.
+    \end{itemize}
+    \item We now move onto today's main topic: The proof of the (very) general Cauchy Integral Theorem.
+    \item First, we need a definition.
+    \item \textbf{Simply connected} (domain): A domain $U\subset\C$ such that $\wn(\gamma,z_0)=0$ for all $\gamma\subset U$ and $z\notin U$.
+    \begin{itemize}
+        \item There are many other definitions, too.
+        \begin{itemize}
+            \item Topology: The \textbf{fundamental group} of $U$ is zero.
+            \item Removing any \textbf{arc} (line segment across the domain) from $U$ turns it into a disconnected set.
+            \item For all arcs $\delta_1,\delta_2$ with the same endpoints, $\delta_1$ and $\delta_2$ are homotopic.
+        \end{itemize}
+        \item The last definition above will be particularly useful for our purposes, as we'll see shortly.
+        \item But these are all formal definitions; what can we think about intuitively?
+        \begin{itemize}
+            \item A good first thing to think about is a blob in the plane.
+            \item But the interior of a fractal domain would also count.
+            \item A square minus a slit at 1, $1/2$, $1/3$, \dots is also simply connected (though not path connected).
+        \end{itemize}
+    \end{itemize}
+    \item Jordan curve theorem: Suppose $\gamma:S^1\to\C$ is a continuous injection. Then $\gamma$ bounds a disk.
+    \begin{itemize}
+        \item Consequence: A domain that is simply connected is homeomorphic to a disk.
+        \item This appears stupidly obvious, but it was only rigorously proved in the early 1910s.
+        \begin{itemize}
+            \item The issue is that we don't really know what \emph{continuous} means.
+            \item If $\gamma$ is $C^1$, this is easy.
+        \end{itemize}
+    \end{itemize}
+    \item The two generalizations and their proofs.
+    \begin{itemize}
+        \item The proof of generalization 1 is very simple, straightforward, and clever.
+        \item The proof of generalization 2 is much more general and uses almost everything we've done.
+    \end{itemize}
+    \item We are now ready to state and prove a first generalization of the CIT.
+    \item Cauchy Integral Theorem: Suppose that $U$ is simply connected and $f\in\mO(U)$. Then $\int_\gamma f\dd{z}=0$ for any closed loop $\gamma$ in $U$.
+    \begin{proof}
+        Let $\gamma$ be an arbitrary closed loop in $U$. Because any two arcs with the same endpoints are homotopic, $\gamma$ is homotopic to the constant path $\tilde{\gamma}:[0,1]\to\{\gamma(0)\}$. This constant path has the property that
+        \begin{equation*}
+            \int_{\tilde{\gamma}}f\dd{z} = \int_0^1f(\tilde{\gamma}(t))\tilde{\gamma}'(t)\dd{t}
+            = \int_0^1f(\tilde{\gamma}(t))\cdot 0\dd{t}
+            = 0
+        \end{equation*}
+        Since integrals are the same for homotopic paths, it follows that
+        \begin{equation*}
+            \int_\gamma f\dd{z} = \int_{\tilde{\gamma}}f\dd{z}
+            = 0
+        \end{equation*}
+        as desired.
+    \end{proof}
+    \item We now build up to an even more general version of the CIT.
+    \begin{figure}[h!]
+        \centering
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}
+                \filldraw [thick,draw=blx,fill=blz,decoration={
+                    markings,
+                    mark=at position 0.25 with \arrow{>}
+                },postaction=decorate] (-0.5,-2)
+                    to[out=0,in=-90] (0,-1.5)
+                    to[out=90,in=180] (0.2,-1.2)
+                    to[out=0,in=-90] (1,-0.3)
+                    to[out=90,in=-60] (0.7,0.5)
+                    to[out=120,in=-120] (0.7,0.8)
+                    to[out=60,in=0] (0.2,1.5)
+                    to[out=180,in=20] (-0.5,0.3)
+                    to[out=-160,in=180,out looseness=1.5] cycle
+                ;
+                \filldraw [thick,draw=blx,fill=blz,rotate=-10,decoration={
+                    markings,
+                    mark=at position 0 with \arrow{>}
+                },postaction=decorate] (-1.5,0.5) ellipse (4mm and 5mm);
+            \end{tikzpicture}
+            \caption{Separate oriented domains.}
+            \label{fig:nulhomExa}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}
+                \footnotesize
+                \filldraw [thick,draw=yex,fill=yez,rotate=-5,decoration={
+                    markings,
+                    mark=at position 0 with \arrow{>}
+                },postaction=decorate] ellipse (1.3cm and 1.4cm);
+                \filldraw [thick,draw=yex,fill=white,rotate=-5,decoration={
+                    markings,
+                    mark=at position 0 with \arrow{<}
+                },postaction=decorate] (0,-0.1) ellipse (0.7cm and 0.8cm);
+    
+                \fill [rex] (0,-0.15) circle (2pt) node[black,above right=-1pt]{$d$};
+            \end{tikzpicture}
+            \caption{Nested curves.}
+            \label{fig:nulhomExb}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\linewidth}
+            \centering
+            \begin{tikzpicture}[
+                every node/.style=black
+            ]
+                \footnotesize
+                \filldraw [thick,draw=orx,fill=orz,decoration={
+                        markings,
+                        mark=at position 0.45 with \arrow{>}
+                    },postaction=decorate] (-2,-0.2)
+                    to[out=-90,in=173,out looseness=1.4] (-0.3,-1.3)
+                    to[out=-7,in=180,out looseness=1.5] (1.5,-1.7)
+                    to[out=0,in=-90] (2.7,-0.5)
+                    to[out=90,in=0] (0,1.2)
+                    to[out=180,in=90] cycle
+                ;
+                \filldraw [thick,draw=orx,fill=white,rotate around={-40:(-1,0.2)},decoration={
+                    markings,
+                    mark=at position 0.9 with \arrow{<}
+                },postaction=decorate] (-1,0.2) ellipse (4mm and 5mm);
+                \filldraw [thick,draw=orx,fill=white,rotate around={-10:(0.15,-0.5)},decoration={
+                    markings,
+                    mark=at position 0.55 with \arrow{<}
+                },postaction=decorate] (0.15,-0.5) ellipse (5mm and 6mm);
+                \filldraw [thick,draw=orx,fill=white,rotate around={5:(1.7,-0.1)},decoration={
+                    markings,
+                    mark=at position 0.65 with \arrow{<}
+                },postaction=decorate] (1.7,-0.1) ellipse (5mm and 5.5mm);
+    
+                \fill [rex] (-1.1,0.1) circle (2pt) node[below right=-1pt]{$a$};
+                \node at (-0.8,0.3) {$\gamma_4^{}$};
+                \fill [rex] (0,-0.6) circle (2pt) node[below right=-1pt]{$b$};
+                \node at (0.4,-0.4) {$\gamma_3^{}$};
+                \fill [rex] (1.6,-0.2) circle (2pt) node[below right=-1pt]{$c$};
+                \node at (1.9,0.1) {$\gamma_2^{}$};
+                \node at (2.6,-1.5) {$\gamma_1^{}$};
+            \end{tikzpicture}
+            \caption{Multiple nested curves.}
+            \label{fig:nulhomExc}
+        \end{subfigure}
+        \caption{Nulhomologous multicurve examples.}
+        \label{fig:nulhomEx}
+    \end{figure}
+    \begin{itemize}
+        \item Suppose $D\subset\C$ is a bounded domain, and $\partial D$ is a union of disjoint simple closed curves (SCCs).
+        \item Let $\partial\vec{D}$ be the union of the boundaries, oriented so that $D$ is on the left.
+        \begin{itemize}
+            \item This is similar to how we orient curves when we're applying Stokes' Theorem.
+            \item Here as well, the outer one goes counterclockwise and the inner one(s) goes clockwise.
+        \end{itemize}
+        \item More generally, we define a the concept of a \textbf{multicurve}.
+        \item Using this definition, we define the \textbf{integral} of $f$ over a multicurve.
+        \begin{itemize}
+            \item This definition allows us to compute the winding number of $\Gamma$ about $z_0$.
+        \end{itemize}
+        \item Lastly, we define a special kind of multicurve called a \textbf{nulhomologous} multicurve.
+        \begin{itemize}
+            \item In Figure \ref{fig:nulhomExc}, $\Gamma=\gamma_1+\gamma_2+\gamma_3+\gamma_4$ is nulhomologous.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Multicurve}: A formal sum of SCCs $\gamma_i$ multiplied by coefficients $c_i\in\C$. \emph{Denoted by} $\bm{\Gamma}$. \emph{Given by}
+    \begin{equation*}
+        \Gamma = \sum c_i\gamma_i
+    \end{equation*}
+    \item \textbf{Integral} (of $f$ over $\Gamma$): The path integral defined as follows. \emph{Denoted by} $\bm{\int_\Gamma f\,\textbf{d}z}$. \emph{Given by}
+    \begin{equation*}
+        \int_\Gamma f\dd{z} := \sum_{i=0}^nc_i\int_{\gamma_i}f\dd{z}
+    \end{equation*}
+    \item \textbf{Nulhomologous} ($\Gamma$ in $U$): A multicurve $\Gamma$ in a domain $U$ for which $\Gamma=\partial\vec{D}$ for $D$ as in Figure \ref{fig:nulhomEx}. \emph{Also known as} \textbf{homologous} ($\Gamma$ in $U$ to 0).
+    \item TPS: Compute $\wn(\partial\vec{D},z_0)$ for all $z_0\notin D$ for each of the domains $D$ in Figure \ref{fig:nulhomEx}.
+    \begin{itemize}
+        \item $\wn(\partial\vec{D},z_0)=0$ because we always get either nothing or a $+1$ and $-1$ and some zeroes.
+    \end{itemize}
+    \item Lemma: If $\Gamma$ is nulhomologous in $U$, then for all $z\notin U$, $\wn(\Gamma,z)=0$.
+    \begin{itemize}
+        \item The converse is not true!
+        \begin{itemize}
+            \item Example: If $U=\C^*$ and $\gamma_1,\gamma_2$ are intersecting closed curves (e.g., the unit circle and the unit circle translated half a unit to the right), then $\gamma_1+\gamma_2$ is still nulhomologous even though it doesn't bound a domain.
+        \end{itemize}
+        \item The condition "for all $z\notin U$, $\wn(\Gamma,z)=0$" is our general definition of nulhomologous in $U$; what we said earlier was just a precursor definition.
+    \end{itemize}
+    \item Example.
+    \begin{figure}[h!]
+        \centering
+        \begin{tikzpicture}[scale=1.3]
+            \filldraw [thick,draw=orx,fill=orz,decoration={
+                markings,
+                mark=at position 0.25 with \arrow{>}
+            },postaction=decorate] (0.5,-0.4) circle (1.3cm);
+            \filldraw [thick,draw=orx,fill=white,decoration={
+                markings,
+                mark=at position 0.25 with \arrow{<}
+            },postaction=decorate] (0,0) circle (3mm);
+            \filldraw [thick,draw=orx,fill=white,decoration={
+                markings,
+                mark=at position 0.25 with \arrow{<}
+            },postaction=decorate] (1,0) circle (3mm);
+            \filldraw [thick,draw=orx,fill=white,decoration={
+                markings,
+                mark=at position 0.63 with \arrow{<}
+            },postaction=decorate] (-0.3,-0.8)
+                to[out=-90,in=-90] (1.3,-0.8)
+                to[out=90,in=0,in looseness=2] (0.5,-1)
+                to[out=180,in=90,out looseness=2] cycle
+            ;
+    
+            \node [rex,label={[yshift=2mm]below:\footnotesize 0}] at (0,0) {$*$};
+            \node [rex,label={[yshift=2mm]below:\footnotesize 1}] at (1,0) {$*$};
+        \end{tikzpicture}
+        \caption{Nulhomologous multicurve in a punctured domain.}
+        \label{fig:nulhomPuncture}
+    \end{figure}
+    \begin{itemize}
+        \item Let
+        \begin{equation*}
+            f(z) = \frac{\sin(1/z)}{z-1}
+        \end{equation*}
+        \item Then $f\in\mO(\C\setminus\{0,1\})$.
+        \item An example of a nulhomologous multicurve over which we could integrate $f$ is as follows.
+    \end{itemize}
+    \item We are now ready for the statement and proof of the most general version of the CIT and CIF we'll see in this course.
+    \item Suppose $U$ is any domain, $\Gamma\subset U$ is nulhomologous, and $f\in\mO(U)$. Then:
+    \begin{enumerate}
+        \item General CIT: We have that
+        \begin{equation*}
+            \int_\Gamma f\dd{z} = 0
+        \end{equation*}
+        \item General CIF: For all $z\in U$ and not in $\im(\Gamma)$,
+        \begin{equation*}
+            \wn(\Gamma,z)\cdot f(z) = \frac{1}{2\pi i}\int_\Gamma\frac{f(\zeta)}{\zeta-z}\dd\zeta
+        \end{equation*}
+    \end{enumerate}
+    \pagebreak
+    \item Discussion of the proof.
+    \begin{itemize}
+        \item We'll sketch the proof today.
+        \item Think back to the proof for star-shaped domains.
+        \item We proved the CIT by saying, "if it's true for triangles, then we win."
+        \begin{itemize}
+            \item Using triangles, we built a primitive and then invoked Goursat's Lemma.
+        \end{itemize}
+        \item We proved the CIF by first defining the helper function
+        \begin{equation*}
+            g(\zeta) =
+            \begin{cases}
+                \frac{f(\zeta)-f(z)}{\zeta-z} & \zeta\neq z\\
+                f'(z) & \zeta=z
+            \end{cases}
+        \end{equation*}
+        \begin{itemize}
+            \item Then we invoked the CIT to say
+            \begin{equation*}
+                \int_{\partial D}g\dd{z} = 0
+            \end{equation*}
+            \item The CIF then followed from this and the fact that
+            \begin{equation*}
+                \int_{\partial D}g\dd\zeta = \int_{\partial D}\frac{f(\zeta)}{\zeta-z}\dd\zeta-f(z)\underbrace{\int_{\partial D}\frac{1}{\zeta-z}\dd\zeta}_{2\pi i}
+            \end{equation*}
+        \end{itemize}
+        \item So can't we just replace all the $\partial D$'s with $\Gamma$'s in the above lines and call it a day?
+        \begin{itemize}
+            \item No, because there's no analogy for the CIT. In other words, there may not be a primitive.
+            \item Thus, we need to fix $\int_{\partial D}g\dd{z}=0$.
+        \end{itemize}
+        \item In sum, the idea of this proof is to prove the CIF and then simply get the CIT.
+        \item We'll have time to prove the CIF today, but probably will not to get to the CIT.
+    \end{itemize}
+    \item We are now ready to sketch the full proof in broad strokes.
+    \begin{proof}
+        Define $h:U\to\C$ by
+        \begin{equation*}
+            h(z) := \int_\Gamma g(\zeta,z)\dd\zeta
+        \end{equation*}
+        We want to show that $h(z)=0$. We can't do anything as nice as showing that it's a continuous map into a discrete space, but there is still a clever idea. First off, we can see that $h(z)\to 0$ as $z\to\infty$ in $U$. Essentially, as before, the denominator $\zeta-z$ gets really big so the first term gets really small and the second term has that $\wn(\Gamma,z)$ term which goes to 0. What we now need to show is that $h$ extends to an entire function so that we can make the denominator \emph{arbitrarily} large. This is where we use the assumption that $\Gamma$ is nulhomologous.\par
+        First, we will show that $h$ is continuous. We know that $g$ is continuous in $(\zeta,z)$ together. We have holomorphic in $\zeta$ for a fixed $z$.\footnote{There's a bit more detail in the notes, but not much.}\par
+        Next, we need to show that $h$ is holomorphic on $U$. We know that $h$ is holomorphic as long as $z\neq\zeta$. On the other hand, what if $\zeta=z$? We will invoke Morera's theorem.\footnote{There's a bit about the triangle integral condition in the notes.}\par
+        Last, we show that $h$ can be analytically continued outside of $U$. We know that on $U$,
+        \begin{equation*}
+            h(z) = \int\frac{f(\zeta)}{\zeta-z}\dd\zeta-f(z)\cdot 2\pi i\wn(\Gamma,z)
+        \end{equation*}
+        Outside of $U$, the second term disappears because $\Gamma$ is nulhomologous. Define
+        \begin{equation*}
+            h(z) := \int\frac{f(\zeta)}{\zeta-z}\dd\zeta
+        \end{equation*}
+        outside of $U$. Thus, we have two functions that agree on a patch, so we get analytic continuation.\par
+        From here, we have an entire function that converges to $0$ at $\infty$ (hence is bounded), so is constant by Liouville's theorem with value that converges to zero (hence is zero).\footnote{There is a bit on the CIT in the notes.}
+    \end{proof}
+\end{itemize}
+
+
+
+
+\end{document}

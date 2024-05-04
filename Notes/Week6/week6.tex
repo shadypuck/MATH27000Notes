@@ -629,9 +629,9 @@
         \end{equation*}
         \item This leads into the following definition.
     \end{itemize}
-    \item \textbf{Winding number} (of $\gamma$ about $z_0$): The number of times the curve $\gamma$ wraps around $z_0$ counterclockwise. \emph{Given by}
+    \item \textbf{Winding number} (of $\gamma$ about $z_0$): The number of times the curve $\gamma$ wraps around $z_0$ counterclockwise. \emph{Denoted by} $\bm{\wn(\gamma,z_0)}$. \emph{Given by}
     \begin{equation*}
-        \frac{1}{2\pi i}\int_\gamma\frac{\dd{z}}{z-z_0}
+        \wn(\gamma,z_0) := \frac{1}{2\pi i}\int_\gamma\frac{\dd{z}}{z-z_0}
     \end{equation*}
     \item Winding number examples.
     \begin{figure}[H]
@@ -641,12 +641,12 @@
             \begin{tikzpicture}
                 \fill circle (2pt);
     
-                \draw [yex,very thick,xscale=1.3,decoration={
+                \draw [yex,thick,xscale=1.3,decoration={
                     markings,
                     mark=at position 0.2 with \arrow{>}
                 },postaction={decorate}] plot[domain=-90:630,samples=50,smooth] (\x:{(cos(45+\x/2)/3+1)});
             \end{tikzpicture}
-            \caption{$\text{wn}=2$.}
+            \caption{$\wn=2$.}
             \label{fig:windingNumberExa}
         \end{subfigure}
         \begin{subfigure}[b]{0.25\linewidth}
@@ -655,12 +655,12 @@
                 \fill circle (2pt);
     
                 \path (0,0) -- (0,{-4/3});
-                \draw [yex,very thick,decoration={
+                \draw [yex,thick,decoration={
                     markings,
                     mark=at position 0.6 with \arrow{<}
                 },postaction={decorate}] circle (1cm);
             \end{tikzpicture}
-            \caption{$\text{wn}=-1$.}
+            \caption{$\wn=-1$.}
             \label{fig:windingNumberExb}
         \end{subfigure}
         \begin{subfigure}[b]{0.25\linewidth}
@@ -669,7 +669,7 @@
                 \fill circle (2pt);
     
                 \draw [
-                    yex,very thick,xscale=1.2,
+                    yex,thick,xscale=1.2,
                     decoration={
                         markings,
                         mark=at position 0.97 with \arrow{>}
@@ -687,7 +687,7 @@
                     to[out=-90,in=-10,out looseness=0.7] cycle
                 ;
             \end{tikzpicture}
-            \caption{$\text{wn}=0$.}
+            \caption{$\wn=0$.}
             \label{fig:windingNumberExc}
         \end{subfigure}
         \caption{Winding number examples.}
