@@ -1,0 +1,294 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{7}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{Counting Zeroes and Laurent Series}
+\begin{itemize}
+    \item \marginnote{5/7:}Announcements.
+    \begin{itemize}
+        \item PSet 5 posted, due next Friday.
+        \begin{itemize}
+            \item 10 problems (a few more than usual), but heavily computational so shouldn't be that bad.
+            \item After today's class, we'll have everything we need to do it.
+        \end{itemize}
+        \item Draft of final project report due this Friday.
+        \begin{itemize}
+            \item It doesn't need to be a full draft, but it should be a pretty well-fleshed-out outline. The more information we can give him, the better feedback he can give us.
+        \end{itemize}
+        \item Make sure to check out the Canvas post on final presentation scheduling.
+    \end{itemize}
+    \item Last time.
+    \begin{itemize}
+        \item We deduced the residue theorem from the general CIT.
+        \begin{itemize}
+            \item It states: Suppose $U$ is a domain, $S\subset U$ is a discrete (though not necessarily finite) set of singularities, $f\in\mO(U\setminus S)$, and $\Gamma=\sum c_i\gamma_i$ is nulhomologous in $U$ (though not necessarily nulhomologous in $U\setminus S$). Then
+            \begin{equation*}
+                \frac{1}{2\pi i}\int_\Gamma f\dd{z} = \sum_{s\in S}\wn(\Gamma,s)\res_sf
+            \end{equation*}
+        \end{itemize}
+        \item The residue of $f$ about $s$ is
+        \begin{equation*}
+            \res_sf = \frac{1}{2\pi i}\int_{\partial D}f\dd{z}
+        \end{equation*}
+        where $D$ is some little disk about $s$ (and only this $s\in S$).
+        \begin{itemize}
+            \item If $s$ is a pole, then $\res_sf$ is also equal to the $a_{-1}$ coefficient of the Laurent expansion.
+        \end{itemize}
+        \item What the residue theorem gets us.
+        \begin{itemize}
+            \item Lets us compute integrals over complicated paths.
+            \begin{itemize}
+                \item We get to work with Laurent series instead of integrals, which is easier.
+            \end{itemize}
+            \item Lets us compute sums, as in the Basel problem.
+            \begin{itemize}
+                \item We choose a function, introduce the residue, and express the sum in terms of the integral.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    \item Today.
+    \begin{itemize}
+        \item \textbf{The argument principle}: A theoretical (not practical) ramification of the residue theorem.
+        \item Talking a bit more about essential singularities.
+    \end{itemize}
+    \item Consider the function $f'/f$, where $f$ is either holomorphic or meromorphic on $U$.
+    \begin{itemize}
+        \item Another way to think about this function is as the derivative of $\log f$.
+        \item We want to investigate the singularities of $f'/f$.
+        \item Suppose $f$ has a zero of order $k$ at $s$.
+        \begin{itemize}
+            \item Then locally, $f(z)=(z-s)^kg(z)$ where $g(s)\neq 0$.
+            \item If $f$ looks like this at $s$, then $f'(z)=k(z-s)^{k-1}g(z)+(z-s)^kg'(z)$.
+            \item Thus,
+            \begin{equation*}
+                \frac{f'}{f}(z) = \frac{k}{z-s}+\frac{g'(z)}{g(z)}
+            \end{equation*}
+            \item Since $g(s)\neq 0$, $g'/g$ is a well-defined number in a disk about $s$.
+            \item The other term gives a well-defined pole.
+            \item Therefore, if $f$ has a zero of order $k$ at $s$, then $f'/f$ has a simple pole at $s$ with $\res_s(f'/f)=k$.
+        \end{itemize}
+        \item Exercise: If $f$ has a pole of order $k$ at $s$, then $f'/f$ has a simple pole with $\res_s(f'/f)=-k$.
+        \begin{itemize}
+            \item Prove the same way (or see the notes).
+        \end{itemize}
+    \end{itemize}
+    \item Corollary (the argument principle): Suppose $U$ is a domain, $f$ is meromorphic on $U$, and $\gamma$ is an SCC oriented counterclockwise that doesn't hit any poles or zeroes of $f$. Then
+    \begin{equation*}
+        \frac{1}{2\pi i}\int_\gamma\frac{f'}{f}\dd{z} = \sum_{s\in S}\res_s(f'/f)
+        = \#\text{ zeroes in }\gamma-\#\text{ poles in }\gamma
+    \end{equation*}
+    \item \textbf{Simple closed curve}: A curve $\gamma$ that separates the inside from the outside. \emph{Also known as} \textbf{SCC}.
+    \begin{itemize}
+        \item See Figure \ref{fig:nulhomExa} for two examples.
+    \end{itemize}
+    \item TPS: Use the argument principle to compute the number of zeroes of the following polynomial inside the unit disk $\D$.
+    \begin{equation*}
+        f(z) = 2z^4-5z+2
+    \end{equation*}
+    \begin{itemize}
+        \item Since $f$ is a polynomial, it has no poles.
+        \item Thus, by the argument principle, the number of zeroes in $\partial\D$ is
+        \begin{equation*}
+            \frac{1}{2\pi i}\int_{\partial\D}\frac{f'}{f}\dd{z} = \frac{1}{2\pi i}\int_{\partial\D}\frac{8z^3-5}{2z^4-5z+2}\dd{z}
+        \end{equation*}
+        \item The integral on the right is "a pain in the butt" to compute, but we definitely could.
+        \begin{itemize}
+            \item We'd just have to do a partial fraction decomposition, substitute in $z=\e[i\theta]$, and bash it out.
+        \end{itemize}
+        \item A better way to find the number of zeroes uses \textbf{Rouch\'{e}'s theorem}, which we'll introduce shortly.
+    \end{itemize}
+    \item Understanding the argument principle geometrically.
+    \emph{picture}
+    \begin{itemize}
+        \item Suppose you have an SCC $\gamma$ enclosing a zero or order 1 and a pole of order 1.
+        \item We'll now investigate $f$ as a mapping of $\C\to\C$ and $\C\to\hat{\C}$.
+        \item As a mapping into the complex plane, $f$ maps $\gamma$ to $f(\gamma)$.
+        \begin{itemize}
+            \item Note that the curve $f(\gamma)$ is just another mapping of the circle into the complex plane.
+        \end{itemize}
+        \item As a mapping into the Riemann sphere, $f$ maps the zero to 0 and the pole to $\infty$.
+        \item Now draw little counterclockwise-oriented curves around the zero and pole.
+        \begin{itemize}
+            \item Since the pole has order 1, its little loop maps to a little loop around $\infty\in\hat{\C}$ that goes around 1 time.
+            \begin{itemize}
+                \item If the pole had order 2, for example, then a little loop that goes around it 1 time would map to a loop that goes around $\infty$ 2 times.
+            \end{itemize}
+            \item Similarly, since the zero has order 1, its little loop maps to a little loop around $0\in\hat{\C}$ that goes around 1 time.
+        \end{itemize}
+        \item Now pull the two loops down the Riemann sphere to the equator.
+        \begin{itemize}
+            \item Observe that their orientations are now inverses, with the orientation of the curve around $\infty$ having flipped.
+            \begin{itemize}
+                \item This is like the Coriolis effect!
+            \end{itemize}
+            \item Projecting the pulled-down curves into $\C$, we can observe that the one around $\infty$ is oriented clockwise and encompasses $f(\gamma)$ while the one around 0 is oriented counterclockwise and situated within $f(\gamma)$.
+        \end{itemize}
+        \item ??
+        \item This all results in the order of zeros minus the order of poles is equal to the winding number of $f(\gamma)$ about zero.
+    \end{itemize}
+    \item Here's a computation that justifies all of the handwavey stuff above:
+    \begin{align*}
+        \wn(f(\gamma),0) &= \frac{1}{2\pi i}\int_{f(\gamma)}\frac{1}{z}\dd{z}\\
+        &= \frac{1}{2\pi i}\int_0^1\frac{1}{f(\gamma(t))}[f(\gamma(t))]'\dd{t}\\
+        &= \frac{1}{2\pi i}\int_0^1\frac{f'(\gamma(t))}{f(\gamma(t))}\gamma'(t)\dd{t}\\
+        &= \frac{1}{2\pi i}\int_\gamma\frac{f'}{f}\dd{z}
+    \end{align*}
+    \begin{itemize}
+        \item This computation is another proof of the argument principle!
+    \end{itemize}
+    \item Rouch\'{e}'s theorem: Let $U$ be a domain, $\gamma\subset U$ an SCC, and $f,g\in\mO(U)$. Suppose also that $|g|<|f|$ on $\gamma$. Then $f$ and $f+g$ have the same number of zeroes.
+    \begin{proof}
+        Set $h_\lambda(z):=f+\lambda g$ where $\lambda\in[0,1]$. Thus, $h_0=f$ and $h_1=f+g$. It follows by the argument principle that the number of zeroes of $h_\lambda$ in $\gamma$ (which is a discrete set) is
+        \begin{equation*}
+            \frac{1}{2\pi i}\int_\gamma\frac{h_\lambda'}{h_\lambda}\dd{z} = \frac{1}{2\pi i}\int_\gamma\frac{f'+\lambda g'}{f+\lambda g}\dd{z}
+        \end{equation*}
+        which is a continuous map in $\lambda$. Essentially, we have shown that the "number of zeroes in $\gamma$" function is a continuous function from $[0,1]\to\N_0$. Hence, as a continuous function into a discrete set, it is constant.\par
+        Note that we used the $|g|<|f|$ condition to ensure that $f+\lambda g$ in the denominator of the above integral is never zero, and hence the integral is always well-defined.
+    \end{proof}
+    \item Example: Solving the TPS from earlier.
+    \begin{itemize}
+        \item $g(z)=2z^4$ has four zeroes inside $\D$.
+        \item $f(z)=-5z$ has one zero inside $\D$.
+        \item On $\partial\D$, we have that $|z|=1$ and hence
+        \begin{equation*}
+            2 = |g| < |f| = 5
+        \end{equation*}
+        so $2z^4-5z$ has the same number of zeroes as $-5z$ (or 1) by Rouch\'{e}'s theorem.
+        \item Redefine $f(z)=2z^4-5z$ and $g(z)=2$.
+        \item On $\partial\D$, we similarly have that
+        \begin{equation*}
+            |f| = |2z^4-5z|
+            \geq \big| |2z^4|-|5z| \big|
+            = |2-5|
+            = 3
+            > 2
+            = |g|
+        \end{equation*}
+        so $2z^4-5z+2$ has the same number of zeroes as $2z^4-5z$ (or 1) by Rouch\'{e}'s theorem.
+    \end{itemize}
+    \item Takeaway: Whenever you're asked to compute zeroes, Rouch\'{e}'s theorem is probably the way to go.
+    \item Exercise: Prove the FTA using Rouch\'{e}'s theorem.
+    \begin{itemize}
+        \item Idea: On big enough circles, eventually the top-degree term dominates.
+    \end{itemize}
+    \item Let's now talk a bit more about essential singularities.
+    \item Suppose $U$ is a small disk, $s\in U$, and $f\in\mO(U\setminus S)$ (so $s$ is an isolated singularity). Then one of three things can happen.
+    \begin{enumerate}
+        \item $s$ is removable.
+        \begin{itemize}
+            \item In this case, we can remove it using Riemann's removable singularity theorem and get an analytic continuation $\hat{f}\in\mO(U)$.
+            \item This is really nice, because then we get a power series near $s$:
+            \begin{equation*}
+                f(z) = \sum_{k=0}^\infty a_k(z-s)^k
+            \end{equation*}
+        \end{itemize}
+        \item $s$ is a pole.
+        \begin{itemize}
+            \item We get a similar series called a Laurent series with:
+            \begin{equation*}
+                f(z) = \sum_{k=-N}^\infty a_k(z-s)^k
+            \end{equation*}
+        \end{itemize}
+        \item $s$ is essential.
+        \begin{itemize}
+            \item We get a Laurent series
+            \begin{equation*}
+                f(z) = \sum_{k=-\infty}^\infty a_k(z-s)^k
+            \end{equation*}
+        \end{itemize}
+    \end{enumerate}
+    \item A word on convergence.
+    \begin{itemize}
+        \item Before, we used to say the magic words "absolutely locally uniformly" and we'd get convergence. Now we can't do that, and we need the following.
+        \item Recall that uniform convergence $f_k\to f$ means that
+        \begin{equation*}
+            \sup_{z\in K}|f_k(z)-f(z)| \to 0
+        \end{equation*}
+        \item In addition, recall that local uniform convergence $f_k\to f$ means that
+        \begin{equation*}
+            \sup_{K\subset U}\sup_{z\in K}|f_k(z)-f(z)| \to 0
+        \end{equation*}
+    \end{itemize}
+    \item Theorem: Suppose $\{f_k\}\in\mO(U\setminus S)$ is such that the $f_k\to f$ locally uniformly. Then $f\in\mO(U\setminus S)$ and moreover $f_k^{(n)}\to f^{(n)}$ for all $n$.
+    \begin{proof}
+        Goursat plus Morera for the first statement. CIF for the second statement. More detail in the notes; Calderon is also happy to talk.
+    \end{proof}
+    \item We now prove that such Laurent expansions exist.
+    \begin{itemize}
+        \item Step 1: "Pull off" the singular part.
+        \begin{itemize}
+            \item This is a theorem called the \textbf{Laurent decomposition}.
+        \end{itemize}
+        \item Step 2: Express $f_\infty$ as
+        \begin{equation*}
+            \sum_{k=-\infty}^{-1}a_k(z-s)^k
+        \end{equation*}
+    \end{itemize}
+    \item Theorem (Laurent decomposition): There exists a unique $f_\infty\in\mO(\C\setminus\{s\})$ with $f=f_0+f_\infty$ such that $f_0\in\mO(U)$ and $f_\infty\to 0$ as $z\to\infty$.
+    \begin{proof}
+        Uniqueness is not interesting; see the book.\par
+        Existence: Let $z\in U$ be arbitrary. Let $D_2$ be a counterclockwise-oriented curve in $U$ containing 0 and $z$. Let $D_1$ be a counterclockwise-oriented curve in $U$ containing just 0. Then $z\in D_2\setminus D_1$. Altogether, this looks like Figure \ref{fig:laurentDecomp}.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}[
+                every node/.style=black
+            ]
+                \footnotesize
+                \node [yex,label={[yshift=2mm]below:$0$}] {\normalsize *};
+        
+                \draw [orx,thick,decoration={
+                    markings,
+                    mark=at position 0.26 with \arrow{>},
+                    mark=at position 0.85 with {\node[below right=-2pt]{$D_1$};}
+                },postaction=decorate] circle (5mm);
+                \draw [blx,thick,decoration={
+                    markings,
+                    mark=at position 0.255 with \arrow{>},
+                    mark=at position 0.3 with {\node[above left=-2pt]{$D_2$};}
+                },postaction=decorate] circle (1.1cm);
+                \draw [dashed] (135:0.1) circle (1.5cm) node[right=1.5cm]{$U$};
+        
+                \fill [rex] (215:0.8) circle (1.5pt) node[below right=-1pt]{$z$};
+            \end{tikzpicture}
+            \caption{Laurent decomposition theorem.}
+            \label{fig:laurentDecomp}
+        \end{figure}
+        Additionally, $\partial D_2-\partial D_1$ is nulhomologous in $U\setminus 0$. Thus, by the general CIF,
+        \begin{equation*}
+            f(z) = \frac{1}{2\pi i}\int_{\partial D_2-\partial D_1}\frac{f(\zeta)}{\zeta-z}\dd\zeta
+            = \underbrace{\frac{1}{2\pi i}\int_{\partial D_2}\frac{f(\zeta)}{\zeta-z}\dd\zeta}_{f_0}-\underbrace{\frac{1}{2\pi i}\int_{\partial D_1}\frac{f(\zeta)}{\zeta-z}\dd\zeta}_{-f_\infty}
+        \end{equation*}
+        Finally, $-f_\infty$ --- as defined above --- has an extension from $U$ to all of $\C\setminus\{0\}$ just like in the proof of the general CIF from the 4/30 lecture.
+    \end{proof}
+    \item Comments on the Laurent decomposition.
+    \begin{itemize}
+        \item Think of $f_0$ as the nonnegative terms of the Laurent expansion, and $f_\infty$ as everything else (all the negative terms).
+    \end{itemize}
+    \item Step 2 proof.
+    \begin{proof}
+        For poles, we could just multiply by $(z-s)^k$. Here, we have to do something very clever. WLOG, let $s=0$. By step 1, $f_\infty$ extends to $\infty$ and we may set $f_\infty(\infty)=0$. Thus, let's think of $f_\infty\in\mO(\hat{\C}\setminus\{0\})$. Set $g(z)=f_\infty(1/z)$. Now $g$ has a removable singularity at 0. Moreover, $g\in\mO(\C)$. Then
+        \begin{equation*}
+            g(z) = \sum_{k=0}^\infty b_k(z-0)^k
+        \end{equation*}
+        converges for all $z$. But therefore
+        \begin{equation*}
+            f_\infty(z) = g(1/z)
+            = \sum_{k=1}^\infty b_k\left( \frac{1}{z} \right)^k
+            = \sum_{k=-\infty}^{-1}a_kz^k
+        \end{equation*}
+        as desired.
+    \end{proof}
+\end{itemize}
+
+
+
+
+\end{document}
