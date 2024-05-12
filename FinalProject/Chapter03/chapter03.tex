@@ -85,7 +85,10 @@
     \begin{itemize}
         \item Starting with the TDSE.
         \item Separation of variables.
-        \item Solving the time component.
+        \item Solving the time component to get
+        \begin{equation*}
+            f(t) = f_0\e[-iEt/\hbar]
+        \end{equation*}
         \item Arriving at the TISE.
         \begin{equation*}
             \dv[2]{x}u(x)+\left[ \frac{2mE}{\hbar^2}-\frac{m^2\omega^2}{\hbar^2}x^2 \right]u(x) = 0
@@ -115,7 +118,7 @@
         \end{equation*}
         \begin{itemize}
             \item The motivation for this change is that successive differentiations keep an $\e[g(\rho)]$ factor in each term that can be cancelled out to leave a zero-order term consisting of $f(\rho)$ multiplied by an arbitrary function of $\rho$. Choosing this latter function to be equal to the constant $a$ from the confluent hypergeometric equation's zero-order term gives us a useful constraint. If this seems complicated, just watch the following computations.
-            \item Making the substitution, we obtain
+            \item Making the substitution and leaving out the $\rho$'s for clarity, we obtain
             \begin{align*}
                 0 &= \dv[2]{\rho}[h\e[g]]+(\mu-\rho^2)h\e[g]\\
                 &= \dv{\rho}[h'\e[g]+hg'\e[g]]+(\mu-\rho^2)h\e[g]\\
@@ -137,7 +140,7 @@
                 0 = h''-2\rho h'+(\mu-1)h
             \end{equation*}
             \begin{itemize}
-                \item One may recognize this as the Hermite equation!
+                \item One may recognize this as \textbf{Hermite's equation}.
                 \item Through this $u(\rho)$ substitution method, we've effectively avoided the handwavey asymptotic analysis that physicists and chemists frequently use to justify deriving the Hermite equation.
             \end{itemize}
         \end{itemize}
@@ -190,20 +193,180 @@
 
 \subsubsection{Boundary Conditions and Energy Eigenvalues}
 \begin{itemize}
-    \item Come back for more detail!!
-    \item Under an asymptotic analysis, the confluent hypergeometric functions are diverging at large $\rho$.
-    \item To prevent this, we need the series to terminate. By our previous results about series termination, this happens when either\dots
+    \item \marginnote{5/11:}Quantum mechanics stipulates that when $|\rho|$ is large, $u(\rho)$ must not diverge.
+    \begin{itemize}
+        \item This ensures that the wave function is normalizable.
+    \end{itemize}
+    \item However, the current solutions do diverge at large $|\rho|$ in general. We can show this via the following asymptotic analysis.
+    \begin{itemize}
+        \item We'll first investigate the leftmost confluent hypergeometric function in the above solution.
+        \begin{itemize}
+            \item Using consecutive applications of the identity $\Gamma(z+1)=z\Gamma(z)$, this function can be written in the form
+            \begin{align*}
+                {}_1F_1(\tfrac{1}{4}(1-\mu);\tfrac{1}{2};\rho^2) &= \sum_{k=0}^\infty\frac{\left( \tfrac{1}{4}(1-\mu) \right)_k}{k!\left( \tfrac{1}{2} \right)_k}\rho^{2k}\\
+                &= \frac{\Gamma\left( \tfrac{1}{2} \right)}{\Gamma\left( \tfrac{1}{4}(1-\mu) \right)}\sum_{k=0}^\infty\frac{\Gamma\left( k+\tfrac{1}{4}(1-\mu) \right)}{k!\Gamma\left( k+\tfrac{1}{2} \right)}\rho^{2k}
+            \end{align*}
+            \item As $k\to\infty$, we have $\Gamma\left( \frac{1}{4}(1-\mu) \right)\to\Gamma\left( k+\frac{1}{2} \right)\to\Gamma(k)$. Hence, the terms come to be $\approx\rho^{2k}/k!$.
+            \item Thus, by adding $\rho^{2k}/k!$ for small $k$ and subtracting these terms off as well as the original terms for small $k$, we obtain the approximation
+            \begin{equation*}
+                {}_1F_1(\tfrac{1}{4}(1-\mu);\tfrac{1}{2};\rho^2) \approx \frac{\Gamma\left( \tfrac{1}{2} \right)}{\Gamma\left( \tfrac{1}{4}(1-\mu) \right)}\left[ \sum_{k=0}^\infty\frac{\rho^{2k}}{k!}-\text{polynomial in }\rho^2 \right]
+            \end{equation*}
+            \item The first term above is the Taylor series for $\e[\rho^2]$, which will dominate at large $|\rho|$.
+            \item Therefore, we have shown that at large $|\rho|$,
+            \begin{equation*}
+                {}_1F_1(\tfrac{1}{4}(1-\mu);\tfrac{1}{2};\rho^2) \approx \e[\rho^2]
+            \end{equation*}
+        \end{itemize}
+        \item By a symmetric argument, we find that at large $|\rho|$,
+        \begin{equation*}
+            {}_1F_1(\tfrac{1}{4}(3-\mu);\tfrac{3}{2};\rho^2) \approx \e[\rho^2]
+        \end{equation*}
+        \item Thus, at large $|\rho|$,
+        \begin{equation*}
+            u(\rho) = h(\rho)\e[g(\rho)]
+            = (\tilde{A}\e[\rho^2]+\tilde{B}\rho\e[\rho^2])\e[-\rho^2/2]
+            = (\tilde{A}+\tilde{B}\rho)\e[\rho^2/2]
+        \end{equation*}
+        where $\tilde{A},\tilde{B}$ incorporate the other constants.
+    \end{itemize}
+    \item To prevent this, we need the series to terminate. By our previous results about series termination (see Section \ref{ss2:2.4.2}), this happens when either\dots
     \begin{enumerate}
         \item $\frac{1}{4}(1-\mu)$ is a nonpositive integer and $B=0$;
         \item $\frac{1}{4}(3-\mu)$ is a nonpositive integer and $A=0$.
     \end{enumerate}
-    \item The first case gives the even energy eigenvalues and Hermite polynomials, and the second case gives us the odd energy eigenvalues and Hermite polynomials.
+    \item Note that we don't \emph{always} need the other term to be zeroed out by its coefficient; however, doing it this way allows us to get the orthonormal basis of Hermite polynomials, and the other cases may be recovered as linear combinations of these polynomials.
+    \item Continuing on, the first case gives the even energy eigenvalues and wave functions.
+    \begin{itemize}
+        \item Let $-n/2$ be the nonpositive integer equal to $\frac{1}{4}(1-\mu)$.
+        \begin{itemize}
+            \item Note that we write our nonpositive integer in this form in anticipation of future manipulations.
+        \end{itemize}
+        \item Then by the definition of $\mu$,
+        \begin{align*}
+            -\frac{n}{2} &= \frac{1}{4}(1-\mu)\\
+            \mu &= 1+2n\\
+            \frac{2E}{\hbar\omega} &= 1+2n\\
+            E_n = E &= \hbar\omega\left( n+\frac{1}{2} \right)\tag{$n=0,2,4,\dots$}
+        \end{align*}
+        \item Additionally,
+        \begin{equation*}
+            u_n(\rho) = A_n\,{}_1F_1(-\tfrac{n}{2};\tfrac{1}{2};\rho^2)\e[-\rho^2/2]
+        \end{equation*}
+        \begin{itemize}
+            \item For even $n$, ${}_1F_1(-\frac{n}{2};\frac{1}{2};\rho^2)$ is a polynomial in even powers of $\rho$.
+        \end{itemize}
+    \end{itemize}
+    \item The second case gives us the odd energy eigenvalues and wave functions.
+    \begin{itemize}
+        \item Let $-(n-1)/2$ be the form of our nonpositive integer this time around.
+        \item Then by a similar argument,
+        \begin{equation*}
+            E_n = E = \hbar\omega\left( n+\frac{1}{2} \right)\tag{$n=1,3,5,\dots$}
+        \end{equation*}
+        \item Similarly, once again,
+        \begin{equation*}
+            u_n(\rho) = B_n\rho\,{}_1F_1(-\tfrac{1}{2}(n-1);\tfrac{3}{2};\rho^2)\e[-\rho^2/2]
+        \end{equation*}
+        \begin{itemize}
+            \item For odd $n$, ${}_1F_1(-\tfrac{1}{2}(n-1);\tfrac{3}{2};\rho^2)$ is a polynomial in odd powers of $\rho$.
+        \end{itemize}
+    \end{itemize}
 \end{itemize}
 
 \subsubsection{Hermite Polynomials and the Confluent Hypergeometric Function}
 \begin{itemize}
-    \item Come back for more detail!!
-    \item Formally defining the Hermite polynomials, and proving that they satisfy the Hermite equation.
+    \item We now rewrite the confluent hypergeometric series into more conventional forms.
+    \item We will begin with $n\in 2\N$.
+    \begin{itemize}
+        \item By the definition of the confluent hypergeometric function,
+        \begin{equation*}
+            {}_1F_1(-\tfrac{n}{2};\tfrac{1}{2};\rho^2) = \sum_{k=0}^\infty\frac{\left( -\frac{n}{2} \right)_k}{k!\left( \frac{1}{2} \right)_k}\rho^{2k}
+        \end{equation*}
+        \item As discussed in Section \ref{ss2:2.4.2}, once $k$ reaches $n/2+1$, the $\left( -\frac{n}{2} \right)_k$ term equals 0. Thus, we may notationally truncate the above series to
+        \begin{equation*}
+            {}_1F_1(-\tfrac{n}{2};\tfrac{1}{2};\rho^2) = \sum_{k=0}^{n/2}\frac{\left( -\frac{n}{2} \right)_k}{k!\left( \frac{1}{2} \right)_k}\rho^{2k}
+        \end{equation*}
+        \item Additionally, to reorder the terms of the series from highest power to lowest power, change the summation index from $k$ to $n/2-k$.
+        \begin{equation*}
+            {}_1F_1(-\tfrac{n}{2};\tfrac{1}{2};\rho^2) = \sum_{k=0}^{n/2}\frac{\left( -\frac{n}{2} \right)_{n/2-k}}{\left( \frac{n}{2}-k \right)!\left( \frac{1}{2} \right)_{n/2-k}}\rho^{n-2k}
+        \end{equation*}
+        \begin{itemize}
+            \item Essentially, what we've done here is the following. For $n=4$, the previous series would have output a Hermite polynomial like $12-48\xi^2+16\xi^4$. Now, the series will output $16\xi^4-48\xi^2+12$ because \emph{it is counting down}.
+            \item Of course, we need some more manipulations before this series will give actual Hermite polynomials, but this reversal demonstrates the idea.
+        \end{itemize}
+        \item From here, we will invoke Pochhammer symbol identities 1, 2, and 5 from Section \ref{sss:2.2}.
+        \begin{itemize}
+            \item In particular, identities 1 and 2 are, respectively,
+            \begin{align*}
+                n! &= (n-m)!(n-m+1)_m&
+                (c-m+1)_m &= (-1)^m(-c)_m
+            \end{align*}
+            \begin{itemize}
+                \item Algebraically rearranging and combining these via transitivity, we obtain
+                \begin{equation*}
+                    \frac{c!}{(c-m)!} = (c-m+1)_m
+                    = (-1)^m(-c)_m
+                \end{equation*}
+                and hence
+                \begin{equation*}
+                    (-c)_m = \frac{(-1)^{-m}c!}{(c-m)!}
+                    = \frac{(-1)^mc!}{(c-m)!}
+                \end{equation*}
+                \item Making the substitutions $c:=n/2$ and $m:=n/2-k$, we obtain
+                \begin{equation*}
+                    \left( -\tfrac{n}{2} \right)_{n/2-k} = \frac{(-1)^{n/2-k}\left( \frac{n}{2} \right)!}{\left[ \frac{n}{2}-\left( \frac{n}{2}-k \right) \right]!}
+                    = \frac{(-1)^{n/2-k}\left( \frac{n}{2} \right)!}{k!}
+                \end{equation*}
+            \end{itemize}
+            \item Additionally, identity 5 is
+            \begin{equation*}
+                (2n-2m)! = 2^{2n-2m}(n-m)!\left( \tfrac{1}{2} \right)_{n-m}
+            \end{equation*}
+            \begin{itemize}
+                \item Making the substitutions $n:=n/2$ and $m:=k$, we obtain
+                \begin{equation*}
+                    (n-2k)! = 2^{n-2k}\left( \tfrac{n}{2}-k \right)!\left( \tfrac{1}{2} \right)_{n/2-k}
+                \end{equation*}
+            \end{itemize}
+        \end{itemize}
+        \item Via these substitutions, it follows that
+        \begin{align*}
+            {}_1F_1(-\tfrac{n}{2};\tfrac{1}{2};\rho^2) &= \sum_{k=0}^{n/2}\frac{(-1)^{n/2-k}\left( \frac{n}{2} \right)!\cdot 2^{n-2k}}{k!\cdot(n-2k)!}\rho^{n-2k}\\
+            &= (-1)^{n/2}\left( \tfrac{n}{2} \right)!\sum_{k=0}^{n/2}\frac{(-1)^{-k}}{k!(n-2k)!}(2\rho)^{n-2k}\\
+            &= (-1)^{n/2}\left( \tfrac{n}{2} \right)!\sum_{k=0}^{n/2}\frac{(-1)^k}{k!(n-2k)!}(2\rho)^{n-2k}\\
+            &= \frac{(-1)^{n/2}\left( \frac{n}{2} \right)!}{n!}\sum_{k=0}^{n/2}\frac{(-1)^kn!}{k!(n-2k)!}(2\rho)^{n-2k}
+        \end{align*}
+    \end{itemize}
+    \item Via an analogous argument, if $n\in 2\N+1$, then
+    \begin{equation*}
+        \rho\,{}_1F_1(-\tfrac{1}{2}(n-1);\tfrac{3}{2};\rho^2) = \frac{(-1)^{(n-1)/2}\left( \frac{1}{2}(n-1) \right)!}{2n!}\sum_{k=0}^{\frac{1}{2}(n-1)}\frac{(-1)^kn!}{k!(n-2k)!}(2\rho)^{n-2k}
+    \end{equation*}
+    \item \textbf{Hermite polynomials}: The family of special functions defined as follows. \emph{Denoted by} $\bm{H_n(\rho)}$. \emph{Given by}
+    \begin{align*}
+        H_n(\rho) &= \frac{n!(-1)^{-n/2}}{\left( \frac{n}{2} \right)!}{}_1F_1(-\tfrac{n}{2};\tfrac{1}{2};\rho^2)\tag{$n$ even}\\
+        H_n(\rho) &= \frac{2n!(-1)^{(1-n)/2}}{\left( \frac{1}{2}(n-1) \right)!}\rho\,{}_1F_1(-\tfrac{1}{2}(n-1);\tfrac{3}{2};\rho^2)\tag{$n$ odd}\\
+    \end{align*}
+    \begin{itemize}
+        \item Via the normalization in this definition, we see that we can write the Hermite polynomials for \emph{any} integer $n$ as
+        \begin{equation*}
+            H_n(\rho) = \sum_{k=0}^{[n/2]}\frac{(-1)^kn!}{k!(n-2k)!}(2\rho)^{n-2k}
+        \end{equation*}
+        where $[x]$ denotes the largest integer less than $x$.\footnote{I.e., $[x]$ denotes the \textbf{floor function}.}
+    \end{itemize}
+    \item \textbf{Hermite's equation}: The linear, second-order, homogeneous differential equation whose solutions are the Hermite polynomials. \emph{Given by}
+    \begin{equation*}
+        H_n''(\rho)-2\rho H_n'(\rho)+2nH_n(\rho) = 0
+    \end{equation*}
+    \begin{itemize}
+        \item Note that $2n=\mu-1$ since we have that $-\frac{n}{2}=\tfrac{1}{4}(1-\mu)$ in the even case and $-\tfrac{1}{2}(n-1)=\tfrac{1}{4}(3-\mu)$ in the odd case, both of which simplify to the equality in question.
+        \item The Hermite polynomials qualify as solutions despite their constant coefficient because of the linearity of the solutions.
+        \item The Hermite polynomials qualify as solutions despite their specific choice of $a$ value because of the fact that the choice is simply a quantum-mechanical restriction to a subclass of mathematically broader solutions.
+    \end{itemize}
+    \item Putting everything together, we may now write the harmonic oscillator eigenfunctions as
+    \begin{equation*}
+        u_n(\rho) = N_nH_n(\rho)\e[-\rho^2/2]
+    \end{equation*}
+    where $N_n$ is a normalization constant that will be determined in Chapter \ref{sch:12}.
 \end{itemize}
 
 
