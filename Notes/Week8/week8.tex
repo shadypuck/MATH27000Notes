@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Applying the Complex Logarithm}
 \section{Counting Zeroes and Laurent Series}
 \begin{itemize}
     \item \marginnote{5/7:}Announcements.
@@ -286,6 +286,503 @@
         \end{equation*}
         as desired.
     \end{proof}
+\end{itemize}
+
+
+
+\section{Riemann Mapping Theorem}
+\begin{itemize}
+    \item \marginnote{5/9:}Announcements.
+    \begin{itemize}
+        \item Sign up for a presentation time.
+        \item Draft due tomorrow.
+        \item Feedback forms due next week.
+        \item Next Monday's OH's are TBD.
+        \item Substitute teacher (postdoc) next Tuesday because Calderon will be out of town.
+    \end{itemize}
+    \item Last time: Using the logarithm to find some things out about zeroes.
+    \item Today: Using the logarithm to find some things out about conformal maps.
+    \item Recall.
+    \begin{itemize}
+        \item $f:U\to\C$ conformal means angle-preserving diffeomorphism.
+        \item $f:U\to\C$ biholomorphic means bijective, holomorphic, and $f^{-1}$ holomorphic.
+        \item Conformal iff biholomorphic.
+        \item If $f\in\mO(U)$ is bijective and $f'$ is nonzero on $U$, then $f^{-1}$ is holomorphic and hence $f\in\Bihol(U)$.
+        \begin{itemize}
+            \item In fact, using the $f'(z)\neq 0$ for all $z\in U$ and the open mapping theorem to imply that $f^{-1}$ is holomorphic was unnecessary! The complex inverse function theorem proved that all we need for biholomorphism is a bijectivity and a holomorphicity condition.
+        \end{itemize}
+        \item Important note: Above, we used the bijectivity condition to imply a "nonzeroness" to the derivative. Suppose $f'(z_0)=0$ and $f(z_0)=0$. Then $f$ can't be bijective for the following reason.
+        \begin{itemize}
+            \item This combined with the hypothesis that $f\in\mO(U)$ and hence $f$ has a Taylor series expansion means that
+            \begin{equation*}
+                f(z) = \underbrace{f(z_0)}_0+\underbrace{f'(z_0)}_0(z-z_0)+\sum_{k=2}^\infty\frac{f^{(k)}(z_0)}{k!}(z-z_0)^k
+                = \sum_{k=2}^\infty\frac{f^{(k)}(z_0)}{k!}(z-z_0)^k
+            \end{equation*}
+            \item Hence, we can factor $(z-z_0)^2$ out of $f$, so $f$ locally looks like $z^2$ and therefore is not injective. This is branching behavior like in Figure \ref{fig:exponentialSingularity}; $z^2$ cuts a slit in the complex plane at the positive real axis and spins it around and then back to where it started.
+        \end{itemize}
+    \end{itemize}
+    \item We wish to investigate conformal, bounded maps on bounded, simply connected domains. Before we begin in earnest, we will show that we can simplify any function in this class to an analogous function in a more restricted class that will be easier to work with.
+    \item Let $U$ be a bounded, simply connected domain. Suppose $f\in\mO(U)$ is conformal and bounded.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style=black
+        ]
+            \footnotesize
+            \begin{scope}[
+                xshift=-4cm,yshift=-2cm,
+                scale=0.7
+            ]
+                \draw [blx,thick] circle (1cm) node[above left=4.3mm]{$\D$};
+                \draw [thick] (0.1,0.9)
+                    to[out=180,in=90] (-0.4,0.6)
+                    to[out=-90,in=90] (-0.35,0.4)
+                    to[out=-90,in=90] (-0.6,-0.4)
+                    to[out=-90,in=180] (-0.2,-0.7)
+                    to[out=0,in=-170] (0.4,-0.4)
+                    to[out=10,in=-90] (0.7,-0.1)
+                    to[out=90,in=-90] (0.5,0.4)
+                    to[out=90,in=0] cycle
+                ;
+                \node [rex,label={[xshift=-7pt,yshift=7pt]below right:$z_0$}] at (-0.1,0.5) {\small *};
+            \end{scope}
+            \begin{scope}[
+                xshift=-2cm,yshift=0.5cm,
+                scale=1.1
+            ]
+                \draw [blx,thick] circle (1cm);
+                \draw [thick] (0.1,0.9)
+                    to[out=180,in=90] (-0.4,0.6) node[below left=-2pt]{$U$}
+                    to[out=-90,in=90] (-0.35,0.4)
+                    to[out=-90,in=90] (-0.6,-0.4)
+                    to[out=-90,in=180] (-0.2,-0.7)
+                    to[out=0,in=-170] (0.4,-0.4)
+                    to[out=10,in=-90] (0.7,-0.1)
+                    to[out=90,in=-90] (0.5,0.4)
+                    to[out=90,in=0] cycle
+                ;
+                \fill [blx] circle (1.5pt) node[below]{$0$};
+                \draw [blx,semithick] (0,0) -- node[pos=0.2,above]{$S$} (170:1);
+            \end{scope}
+            \begin{scope}[
+                xshift=2cm,yshift=0.5cm,
+                scale=1.5
+            ]
+                \draw [yex,thick] circle (1cm);
+                \draw [thick] (0.6,0.65)
+                    to[out=180,in=10] (-0.1,0.4) node[above,xshift=-1mm]{$f(U)$}
+                    to[out=-170,in=90,in looseness=0.5] (-0.8,0.1)
+                    to[out=-90,in=90] (-0.4,-0.1)
+                    to[out=-90,in=90] (-0.45,-0.4)
+                    to[out=-90,in=180] (-0.1,-0.8)
+                    to[out=0,in=180] (0.3,-0.2)
+                    to[out=0,in=-90] (0.7,0)
+                    to[out=90,in=-90] (0.6,0.3)
+                    to[out=90,in=0] cycle
+                ;
+                \fill [yex] circle (1.5pt) node[below]{$0$};
+                \draw [yex,semithick] (0,0) -- node[pos=0.8,below]{$R$} (5:1);
+            \end{scope}
+            \begin{scope}[
+                xshift=4cm,yshift=-2cm,
+                scale=0.7
+            ]
+                \draw [yex,thick] circle (1cm) node[above right=4.3mm]{$\D$};
+                \draw [thick] (0.6,0.65)
+                    to[out=180,in=10] (-0.1,0.4)
+                    to[out=-170,in=90,in looseness=0.5] (-0.8,0.1)
+                    to[out=-90,in=90] (-0.4,-0.1)
+                    to[out=-90,in=90] (-0.45,-0.4)
+                    to[out=-90,in=180] (-0.1,-0.8)
+                    to[out=0,in=180] (0.3,-0.2)
+                    to[out=0,in=-90] (0.7,0)
+                    to[out=90,in=-90] (0.6,0.3)
+                    to[out=90,in=0] cycle
+                ;
+                \node [rex] at (-0.2,-0.6) {\small *};
+            \end{scope}
+            \begin{scope}[
+                xshift=6.5cm,yshift=-2cm,
+                scale=0.7
+            ]
+                \draw [yex,thick] circle (1cm);
+                \draw [thick] (0.6,0.65)
+                    to[out=180,in=10] (-0.1,0.5)
+                    to[out=-170,in=90,in looseness=0.5] (-0.8,0.2)
+                    to[out=-90,in=90] (-0.4,0)
+                    to[out=-90,in=90] (-0.45,-0.2)
+                    to[out=-90,in=180] (-0.1,-0.5)
+                    to[out=0,in=180] (0.3,-0.1)
+                    to[out=0,in=-90] (0.7,0.1)
+                    to[out=90,in=-90] (0.6,0.4)
+                    to[out=90,in=0] cycle
+                ;
+                \node [rex,label={[xshift=6pt,yshift=1pt]left:$0$}] at (0,0) {\small *};
+            \end{scope}
+    
+            \draw [->] ($(-4,-2)!0.25!(-2,0.5)$) to[bend left=15] node[above left=-2pt]{$\times S$} ($(-4,-2)!0.63!(-2,0.5)$);
+            \draw [->] ($(-2,0.5)!0.3!(2,0.5)$) to[bend left=15] node[above]{$f$} ($(-2,0.5)!0.6!(2,0.5)$);
+            \draw [->] ($(2,0.5)!0.5!(4,-2)$) to[bend left=15] node[above right=-2pt]{$/R$} ($(2,0.5)!0.75!(4,-2)$);
+            \draw [->] ($(-4,-2)!0.1!(4,-2)$) to[bend left=15] ($(-4,-2)!0.9!(4,-2)$);
+            \draw [->] ($(4,-2)!0.33!(6.5,-2)$) to[bend left=15] node[above]{M\"{o}bius} ($(4,-2)!0.67!(6.5,-2)$);
+        \end{tikzpicture}
+        \caption{Constructing an analogous, simpler class of bounded conformal maps.}
+        \label{fig:analogousConformal}
+    \end{figure}
+    \begin{itemize}
+        \item Intuitively, these constraints imply that $f$ maps a blob to a blob.
+        \begin{itemize}
+            \item Conformal maps send simply connected domains to simply connected domains.
+            \item Bounded maps send bounded domains to bounded domains, i.e., the image blob must lie in some disk.
+        \end{itemize}
+        \item By the maximum modulus principle, if $|f(z)|=R$, then $z\in\partial U$.
+        \begin{itemize}
+            \item This is valid because a conformal map must be nonconstant.
+        \end{itemize}
+        \item Now here comes the critical step: We can rescale the problem of a map from a blob of radius $S$ to a blob of radius $R$ to the problem of a map from a blob in $\D$ to another blob in $\D$.
+        \begin{itemize}
+            \item We do this by prescaling the initial $\D$ up by $S$ and postscaling the image disk down by $R$.
+        \end{itemize}
+        \item Therefore, via rescaling, we can reduce this problem to understanding maps from $U\subset\D\to\D$.
+        \item Now fix $z_0\in U$. Recall from PSet 4 that we can use a M\"{o}bius transformation to take $f(z_0)\mapsto 0$.
+        \begin{itemize}
+            \item Fact/Exercise: A M\"{o}bius transformation $\D\to\D$ of the form $z\mapsto(az+b)/(cz+d)$ for $a,b,c,d\in\R$ acts transitively on points in $\D$ (i.e., any point can be taken to zero).
+            \item It's kind of obvious if you do this with the upper half plane instead of the disk and then bring it to the disk.
+        \end{itemize}
+        \item Therefore, via rescaling \emph{and} M\"{o}bius transformations, we can reduce this problem to understanding maps from $U\subset\D\to\D$ that take $z_0\in U\mapsto 0$.
+    \end{itemize}
+    \item Let's begin investigating these maps.
+    \item The first (and easiest) case we'll tackle is when $U=\D$. We'll tackle it with the \textbf{Schwarz Lemma}.
+    \item Schwarz Lemma: Suppose $f:\D\to\D$ (not necessarily surjective) is conformal and $f(0)=0$. Then\dots
+    \begin{enumerate}
+        \item $|f(z)|\leq|z|$;
+        \begin{proof}
+            Consider the function defined by the following ratio.
+            \begin{equation*}
+                \frac{f(z)}{z}
+            \end{equation*}
+            This function is holomorphic for all $z\neq 0$. But what happens at zero? We know that $f(0)=0$ by hypothesis. Thus, $f$ has a power series expansion at zero. In particular, since $a_0=f(0)=0$,
+            \begin{equation*}
+                f(z) = a_1z+a_2z^2+\cdots
+            \end{equation*}
+            so
+            \begin{equation*}
+                \frac{f(z)}{z} = a_1+a_2z+\cdots
+            \end{equation*}
+            This means that $f(z)/z$ has a removable singularity which we can fill in via Riemann's removable singularity theorem to get
+            \begin{equation*}
+                \frac{f(0)}{0} = f'(0)
+            \end{equation*}
+            Now pick an $r\in(0,1)$ and let $z\in\partial D_r(0)$ be arbitrary. Then
+            \begin{equation*}
+                \left| \frac{f(z)}{z} \right| = \frac{|f(z)|}{|z|}
+                = \frac{|f(z)|}{r}
+                \leq \frac{1}{r}
+            \end{equation*}
+            Essentially, we have bounded the value of $f(z)/z$ on the boundary of a disk. Moreover, it follows by the maximum modulus principle that this bound must hold for all $z\in D_r(0)$. (Otherwise, we would get a local maximum inside $D_r(0)$; this would imply by the MMP that $f$ is constant, which we can't have because the function is conformal [hence nonconstant] by hypothesis.) Thus, we have shown that
+            \begin{equation*}
+                |f(z)| \leq \frac{1}{r}\cdot|z|
+            \end{equation*}
+            for all $z\in D_r(0)$. To finish it off, we can send $r\to 1$, thereby including all $z\in\D$ in our argument and transforming the above inequality into the desired one.
+        \end{proof}
+        \item If $|f(z)|\leq|z|$ is an equality for any $z\in\D$, then $f$ is a rotation;
+        \begin{proof}
+            Let $z_0\in\D$ be the point at which $|f(z_0)|=|z_0|$. It follows that
+            \begin{equation*}
+                \left| \frac{f(z_0)}{z_0} \right| = 1
+            \end{equation*}
+            Additionally, we have by (1) that for all $z\in\D$,
+            \begin{equation*}
+                \left| \frac{f(z)}{z} \right| \leq 1
+            \end{equation*}
+            Thus, $|f(z)/z|$ takes a maximum inside $\D$ (in particular, it takes its max at $z_0$). It follows by the maximum modulus principle that $f(z)/z$ is constant on $\D$.\par
+            Let $c$ be this constant value. Naturally, it follows that in particular, $c=f(z_0)/z_0$ and hence
+            \begin{equation*}
+                |c| = \left| \frac{f(z_0)}{z_0} \right| = 1
+            \end{equation*}
+            But via algebraic rearrangement this means that $f(z)=cz$ where $c\in\C$ has $|c|=1$. Therefore, $f$ is a rotation, as desired.
+        \end{proof}
+        \item If $|f'(0)|=1$, then $f$ is a rotation.
+        \begin{proof}
+            % By (1), $|f(z)/z|\leq 1$ for all $z\in\D$. $|f(z)|=|z|$ implies $|f(z)/z|=1$ for some $z\in\D$, so if $f(z)/z$ takes a maximum inside $\D$, then it must be constant by the maximum modulus principle. But a constant function with $|f(z)/z|=1$ is just a rotation.
+
+            In the proof of part (1), we showed that the power series expansion of $f(z)/z$ is
+            \begin{equation*}
+                \frac{f(z)}{z} = a_1+a_2z+\cdots
+                = f'(0)+\frac{f''(0)}{2!}z+\cdots
+            \end{equation*}
+            Thus, since $|f'(0)|=1$, we have that
+            \begin{equation*}
+                \left| \widehat{\frac{f(0)}{0}} \right| = \left| f'(0)+\frac{f''(0)}{2!}\cdot 0+\cdots \right|
+                = |f'(0)|
+                = 1
+            \end{equation*}
+            Thus, as in the proof of part (2), we have shown that there exists a point in $\D$ at which $|f(z)/z|=1$. Therefore, $f$ is a rotation by a symmetric argument, as desired.
+        \end{proof}
+    \end{enumerate}
+    \item Note that we did not use conformality anywhere in our proof of the Schwarz Lemma!
+    \begin{itemize}
+        \item All we actually needed was a holomorphicity condition.
+        \item We'll need full conformality, however, to prove the following sort-of converse.
+    \end{itemize}
+    \item Lemma (a "converse" to the Schwarz Lemma): Suppose $f:\D\to\D$ is conformal and not onto with $f(0)=0$. Then there exists $F:\D\to\D$ (still conformal) such that $F(0)=0$ and $|F'(0)|>|f'(0)|$.
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}[
+            every node/.style=black
+        ]
+            \footnotesize
+            \begin{scope}[xshift=-3.3cm]
+                \filldraw [thick,draw=rex,fill=rez] circle (1cm) node[above left=7mm]{$\D$};
+    
+                \fill [yex] circle (2pt) node[above=1pt]{$0$};
+            \end{scope}
+            \begin{scope}
+                \draw [semithick,dashed] circle (1cm) node[above left=7mm]{$\D$};
+                \filldraw [thick,draw=rex,fill=rez] plot[domain=0:360,samples=100] (\x:{0.6+0.1*cos(6*\x)});
+                \node at (-145:0.7) {$U$};
+    
+                \fill [yex] circle (2pt) node[above=1pt]{$0$};
+                \fill [blx] (30:0.7) circle (2pt) node[below right]{$w$};
+            \end{scope}
+            \begin{scope}[yshift=3.3cm]
+                \draw [semithick,dashed] circle (1cm);
+                \filldraw [thick,draw=rex,fill=rez] (-45:0.8)
+                    to[out=45  ,in=-45] (-135:0.2)
+                    to[out=135 ,in=45 ] (135:0.8)
+                    to[out=-135,in=63 ] (153:0.6)
+                    to[out=-117,in=81 ] (171:0.8)
+                    to[out=-99 ,in=99 ] (189:0.6)
+                    to[out=-81 ,in=117] (207:0.8)
+                    to[out=-63 ,in=135] (225:0.6)
+                    to[out=-45 ,in=153] (243:0.8)
+                    to[out=-27 ,in=171] (261:0.6)
+                    to[out=-9  ,in=189] (279:0.8)
+                    to[out=9   ,in=207] (297:0.6)
+                    to[out=27  ,in=225] cycle
+                ;
+                \node at (-15:0.6) {$T(U)$};
+    
+                \fill [yex] (-135:0.4) circle (2pt);
+                \fill [blx] circle (2pt) node[above=1pt]{$0$};
+            \end{scope}
+            \begin{scope}[xshift=3.3cm,yshift=3.3cm]
+                \draw [semithick,dashed] circle (1cm);
+                \filldraw [thick,draw=rex,fill=rez] (157.5:0.89)
+                    to[out=247.5,in=22.5 ] (112.5:0.45)
+                    to[out=22.5 ,in=-22.5] ( 67.5:0.89)
+                    to[out=157.5,in=-13.5] ( 76.5:0.77)
+                    to[out=166.5,in=-4.5 ] ( 85.5:0.89)
+                    to[out=175.5,in=13.5 ] ( 94.5:0.77)
+                    to[out=184.5,in=22.5 ] (103.5:0.89)
+                    to[out=193.5,in=31.5 ] (112.5:0.77)
+                    to[out=202.5,in=40.5 ] (121.5:0.89)
+                    to[out=211.5,in=49.5 ] (130.5:0.77)
+                    to[out=220.5,in=58.5 ] (139.5:0.89)
+                    to[out=229.5,in=67.5 ] (148.5:0.77)
+                    to[out=238.5,in=56.5 ] cycle
+                ;
+    
+                \fill [yex] (112.5:0.63) circle (2pt);
+                \node at (-0.2,-0.5) {$\sqrt{T(0)}$}
+                    edge [out=130,in=-160,->,shorten >=3pt] (112.5:0.63)
+                ;
+                \fill [blx] circle (2pt);
+            \end{scope}
+            \begin{scope}[xshift=3.3cm]
+                \draw [semithick,dashed] circle (1cm);
+                \filldraw [thick,draw=rex,fill=rez] (157.5:0.75)
+                    to[out=247.5,in=202.5] (-67.5:0.45)
+                    to[out=22.5 ,in=-22.5] ( 67.5:0.75)
+                    to[out=157.5,in=-13.5] ( 76.5:0.65)
+                    to[out=166.5,in=-4.5 ] ( 85.5:0.75)
+                    to[out=175.5,in=13.5 ] ( 94.5:0.65)
+                    to[out=184.5,in=22.5 ] (103.5:0.75)
+                    to[out=193.5,in=31.5 ] (112.5:0.65)
+                    to[out=202.5,in=40.5 ] (121.5:0.75)
+                    to[out=211.5,in=49.5 ] (130.5:0.65)
+                    to[out=220.5,in=58.5 ] (139.5:0.75)
+                    to[out=229.5,in=67.5 ] (148.5:0.65)
+                    to[out=238.5,in=56.5] cycle
+                ;
+    
+                \fill [yex] circle (2pt) node[above=1pt]{$0$};
+                \fill [blx] (-67.5:0.63) circle (2pt);
+            \end{scope}
+    
+            \draw [->] (-2.2,0) to[bend left=15] node[above]{$f$} (-1.1,0);
+            \draw [->] (-0.1,1.1) to[bend left=15] node[left]{$T$} (-0.1,2.2);
+            \draw [->] (0.1,2.2) to[bend right=15] node[right]{$T^{-1}$} (0.1,1.1);
+            \draw [->] (1.1,3.4) to[bend left=15] node[above]{$\sqrt{}$} (2.2,3.4);
+            \draw [->] (2.2,3.2) to[bend right=15] node[below]{$z\mapsto z^2$} (1.1,3.2);
+            \draw [->] (3.4,2.2) to[bend left=15] node[right]{$S$} (3.4,1.1);
+            \draw [->] (3.2,1.1) to[bend right=15] node[left]{$S^{-1}$} (3.2,2.2);
+            \draw [->] (1.1,0.1) to[bend left=15] node[above]{$h$} (2.2,0.1);
+            \draw [->] (2.2,-0.1) to[bend right=15] node[below]{$h^{-1}$} (1.1,-0.1);
+    
+            \draw [->] (-2.5,-0.8) to[bend right=15] node[pos=0.18,above]{$F$} (2.5,-0.8);
+        \end{tikzpicture}
+        \caption{A "converse" to the Schwarz Lemma.}
+        \label{fig:convSchwarz}
+    \end{figure}
+    \begin{proof}
+        % Since $f$ is conformal and its domain $\D$ is simply connected, $\im(f)$ is simply connected. Some argument about preservation of exterior winding number being zero??\par
+        % Claim: For all $z_0\in U\subsetneq\D$ simply connected, there exists a map $h:U\to\D$ with $h(z_0)=0$ and $|h'(z_0)|>1$.
+        % \begin{proof}
+        %     See the \textcite{bib:FischerLieb} for more details.\par
+        %     WLOG, let $z_0=0$ (else, use a M\"{o}bius transformation). We know that $0\in U$ and there exists points $w\in\D$ such that $w\notin U$. Use a M\"{o}bius transformation $T:w\mapsto 0$. Now $0\notin T(U)$. Since we have conformality, we may take the square root, which is not defined on all of $\D$ but is defined on $T(U)$. (This is because $z^{1/2}=\e[\log(z)/2]$ and we don't have any logarithms defined on zero, and because $T(U)$ is simply connected.) Lastly, take a M\"{o}bius transformation $S:\sqrt{T(0)}\mapsto 0$. Define $h=S\circ\sqrt{}\circ T$. Explicitly construct an inverse $g=h^{-1}=T^{-1}\circ z^2\circ S^{-1}$. $g$ is not a rotation, so by the Schwarz lemma, $|g'(0)|<1$, so this must mean that $|h'(0)|>1$.
+        % \end{proof}
+        % Claim implies lemma: Set $F=h\circ f$ and then use the chain rule because since $h'(z_0)>1$.
+
+        % {\color{white}hi}
+        % \begin{itemize}
+        %     \item Summary of argument.
+        %     \begin{itemize}
+        %         \item This is a \emph{constructive} proof, in that we will actually construct $F$ as opposed to just proving its existence in the abstract. In particular\dots
+        %         \item We will construct a function $h$, and prove that it has some special properties.
+        %         \item We will define $F=h\circ f$.
+        %         \item We will use the special properties of $h$ to prove that $F$, as defined, has the desired properties.
+        %     \end{itemize}
+        %     \item Let $U:=f(\D)$.
+        %     \item $f$ is conformal and $\D$ is simply connected: $f(\D)$ is simply connected.
+        %     \begin{itemize}
+        %         \item Some argument about preservation of exterior winding number being zero?? Footnote.
+        %     \end{itemize}
+        %     \item There exists $h:U\to\D$ with $h(0)=0$ and $|h'(0)|>1$.\footnote{We can also prove a more general version of this claim in which we let $z_0\in U$ be arbitrary and construct $h$ with $h(z_0)=0$ and $|h'(z_0)|>1$ by adding in an additional M\"{o}bius transformation in the beginning sending $z_0\mapsto 0$. This is what we did in class, but it it not actually necessary for the proof, so I have left out the argument here. My raw, unedited notes from class are still available in the .tex file, for future reference.}
+        %     \item Construct $h$.
+        %     \begin{itemize}
+        %         % \item Let $R$ be a M\"{o}bius transformation sending $z_0\mapsto 0$.
+        %         \item $f$ is not onto: There exists $w\in\D$ such that $w\notin U$.
+        %         \item Let $T$ be a M\"{o}bius transformation sending $w\mapsto 0$.
+        %         \item $T$ is a M\"{o}bius transformation $\Longrightarrow$ $T$ is biholomorphic $\Longrightarrow$ $T$ is conformal and $U$ is simply connected: $T(U)$ is simply connected.
+        %         \item $T(U)$ is simply connected: There exists a logarithm on $T(U)$.
+        %         \item There exists a logarithm on $T(U)$: There exists a square root function $\sqrt{}:z\mapsto z^{1/2}=\e[0.5\log z]$ on $U$.
+        %         \item Let $S$ be a M\"{o}bius transformation sending $\sqrt{T(0)}\mapsto 0$.
+        %         \item Define $h:U\to\D$ by
+        %         \begin{equation*}
+        %             h(z) := (S\circ\sqrt{}\circ T)(z)
+        %         \end{equation*}
+        %     \end{itemize}
+        %     \item $h(0)=0$.
+        %     \begin{itemize}
+        %         \item By definition.
+        %     \end{itemize}
+        %     \item $|h'(0)|>1$.
+        %     \begin{itemize}
+        %         \item Define $h^{-1}:h(U)\to U$ by
+        %         \begin{equation*}
+        %             h^{-1}(z) := (T^{-1}\circ[z\mapsto z^2]\circ S^{-1})(z)
+        %         \end{equation*}
+        %         \item $h^{-1}$ is a composition of maps that are holomorphic and bijective on their domains: $h^{-1}$ is conformal.
+        %         \item Contrapositive of the Schwarz Lemma ($h^{-1}$ is conformal, $h^{-1}(0)=0$, and $h^{-1}$ is not a rotation): $|(h^{-1})'(0)|<1$.
+        %         \item Inverse function theorem: $|h'(0)|>1$.
+        %     \end{itemize}
+        %     \item Let $F=h\circ f$.
+        %     \item $f:\D\to U$ and $h:U\to\D$: $F:\D\to\D$.
+        %     \item $f(0)=0$ and $h(0)=0$: $F(0)=h(f(0))=h(0)=0$.
+        %     \item $|h'(0)|>1$:
+        %     \begin{equation*}
+        %         |F'(0)| = |h'(f(0))\cdot f'(0)|
+        %         = |h'(0)|\cdot|f'(0)|
+        %         > 1\cdot|f'(0)|
+        %         = |f'(0)|
+        %     \end{equation*}
+        % \end{itemize}
+
+
+        We will prove this claim via \emph{constructive} means, actually building a function $F$ as opposed to just proving its existence in the abstract. In particular\dots
+        \begin{enumerate}
+            \item We will construct a function $h$, and prove that it has some special properties;\footnote{We can also prove a more general version of this claim in which we let $z_0\in U$ be arbitrary and construct $h$ with $h(z_0)=0$ and $|h'(z_0)|>1$ by adding in an additional M\"{o}bius transformation in the beginning sending $z_0\mapsto 0$. This is what we did in class, but it it not actually necessary for the proof, so I have left out the argument here. My raw, unedited notes from class are still available in the .tex file, for future reference.}
+            \item We will define $F=h\circ f$;
+            \item We will use the special properties of $h$ to prove that $F$, as defined, has the desired properties.
+        \end{enumerate}
+        Let's begin.\par
+        Let $U:=f(\D)$. Since $f$ is conformal and $\D$ is simply connected, $f(\D)$ is simply connected.\footnote{Some argument about how conformal maps preserve the winding number of $\gamma\subset U$ about an exterior point being zero??} We now construct the aforementioned function $h$.\par
+        To construct $h$, we will build three other functions --- $T$, $\sqrt{}$, and $S$ --- and let $h$ be their composition.
+        \begin{enumerate}
+            \item Since $f$ is not onto by hypothesis, there exists $w\in\D$ such that $w\notin U$. Let $T$ be a M\"{o}bius transformation sending $w\mapsto 0$.
+            \item Since $T$ is a M\"{o}bius transformation (hence biholomorphic and hence conformal) and $U$ is simply connected, $T(U)$ is simply connected. Thus, there exists a logarithm function on $T(U)$. It follows that there exists a square root function $\sqrt{}:z\mapsto z^{1/2}=\e[0.5\log z]$ on $U$.
+            \item Lastly, let $S$ be a M\"{o}bius transformation sending $\sqrt{T(0)}\mapsto 0$.
+        \end{enumerate}
+        At this point, we can finally define $h:U\to\D$ by
+        \begin{equation*}
+            h(z) := (S\circ\sqrt{}\circ T)(z)
+        \end{equation*}
+        We will now prove two special properties of $h$: $h(0)=0$ and $|h'(0)|>1$. By the construction of $T,\sqrt{},S$, we immediately obtain $h(0)=0$. As to the other property, begin with defining $h^{-1}:h(U)\to U$ by
+        \begin{equation*}
+            h^{-1}(z) := (T^{-1}\circ[z\mapsto z^2]\circ S^{-1})(z)
+        \end{equation*}
+        Since $h^{-1}$ is a composition of holomorphic and bijective maps, $h^{-1}$ is conformal. This combined with the facts that $h^{-1}(0)=0$ and $h^{-1}$ is not a rotation (clearly) implies by the contrapositive of the Schwarz Lemma that $|(h^{-1})'(0)|<1$. Therefore, by the inverse function theorem, $|h'(0)|>1$.\par
+        At this point, we may define a function $F$ by
+        \begin{equation*}
+            F := h\circ f
+        \end{equation*}
+        We now check $F$'s four properties. Since $f:\D\to U$, $h:U\to\D$, and $F=h\circ f$, we have that $F:\D\to\D$ via function composition, as desired. Since $T$, $\sqrt{}$, and $S$ are conformal, we have that $F$ is conformal, as desired. Since $f(0)=0$ by hypothesis, $h(0)=0$ by the above, and $F=h\circ f$, we have that
+        \begin{equation*}
+            F(0) = h(f(0))
+            = h(0)
+            = 0
+        \end{equation*}
+        as desired. And since $|h'(0)|>1$, we conclude by observing the following.
+        \begin{equation*}
+            |F'(0)| = |h'(f(0))\cdot f'(0)|
+            = |h'(0)|\cdot|f'(0)|
+            > 1\cdot|f'(0)|
+            = |f'(0)|
+        \end{equation*}
+    \end{proof}
+    \item Takeaway: The Schwarz Lemma tells us that conformal maps from $\D\to\D$ have derivative $\leq 1$, and this lemma tells us that maps from $U\subsetneq\D\to\D$ can be made to have a larger derivative.
+    \item Note that the behavior in the Schwarz and this lemma is analogous to that of \emph{entire} biholomorphims, where $f$ conformal implies $f$ biholomorphic implies $f(z)=az+b$, this plus $f(0)=0$ implies $f(z)=az$, and $f:\D\to\D$ implies $|a|\leq 1$.
+    \pagebreak
+    \item We now prove our main result for the day.
+    \item Riemann mapping theorem: Let $U$ be any simply connected domain in $\C$ (but not $\C$ itself). Then there exists a conformal map $f:U\to\D$.
+    \item Comments on the RMT.
+    \begin{itemize}
+        \item So every simply connected domain is either $\C$ or the unit disk.
+        \item Exercise: If we stipulate also that some $z_0\in U\mapsto 0$ and $f'(z_0)\in\R_{>0}$, then $f$ is unique.
+        \item Why we delayed proving this masterpiece theorem until the end of the class: We just developed the tool we need.
+    \end{itemize}
+    \item Three-step proof outline.
+    \begin{enumerate}
+        \item Map $U$ into $\D$.
+        \begin{proof}[Proof Sketch]
+            Suppose $U$ misses some open set in $\hat{\C}$. (If it misses some open set, it misses a ball.) Now, just use a M\"{o}bius transformation, specifically the one that takes this ball to the entire northern hemisphere, thereby making $U$ something else that lives in the southern hemisphere. Make sure that this map also sends some point $z_0\in U$ to $0\in\hat{\C}$! Then remember that the southern hemisphere is just the unit disk (see Figure \ref{fig:stereographicProjection}.) Great pictures on the board!\par
+            If $U$ doesn't miss an open set (e.g., $U=\C\setminus\R_{\leq 0}$), then use a log, which we would be able to do because the set is simply connected.
+        \end{proof}
+        \item "Maximize" among all such maps.
+        \begin{proof}[Proof Sketch]
+            If $f:U\to\D$ is conformal and not onto, then use the Converse Lemma to find $F$ with a bigger derivative at $z_0$.\par
+            Thus, "just" take an $f$ maximizing $|f'(z_0)|$. We can't find something with a bigger derivative at this point, so the function must be onto.\par
+            We now pull a rabbit out of the hat in the form of the real analytical/metric space form of the \textbf{Arzel\`{a}-Ascoli theorem}.
+        \end{proof}
+        \item Take a limit of this maximizing sequence (this is where the real magic happens, using the argument principle and such).
+        \begin{proof}[Proof Sketch]
+            Set $\mathcal{F}=\{f:U\to\D\mid\text{conformal, }f(z_0)=0\}$. This family is uniformly bounded (e.g., by the unit disk). Let
+            \begin{equation*}
+                \alpha := \sup_{f\in\mathcal{F}}|f'(z_0)|
+            \end{equation*}
+            The set of all $f_k$ such that $|f_k'(z_0)|\to\alpha$ has a uniformly convergent subsequence. If $f_k\to f$ locally uniformly, then by the theorem from last class, $f$ is holomorphic. Additionally, $f$ is also conformal because it is holomorphic and bijective (see the following proposition), hence biholomorphic.
+        \end{proof}
+    \end{enumerate}
+    \item \textbf{Arzel\`{a}-Ascoli theorem}: If $\{f_k\}:X\to Y$ (where $X,Y$ are metric spaces) is a family of (locally) uniformly bounded and (locally) equicontinuous functions, then there exists a (locally) uniformly convergent subsequence.
+    \item \textbf{Equicontinuity}: Same $\varepsilon$'s and $\delta$'s work for every $f_k$.
+    \item Proposition: If $f_k$ are all conformal, then $f$ is either conformal or constant.
+    \begin{proof}
+        Suppose that $f$ is not bijective. Hence, $f$ is not injective. Thus, there are two points $z_1\neq z_2$ such that $f(z_1)=w=f(z_2)$. Pick disks $D_i$ about $z_i$ such that on each $D_i$, only $z_i\mapsto w$.\par
+        Thus, $f(z)=w$ (i.e., $f(z)-w=0)$ twice on $D_1\cup D_2$. Thus, by the argument principle,
+        \begin{equation*}
+            2 = \int_{\partial D_1+\partial D_2}\frac{f'(z)}{f(z)-w}\dd{z}
+            = \lim_{k\to\infty}\int_{\partial D_1+\partial D_2}\frac{f_k'(z)}{f_k(z)-w}\dd{z}
+            \leq 1
+        \end{equation*}
+        which is a contradiction since the $f_k$ are injective, so $f$ is bijective.
+    \end{proof}
+    \item With just a bit of work, we can get from here to Montel's theorem.
+    \item Montel's theorem: If $\{f_k\}$ is a family of (locally) uniformly bounded holomorphic functions, then there exists a (locally) uniformly convergent subsequence.
+    \begin{proof}
+        (Locally) uniformly bounded plus holomorphic implies (locally) equicontinuous.
+    \end{proof}
+    \item Montel's theorem allows us to extract limits.
 \end{itemize}
 
 
