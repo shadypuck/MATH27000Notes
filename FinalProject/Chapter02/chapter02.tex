@@ -1,0 +1,303 @@
+\documentclass[../finalProject.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\sectionmark}[1]{\markboth{Chapter \thesection\ (#1)}{}}
+\stepcounter{section}
+
+\begin{document}
+
+
+
+
+\section{Differential Equations and Special Functions}
+\subsection{Infinite Series}
+\begin{itemize}
+    \item \marginnote{5/10:}If we're going to be extensively working with infinite series, we might as well review their properties.
+    \item Defines the \textbf{$\bm{n}^\textbf{th}$ partial sum}, \textbf{convergence}, \textbf{absolute} (convergence), and \textbf{uniform} (convergence).
+    \item Properties of uniformly convergent infinite series.
+    \begin{enumerate}
+        \item $\{u_k\}$ continuous $\Longrightarrow$ $u$ continuous.
+        \item $\{u_k\}$ continuous $\Longrightarrow$ $u$ integrable term by term.
+        \item $\{u_k\}\subset C^1$ and $u_k'\to u'$ uniformly $\Longrightarrow$ $u$ differentiable term by term.
+    \end{enumerate}
+    \item Assume that all of these properties hold for every series in \textcite{bib:Seaborn} unless explicitly stated otherwise.
+\end{itemize}
+
+
+\subsection{Analytic Functions}
+\begin{itemize}
+    \item \textbf{Real analytic} (function in $(a,b)$): A function $f$ such that for each point $x_0\in(a,b)$, $f(x)$ can be written as a power series
+    \begin{equation*}
+        f(x) = \sum_{n=0}^\infty c_n(x-x_0)^n
+    \end{equation*}
+    where the numbers $c_n$ are independent of $x$.
+    \begin{itemize}
+        \item The functions we encounter in physics and applied mathematics are generally analytic.
+        \item The functions we encounter in this book certainly will be.
+        \item Any function $f$ that is analytic in the interval $(a,b)$ may be represented by its \textbf{Taylor series} expanded about any point $x_0$ in the interval.
+    \end{itemize}
+    \item \textbf{Radius of convergence}. \emph{Denoted by} $\bm{R}$.
+    \item \textcite{bib:Seaborn} motivates the \textbf{Pochhammer symbol} by using it to rewrite the Taylor series for $f(z)=(1-z)^s$.
+    \item \textbf{Pochhammer symbol}: The number defined inductively as follows, where $a\in\C$ and $n\in\N_0$. \emph{Denoted by} $\bm{(a)_n}$. \emph{Given by}
+    \begin{align*}
+        (a)_0 &:= 1\\
+        (a)_n &:= a(a+1)(a+2)(a+3)\cdots(a+n-1)\tag{$n=1,2,3,\dots$}
+    \end{align*}
+    \item Definition of the \textbf{geometric series}.
+    \item Identities involving Pochhammer symbols.
+    \begin{enumerate}
+        \item $n!=(n-m)!(n-m+1)_m$.
+        \item $(c-m+1)_m=(-1)^m(-c)_m$.
+        \item $(n+m)!=n!(n+1)_m$.
+        \item $n!=m!(m+1)_{n-m}$.
+        \item $(2n-2m)!=2^{2n-2m}(n-m)!(\frac{1}{2})_{n-m}$.
+        \item $(c)_{n+m}=(c)_n(c+n)_m$.
+        \item $(c)_n=(-1)^m(c)_{n-m}(-c-n+1)_m$.
+        \item $(c)_n=(-1)^{n-m}(c)_m(-c-n+1)_{n-m}$.
+        \item $(-n)_{m-k}=(-n)_{m-n}(m-2n)_{n-k}$.
+    \end{enumerate}
+\end{itemize}
+
+\subsubsection{Series Expansion with Remainder}
+\begin{itemize}
+    \item \textbf{$\bm{n}^\textbf{th}$ remainder} (of $f$ analytic): The difference between $f$ and the first $n$ terms of its Taylor series. \emph{Denoted by} $\bm{R_n}$. \emph{Given by}
+    \begin{equation*}
+        R_n(x) := f(x)-\sum_{k=0}^{n-1}\frac{f^{(k)}(a)}{k!}(x-a)^k
+    \end{equation*}
+    \item \textcite{bib:Seaborn} derives the Lagrange error bound.
+    \begin{itemize}
+        \item He also provides an integral formula and works an example.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Integration of Infinite Series}
+\begin{itemize}
+    \item "Infinite series that converge uniformly can be integrated term by term" \parencite[22]{bib:Seaborn}.
+    \item This allows us to find the Taylor series for certain functions.
+    \begin{itemize}
+        \item Example: We already know the Taylor series for $(1+x^2)^{-1}$ by extrapolating from the geometric series, and this function is just the derivative of $\tan^{-1}$!
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Inversion of Series}
+\begin{itemize}
+    \item Same as Section II.4 of \textcite{bib:FischerLieb}, but with more terms given.
+\end{itemize}
+
+
+\subsection{Linear Second-Order Differential Equations}
+\begin{itemize}
+    \item A clever method of solution for any linear, second-order, homogeneous differential equation.
+    \begin{itemize}
+        \item Such equations can be written in the form
+        \begin{equation*}
+            \dv[2]{z}u(z)+P(z)\dv{z}u(z)+Q(z)u(z) = 0
+        \end{equation*}
+        \item Rewrite the above as
+        \begin{equation*}
+            u''(z) = f(z,u,u')
+        \end{equation*}
+        \item Suppose $u,u'$ are defined at $z_0$.
+        \item Then the above gives $u''(z_0)$.
+        \item It follows by differentiating to
+        \begin{equation*}
+            u^{(3)}(z) = \dv{f}{z}
+            = f'(z,u,u')
+        \end{equation*}
+        that $u^{(3)}$ can also be evaluated at $z_0$.
+        \item Assuming $u$ is analytic, all higher derivatives of the above exist as well, so by evaluating these at $z_0$ and adding on the two given ones, we can construct the following Taylor series for $u$.
+        \begin{equation*}
+            u(z) = \sum_{n=0}^\infty\frac{u^{(n)}(z_0)}{n!}(z-z_0)^n
+        \end{equation*}
+        \item If this series has a nonzero radius of convergence, then the solution exists.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Singularities of a Differential Equation}
+\begin{itemize}
+    \item \textbf{Ordinary point} (of an ODE): A point $z_0$ for which $u,u'$ can be assigned arbitrary values and the solution still exists.
+    \begin{itemize}
+        \item Example: In the harmonic oscillator, all times $t_0$ are ordinary points of the Newton's second law ODE because we can pick $x(t_0),x'(t_0)=v(t_0)$ arbitrarily and still solve the ODE for a trajectory.
+    \end{itemize}
+    \item \textbf{Singular point} (of an ODE): A point $z_0$ for which $u,u'$ cannot be assigned arbitrary values without the solution failing to exist somewhere. \emph{Also known as} \textbf{singularity} (at $z_0$).
+    \begin{itemize}
+        \item Example: The ODE
+        \begin{equation*}
+            z^2u''(z)+azu'(z)+bu(z) = 0
+        \end{equation*}
+        has a singularity at 0. Indeed, if $u(0)$ has any value other than 0, the above equation will not hold unless either $u'(0)$ or $u''(0)$ are infinite.
+    \end{itemize}
+    \item The above two definitions are often alternatively stated as follows: If both $P,Q$ are analytic at $z_0$, then $z_0$ is an ordinary point. Otherwise, the point is singular.
+\end{itemize}
+
+\subsubsection{Singularities of a Function}
+\begin{itemize}
+    \item \textbf{Regular} ($f$ at $z_0$): A point $z_0$ at which $f$ is analytic.
+    \item \textbf{Irregular} ($f$ at $z_0$): A point $z_0$ at which $f$ is not analytic.
+    \item Definition of \textbf{pole} and \textbf{essential singularity}.
+    \begin{itemize}
+        \item In Chapter \ref{sch:7}, we'll learn about \textbf{branch points}, an additional type of singularity.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Regular and Irregular Singularities of a Differential Equation}
+\begin{itemize}
+    \item \textbf{Regular} (singularity of an ODE): A singular point $z_0$ of an ODE for which $(z-z_0)P(z)$ and $(z-z_0)^2Q(z)$ are analytic at $z_0$.
+    \item \textbf{Irregular} (singularity of an ODE): A singular point $z_0$ of an ODE that is not regular.
+\end{itemize}
+
+
+\subsection{The Hypergeometric Function}
+\begin{itemize}
+    \item Definition of \textbf{rational} (function).
+    \item All ODEs encountered in this book have at most three singularities.
+    \begin{itemize}
+        \item A differential equation with at most three singularities has $P,Q$ rational.
+    \end{itemize}
+    \item A change of variables can convert such an ODE into Gauss's \textbf{hypergeometric equation}.
+    \item \textbf{Hypergeometric equation}: The differential equation given as follows, where $a,b,c\in\C$ are constants independent of $z$. \emph{Given by}
+    \begin{equation*}
+        z(1-z)\dv[2]{u}{z}+[c-(a+b+1)z]\dv{u}{z}-abu = 0
+    \end{equation*}
+    \begin{itemize}
+        \item This ODE has its singularities at $0,1,\infty$.
+    \end{itemize}
+    \item Since every ODE we will encounter for the rest of the book can be transformed into the hypergeometric equation, we need only solve it once. After that, we can express solutions to other ODEs in terms of this solution.
+    \item Solving the hypergeometric equation.
+    \begin{itemize}
+        \item Use the ansatz
+        \begin{equation*}
+            u(z) = \sum_{n=0}^\infty a_nz^{n+s}
+        \end{equation*}
+        \item Substituting in, collecting terms, and setting each coefficient equal to zero gives the recursion relations
+        \begin{align*}
+            s(s+c-1)a_0 &= 0&
+            a_{n+1} &= \frac{(n+s)(n+s+a+b)+ab}{(n+s+1)(n+s+c)}a_n
+        \end{align*}
+        \item We now divide into cases ($a_0=0$, $s=0$, and $s=1-c$).
+        \begin{itemize}
+            \item \underline{$a_0=0$}: Implies that $a_n=0$ for all $n$, and hence $u(z)=0$ is the only solution.
+            \item \underline{$s=0$}: The recursion relation simplifies to
+            \begin{equation*}
+                a_{n+1} = \frac{(a+n)(b+n)}{(n+1)(c+n)}a_n
+            \end{equation*}
+            which yields the coefficients of the \textbf{hypergeometric function}.
+            \item \underline{$s=1-c$}: Discussed shortly.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Hypergeometric function}: The function defined as follows, which solves the hypergeometric equation in one case. \emph{Denoted by} $\bm{F(a,b;c;z)}$. \emph{Given by}
+    \begin{equation*}
+        F(a,b;c;z) := \sum_{n=0}^\infty\frac{(a)_n(b)_n}{n!(c)_n}z^n
+    \end{equation*}
+\end{itemize}
+
+\subsubsection{Examples}
+\begin{itemize}
+    \item We have
+    \begin{align*}
+        \sum_{n=0}^\infty z^n &= F(1,b;b;z)&
+        (1-z)^s &= F(-s,b;b;z)
+    \end{align*}
+    \begin{itemize}
+        \item Note that the left equation above is the geometric series!
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Linearly Independent Solutions}
+\begin{itemize}
+    \item Miscellaneous observations, based on the form of the hypergeometric function.
+    \begin{itemize}
+        \item If $a$ or $b$ is in $\Z_{\leq 0}$, then the series terminates (i.e., it is a polynomial).
+        \item The case where $c$ is a negative integer or zero will be discussed shortly.
+    \end{itemize}
+    \item Since the hypergeometric equation is a homogeneous, linear, second-order differential equation, its general solution is a linear combination of two \textbf{linearly independent} solutions $u_1,u_2$.
+    \item \textbf{Linearly independent} (functions): Two functions $u_1,u_2$ such that $c_1u_1+c_2u_2=0$ iff $c_1=c_2=0$.
+    \item $u_1(z)=F(a,b;c;z)$ is one solution.
+    \item The other one may be obtained as follows from the $s=1-c$ case.
+    \begin{itemize}
+        \item Substituting in and rearranging the original recursion relation yields
+        \begin{align*}
+            a_{n+1} &= \frac{[n+(2-c)-1][n+(2-c)-1+a+b]+ab}{[n+(2-c)](n+1)}a_n\\
+            &= \frac{(n+c'-1+a)(n+c'-1+b)}{(n+1)(n+c')}a_n\\
+            &= \frac{(a'+n)(b'+n)}{(n+1)(c'+n)}a_n
+        \end{align*}
+        \item Thus, returning the substitutions,
+        \begin{equation*}
+            u_2(z) = z^{1-c}F(1+a-c,1+b-c;2-c;z)
+        \end{equation*}
+    \end{itemize}
+    \item Therefore, the general solution of the hypergeometric equation is
+    \begin{equation*}
+        u(z) = AF(a,b;c;z)+Bz^{1-c}F(1+a-c,1+b-c;2-c;z)
+    \end{equation*}
+\end{itemize}
+
+\subsubsection{If \texorpdfstring{$\bm{c}$}{TEXT} is an Integer}
+\begin{itemize}
+    \item If $c=1$, then $u_2(z)$ is not a new solution.
+    \item If $c\geq 2$, then
+    \begin{equation*}
+        (2-c)_k = (2-c)(3-c)\cdots(-1)\cdot 0\cdot(-n+k+1)!
+    \end{equation*}
+    \begin{itemize}
+        \item Thus, the denominator vanishes in higher order terms and $u_2$ is not a valid solution.
+    \end{itemize}
+    \item If $c\leq 0$, then
+    \begin{equation*}
+        (c)_k = (-n)(-n+1)\cdots(-1)\cdot 0\cdot(-n+k-1)!
+    \end{equation*}
+    \begin{itemize}
+        \item Similarly, the denominator vanishes in higher order terms and $u_2$ is not a valid solution.
+    \end{itemize}
+    \item If $c\in\Z$ and $a$ or $b$ is an integer, too, then it may be possible to have solutions given by both series.
+    \begin{itemize}
+        \item Example given.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{The Simple Pendulum}
+\begin{itemize}
+    \item \textcite{bib:Seaborn} uses the hypergeometric function and elliptic integrals to solve the simple pendulum of classical mechanics \emph{exactly}, i.e., without resorting to the small angle approximation.
+    \item Excellent to see! Come back to if I have time.
+\end{itemize}
+
+
+\subsection{The Generalized Hypergeometric Function}
+\begin{itemize}
+    \item \textbf{Generalized hypergeometric function}: The function defined as follows. \emph{Denoted by} $\bm{{}_pF_q}$. \emph{Given by}
+    \begin{equation*}
+        {}_pF_q(a_1,\dots,a_p;b_1,\dots,b_q;z) := \sum_{n=0}^\infty\frac{(a_1)_n\cdots(a_p)_n}{n!(b_1)_n\cdots(b_q)_n}z^n
+    \end{equation*}
+\end{itemize}
+
+
+\subsection{Vandermonde's Theorem}
+\begin{itemize}
+    \item See \verb|AIMEPrep.pdf|.
+    \item \textbf{Vandermonde's theorem}: The following powerful relation useful in manipulating sums involving Pochhammer symbols. \emph{Given by}
+    \begin{equation*}
+        \sum_{m=0}^n\frac{(a)_m}{m!}\frac{(b)_{n-m}}{(n-m)!} = \frac{(a+b)_n}{n!}
+    \end{equation*}
+    \begin{proof}
+        Given.
+    \end{proof}
+    \item Definition of the \textbf{Cauchy product}.
+\end{itemize}
+
+
+\subsection{Leibniz's Theorem}
+\begin{itemize}
+    \item \textbf{Leibniz's theorem}: The following formula for the $m^\text{th}$ derivative of the product of two analytic functions $u,v$. \emph{Given by}
+    \begin{equation*}
+        \dv[m]{x}[u(x)v(x)] = \sum_{k=0}^m\frac{(m-k+1)_k}{k!}\left[ \dv[k]{x}u(x) \right]\left[ \dv[m-k]{x}v(x) \right]
+    \end{equation*}
+    \begin{proof}
+        Given; follows from Vandermonde's theorem.
+    \end{proof}
+\end{itemize}
+
+
+
+
+\end{document}

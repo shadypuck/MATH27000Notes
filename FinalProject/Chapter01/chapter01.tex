@@ -1,0 +1,129 @@
+\documentclass[../finalProject.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\sectionmark}[1]{\markboth{Chapter \thesection\ (#1)}{}}
+
+\begin{document}
+
+
+
+
+\section{Special Functions in Applied Mathematics}
+\subsection{Variables, Functions, Limits, and Continuity}
+\begin{itemize}
+    \item \marginnote{5/10:}Notes from the preface.
+    \begin{itemize}
+        \item Instead of introducing special functions as solutions to an ODE of interest, we will define the special function in terms of the generalized hypergeometric series and then derive all its interesting properties from this definitino.
+        \item We will not be simple, straightforward, or elegant; rather, we will furnish the clearest and most direct connections between the functions of applied math and the hypergeometric functions.
+        \item Prerequisites: Real analysis, general awareness of Schr\"{o}dinger's equation. Intermediate physics courses will lend a greater appreciation for the book.
+        \item Mathematical topics are not introduced until needed (e.g., complex analysis doesn't come in until Chapters 7-8 with the exception of a few reminders along the way).
+    \end{itemize}
+    \item Introduction to the chapter.
+    \begin{itemize}
+        \item \textbf{Special function}: A mathematical function that occurs often enough in fields like physics and engineering to warrant special consideration, often expressed through extensive dedicated literature.
+    \end{itemize}
+    \item Definition of \textbf{variable}, \textbf{function}, \textbf{single-valued} or \textbf{bijective} (function), \textbf{limit}, and \textbf{continuity}.
+\end{itemize}
+
+
+\subsection{Why Study Special Functions?}
+\begin{itemize}
+    \item Sine is a special function!
+    \begin{itemize}
+        \item \textcite{bib:Seaborn} gives two completely different contexts in physics where it arises.
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{Special Functions and Power Series}
+\begin{itemize}
+    \item Special functions can be represented as a power series.
+    \begin{itemize}
+        \item This is because "the behavior of a physical system is commonly represented by a differential equation" and "one very powerful method for solving differential equations is to assume a power series solution" \parencite[3]{bib:Seaborn}.
+    \end{itemize}
+    \item As an example, \textcite{bib:Seaborn} very neatly solves the classical harmonic oscillator in full generality using a power series solution!
+\end{itemize}
+
+
+\subsection{The Gamma Function: Another Example from Physics}
+\begin{itemize}
+    \item \textbf{Gamma function}: The complex function defined as follows. \emph{Denoted by} $\bm{\Gamma(z)}$. \emph{Given by}
+    \begin{equation*}
+        \Gamma(z) := \int_0^\infty t^{z-1}\e[-t]\dd{t}
+    \end{equation*}
+    \item \textcite{bib:Seaborn} gives an example of $\Gamma(3/2)$ arising in the context of normalizing the Maxwell-Boltzmann distribution.
+\end{itemize}
+
+\subsubsection{Properties of the Gamma Function}\label{ss2:1.4.1}
+\begin{itemize}
+    \item By direct computation,
+    \begin{equation*}
+        \Gamma(1) = 1
+    \end{equation*}
+    \item Via integration by parts,
+    \begin{equation*}
+        \Gamma(z+1) = z\Gamma(z)
+    \end{equation*}
+    \item Combining the last two, we have for all $n\in\N_0$,
+    \begin{equation*}
+        \Gamma(n+1) = n!
+    \end{equation*}
+    \item Two alternative integral representations.
+    \begin{align*}
+        \frac{\Gamma(z+1)}{a^{z+1}} &= \int_0^\infty x^z\e[-ax]\dd{x}&
+        \Gamma(z) &= \int_0^1[\log(s^{-1})]^{z-1}\dd{s}
+    \end{align*}
+    \begin{itemize}
+        \item Brief derivations given for these, as well as the following.
+    \end{itemize}
+    \item Sum in the argument.
+    \begin{equation*}
+        \Gamma(x+1) = \int_0^\infty\e[-t]t^{x+y-1}\dd{t}
+    \end{equation*}
+    \item Product.
+    \begin{equation*}
+        \Gamma(x)\Gamma(y) = \Gamma(x+y)\int_0^\infty p^{x-1}(1-p)^{-x-y}\dd{p}
+    \end{equation*}
+    \item If $y=1-x$ and $0<x<1$, then
+    \begin{equation*}
+        \Gamma(x)\Gamma(1-x) = \int_0^\infty\frac{p^{x-1}}{1+p}\dd{p}
+    \end{equation*}
+    \item We have the specific value that
+    \begin{equation*}
+        \Gamma(\tfrac{1}{2}) = \sqrt{\pi}
+    \end{equation*}
+    \item \textbf{Duplication formula} (for $\Gamma$): The relation given as follows. \emph{Given by}
+    \begin{equation*}
+        \Gamma(z)\Gamma(z+\tfrac{1}{2}) = \sqrt{\pi}2^{1-2z}\Gamma(2z)
+    \end{equation*}
+\end{itemize}
+
+\subsubsection{Velocity Distribution in an Ideal Gas}
+\begin{itemize}
+    \item \textcite{bib:Seaborn} finishes the derivation of the Maxwell-Boltzmann distribution using the properties in Section \ref{ss2:1.4.1}.
+    \item \textbf{Incomplete gamma function}: The complex function defined as follows. \emph{Denoted by} $\bm{\gamma(z,b)}$. \emph{Given by}
+    \begin{equation*}
+        \gamma(z,b) := \int_0^bt^{z-1}\e[-t]\dd{t}
+    \end{equation*}
+\end{itemize}
+
+
+\subsection{A Look Ahead}
+\begin{itemize}
+    \item Many techniques exist for evaluating definite integrals.
+    \item Examples.
+    \begin{itemize}
+        \item Contour integration (see Chapter \ref{sch:8}).
+        \begin{itemize}
+            \item $\Gamma(\frac{1}{2})$ may be evaluated by this method; computation given in a later chapter.
+        \end{itemize}
+        \item Geometrical approach.
+    \end{itemize}
+    \item \textbf{Elementary functions}: The mathematical functions like the sine, the cosine, and the exponential, along with polynomials and other algebraic expressions.
+    \item We will focus on \textbf{higher transcendental functions}, of which $\Gamma$ is one example.
+\end{itemize}
+
+
+
+
+\end{document}

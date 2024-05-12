@@ -1,0 +1,165 @@
+\documentclass[../finalProject.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{CHEM 26100 Notes}
+
+\begin{document}
+
+
+
+
+\section*{CHEM 26100 Notes}
+\addcontentsline{toc}{section}{CHEM 26100 Notes}
+\begin{itemize}
+    \item \marginnote{5/10:}A preview of where the complex analysis comes in.
+    \begin{itemize}
+        \item This is an ordinary differential equation that physicists care about:
+        \begin{equation*}
+            -\frac{\hbar^2}{2m}\pdv[2]{\psi(x)}{x}+V(x)\cdot\psi(x) = E\psi(x)
+        \end{equation*}
+        \item What do they do with it?
+        \begin{itemize}
+            \item They take a potential energy function $V:\R\to\R$ of interest and use this equation to solve for a corresponding $\psi:\R\to\R$.
+            \item Some potential energy functions $V$ give rise to special differential equations, such as the \textbf{Hermite equation} and \textbf{Legendre equation}.
+        \end{itemize}
+        \item Why do we care?
+        \begin{itemize}
+            \item We can use complex analysis and the hypergeometric function introduced on Problem Set 2 to solve these equations.
+        \end{itemize}
+    \end{itemize}
+    \item Quantum mechanics background.
+    \begin{itemize}
+        \item In the name of being concise in my background, I'm going to intentionally skip some details. You're free to ask me about these things, but I have done my best to present a cohesive, standalone introduction.
+        \item Quantum mechanics is better \emph{done} than \emph{understood} at first. Understanding typically develops with experience in doing the computations, which is a strange but fairly valid pedagogical approach. However, since I don't have the time to walk you through a bunch of computations, I will do my best to offer a handwavey verbal explanation.
+        \begin{itemize}
+            \item Quote my physics textbook here??
+        \end{itemize}
+        \item Classical physics: Matter is composed of particles whose motion is governed by Newton's laws, most famously, the second-order differential equation
+        \begin{equation*}
+            -\dv{V}{x} = F 
+            = ma
+            = m\dv[2]{x}{t}
+        \end{equation*}
+        \begin{itemize}
+            \item Analyze larger objects as collections of particles each evolving under Newton's laws.
+            \item Matter has a fundamentally \emph{particle-like} nature.
+        \end{itemize}
+        \item New results challenge this postulate.
+        \begin{itemize}
+            \item Einstein (1905): The photoelectric effect equation and the mass-energy equation.
+            \begin{align*}
+                E &= h\nu = \frac{hc}{\lambda}&
+                E &= mc^2
+            \end{align*}
+            \item Combining these, we find that light has mass!
+            \begin{align*}
+                mc^2 &= \frac{hc}{\lambda}\\
+                m &= \frac{h}{\lambda c}
+            \end{align*}
+            \item Louis de Broglie (1924): Turns in a 4-page PhD thesis and says:
+            \begin{equation*}
+                \lambda = \frac{h}{mc}
+            \end{equation*}
+            \item Paris committee will fail him, but they write to Einstein who recognizes the importance of this work \parencite[7]{bib:CHEM26100Notes}.
+            \item Takeaway: de Broglie has just postulated that fundamental particles of matter (e.g., electrons) have a wavelike nature.
+            \item Davisson-Germer experiment: Update to Thomas Young's double-slit experiment. They use electrons and \emph{still} observe a diffraction pattern. Confirms de Broglie's hypothesis.
+        \end{itemize}
+        \item So what is matter?
+        \begin{itemize}
+            \item Modern physicists and chemists will say it has a \textbf{dual wave-particle nature}.
+            \item What does this mean? I mean, I can picture a wave, I can picture a particle, and they don't look the same! How should I picture it?
+            \item Remember, all we can do as scientists is provide a model to summarize our experimental results.
+            \item Occam's razor: Simpler models are better.
+            \item There are some experimental results in which light behaves like a particle and some in which it behaves like a wave. We will use each model when appropriate and leave the true nature of matter unsettled until we have more data.
+        \end{itemize}
+        \item For the remainder of this discussion, let us confine ourselves to one-dimensional space.
+        \item So if matter is a wave, then it is spread out over all space in some sense; it does not exist locally at some point $x$, but rather at each point $x\in\R$, it has some intensity $\psi(x)$ given by a wave function $\psi:\R\to\R$.
+        \item What constraints can we put on $\psi$?
+        \item Schr\"{o}dinger (1925):
+        \begin{equation*}
+            -\frac{\hbar^2}{2m}\pdv[2]{\psi(x)}{x}+V(x)\cdot\psi(x) = E\psi(x)
+        \end{equation*}
+        \begin{itemize}
+            \item In the Swiss Alps with his mistress.
+            \begin{itemize}
+                \item Wasn't just Oppenheimer.
+            \end{itemize}
+            \item Richard Feynman: "Where did we get that [equation] from? Nowhere. It is not possible to derive it from anything you know. It came from the mind of Schr\"{o}dinger."
+            \item Feynman, true to character, was being mildly facetious, but the core of what he says is true: It was a pretty out-of-left-field result.
+        \end{itemize}
+        \item So say we're given some potential $V(x)$ and get a $\psi(x)$ that solves the TISE. What does $\psi(x)$ tell us?
+        \begin{itemize}
+            \item Nothing directly.
+            \item Born (1926): $|\psi(x)|^2$ gives the probability that the wave/particle is at $x$.
+            \item Examples likening densities to orbitals from Gen Chem I final review session..
+        \end{itemize}
+        \item The universe can still be quantized even if we can't see it.
+        \begin{itemize}
+            \item The Earth can still be round even if we can't see it.
+            \item The pixels in a screen can still be quantized even if we can't see them.
+        \end{itemize}
+        \item Now, where is all of this going? Why am I talking about quantum mechanics in my complex analysis final project?
+        \begin{itemize}
+            \item While you or I might care about the solutions to these questions in the abstract and just for funsies, the people who will pay you to do your research might not. As such, it is important to be able to explain to a non-mathematician where your problem comes from and how a solution will benefit the average Joe.
+        \end{itemize}
+        \item This brings us to microwaves.
+        \begin{itemize}
+            \item Personally, I like microwaves. They heat up food far more quickly than a traditional oven, they're energy efficient, and they go ding when they're done.
+            \item Microwaves work because of quantum mechanics.
+            \item Essentially, they shoot light of just the right frequency at your food so that molecules in it --- which are already vibrating harmonically --- vibrate faster. Faster vibrations means warmer food.
+            \item But how do we analyze such a vibrating molecule to know what frequency of light to shoot at it? Well, a vibrating molecule can be modeled as a quantum harmonic oscillator, that is, a quantum particle with
+            \begin{equation*}
+                V(x) = \frac{1}{2}kx^2
+            \end{equation*}
+            \item Sparing you the gory details, if we plug this into the Schr\"{o}dinger equation and do some rearranging, we end up having to solve the \textbf{Hermite equation}:
+            \begin{equation*}
+                \dv[2]{H}{y}-2y\dv{H}{y}+(\epsilon-1)H(y) = 0
+            \end{equation*}
+            \item To solve the Hermite equation, we need complex analysis and the hypergeometric function.
+        \end{itemize}
+        \item Alright, where else can we use such techniques?
+        \begin{itemize}
+            \item What if we care about chemistry, at all?
+            \item Once atoms and molecules were discovered, chemistry developed as the discipline that uses atoms and molecules to do stuff, be it synthesizing a new medicine, mass-producing the ammonia fertilizer that feeds the planet, or literally anything else.
+            \item "Doing stuff" with atoms and molecules, however, is greatly facilitated by a good understanding of how atoms and molecules interact, and hence how they're structured.
+            \item Once again, quantum mechanics provides the answers we need.
+            \item A classic example is the electronic structure of the hydrogen atom, which consists of a single electron (a quantum particle) existing in the potential
+            \begin{equation*}
+                V(r) = -\frac{e^2}{4\pi\varepsilon_0r}
+            \end{equation*}
+            \begin{itemize}
+                \item FYI, that is not Euler's number in the numerator but rather the charge of an electron.
+            \end{itemize}
+            \item Sparing you the gory details once again, if we plug this into the Schr\"{o}dinger equation and do some rearranging, we end up having to solve the \textbf{Legendre equation}:
+            \begin{equation*}
+                (1-x^2)\dv[2]{P}{x}-2x\dv{P}{x}+\left[ \ell(\ell+1)-\frac{m^2}{1-x^2} \right]P(x) = 0
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+    \item \textcite[28-31]{bib:CHEM26100Notes}: Hermite polynomials derivation.
+    \begin{itemize}
+        \item Address the quantum harmonic oscillator.
+        \item Apply the 1D TISE.
+        \item Change coordinates.
+        \item Take an asymptotic solution.
+        \item Discover that the general solutions are of the form $H(y)\e[-y^2/2]$.
+        \item Substituting back into the TISE, we obtain the Hermite equation.
+        \item Solve via a series expansion and recursion relation.
+        \item Truncate the polynomial expansion to quantize.
+    \end{itemize}
+    \item \textcite[56-65]{bib:CHEM26100Notes}: Legendre polynomials and associated Legendre functions derivation.
+    \begin{itemize}
+        \item Address the hydrogen atom.
+        \item Starting from the 3D TISE in spherical coordinates, use separation of variables to isolate a one-variable portion of the angular equation. When rearranged, this ODE becomes \textbf{Legendre's equation}.
+        \item Solving Legendre's equation when $m=0$ gives the Legendre polynomials $P_\ell(x)$.
+        \item Solving Legendre's equation when $m\neq 0$ gives the associated Legendre functions
+        \begin{equation*}
+            P_\ell^{|m|}(x) = (1-x^2)^{|m|/2}\dv[|m|]{x}[P_\ell(x)]
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+
+
+
+\end{document}

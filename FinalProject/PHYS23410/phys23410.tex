@@ -1,0 +1,36 @@
+\documentclass[../finalProject.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{PHYS 23410 Notes}
+
+\begin{document}
+
+
+
+
+\section*{PHYS 23410 Notes}
+\addcontentsline{toc}{section}{PHYS 23410 Notes}
+\begin{itemize}
+    \item \marginnote{5/10:}\textcite[34-37]{bib:PHYS23410Notes}: Much more detailed asymptotic analysis and derivation of the Hermite equation.
+    \begin{itemize}
+        \item Here, we properly motivate the $H(y)\e[-y^2/2]$ that was just supplied last time.
+        \item Hermite polynomials are eventually defined via the following formula, which is \emph{not} derived.
+        \begin{equation*}
+            H_n(\xi) = (-1)^n\exp(\xi^2)\dv[n]{\xi}[\exp(-\xi^2)]
+        \end{equation*}
+    \end{itemize}
+    \item \textcite[65-66]{bib:PHYS23410Notes}: Legendre polynomials.
+    \begin{itemize}
+        \item \textcite{bib:CHEM26100Notes} actually does a better job of deriving Legendre's equation and motivating why we need the associated Legendre functions.
+        \item The Legendre polynomials are given by Rodrigues' formula:
+        \begin{equation*}
+            P_\ell(u) = \frac{1}{2^\ell\ell!}\dv[\ell]{u}(u^2-1)^\ell
+        \end{equation*}
+        \item The associated Legendre functions are defined as in \textcite{bib:CHEM26100Notes}.
+    \end{itemize}
+\end{itemize}
+
+
+
+
+\end{document}

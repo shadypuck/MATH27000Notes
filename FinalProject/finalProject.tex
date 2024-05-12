@@ -2,6 +2,10 @@
 
 \input{../preamble.tex}
 
+\setcounter{tocdepth}{2}
+
+\externaldocument{finalProject}
+
 \title{MATH 27000 (Basic Complex Variables) Final Project Notes}
 \author{Steven Labalme}
 
@@ -30,6 +34,75 @@
 \renewcommand{\proofname}{Answer}
 \subfile{Proposal/proposal.tex}
 \renewcommand{\proofname}{Proof}
+\newpage
+
+\renewcommand{\leftmark}{Proposal Feedback}
+\subfile{ProposalFeedback/feedback.tex}
+\newpage
+
+
+\pagestyle{empty}
+\part{Quantum Mechanics Review}
+\newpage
+
+\pagestyle{main}
+\renewcommand{\leftmark}{CHEM 26100 Notes}
+\subfile{CHEM26100/chem26100.tex}
+\newpage
+
+\renewcommand{\leftmark}{PHYS 23410 Notes}
+\subfile{PHYS23410/phys23410.tex}
+\newpage
+
+
+\pagestyle{empty}
+\part{Textbook Notes}
+\newpage
+
+\pagestyle{main}
+\renewcommand{\leftmark}{\firstmark}
+\renewcommand{\sectionmark}[1]{\markboth{Chapter \thesection\ (#1)}{}}
+\renewcommand{\subsectionmark}[1]{}
+\subfile{Chapter01/chapter01.tex}
+\newpage
+
+\subfile{Chapter02/chapter02.tex}
+\newpage
+
+\subfile{Chapter03/chapter03.tex}
+\newpage
+
+\stepcounter{section}
+\subfile{Chapter05/chapter05.tex}
+\newpage
+
+\stepcounter{section}
+\subfile{Chapter07/chapter07.tex}
+\newpage
+
+\subfile{Chapter08/chapter08.tex}
+\newpage
+
+\subfile{Chapter09/chapter09.tex}
+\newpage
+
+\subfile{Chapter10/chapter10.tex}
+\newpage
+
+\subfile{Chapter11/chapter11.tex}
+\newpage
+
+\subfile{Chapter12/chapter12.tex}
+\newpage
+
+
+\pagestyle{empty}
+\part{Final Report}
+\newpage
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Report and Presentation Outline}
+\subfile{Outline/outline.tex}
 
 
 

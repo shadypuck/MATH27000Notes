@@ -1,0 +1,212 @@
+\documentclass[../finalProject.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\sectionmark}[1]{\markboth{Chapter \thesection\ (#1)}{}}
+\setcounter{section}{2}
+
+\begin{document}
+
+
+
+
+\section{The Confluent Hypergeometric Function}
+\subsection{The Confluent Hypergeometric Equation}
+\begin{itemize}
+    \item \marginnote{5/10:}In this section, \textcite{bib:Seaborn} present a purposefully handwavey derivation of the confluent hypergeometric equation (and function) from the hypergeometric equation (and function). They do this so as to emphasize the connection between the two and their solutions and not get bogged down in the algebra. Let's begin.
+    \item Define $x:=bz$ in order to rewrite the hypergeometric function as follows.
+    \begin{align*}
+        F(a,b;c;z) &= \sum_{n=0}^\infty\frac{(a)_n(1)(b+1)\cdots(b+n-1)}{n!(c)_n}z^n\\
+        &= \sum_{n=0}^\infty\frac{(a)_n(1)(1+\frac{1}{b})\cdots(1+\frac{n-1}{b})}{n!(c)_n}x^n
+    \end{align*}
+    \begin{itemize}
+        \item Taking the limit as $b\to\infty$ of the above yields the \textbf{confluent hypergeometric function}.
+    \end{itemize}
+    \item \textbf{Confluent hypergeometric function}: The function defined as follows. \emph{Denoted by} $\bm{{}_1F_1}$. \emph{Given by}
+    \begin{equation*}
+        {}_1F_1(a;c;x) := \sum_{n=0}^\infty\frac{(a)_n}{n!(c)_n}x^n
+    \end{equation*}
+    \item Similarly, we may rewrite the hypergeometric equation using this substitution.
+    \begin{equation*}
+        x\left( 1-\frac{x}{b} \right)\dv[2]{u}{x}+\left[ c-\left( \frac{a+1}{b}+1 \right)x \right]\dv{u}{x}-au = 0
+    \end{equation*}
+    \begin{itemize}
+        \item Note that we have to use the chain rule when replacing the derivatives; this is how all the $b$'s work out. Essentially, we substitute $z=x/b$, $u(z)=u(x)$, $\dv*{u}{z}=b\cdot\dv*{u}{x}$, and $\dv*[2]{u}{z}=b^2\cdot\dv*[2]{u}{x}$; after that, we divide through once by $b$ and simplify.
+        \item Then once again, we take the limit as $b\to\infty$ to recover the \textbf{confluent hypergeometric equation}.
+    \end{itemize}
+    \item \textbf{Confluent hypergeometric equation}: The differential equation given as follows, where $a,c\in\C$ are constants independent of $x$. \emph{Given by}
+    \begin{equation*}
+        x\dv[2]{u}{x}+(c-x)\dv{u}{x}-au = 0
+    \end{equation*}
+    \item Let's investigate the singularities of the confluent hypergeometric equation and see how they stack up against the $0,1,\infty$ of the hypergeometric equation.
+    \begin{itemize}
+        \item First off, observe that the confluent hypergeometric equation has singularities at $x=0,\infty$.
+        \item Rewriting the confluent hypergeometric equation in the standard form for a linear, second-order, homogeneous differential equation, we obtain
+        \begin{align*}
+            P(x) &= \frac{c}{x}-1&
+            Q(x) &= -\frac{a}{x}
+        \end{align*}
+        \begin{itemize}
+            \item Since $xP(x)=c-x$ and $x^2Q(x)=-ax$ are both analytic at $x=0$, the singularity at $x=0$ is regular.
+        \end{itemize}
+        \item How about the regularity of the singularity at $x=\infty$?
+        \begin{itemize}
+            \item Change the variable to $y=x^{-1}$ and consider the resultant analogous singularity at $y=0$.
+            \item This yields
+            \begin{equation*}
+                \dv[2]{u}{y}+\frac{y+(2-c)y^2}{y^3}\dv{u}{y}-\frac{a}{y^3}u = 0
+            \end{equation*}
+            \item Since $yP(y)=[1+(2-c)y]/y$ and $y^2Q(y)=-a/y$ --- neither of which is analytic at $y=0$ --- the singularity at $x=\infty$ must be irregular.
+            \item In particular, this is because a merging (or \textbf{confluence}) of the singularities of the hypergeometric equation at $z=1$ and $z=\infty$ has occurred.
+        \end{itemize}
+    \end{itemize}
+    \item Finally, we will show that the confluent hypergeometric function constitutes a solution to the confluent hypergeometric equation and derive the general solution as well.
+    \begin{itemize}
+        \item Once again, we use the ansatz
+        \begin{equation*}
+            u(x) = \sum_{k=0}^\infty a_kx^{k+s}
+        \end{equation*}
+        \item Doing the casework and the recursion relation gets us to
+        \begin{align*}
+            u_1(x) &= a_0\,{}_1F_1(a;c;x)&
+            u_2(x) &= a_0x^{1-c}\,{}_1F_1(1+a-c;2-c;x)
+        \end{align*}
+        so that if $c\notin\Z$, the general solution is
+        \begin{equation*}
+            u(x) = A\,{}_1F_1(a;c;x)+Bx^{1-c}\,{}_1F_1(1+a-c;2-c;x)
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{One-Dimensional Harmonic Oscillator}
+\begin{itemize}
+    \item The 1D quantum harmonic oscillator will now be solved using the methods developed in the previous section.
+    \item The quantum mechanics.
+    \begin{itemize}
+        \item Starting with the TDSE.
+        \item Separation of variables.
+        \item Solving the time component.
+        \item Arriving at the TISE.
+        \begin{equation*}
+            \dv[2]{x}u(x)+\left[ \frac{2mE}{\hbar^2}-\frac{m^2\omega^2}{\hbar^2}x^2 \right]u(x) = 0
+        \end{equation*}
+    \end{itemize}
+    \item We will now go through several changes of variable to transform the above into the confluent hypergeometric equation.
+    \begin{itemize}
+        \item To begin, we can clean up a lot of the constants via a change of independent variable $x=b\rho$.
+        \begin{itemize}
+            \item Making this substitution yields
+            \begin{align*}
+                0 &= \frac{1}{b^2}\dv[2]{\rho}u(\rho)+\left[ \frac{2mE}{\hbar^2}-\frac{m^2\omega^2}{\hbar^2}\cdot b^2\rho^2 \right]u(\rho)\\
+                &= \dv[2]{\rho}u(\rho)+\left[ \frac{2mE}{\hbar^2}\cdot b^2-\frac{m^2\omega^2}{\hbar^2}\cdot b^4\rho^2 \right]u(\rho)
+            \end{align*}
+            \item Thus, if we define $b^4=\hbar^2/m^2\omega^2$ (directly, this is $b:=(\hbar/m\omega)^{1/2}$), we can entirely rid ourselves of the constants in front of the former $x^2u(x)$ term. This yields
+            \begin{equation*}
+                0 = \dv[2]{\rho}u(\rho)+\left[ \frac{2E}{\hbar\omega}-\rho^2 \right]u(\rho)
+            \end{equation*}
+            \item Defining $\mu:=2E/\hbar\omega$ further cleans up the above, yielding
+            \begin{equation*}
+                0 = \dv[2]{\rho}u(\rho)+(\mu-\rho^2)u(\rho)
+            \end{equation*}
+        \end{itemize}
+        \item Continuing to push forward, try the following substitution where $h,g$ are to be determined.
+        \begin{equation*}
+            u(\rho) = h(\rho)\e[g(\rho)]
+        \end{equation*}
+        \begin{itemize}
+            \item The motivation for this change is that successive differentiations keep an $\e[g(\rho)]$ factor in each term that can be cancelled out to leave a zero-order term consisting of $f(\rho)$ multiplied by an arbitrary function of $\rho$. Choosing this latter function to be equal to the constant $a$ from the confluent hypergeometric equation's zero-order term gives us a useful constraint. If this seems complicated, just watch the following computations.
+            \item Making the substitution, we obtain
+            \begin{align*}
+                0 &= \dv[2]{\rho}[h\e[g]]+(\mu-\rho^2)h\e[g]\\
+                &= \dv{\rho}[h'\e[g]+hg'\e[g]]+(\mu-\rho^2)h\e[g]\\
+                &= [(h''\e[g]+h'g'\e[g])+(h'g'\e[g]+hg''\e[g]+h(g')^2\e[g])]+(\mu-\rho^2)h\e[g]\\
+                &= [(h''+h'g')+(h'g'+hg''+h(g')^2)]+(\mu-\rho^2)h\\
+                &= h''+2g'h'+(\mu-\rho^2+(g')^2+g'')h
+            \end{align*}
+            \item To make the zero-order term's factor constant, simply take $(g')^2:=\rho^2$. See how we've used the constancy constraint to define $g$! Specifically, from here we get
+            \begin{align*}
+                g' &= \pm\rho\\
+                g &= \pm\frac{1}{2}\rho^2
+            \end{align*}
+            \item As to the sign question, we choose the sign that ensures $u(\rho)=h(\rho)\e[\pm\rho^2/2]$ does not blow up for large $\rho$. Naturally, this means that we choose the negative sign and obtain
+            \begin{equation*}
+                u(\rho) = h(\rho)\e[-\rho^2/2]
+            \end{equation*}
+            \item The differential equation also simplifies to the following under this definition of $g$.
+            \begin{equation*}
+                0 = h''-2\rho h'+(\mu-1)h
+            \end{equation*}
+            \begin{itemize}
+                \item One may recognize this as the Hermite equation!
+                \item Through this $u(\rho)$ substitution method, we've effectively avoided the handwavey asymptotic analysis that physicists and chemists frequently use to justify deriving the Hermite equation.
+            \end{itemize}
+        \end{itemize}
+        \item Alright, so this takes care of $g$; now how about $h$?
+        \item To address $h$, we will need another independent variable change.
+        \begin{itemize}
+            \item An independent variable change is desirable here because it can alter the first two terms without affecting the zero-order term.
+            \item Begin with the general modification $s:=\alpha\rho^n$, where $\alpha,n$ are parameters to be determined.
+            \item Via the chain rule, the differential operators transform under this substitution into
+            \begin{align*}
+                \dv{\rho} &= \dv{s}{\rho}\cdot\dv{s}\\
+                &= n\alpha\rho^{n-1}\cdot\dv{s}\\
+                &= n\alpha(\alpha^{-1/n}s^{1/n})^{n-1}\cdot\dv{s}\\
+                % &= n\alpha(\alpha^{-(n-1)/n}s^{(n-1)/n})\cdot\dv{s}\\
+                &= n\alpha^{1/n}s^{1-1/n}\cdot\dv{s}
+            \end{align*}
+            and, without getting into the analogous gory details,
+            \begin{equation*}
+                \dv[2]{\rho} = n^2\alpha^{2/n}s^{2-2/n}\dv[2]{s}+n(n-1)\alpha^{2/n}s^{1-2/n}\dv{s}
+            \end{equation*}
+            \item Now another thing that the confluent hypergeometric equation tells us is that the second-order term needs an $s$ in the coefficient. Thus, since $s^{2-2/n}$ is the current coefficient, we should choose $n=2$ so that $s^{2-2/2}=s^1=s$ is in the coefficient.
+            \item This simplifies the operators to
+            \begin{align*}
+                \dv{\rho} &= 2\alpha^{1/2}s^{1/2}\cdot\dv{s}&
+                \dv[2]{\rho} &= 4\alpha s\dv[2]{s}+2\alpha\dv{s}
+            \end{align*}
+            and hence the differential equation to
+            \begin{align*}
+                0 &= 4\alpha s\dv[2]{h}{s}+2\alpha\dv{h}{s}-2\cdot\alpha^{-1/2}s^{1/2}\cdot 2\alpha^{1/2}s^{1/2}\cdot\dv{h}{s}+(\mu-1)h(s)\\
+                &= 4\alpha s\dv[2]{h}{s}+(2\alpha-4s)\dv{h}{s}+(\mu-1)h(s)\\
+                &= \alpha s\dv[2]{h}{s}+\left( \frac{\alpha}{2}-s \right)\dv{h}{s}-\frac{1}{4}(1-\mu)h(s)
+            \end{align*}
+            \item Finally, to give the right coefficient in the second-order term and complete the transformation into the confluent hypergeometric equation, pick $\alpha=1$.
+            \begin{equation*}
+                0 = s\dv[2]{h}{s}+\left( \frac{1}{2}-s \right)\dv{h}{s}-\frac{1}{4}(1-\mu)h(s)
+            \end{equation*}
+        \end{itemize}
+    \end{itemize}
+    \item Now according to our prior general solution to the hypergeometric equation,
+    \begin{equation*}
+        h(s) = A\,{}_1F_1(\tfrac{1}{4}(1-\mu);\tfrac{1}{2};s)+Bs^{1/2}\,{}_1F_1(1+\tfrac{1}{4}(1-\mu)-\tfrac{1}{2};2-\tfrac{1}{2};s)
+    \end{equation*}
+    \begin{itemize}
+        \item Under one last reverse change of variables back via $s=\rho^2$ and some simplification, we obtain
+        \begin{equation*}
+            h(\rho) = A\,{}_1F_1(\tfrac{1}{4}(1-\mu);\tfrac{1}{2};\rho^2)+B\rho\,{}_1F_1(\tfrac{1}{4}(3-\mu);\tfrac{3}{2};\rho^2)
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Boundary Conditions and Energy Eigenvalues}
+\begin{itemize}
+    \item Come back for more detail!!
+    \item Under an asymptotic analysis, the confluent hypergeometric functions are diverging at large $\rho$.
+    \item To prevent this, we need the series to terminate. By our previous results about series termination, this happens when either\dots
+    \begin{enumerate}
+        \item $\frac{1}{4}(1-\mu)$ is a nonpositive integer and $B=0$;
+        \item $\frac{1}{4}(3-\mu)$ is a nonpositive integer and $A=0$.
+    \end{enumerate}
+    \item The first case gives the even energy eigenvalues and Hermite polynomials, and the second case gives us the odd energy eigenvalues and Hermite polynomials.
+\end{itemize}
+
+\subsubsection{Hermite Polynomials and the Confluent Hypergeometric Function}
+\begin{itemize}
+    \item Come back for more detail!!
+    \item Formally defining the Hermite polynomials, and proving that they satisfy the Hermite equation.
+\end{itemize}
+
+
+
+
+\end{document}
