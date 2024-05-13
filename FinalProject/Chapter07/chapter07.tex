@@ -10,9 +10,134 @@
 
 
 \section{Complex Analysis}\label{sch:7}
+\begin{itemize}
+    \item \marginnote{5/12:}Where we're headed: We will develop enough complex analysis in the next two chapters to establish the equivalence of the three common definitions of each special function (namely, as generating functions, asymptotic forms, and recursion formulas) across the following three chapters.
+\end{itemize}
+
+
 \subsection{Complex Numbers}
 \begin{itemize}
-    \item \marginnote{5/10:}Starts off with a bunch of review, but gets into some more advanced stuff (and new topics like cut lines) that I should probably look into.
+    \item Definition of $\bm{i}$, \textbf{imaginary} and \textbf{complex} (number), \textbf{real part} and \textbf{complex part} (of $z$).
+    \item \textbf{Complex conjugate} (of $z$). \emph{Denoted by} $\bm{z^*}$.
+    \item Definition of \textbf{complex plane}, \textbf{absolute value} and \textbf{argument} (of $z$).
+\end{itemize}
+
+
+\subsection{Analytic Functions of a Complex Variable}
+\begin{itemize}
+    \item \textbf{Complex analytic} ($f$ at $z_0$): A function $f$ for which $f'(z)$ exists everywhere in a small neighborhood around $z_0$ including at $z_0$, itself.
+    \item \textbf{Singular point} (of $f$). \emph{Also known as} \textbf{singularity}.
+    \item Decomposition of $f:\C\to\C$ into real and imaginary parts.
+    \begin{itemize}
+        \item Example given.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{The Cauchy-Riemann Equations}
+\begin{itemize}
+    \item Definition of $\bm{f'(z)}$, \textbf{Cauchy-Riemann equations}.
+\end{itemize}
+
+\subsubsection{The Cauchy Integral Theorem}
+\begin{itemize}
+    \item \textbf{Green's theorem}: If $P(x,y),Q(x,y)\in C^1$ and $S$ is the region of the $xy$-plane bounded by the closed curve $C$, then
+    \begin{equation*}
+        \oint_C(P\dd{x}+Q\dd{y}) = \iint_S\left( \pdv{Q}{x}-\pdv{P}{y} \right)\dd{x}\dd{y}
+    \end{equation*}
+    \begin{proof}
+        As in Theorem 17.1 on \textcite[89-90]{bib:CAAGThomasNotes}.
+    \end{proof}
+    \item \textbf{Simply connected} (region): A region of the complex plane such that for every closed curve in the region, the area bounded by said curve --- including the curve itself --- lies wholly within the region.\footnote{This is \emph{another} definition equivalent to the ones given in the 4/30 lecture.}
+    \item \textbf{Doubly connected} (region): A simply connected region minus the closure of a simply connected proper subset of it.
+    \item \textbf{Triply connected} (region): A simply connected region minus the closures of two disjoint simply connected proper subsets of it, the union of which is not the whole thing.
+    \item \textbf{Cauchy integral theorem}.
+    \begin{itemize}
+        \item \textcite{bib:Seaborn} requires $f$ be \emph{analytic}.\footnote{This is fine since analytic functions are holomorphic, and vice versa.}
+        \item Proof: Green's theorem plus the Cauchy-Riemann equations. Very neat, worth coming back to!!
+        \begin{itemize}
+            \item This proof is only applicable when $u,v$ of $f=u+iv$ are continuous in $\overline{S}$, however.
+        \end{itemize}
+    \end{itemize}
+    \item \textcite[107-09]{bib:Seaborn} doesn't use homotopy to prove that the integrals along two different curves around the same hole are the same, but rather introduces \textbf{cut lines} and directly applies the CIT.
+    \begin{itemize}
+        \item Neat little argument worth coming back to!!
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{The Cauchy Integral Formula}
+\begin{itemize}
+    \item Definition of \textbf{isolated singularity}, \textbf{Cauchy integral formula}.
+    \item Neat little proof of the CIF using cut lines (worth coming back to!!).
+\end{itemize}
+
+
+\subsection{Analyticity}
+\begin{itemize}
+    \item \textcite{bib:Seaborn} establishes the equivalence between power series analyticity and holomorphicity in a neighborhood of a point.
+    \item For the argument, see Proposition 3.5 from Section I.3 of \textcite{bib:FischerLieb}, the lemma and claim from the 3/26 lecture, and the power series TPS from the 4/4 lecture.
+    \begin{itemize}
+        \item \textcite{bib:Seaborn} is even weedier than us!
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Elementary Functions}
+\begin{itemize}
+    \item Definition of \textbf{complex exponential}, \textbf{complex sine}, \textbf{complex cosine}, \textbf{complex hyperbolic sine}, \textbf{complex hyperbolic cosine}.
+\end{itemize}
+
+\subsubsection{Summary}
+\begin{itemize}
+    \item Four equivalent definitions of the analyticity of $f=u+iv$ in a given region $S$.
+    \begin{enumerate}
+        \item $f'$ exists everywhere in $S$.
+        \item $u,v$ have continuous derivatives and satisfy the CR equations.
+        \item $f\in C^0(S)$ and its integral around every closed contour in a simply connected part of $S$ is zero.
+        \item $f$ can be represented by a power series expanded about any point in the region.
+    \end{enumerate}
+    \item Example: Establishing the analyticity of $f(z)=z^2+az+b$ each of the four ways.
+    \begin{itemize}
+        \item Come back to if I have time!!
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{Laurent Expansion}
+\begin{itemize}
+    \item Concise derivation of the \textbf{Laurent series} using cut lines, similar to but probably superior to what was done in class on 5/7!!
+\end{itemize}
+
+
+\subsection{Essential Singularities}
+\begin{itemize}
+    \item Definition of \textbf{removable singularity}, \textbf{pole} (of order $m$ at $z_0$), \textbf{essential singularity}, \textbf{residue}.
+\end{itemize}
+
+
+\subsection{Branch Points}
+\begin{itemize}
+    \item Refer to Figure 6.1 from the class notes throughout this discussion.
+    \item \textbf{Multifunction}: A mapping that takes multiple values at certain points in its domain.
+    \begin{itemize}
+        \item Example: $z^{1/2}$ is a multifunction since $1^{1/2}=\e[i0/2]=\e[0]=1$ and $1^{1/2}=\e[2\pi i/2]=-1$.
+    \end{itemize}
+    \item \textbf{Branch point} (of a multifunction): A point $z_0$ in the domain of a multifunction such that if the multifunction is has $n$ values at $z_0$, every neighborhood $D_r(z_0)$ contains a point that has more than $n$ values.
+    \begin{itemize}
+        \item Example: 0 is a branch point of $z^{1/2}$ since every $D_r(0)$ contains a $z_0=r/2$, which has both positive and negative square roots.
+    \end{itemize}
+    \item "Clearly, the trouble with the singularity at $z=0$ is not at the point itself, but in the \emph{neighborhood} of the singularity. The singularity is \emph{not isolated}. We can eliminate this problem and make $z^{1/2}$ single valued by (for example) restricting $\theta$ to values less than $2\pi$" \parencite[121]{bib:Seaborn}.
+    \item \textbf{Branch} (of a multifunction): A restriction of the points in the domain analogous to the above.
+    \item \textbf{Branch cut}: The exclusion of a set on which a multifunction is discontinuous.
+    \begin{itemize}
+        \item Example: For $z^{1/2}$, this is the positive real axis.
+    \end{itemize}
+    \item Takeaway: Branch points must be handled with care.
+\end{itemize}
+
+
+\subsection{Analytic Continuation}
+\begin{itemize}
+    \item Definition of \textbf{analytic continuation}.
+    \item Analytically continuing an analytic function outside a patch via overlapping patches, as discussed in the 4/4 lecture.
 \end{itemize}
 
 
