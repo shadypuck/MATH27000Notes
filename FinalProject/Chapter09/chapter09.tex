@@ -10,18 +10,217 @@
 
 
 \section{Alternate Forms for Special Functions}
-\setcounter{subsection}{2}
+\begin{itemize}
+    \item \marginnote{5/13:}Benefits of the alternate forms of special functions: "These expressions are often useful in computing numerical values for the functions. They allow us to extend the domain of validity of the original functions by analytic continuation. They will also provide us with the recursion formulas and orthogonality relations that appear in textbooks on physics and mathematical applications" \parencite[155]{bib:Seaborn}.
+\end{itemize}
+
+
+\subsection{The Gamma Function}
+\begin{itemize}
+    \item \textcite{bib:Seaborn} uses contour integration about a branch point to prove that
+    \begin{equation*}
+        \Gamma(z)\Gamma(1-z) = \frac{\pi}{\sin\pi z}
+    \end{equation*}
+\end{itemize}
+
+
+\stepcounter{subsection}
 \subsection{Legendre Polynomials}
 \begin{itemize}
-    \item \marginnote{5/10:}Will get to use residue and the $\Gamma$ function.
-    \item Get to the Rodrigues formula.
-    \item Elaborate on complex analytic topics like the $\Gamma$ function.
+    \item In this section, we'll pass through an alternate series definition on our way to \textbf{Rodrigues's formula}.
+    \item First, let's build up to this alternate series definition. Note that we will be using some of Section \ref{sss:2.2}'s Pochhammer symbol identities throughout.
+    \begin{itemize}
+        \item Recall from Section \ref{sss:5.3} that
+        \begin{equation*}
+            P_n(x) = {}_2F_1(-n,n+1;1;\tfrac{1}{2}(1-x))
+        \end{equation*}
+        \item Using Section \ref{sss:2.2}'s formula for $(1-x)^k$, we can expand the above hypergeometric function to
+        \begin{align*}
+            P_n(x) &= \sum_{k=0}^\infty\frac{(-n)_k(n+1)_k}{k!(1)_k2^k}(1-x)^k\\
+            &= \sum_{k=0}^\infty\frac{(-n)_k(n+1)_k}{k!k!2^k}\sum_{m=0}^\infty\frac{(-k)_m}{m!}x^m\\
+            &= \sum_{k=0}^\infty\frac{(-n)_k(n+1)_k}{k!k!2^k}\sum_{m=0}^\infty\frac{(k-m+1)_m}{m!}(-1)^mx^m\tag*{Identity 2}
+        \end{align*}
+        % \item At this point, we will need the additional Pochhammer symbol identity
+        % \begin{equation*}
+        %     (k-m+1)_m = \frac{k!(k-m+1)_{n-k}}{\Gamma(n-m+1)}
+        % \end{equation*}
+        % \begin{itemize}
+        %     \item It is probably possible to derive this identity from the existing ones and the fact that $\Gamma(n+1)=n!$.
+        % \end{itemize}
+        \item Reverse the order of the sums, use this identity, and use the fact that $(-n)_k=0$ for $k>n$ to get
+        \begin{align*}
+            P_n(x) &= \sum_{m=0}^\infty\left( \sum_{k=0}^n\frac{(-n)_k(n+1)_k}{k!2^k}\frac{(k-m+1)_m}{k!} \right)\frac{(-1)^m}{m!}x^m\\
+            &= \sum_{m=0}^\infty\left( \sum_{k=0}^n\frac{(-n)_k(n+1)_k}{k!2^k}\frac{1}{(k-m)!} \right)\frac{(-1)^m}{m!}x^m\tag*{Identity 1}\\
+            &= \sum_{m=0}^\infty\left( \sum_{k=0}^n\frac{(-n)_k(n+1)_k}{k!2^k}\frac{(k-m+1)_{n-k}}{(n-m)!} \right)\frac{(-1)^m}{m!}x^m\tag*{Identity 4}\\
+            &= \sum_{m=0}^\infty\left( \sum_{k=0}^n\frac{(-n)_k(n+1)_k}{k!2^k}\frac{(k-m+1)_{n-k}}{\Gamma(n-m+1)} \right)\frac{(-1)^m}{m!}x^m
+        \end{align*}
+        \item Since $\Gamma(n-m+1)$ diverges for $m>n$ (zeroing out all of those terms from its position in the denominator), we can rewrite the above double sum as
+        \begin{align*}
+            P_n(x) &= \sum_{m=0}^n\frac{(-1)^mx^m}{m!\Gamma(n-m+1)}\sum_{k=0}^n\frac{(-n)_k(n+1)_k}{k!2^k}\frac{(k-m+1)_{n-k}}{1}\\
+            &= \sum_{m=0}^n\frac{(-1)^mx^m}{m!\Gamma(n-m+1)}\sum_{k=0}^n\frac{(-1)^k(n-k+1)_k\cdot(n+1)_k}{k!2^k}\frac{(k-m+1)_{n-k}}{1}\tag*{Identity 2}\\
+            &= \sum_{m=0}^n\frac{(-1)^mx^m}{m!\Gamma(n-m+1)}\sum_{k=0}^n\frac{(-1)^k\cdot n!\cdot(n+1)_k}{k!2^k\cdot(n-k)!}\frac{(k-m+1)_{n-k}}{1}\tag*{Identity 1}\\
+            &= \sum_{m=0}^n\frac{(-1)^mx^mn!}{m!\Gamma(n-m+1)}\sum_{k=0}^n\frac{(-1)^k(n+1)_k}{k!2^k}\frac{(k-m+1)_{n-k}}{(n-k)!}\\
+            &= \sum_{m=0}^n\frac{(-1)^mx^mn!}{m!\Gamma(n-m+1)}\sum_{k=0}^n\frac{(-n-1-k+1)_k}{k!2^k}\frac{(k-m+1)_{n-k}}{(n-k)!}\tag*{Identity 2}
+        \end{align*}
+        \item Now observe that the sum on the right above kind of looks like the coefficient of the $n^\text{th}$ term in a Cauchy product expansion. We will use this observation and some complex analysis to rewrite said sum in a much simpler closed form.
+        \begin{itemize}
+            \item In fact, with a little rewrite, we can put it in exactly that form:
+            \begin{equation*}
+                c_n = \sum_{k=0}^n\frac{(-n-1-k+1)_k}{k!2^k}\frac{(n-m-(n-k)+1)_k}{(n-k)!}
+            \end{equation*}
+            \item What functions $u(t),v(t)$ would have such a coefficient in their Cauchy product $w(t)=u(t)v(t)$? By the definition of the Cauchy product and Section \ref{sss:2.2}'s formula for $(1-z)^s$, it would have to be the functions
+            \begin{align*}
+                u(t) &= \sum_{k=0}^\infty\frac{(-n-1-k+1)_k}{k!2^k}t^k&
+                    v(t) &= \sum_{k=0}^\infty\frac{(n-m-k+1)_k}{k!}t^k\\
+                &= \sum_{k=0}^\infty\frac{(-1)^k(n+1)_k}{k!2^k}t^k&
+                    &= \sum_{k=0}^\infty\frac{(-1)^k(-n+m)_k}{k!}t^k\tag*{Identity 2}\\
+                &= \sum_{k=0}^\infty\frac{(n+1)_k}{k!}(-\tfrac{t}{2})^k&
+                    &= \sum_{k=0}^\infty\frac{(-n+m)_k}{k!}(-t)^k\\
+                &= \left( 1+\frac{t}{2} \right)^{-n-1}&
+                    &= (1+t)^{n-m}
+            \end{align*}
+            \item Consequently,
+            \begin{equation*}
+                w(t) = \left( 1+\frac{t}{2} \right)^{-n-1}(1+t)^{n-m}
+            \end{equation*}
+            \item Since $u,v$ were both analytic (as power series), $w$ must be analytic as well with
+            \begin{equation*}
+                w(t) = \sum_{k=0}^\infty c_kt^k
+            \end{equation*}
+            \item Thus, by the formula for the derivative of the CIF from the 4/2 lecture, we know that the power series expansion of $w$ about 0 (a computationally nice point where $w$ is analytic) is the following, where $C$ is a closed curve encircling 0 but none of $w$'s singularities.
+            \begin{equation*}
+                w(t) = \sum_{k=0}^\infty\left( \frac{1}{2\pi i}\oint_C\frac{w(\tau)}{\tau^{k+1}}\dd\tau \right)t^k
+            \end{equation*}
+            \item It follows that in particular,
+            \begin{align*}
+                c_n &= \frac{1}{2\pi i}\oint_C\frac{w(t)}{t^{n+1}}\dd{t}\\
+                &= \frac{1}{2\pi i}\oint_C\frac{(1+t)^{n-m}}{\left( 1+\tfrac{t}{2} \right)^{n+1}t^{n+1}}\dd{t}\\
+                &= \frac{2^{n+1}}{2\pi i}\oint_C\frac{(1+t)^{n-m}}{(2t+t^2)^{n+1}}\dd{t}
+            \end{align*}
+            \item Perform a $u$-substitution with $u:=2t+t^2$:
+            \begin{align*}
+                c_n &= \frac{2^{n+1}}{2\pi i}\oint_C\frac{(1+t)^{n-m}}{u^{n+1}}\cdot\frac{\dd{u}}{2+2t}\\
+                &= \frac{2^n}{2\pi i}\oint_C\frac{(1+t)^{n-m-1}}{u^{n+1}}\dd{u}\\
+                &= \frac{2^n}{2\pi i}\oint_C\frac{[(1+t)^2]^{(n-m-1)/2}}{u^{n+1}}\dd{u}\\
+                &= \frac{2^n}{2\pi i}\oint_C\frac{(1+2t+t^2)^{(n-m-1)/2}}{u^{n+1}}\dd{u}\\
+                &= \frac{2^n}{2\pi i}\oint_C\frac{(1+u)^{(n-m-1)/2}}{u^{n+1}}\dd{u}
+            \end{align*}
+            \item Using Section \ref{sss:2.2}'s formula for $(1-z)^s$, we can transform the numerator of the integrand as follows.
+            \begin{align*}
+                c_n &= \frac{2^n}{2\pi i}\oint_C\frac{1}{u^{n+1}}\sum_{r=0}^\infty\frac{(-\tfrac{n-m-1}{2})_r}{r!}(-u)^r\dd{u}\\
+                &= \frac{2^n}{2\pi i}\oint_C\sum_{r=0}^\infty\frac{(-1)^r(\tfrac{n-m-1}{2}-r+1)_r}{r!}\frac{(-1)^ru^r}{u^{n+1}}\dd{u}\tag*{Identity 2}\\
+                &= \frac{2^n}{2\pi i}\sum_{r=0}^\infty\frac{(\tfrac{n-m-1}{2}-r+1)_r}{r!}\oint_Cu^{r-n-1}\dd{u}
+            \end{align*}
+            \item Since $C$ surrounds $t=0$ by definition, it also naturally surrounds $u=0$. Thus, we may use the two definitions of the residue to learn that
+            \begin{align*}
+                c_n &= \frac{2^n}{2\pi i}\sum_{r=0}^\infty\frac{(\tfrac{n-m-1}{2}-r+1)_r}{r!}\cdot 2\pi i\res_0\left( \frac{1}{u^{n+1-r}} \right)\\
+                &= 2^n\sum_{r=0}^\infty\frac{(\tfrac{n-m-1}{2}-r+1)_r}{r!}\res_0\left( \frac{1}{u^{n+1-r}} \right)
+            \end{align*}
+            \item Clearly, the "$a_{-1}$ term" of $u^{r-n-1}$ is only nonzero when $r=n$, and in this case, $a_{-1}=1$.
+            \item Thus, we may neglect all terms in the above sum save the $r=n$ term, leaving us with
+            \begin{align*}
+                c_n &= \frac{2^n(\tfrac{n-m-1}{2}-n+1)_n}{n!}\\
+                &= \frac{2^n\left( -\tfrac{1}{2}(n+m-1) \right)_n}{n!}
+            \end{align*}
+        \end{itemize}
+        \item Having simplified $c_n$, we can substitute it back into the expression for $P_n(x)$, obtaining
+        \begin{equation*}
+            P_n(x) = \sum_{m=0}^n\frac{(-1)^mx^m2^n\left( -\tfrac{1}{2}(n+m-1) \right)_n}{m!(n-m)!}
+        \end{equation*}
+        \item Since the summation index $m\leq n$ by definition, we have that $\tfrac{1}{2}(n+m-1)<n$. Thus, $(-\tfrac{1}{2}(n+m-1))_n$ will reach zero (and hence be zero) whenever $n+m-1$ is an even integer, zeroing out those terms in the above summation. As such, we may define a new summation index $k$ by $2k=n-m$; this one will only index over the nonzero terms of the above sum by keeping $n+m-1$ equal to an odd integer. Reindexing, we get
+        \begin{equation*}
+            P_n(x) = \sum_{k=0}^{[n/2]}\frac{(-1)^{n-2k}x^{n-2k}2^n\left( k-n+\tfrac{1}{2} \right)_n}{(n-2k)!(2k)!}
+        \end{equation*}
+        \item Finally, use some more Pochhammer symbol identities to rewrite the expression above fully in terms of factorials.
+        \begin{equation*}
+            P_n(x) = \sum_{k=0}^{[n/2]}\frac{(-1)^k(2n-2k)!}{2^nk!(n-k)!(n-2k)!}x^{n-2k}
+        \end{equation*}
+    \end{itemize}
+    \item We now derive \textbf{Rodrigues's formula}.
+    \begin{itemize}
+        \item Looking at the above expression for $P_n(x)$, observe that the right two factorials and variable are actually, by definition, an $n^\text{th}$ derivative. Thus, we can make the substitution
+        \begin{equation*}
+            P_n(x) = \sum_{k=0}^{[n/2]}\frac{(-1)^k}{2^nk!(n-k)!}\dv[n]{x}x^{2n-2k}
+        \end{equation*}
+        \item Let's investigate this $n^\text{th}$ derivative a bit more.
+        \begin{itemize}
+            \item Computationally, we have
+            \begin{equation*}
+                \dv[n]{x}x^{2n-2k} = (n-2k+1)_nx^{n-2k}
+            \end{equation*}
+            \item Observe that like the analogous case in the previous derivation, $(n-2k+1)_n=0$ for $k\geq[\tfrac{n}{2}]+1$. Thus, we may formally add terms in the range $[\tfrac{n}{2}]+1\leq k\leq n$ to the sum without changing the value:
+            \begin{equation*}
+                P_n(x) = \sum_{k=0}^n\frac{(-1)^k}{2^nk!(n-k)!}\dv[n]{x}x^{2n-2k}
+            \end{equation*}
+        \end{itemize}
+        \item Reindex with $p=n-k$:
+        \begin{equation*}
+            P_n(x) = \sum_{p=0}^n\frac{(-1)^{n-p}}{2^n(n-p)!p!}\dv[n]{x}x^{2p}
+        \end{equation*}
+        \item Now, we may rewrite the expression and compress it via a binomial expansion into the final form.
+        \begin{align*}
+            P_n(x) &= \frac{1}{2^nn!}\dv[n]{x}\sum_{p=0}^n\frac{n!}{p!(n-p)!}(x^2)^p(-1)^{n-p}\\
+            &= \frac{1}{2^nn!}\dv[n]{x}(x^2-1)^n
+        \end{align*}
+    \end{itemize}
+    \item \textbf{Rodrigues's formula}: The following formula, which generates the Legendre polynomials. \emph{Given by}
+    \begin{equation*}
+        P_\ell(x) = \frac{1}{2^\ell\ell!}\dv[\ell]{x}(x^2-1)^\ell
+    \end{equation*}
+    \item Plugging Rodrigues's formula into the definition of the associated Legendre functions yields
+    \begin{equation*}
+        P_\ell^m(x) = (1-x^2)^{|m|/2}\dv[|m|]{x}P_\ell(x)
+        = \frac{1}{2^\ell\ell!}(1-x^2)^{|m|/2}\dv[\ell+|m|]{x}(x^2-1)^\ell
+    \end{equation*}
+    \begin{itemize}
+        \item This formula is "useful in establishing the orthogonality of the associated Legendre functions and it is sometimes used to \emph{define} the associated Legendre functions" \parencite[165]{bib:Seaborn}.
+    \end{itemize}
 \end{itemize}
 
 
 \subsection{Hermite Polynomials}
 \begin{itemize}
-    \item Rodrigues expression for the Hermite polynomials.
+    \item We now build up to a Rodrigues-like expression for the Hermite polynomials.
+    \item To do so, we will prove the result for the even Hermite polynomials; an analogous argument suffices for the odd Hermite polynomials. Let's begin.
+    \begin{itemize}
+        \item Multiply the expression for the even Hermite polynomials from Section \ref{ss2:3.2.2} on both sides by $\e[-x^2]$:
+        \begin{align*}
+            \e[-x^2]H_n(x) &= \e[-x^2]\cdot\frac{n!(-1)^{-n/2}}{(\tfrac{n}{2})!}\,{}_1F_1(-\tfrac{n}{2};\tfrac{1}{2};x^2)\\
+            &= \sum_{m=0}^\infty\frac{(-x^2)^m}{m!}\cdot\frac{n!(-1)^{-n/2}}{(\tfrac{n}{2})!}\sum_{k=0}^\infty\frac{(-\tfrac{n}{2})_k}{k!(\tfrac{1}{2})_k}x^{2k}\\
+            &= \frac{(-1)^{-n/2}n!}{(\tfrac{n}{2})!}\sum_{m=0}^\infty\frac{(-1)^m}{m!}x^{2m}\sum_{k=0}^\infty\frac{(-\tfrac{n}{2})_k}{k!(\tfrac{1}{2})_k}x^{2k}
+        \end{align*}
+        \begin{itemize}
+            \item Note that the terms corresponding to $k>n/2$ contribute nothing because then, $(-\tfrac{n}{2})_k=0$.
+        \end{itemize}
+        \item Take the Cauchy product of the two sums in the above expression.
+        \begin{align*}
+            \e[-x^2]H_n(x) &= \frac{(-1)^{-n/2}n!}{(\tfrac{n}{2})!}\sum_{p=0}^\infty\left( \sum_{q=0}^p\frac{(-1)^{p-q}(-\tfrac{n}{2})_q}{(p-q)!q!(\tfrac{1}{2})_q} \right)x^{2p}
+        \end{align*}
+        \item It follows that
+        \begin{align*}
+            \e[-x^2]H_n(x) &= \frac{(-1)^{-n/2}n!}{(\tfrac{n}{2})!}\sum_{p=0}^\infty\left( \frac{1}{(\tfrac{1}{2})_p}\sum_{q=0}^p\frac{(-\tfrac{n}{2})_q}{q!}\frac{(\tfrac{1}{2}-p)_{p-q}}{(p-q)!} \right)x^{2p}\tag*{Identity 8}\\
+            &= \frac{(-1)^{-n/2}n!}{(\tfrac{n}{2})!}\sum_{p=0}^\infty\frac{(\tfrac{1}{2}-p-\tfrac{n}{2})_p}{(\tfrac{1}{2})_pp!}x^{2p}\tag*{Vandermonde's theorem}\\
+            &= \frac{(-1)^{-n/2}n!}{(\tfrac{n}{2})!}\sum_{p=0}^\infty\frac{(-1)^p(2p+n)!}{n!(\tfrac{n}{2}+1)_p(2p)!}x^{2p}\tag*{Identities}\\
+            &= (-1)^{-n/2}\sum_{p=0}^\infty\frac{(-1)^p(2p+n)!}{(\tfrac{n}{2}+p)!(2p)!}x^{2p}
+        \end{align*}
+        \item Reindex from $p\to p-\tfrac{n}{2}$.
+        \begin{align*}
+            \e[-x^2]H_n(x) &= (-1)^{-n/2}\sum_{p=\frac{n}{2}}^\infty\frac{(-1)^{p-\tfrac{n}{2}}(2p)!}{p!(2p-n)!}x^{2p-n}\\
+            &= (-1)^n\sum_{p=\frac{n}{2}}^\infty\frac{(-1)^p(2p)!}{p!\Gamma(2p-n+1)}x^{2p-n}
+        \end{align*}
+        \item Since $\Gamma(2p-n+1)$ diverges for $p\in[0,\tfrac{n}{2})$, all such terms vanish, so we may extend the above sum down to start at $p=0$:
+        \begin{equation*}
+            \e[-x^2]H_n(x) = (-1)^n\sum_{p=0}^\infty\frac{(-1)^p}{p!}\frac{(2p)!}{(2p-n)!}x^{2p-n}
+        \end{equation*}
+        \item At this point, we may introduce a derivative and rearrange into our final expression.
+        \begin{align*}
+            \e[-x^2]H_n(x) &= (-1)^n\sum_{p=0}^\infty\frac{(-1)^p}{p!}(2p)(2p-1)\cdots(2p-n+1)x^{2p-n}\\
+            &= (-1)^n\sum_{p=0}^\infty\frac{(-1)^p}{p!}\dv[n]{x}x^{2p}\\
+            &= (-1)^n\dv[n]{x}\sum_{p=0}^\infty\frac{(-x^2)^p}{p!}\\
+            &= (-1)^n\dv[n]{x}\e[-x^2]\\
+            H_n(x) &= (-1)^n\e[x^2]\dv[n]{x}\e[-x^2]
+        \end{align*}
+    \end{itemize}
 \end{itemize}
 
 
