@@ -12,11 +12,420 @@
 \section{The Central Force Problem in Quantum Mechanics}
 \subsection{Three-Dimensional Schr\"{o}dinger Equation}
 \begin{itemize}
-    \item \marginnote{5/10:}Chapter 4 is all about Bessel functions; not relevant to me at all.
-    \item Very much analogously to Chapter 3, the hypergeometric function is used to tackle Legendre's equation, Legendre polynomials, and associated Legendre functions.
-    \item Finally derives where $\ell(\ell+1)$ comes from for the first time!
-    \item Chebyshev in the exercises, though not relevant to me.
-    \item Chapter 6 is Bessel, Neumann, Hankel, and Laguerre (polynomials and associated functions); not relevant to me at all either.
+    \item \marginnote{5/12:}The hydrogen atom will now be solved using the methods developed previously.
+    \item The quantum mechanics, summarized in \textcite[56-58]{bib:CHEM26100Notes}.
+    \begin{itemize}
+        \item Starting with the 3D TISE.
+        \item Introduction of polar coordinates and a spherically symmetric potential.
+        \item The Laplacian in spherical coordinates.
+        \item Separation of variables into a radial and angular equation, with the separation constant being denoted $\lambda$ so that, in particular,
+        \begin{equation*}
+            \lambda = -\frac{1}{Y}\left[ \frac{1}{\sin\theta}\pdv{\theta}(\sin\theta\pdv{\theta})+\frac{1}{\sin^2\theta}\pdv[2]{\phi} \right]Y
+        \end{equation*}
+        \item The angular momentum operator.
+        \item Separation of the angular variables into the polar and azimuthal equations, and solution to the azimuthal equation.
+    \end{itemize}
+    \item This all gets us to one substitution --- namely, $x=\cos\theta$ --- away from a precursor to the general Legendre equation.
+\end{itemize}
+
+
+\subsection{Legendre's Equation}
+\begin{itemize}
+    \item We have arrived at the following differential equation.
+    \begin{equation*}
+        (1-x^2)\dv[2]{x}f(x)-2x\dv{x}f(x)+\left( \lambda-\frac{m^2}{1-x^2} \right)f(x) = 0
+    \end{equation*}
+    \item This ODE has three regular singular points (at $x=\infty$ and $x=\pm 1$), so we will look to transform it into the typical hypergeometric equation.
+    \item We now begin the changes of variable.
+    \begin{itemize}
+        \item Begin with the (unmotivated) substitution
+        \begin{equation*}
+            f(x) = v(x)w(x)
+        \end{equation*}
+        \begin{itemize}
+            \item Using this substitution and rewriting the resulting differential equation in terms of $w$ yields
+            \begin{align*}
+                0 &= (1-x^2)\dv[2]{x}[vw]-2x\dv{x}[vw]+\left( \lambda-\frac{m^2}{1-x^2} \right)vw\\
+                &= (1-x^2)\dv{x}[v'w+vw']-2x(v'w+vw')+\left( \lambda-\frac{m^2}{1-x^2} \right)vw\\
+                &= (1-x^2)[(v''w+v'w')+(v'w'+vw'')]-2x(v'w+vw')+\left( \lambda-\frac{m^2}{1-x^2} \right)vw\\
+                &= (1-x^2)vw''(x)+[2(1-x^2)v'-2xv]w'(x)+\left[ (1-x^2)v''-2xv'+\left( \lambda-\frac{m^2}{1-x^2} \right)v \right]w(x)
+            \end{align*}
+        \end{itemize}
+        \item For our next (unmotivated) substitution, we will let
+        \begin{equation*}
+            v(x) = (1-x^2)^a
+        \end{equation*}
+        \begin{itemize}
+            \item To pin down the exact value of $a$, first observe that it would be nice if we could just divide the $v$ out of the second-order term, leaving only an expression of the independent variable behind as in the hypergeometric equation's second term.
+            \item However, doing this would also necessitate dividing $v$ out of the rest of the equation. In particular, we would need the coefficient of the zero-order term to be constant following this division, i.e., we need the zero-order term as written to be proportional to $v$.\footnote{More thoughts on justifying this and the last claim?? See the comment on the zero-order factor being "proportional to $v$" on \textcite[72-73]{bib:Seaborn}.}
+            \item Let $c$ be the constant of proportionality.
+            \item If $v=(1-x^2)^a$, then
+            \begin{align*}
+                v'(x) &= a(1-x^2)^{a-1}\cdot(-2x)\\
+                &= -2ax(1-x^2)^{a-1}
+            \end{align*}
+            and
+            \begin{align*}
+                v''(x) &= -2a(1-x^2)^{a-1}-2ax(a-1)(1-x^2)^{a-2}\cdot(-2x)\\
+                &= -2a(1-x^2)^{a-1}+4x^2(a^2-a)(1-x^2)^{a-2}
+            \end{align*}
+            \item Substituting into the zero-order term's coefficient, we obtain
+            \begin{align*}
+                \begin{split}
+                    cv ={}& (1-x^2)\left[ -2a(1-x^2)^{a-1}+4x^2(a^2-a)(1-x^2)^{a-2} \right]\\
+                    &- 2x\cdot -2ax(1-x^2)^{a-1}+\left( \lambda-\frac{m^2}{1-x^2} \right)(1-x^2)^a
+                \end{split}\\
+                \begin{split}
+                    c(1-x^2)^a ={}& -2a(1-x^2)^a+4a^2x^2(1-x^2)^{a-1}-4ax^2(1-x^2)^{a-1}\\
+                    &+ 4ax^2(1-x^2)^{a-1}+\lambda(1-x^2)^a-m^2(1-x^2)^{a-1}
+                \end{split}\\
+                c ={}& (\lambda-2a)+(4a^2x^2-m^2)(1-x^2)^{-1}
+            \end{align*}
+            \item Choosing $a$ such that $4a^2=m^2$ ensures that $c$ is constant, since then
+            \begin{align*}
+                c &= \lambda-2a+4a^2(x^2-1)(1-x^2)^{-1}\\
+                &= \lambda-2a-4a^2
+            \end{align*}
+            \item But if $4a^2=m^2$, then $a=\pm|m|/2$ and hence
+            \begin{equation*}
+                v(x) = (1-x^2)^{\pm|m|/2}
+            \end{equation*}
+        \end{itemize}
+        % \item It follows that
+        % \begin{align*}
+        %     v'(x) &= \pm\frac{|m|}{2}(1-x^2)^{\pm|m|/2-1}\cdot(-2x)\\
+        %     &= \mp|m|x(1-x^2)^{\pm|m|/2-1}
+        % \end{align*}
+        % and
+        % \begin{align*}
+        %     v''(x) &= \mp|m|(1-x^2)^{\pm|m|/2-1}\mp|m|x\cdot\left( \pm\frac{|m|}{2}-1 \right)(1-x^2)^{\pm|m|/2-2}\cdot(-2x)\\
+        %     &= \mp|m|(1-x^2)^{\pm|m|/2-1}\pm |m|x^2(\pm|m|-2)(1-x^2)^{\pm|m|/2-2}\\
+        %     &= \mp|m|(1-x^2)^{\pm|m|/2-1}+(m^2\mp 2|m|)x^2(1-x^2)^{\pm|m|/2-2}
+        % \end{align*}
+        % \item Substituting this back into the differential equation in $w$ yields
+        % \begin{align*}
+        %     \begin{split}
+        %         0 ={}& (1-x^2)(1-x^2)^{\pm|m|/2}w''(x)\\
+        %         &+ \left[ 2(1-x^2)\cdot\mp|m|x(1-x^2)^{\pm|m|/2-1}-2x(1-x^2)^{\pm|m|/2} \right]w'(x)\\
+        %         &+ \bigg[ (1-x^2)\left( \mp|m|(1-x^2)^{\pm|m|/2-1}+(m^2\mp 2|m|)x^2(1-x^2)^{\pm|m|/2-2} \right)\\
+        %         &\quad\left. -2x\cdot\mp|m|x(1-x^2)^{\pm|m|/2-1}+\left( \lambda-\frac{m^2}{1-x^2} \right)(1-x^2)^{\pm|m|/2} \right]w(x)
+        %     \end{split}\\
+        %     % \begin{split}
+        %     %     ={}& (1-x^2)w''(x)\\
+        %     %     &+ \left[ 2(1-x^2)\cdot\mp|m|x(1-x^2)^{-1}-2x \right]w'(x)\\
+        %     %     &+ \bigg[ (1-x^2)\left( \mp|m|(1-x^2)^{-1}+(m^2\mp 2|m|)x^2(1-x^2)^{-2} \right)\\
+        %     %     &\quad\left. -2x\cdot\mp|m|x(1-x^2)^{-1}+\left( \lambda-\frac{m^2}{1-x^2} \right) \right]w(x)
+        %     % \end{split}\\
+        %     \begin{split}
+        %         ={}& (1-x^2)w''(x)\\
+        %         &+ [2\cdot\mp|m|x-2x]w'(x)\\
+        %         &+ \bigg[ \mp|m|+(m^2\mp 2|m|)x^2(1-x^2)^{-1}\\
+        %         &\quad\left. -2x\cdot\mp|m|x(1-x^2)^{-1}+\lambda-\frac{m^2}{1-x^2} \right]w(x)
+        %     \end{split}\\
+        %     \begin{split}
+        %         ={}& (1-x^2)w''(x)-2(1\pm|m|)xw'(x)\\
+        %         &+ \left[ \mp\frac{|m|(1-x^2)}{1-x^2}+\frac{(m^2\mp 2|m|)x^2}{1-x^2}\pm\frac{2|m|x^2}{1-x^2}-\frac{m^2}{1-x^2}+\lambda \right]w(x)
+        %     \end{split}\\
+        %     \begin{split}
+        %         ={}& (1-x^2)w''(x)-2(1\pm|m|)xw'(x)\\
+        %         &+ \left[ \frac{m^2(x^2-1)\pm|m|(x^2-1)}{1-x^2}+\lambda \right]w(x)
+        %     \end{split}\\
+        %     ={}& (1-x^2)w''(x)-2(1\pm|m|)xw'(x)-(m^2\pm|m|-\lambda)w(x)
+        % \end{align*}
+        \item At this point, we have solved for the second-order coefficient ($1-x^2$) and the zero-order coefficient ($\lambda-2a-4a^2$) of our transformed differential equation in terms of $a$. Let's look at the first-order coefficient now in terms of $a$.
+        \begin{itemize}
+            \item Using the above substitutions, this coefficient should be
+            \begin{align*}
+                \frac{1}{v}\cdot 2(1-x^2)v'-2xv &= \frac{2(1-x^2)\cdot -2ax(1-x^2)^{a-1}-2x(1-x^2)^a}{(1-x^2)^a}\\
+                &= -2(1+2a)x
+            \end{align*}
+        \end{itemize}
+        \item Now, let's put everything together for this second substitution.
+        \begin{itemize}
+            \item In terms of $a$, we get
+            \begin{equation*}
+                (1-x^2)w''(x)-2(1+2a)xw'(x)-(4a^2+2a-\lambda)w(x) = 0
+            \end{equation*}
+            \item Substituting $a=\pm|m|/2$, we get
+            \begin{equation*}
+                (1-x^2)w''(x)-2(1\pm|m|)xw'(x)-(m^2\pm|m|-\lambda)w(x) = 0
+            \end{equation*}
+        \end{itemize}
+        \item Finally, we embark on our last substitution.
+        \begin{itemize}
+            \item The zero-order term is set at this point, so we just need to change the independent variable.
+            \item In particular, looking at the second-order term, we would lake to transform $1-x^2$ into $z(1-z)$. To facilitate this, let
+            \begin{equation*}
+                1-x^2 = \alpha z(1-z)
+            \end{equation*}
+            where $\alpha$ is an undetermined constant.
+            \item We can determine $\alpha$ using the following constraint.
+            \begin{align*}
+                z(1-z)\dv[2]{w}{z} &= (1-x^2)\dv[2]{w}{x}\\
+                &= \alpha z(1-z)\left[ \dv[2]{w}{z}\cdot\left( \dv{z}{x} \right)^2+\dv{w}{z}\dv[2]{z}{x} \right]\\
+                \frac{1}{\alpha}\cdot\dv[2]{w}{z}+0\cdot\dv{w}{z} &= \left( \dv{z}{x} \right)^2\cdot\dv[2]{w}{z}+\dv[2]{z}{x}\cdot\dv{w}{z}
+            \end{align*}
+            \item Comparing like terms, the above constraint splits into the two constraints
+            \begin{align*}
+                \frac{1}{\alpha} &= \left( \dv{z}{x} \right)^2&
+                0 &= \dv[2]{z}{x}
+            \end{align*}
+            \item Using the right constraint above, we learn that there exist $a,b\in\C$ such that
+            \begin{equation*}
+                z = ax+b
+            \end{equation*}
+            \item Applying the left constraint above to this result tells us that
+            \begin{equation*}
+                \alpha = \frac{1}{a^2}
+            \end{equation*}
+            \item Thus, returning to the original equation,
+            \begin{align*}
+                1-x^2 &= \frac{1}{a^2}(ax+b)[1-(ax+b)]\\
+                &= \frac{1}{a^2}(ax+b-a^2x^2-abx-abx-b^2)\\
+                1+0x-x^2 &= \frac{1}{a^2}(b-b^2+(a-2ab)x-a^2x^2)\\
+                1+0x &= \frac{b-b^2}{a^2}+\frac{1-2b}{a}x
+            \end{align*}
+            \item Comparing like terms, we obtain the two-variable two-equation system
+            \begin{align*}
+                1 &= \frac{b-b^2}{a^2}&
+                0 &= \frac{1-2b}{a}
+            \end{align*}
+            \item Solving the right equation above, we learn that
+            \begin{equation*}
+                b = \frac{1}{2}
+            \end{equation*}
+            \item Using this to solve the left equation above, we learn that
+            \begin{align*}
+                1 &= \frac{\frac{1}{2}-\frac{1}{4}}{a^2}\\
+                a &= \pm\frac{1}{2}
+            \end{align*}
+            \item It follows that
+            \begin{equation*}
+                \alpha = a^{-2} = 4
+            \end{equation*}
+            \item The last remaining question is which sign we should choose for $a$. In fact, it doesn't matter, so WLOG we will choose the minus sign because it will simplify things later down the road.\footnote{This appears to be what \textcite[73]{bib:Seaborn} suggests with "will satisfy our requirements," but am I reading this right??}
+            \item Therefore,
+            \begin{equation*}
+                z = \frac{1}{2}(1-x)
+            \end{equation*}
+            \item Using this substitution, we obtain
+            \begin{align*}
+                0 &= [1-(1-2z)^2]\dv{z}(\dv{w}{z}\cdot -\frac{1}{2})\cdot -\frac{1}{2}-2(1\pm|m|)(1-2z)\dv{w}{z}\cdot -\frac{1}{2}-(m^2\pm|m|-\lambda)w(z)\\
+                &= \frac{1}{4}[1-(1-4z+4z^2)]\dv[2]{w}{z}+(1\pm|m|-2z\mp 2|m|z)\dv{w}{z}-(m^2\pm|m|-\lambda)w(z)\\
+                &= z(1-z)w''(z)+[1\pm|m|-2(1\pm|m|)z]w'(z)-(m^2\pm|m|-\lambda)w(z)
+            \end{align*}
+        \end{itemize}
+    \end{itemize}
+    \item We may now invoke our prior general solution to the hypergeometric equation.
+    \begin{itemize}
+        \item Observe that when $\theta=0$,
+        \begin{equation*}
+            z = \frac{1}{2}(1-x)
+            = \frac{1}{2}(1-\cos\theta)
+            = 0
+        \end{equation*}
+        \item Since such points are physically \emph{allowed}, we must discard the solution that is singular at $z=0$ by setting $B=0$ in the general solution.
+        \item Therefore, the solution to the above differential equation that is fully acceptable on physical grounds is
+        \begin{equation*}
+            w(z) = {}_2F_1(a,b;c;z)
+        \end{equation*}
+        where
+        \begin{align*}
+            a+b &= 1\pm 2|m|&
+            ab &= m^2\pm|m|-\lambda&
+            c &= 1\pm|m|
+        \end{align*}
+        \item Since the hypergeometric function is invariant under interchange of $a,b$, we may solve the left two equations above for $a$ and $b$ and WLOG take $b$ to be the larger of the two. This yields
+        \begin{equation*}
+            w(z) = {}_2F_1(\underbrace{\tfrac{1}{2}(1-\sqrt{4\lambda+1})\pm|m|}_a,\underbrace{\tfrac{1}{2}(1+\sqrt{4\lambda+1})\pm|m|}_b;\underbrace{1\pm|m|}_c;z)
+        \end{equation*}
+    \end{itemize}
+    \item To determine the right choice of sign, we examine the behavior of the complete solution at the physically accessible point $z=0$ (equivalently, $x=1$).
+    \begin{itemize}
+        \item Returning our substitutions, we obtain the following with $a,b,c$ defined as above.
+        \begin{align*}
+            f(x) &= Av(x)w(x)\\
+            &= A(1-x^2)^{\pm|m|/2}\sum_{k=0}^\infty\frac{(a)_k(b)_k}{k!(c)_k}[z(x)]^k\\
+            &= A(1-x^2)^{\pm|m|/2}\left[ 1+\sum_{k=1}^\infty\frac{(a)_k(b)_k}{k!(c)_k}(\tfrac{1}{2}-\tfrac{1}{2}x)^k \right]
+        \end{align*}
+        \item As $x\to 1$, the quantity in brackets approaches 1 and $1-x^2\to 0$. Thus, to ensure that the $v(x)$ term does not become a pole (hence $f$ stays well behaved near 1), we choose the positive sign.
+        \item Recalling that the original instance of "$\pm$" in $v(x)$ is what led to all other instances, this one choice resolves all other sign choices.
+        \item Therefore, the complete solution to the precursor to the general Legendre equation is
+        \begin{equation*}
+            f(x) = A(1-x^2)^{|m|/2}\,{}_2F_1(\tfrac{1}{2}(1-\sqrt{4\lambda+1})+|m|,\tfrac{1}{2}(1+\sqrt{4\lambda+1})+|m|;1+|m|;z)
+        \end{equation*}
+    \end{itemize}
+    \item Finally, as with the Hermite polynomials, we can show that the series diverges at certain values of $x$, so we must put a termination condition on it.
+    \item An example of a case where it currently diverges but should be physically accessible.
+    \begin{itemize}
+        \item Consider the behavior of ${}_2F_1(a,b;c;z)$ at $z=1$.
+        \item We have
+        \begin{equation*}
+            {}_2F_1(a,b;c;1) = \sum_{k=0}^\infty\frac{(a)_k(b)_k}{k!(c)_k}
+        \end{equation*}
+        \item This series diverges if there is ever a case in which the $(k+1)^\text{th}$ term is not smaller than the $k^\text{th}$ term.
+        \begin{itemize}
+            \item In such a case, we would have
+            \begin{equation*}
+                \frac{(a)_{k+1}(b)_{k+1}}{(k+1)!(c)_{k+1}} \geq \frac{(a)_k(b)_k}{k!(c)_k}
+            \end{equation*}
+            \item This condition is equivalent to
+            \begin{align*}
+                (a+k)(b+k) &\geq (k+1)(c+k)\\
+                ab+(a+b)k &\geq c+ck
+            \end{align*}
+        \end{itemize}
+        \item Thus, in the limit of large $k$, this condition is fulfilled if $a+b\geq c$.
+        \item Critically, in this particular case, $a+b$ actually \emph{is} greater than $c$ since $|m|\geq 0$:
+        \begin{align*}
+            a+b &= [\tfrac{1}{2}(1-\sqrt{4\lambda+1})+|m|]+[\tfrac{1}{2}(1+\sqrt{4\lambda+1})+|m|]\\
+            &= 1+2|m|\\
+            &\geq 1+|m|\\
+            &= c
+        \end{align*}
+    \end{itemize}
+    \item To address this divergence, we must require the series to terminate.
+    \begin{itemize}
+        \item In particular, either $a$ or $b$ must be a nonpositive integer.
+        \item In fact, it is sufficient for $a$ to be a nonpositive integer.
+        \begin{itemize}
+            \item This is because $b$ nonpositive implies $a$ nonpositive. Here's why.
+            \begin{proof}
+                Suppose $b$ is a nonpositive integer. By choice, $b\geq a$. Since $a+b=2|m|+1$ is an odd natural number, we have that $a\neq b$ and hence the strict inequality $b>a$ holds. The $a+b=2|m|+1$ condition combined with the fact that $b\in\Z$ also implies that $a\in\Z$. Therefore, $a$ is an integer strictly less than zero, as desired.
+            \end{proof}
+        \end{itemize}
+        \item In particular, $a$ being a nonpositive integer means that
+        \begin{equation*}
+            \tfrac{1}{2}(1-\sqrt{4\lambda+1})+|m| = a = -n\tag{$n=0,1,2,\dots$}
+        \end{equation*}
+        \begin{itemize}
+            \item Note: Since $a=-n$ and $a+b=2|m|+1$, it also follows that $b=n+2|m|+1$.
+        \end{itemize}
+    \end{itemize}
+    \item This termination condition allows us to solve for $\lambda$.
+    \begin{align*}
+        -n &= \tfrac{1}{2}(1-\sqrt{4\lambda+1})+|m|\\
+        -2(n+|m|) &= 1-\sqrt{4\lambda+1}\\
+        4\lambda+1 &= 1+4(n+|m|)+4(n+|m|)^2\\
+        \lambda &= (n+|m|)(n+|m|+1)
+    \end{align*}
+    \begin{itemize}
+        \item Define $\ell:=n+|m|$. Then the separation constant is
+        \begin{equation*}
+            \lambda = \ell(\ell+1)\tag{$\ell=0,1,2,\dots$}
+        \end{equation*}
+        \item \textcite{bib:Seaborn} comments a bit on the physical interpretation of this quantization as quantized angular momentum.
+        \item Additional consequence: Rearranging the definition of $\ell$ to $\ell-|m|=n\geq 0$, we obtain the following two relations between $\ell,m$.
+        \begin{align*}
+            \ell &\geq |m|&
+            -\ell &\leq m \leq \ell
+        \end{align*}
+    \end{itemize}
+    \item It follows that in terms of these new parameters, the solution to the precursor to the general Legendre equation is
+    \begin{equation*}
+        f_{\ell m}(x) = A_{\ell m}(1-x^2)^{|m|/2}\,{}_2F_1(-\ell+|m|,\ell+|m|+1;|m|+1;\tfrac{1}{2}-\tfrac{1}{2}x)
+    \end{equation*}
+    \item \textbf{Legendre's equation}: The linear, second-order, homogeneous differential equation (with rational coefficients) given as follows, which is the special case of the precursor to the general Legendre equation obtained when $m=0$ and $\lambda=\ell(\ell+1)$. \emph{Given by}
+    \begin{equation*}
+        (1-x^2)f''(x)-2xf'(x)+\ell(\ell+1)f(x) = 0
+    \end{equation*}
+\end{itemize}
+
+
+\subsection{Legendre Polynomials and Associated Legendre Functions}
+\begin{itemize}
+    \item \textbf{Legendre polynomial} (of order $\ell$): A solution to Legendre's equation. \emph{Denoted by} $\bm{P_\ell(x)}$. \emph{Given by}
+    \begin{equation*}
+        P_\ell(x) := {}_2F_1(-\ell,\ell+1;1;\tfrac{1}{2}-\tfrac{1}{2}x)
+    \end{equation*}
+    \item \textbf{General Legendre equation}: The generalization of Legendre's equation that we originally solved above. \emph{Given by}
+    \begin{equation*}
+        (1-x^2)\dv[2]{x}P_\ell^m(x)-2x\dv{x}P_\ell^m(x)+\left[ \ell(\ell+1)-\frac{m^2}{1-x^2} \right]P_\ell^m(x) = 0
+    \end{equation*}
+    \item We now derive the \textbf{associated Legendre functions}.
+    \begin{itemize}
+        \item Differentiate $p$ times the Legendre polynomial of order $\ell$:
+        \begin{equation*}
+            \dv[p]{x}P_\ell(x) = (-1)^p\sum_{k=p}^\infty\frac{(-\ell)_k(\ell+1)_k}{2^kk!(1)_k}(k-p+1)_p(1-x)^{k-p}
+        \end{equation*}
+        \item Reindex $k-p$ to $k$:
+        \begin{equation*}
+            \dv[p]{x}P_\ell(x) = (-1)^p\sum_{k=0}^\infty\frac{(-\ell)_{k+p}(\ell+1)_{k+p}}{2^{k+p}(k+p)!(1)_{k+p}}(k+1)_p(1-x)^k
+        \end{equation*}
+        \item Iteratively apply Pochhammer symbol identity 6 from Section \ref{sss:2.2}:
+        \begin{align*}
+            \dv[p]{x}P_\ell(x) &= (-1)^p\sum_{k=0}^\infty\frac{(-\ell)_p(-\ell+p)_k(\ell+1)_p(\ell+1+p)_k}{2^k2^p(k+p)!(1)_p(1+p)_k}(k+1)_p(1-x)^k\\
+            &= (-1)^p\frac{(-\ell)_p(\ell+1)_p}{2^p(1)_p}\sum_{k=0}^\infty\frac{(-\ell+p)_k(k+1)_p(\ell+1+p)_k}{2^k(k+p)!(1+p)_k}(1-x)^k\\
+            &= (-1)^p\frac{(-\ell)_p(\ell+1)_p}{2^pp!}\sum_{k=0}^\infty\frac{(-\ell+p)_k(k+1)_p(\ell+p+1)_k}{2^kk!(k+1)_p(p+1)_k}(1-x)^k\\
+            &= (-1)^p\frac{(-\ell)_p(\ell+1)_p}{2^pp!}\sum_{k=0}^\infty\frac{(-\ell+p)_k(\ell+p+1)_k}{2^kk!(p+1)_k}(1-x)^k
+        \end{align*}
+        \item Use the hypergeometric function to simplify the notation above.
+        \begin{equation*}
+            \dv[p]{x}P_\ell(x) = (-1)^p\frac{(-\ell)_p(\ell+1)_p}{2^pp!}\,{}_2F_1(-\ell+p,\ell+p+1;p+1;\tfrac{1}{2}-\tfrac{1}{2}x)
+        \end{equation*}
+        \item By relating $p\sim|m|$ and comparing the above to $f_{\ell m}(x)$, we can see that the functions defined as follows will be solutions to the general Legendre equation. Note that the big constant above takes the role of $A_{\ell m}$.
+    \end{itemize}
+    \item \textbf{Associated Legendre functions}: The canonical solutions to the general Legendre equation. \emph{Also known as} \textbf{associated Legendre polynomials}. \emph{Denoted by} $\bm{P_\ell^m(x)}$. \emph{Given by}
+    \begin{equation*}
+        P_\ell^m(x) := (1-x^2)^{|m|/2}\dv[|m|]{x}P_\ell(x)
+    \end{equation*}
+    \item Let's take an additional moment to relate the above definition to the preceding derivation.
+    \begin{itemize}
+        \item Via the Pochhammer symbol identities from Section \ref{sss:2.2}, we may obtain the identities
+        \begin{align*}
+            (-1)^{|m|}(-\ell)_{|m|} &= (\ell-|m|+1)_{|m|}\tag*{Identity 2}\\
+            &= \frac{\ell!}{(\ell-|m|)!}\tag*{Identity 2}
+        \end{align*}
+        and
+        \begin{equation*}
+            (\ell+1)_{|m|} = \frac{(\ell+|m|)!}{\ell!}\tag*{Identity 3}
+        \end{equation*}
+        \begin{itemize}
+            \item Note that $\ell-|m|$ is nonnegative and hence a valid argument for the factorial because $\ell\geq|m|$.
+        \end{itemize}
+        \item Therefore,
+        \begin{align*}
+            P_\ell^m(x) &= (1-x^2)^{|m|/2}\frac{(-1)^{|m|}(-\ell)_{|m|}\cdot(\ell+1)_{|m|}}{2^{|m|}|m|!}\,{}_2F_1(-\ell+|m|,\ell+|m|+1;|m|+1;\tfrac{1}{2}-\tfrac{1}{2}x)\\
+            &= (1-x^2)^{|m|/2}\frac{\ell!\cdot(\ell+|m|)!}{2^{|m|}|m|!(\ell-|m|)!\cdot\ell!}\,{}_2F_1(-\ell+|m|,\ell+|m|+1;|m|+1;\tfrac{1}{2}-\tfrac{1}{2}x)\\
+            &= \frac{(\ell+|m|)!(1-x^2)^{|m|/2}}{2^{|m|}|m|!(\ell-|m|)!}\,{}_2F_1(-\ell+|m|,\ell+|m|+1;|m|+1;\tfrac{1}{2}-\tfrac{1}{2}x)
+        \end{align*}
+    \end{itemize}
+    \item We now define an inner product on the Legendre polynomials to discuss their \textbf{orthogonality}.
+    \begin{itemize}
+        \item Orthogonality will be covered more in Chapter \ref{sch:12} (including for associated Legendre functions!), but for now we will just say that by "$P_\ell(x)$ is orthogonal to $P_{\ell'}(x)$ for $\ell\neq\ell'$," we mean that
+        \begin{equation*}
+            \int_{-1}^1P_\ell(x)P_{\ell'}(x)\dd{x} = 0\tag{$\ell\neq\ell'$}
+        \end{equation*}
+    \end{itemize}
+    \item We now prove this orthogonality relation.
+    \begin{proof}
+        Let $\ell\neq\ell'$. Since $P_\ell(x),P_{\ell'}(x)$ are both Legendre polynomials, they satisfy Legendre's equation. Mathematically, we have that
+        \begin{equation*}
+            (1-x^2)P_\ell''(x)-2xP_\ell'(x)+\ell(\ell+1)P_\ell(x) = 0
+        \end{equation*}
+        and
+        \begin{equation*}
+            (1-x^2)P_{\ell'}''(x)-2xP_{\ell'}'(x)+\ell'(\ell'+1)P_{\ell'}(x) = 0
+        \end{equation*}
+        Multiply the top equation above by $P_{\ell'}(x)$, the bottom by $P_\ell(x)$, and subtract the first from the second to obtain
+        \begin{equation*}
+            (1-x^2)[P_\ell P_{\ell'}''-P_\ell''P_{\ell'}]-2x[P_\ell P_{\ell'}'-P_\ell'P_{\ell'}]+[\ell'(\ell'+1)-\ell(\ell+1)]P_\ell P_{\ell'}
+        \end{equation*}
+        Using a bit of calculus, the left two terms above can be combined. Additionally, the rightmost term can be moved over to the right side of the equation. This yields
+        \begin{equation*}
+            \dv{x}\{(1-x^2)[P_\ell P_{\ell'}'-P_\ell'P_{\ell'}]\} = [\ell(\ell+1)-\ell'(\ell'+1)]P_\ell P_{\ell'}
+        \end{equation*}
+        Integrating both sides from $-1$ to $1$ yields
+        \begin{align*}
+            \int_{-1}^1\dd{(1-x^2)[P_\ell P_{\ell'}'-P_\ell'P_{\ell'}]} &= \int_{-1}^1[\ell(\ell+1)-\ell'(\ell'+1)]P_\ell P_{\ell'}\dd{x}\\
+            \eval{(1-x^2)[P_\ell(x)P_{\ell'}'(x)-P_\ell'(x)P_{\ell'}(x)]}_{-1}^1 &= [\ell(\ell+1)-\ell'(\ell'+1)]\int_{-1}^1P_\ell(x)P_{\ell'}(x)\dd{x}
+        \end{align*}
+        Since $1-x^2$ goes to 0 at both $1$ and $-1$, the left side of the above equation is zero. Thus, we can divide out the constant term in front of the integral on the right side of the above equation, leaving us with
+        \begin{equation*}
+            0 = \int_{-1}^1P_\ell(x)P_{\ell'}(x)\dd{x}
+        \end{equation*}
+        as desired.
+    \end{proof}
 \end{itemize}
 
 
