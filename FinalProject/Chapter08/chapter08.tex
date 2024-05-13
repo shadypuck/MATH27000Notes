@@ -10,10 +10,88 @@
 
 
 \section{Applications of Contour Integrals}\label{sch:8}
+\begin{itemize}
+    \item \marginnote{5/13:}\textbf{Multiply connected} (region): A simply connected region with several holes or places where $f$ is not analytic.
+\end{itemize}
 \subsection{The Cauchy Residue Theorem}
 \begin{itemize}
-    \item \marginnote{5/10:}Largely review, but probably good to skim through in more depth.
-    \item Plus, I will need their proof of the Residue Theorem!!
+    \item \textbf{Cauchy residue theorem}: If $C$ is a curve that encloses $N$ isolated singularities of $f$, the $k^\text{th}$ one being at $z_k$, then we have
+    \begin{align*}
+        \oint_Cf(z)\dd{z} &= \sum_{k=1}^N\oint_{C_k}f(z)\dd{z}
+            = 2\pi i\sum_{k=1}^Na_{-1}(z_k)\\
+        &= 2\pi i[\text{sum of residues}]
+    \end{align*}
+    \begin{proof}
+        For the sake of this argument, we will discuss a region with two holes/singularities, but the argument easily generalizes. Draw curves $C_1,C_2$ around these holes/singularities oriented counterclockwise as well. Make cut lines from $C$ to $C_1$ and from $C$ to $C_2$. Thus, the single continuous contour
+        \begin{equation*}
+            C' := C+(-C_1)+(-C_2)+\text{cut lines}
+        \end{equation*}
+        encloses a simply connected region. Thus, by the definition of integrating over multiple curves,
+        \begin{equation*}
+            \oint_{C'}f(z)\dd{z} = \oint_Cf(z)\dd{z}+\oint_{-C_1}f(z)\dd{z}+\oint_{-C_2}f(z)\dd{z}
+        \end{equation*}
+        By the CIT, the left-hand side of the above vanishes. Thus, rearranging, we obtain
+        \begin{equation*}
+            \oint_Cf(z)\dd{z} = \oint_{C_1}f(z)\dd{z}+\oint_{C_2}f(z)\dd{z}
+        \end{equation*}
+        At this point, we can evaluate each of the integrals on the RHS above via the definition of the residue to get the desired result.
+    \end{proof}
+    \item Takeaway: Applications to evaluating definite integrals on closed contours.
+    \item Goes over the residue properties from the 5/2 lecture.
+\end{itemize}
+
+
+\subsection{Evaluation of Definite Integrals by Contour Integration}
+\begin{itemize}
+    \item General strategy: Choose a contour $C$ such that part of it (which we'll call $C_1$) lies along the real axis and such that the integral along the remaining part $C_2$ is either zero or simple to evaluate. Then
+    \begin{align*}
+        \int_{-\infty}^\infty f(x)\dd{x} &= \lim_{R\to\infty}\int_{-R}^Rf(z)\dd{z}\\
+        &= \lim_{R\to\infty}\left[ \oint_Cf(z)\dd{z}-\int_{C_2}f(z)\dd{z} \right]\\
+        &= 2\pi i[\text{sum of residues in }C]-\lim_{R\to\infty}\int_{C_2}f(z)\dd{z}
+    \end{align*}
+    \item Does $f(z)=(z^2+1)^{-1}$ as an example.
+    \item Goes through some more examples, including higher-order poles and trigonometric functions.
+\end{itemize}
+
+\subsubsection{Jordan's Lemma}
+\begin{itemize}
+    \item Solves a certain integral two ways to motivate and build \textbf{Jordan's lemma}.
+    \item Introduces and rigorously proves the following bound in the process.
+    \begin{equation*}
+        \sin\theta \geq \frac{2\theta}{\pi}
+    \end{equation*}
+    \item \textbf{Jordan's lemma}: Given a function of the form $\e[iaz]f(z)$, where $a>0$, if we have $|f(R\e[i\theta])|\leq g(R)$ for all $\theta\in[0,\pi]$, where $g:\R\to\R$, then
+    \begin{equation*}
+        \left| \int_{C_2}\e[iaz]f(z)\dd{z} \right| \leq \frac{\pi}{a}g(R)(1-\e[-aR])
+    \end{equation*}
+    If, in addition, $g(R)\to 0$ as $R\to\infty$, then
+    \begin{equation*}
+        \int_{-\infty}^\infty\e[iax]f(x)\dd{x} = 2\pi i[\text{sum of residues of }\e[iaz]f(z)\text{ in }\Hh]
+    \end{equation*}
+    \item An analogous results exists for the lower half plane.
+    \item More examples.
+\end{itemize}
+
+\subsubsection{Cauchy Principal Value}
+\begin{itemize}
+    \item \textbf{Cauchy principal value} (of a compact integral over a pole): The number defined as follows, where $f(z)$ is a function with a simple pole on the real axis at $z=x_0$ and $x_0\in(a,b)$. \emph{Denoted by} $\bm{P\int_a^bf(x)\,\textbf{d}x}$. \emph{Given by}
+    \begin{equation*}
+        P\int_a^bf(x)\dd{x} = \lim_{r\to 0}\left[ \int_a^{x_0-r}f(x)\dd{x}+\int_{x_0+r}^bf(x)\dd{x} \right]
+    \end{equation*}
+    \item We define the Cauchy principal value because for such functions, $\int_a^bf(x)\dd{x}$ does not strictly exist.
+    \item Evaluating over the contour in Figure 2.5 from the class notes, we obtain
+    \begin{equation*}
+        P\int_a^bf(x)\dd{x} = \pi i\res_{x_0}f+2\pi i[\text{sum of residues of }f\text{ enclosed by }C]-\int_{C_2=\gamma_4}f(z)\dd{z}
+    \end{equation*}
+    \item Example given.
+\end{itemize}
+
+\subsubsection{A Branch Point}
+\begin{itemize}
+    \item Example given.
+    \begin{itemize}
+        \item Looks like you take cut lines along the branch cut.
+    \end{itemize}
 \end{itemize}
 
 
