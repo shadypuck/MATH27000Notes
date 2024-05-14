@@ -1,0 +1,138 @@
+\documentclass[../notes.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter\ (#1)}{}}
+\setcounter{chapter}{8}
+
+\begin{document}
+
+
+
+
+\chapter{???}
+\section{The Gelfond-Schneider Theorem}
+\begin{itemize}
+    \item \marginnote{5/14:}Today's lecture.
+    \begin{itemize}
+        \item By Ben, a postdoc.
+        \item His choice of topic in complex analysis.
+        \item Proof that $\e[\sqrt{2}]$ is irrational, pulled from the Math Library's one complex textbook.
+        \item He chose this topic to illustrate how useful complex analysis is in other areas of math.
+    \end{itemize}
+    \item The main theorem we'll use here is the maximum modulus principle, in a slightly modified form.
+    \item Maximum modulus principle (alternate statement): If $\Omega$ is a compact domain, $f\in\mO(\Omega)$, then
+    \begin{equation*}
+        |f(z)| \leq \max_{w\in\partial\Omega}|f(w)|
+    \end{equation*}
+    Moreover, if equality holds in any case, then $f$ is constant.
+    \begin{proof}
+        For $\Omega=B_p(r)$, this follows from the \textbf{mean-value property}.\footnote{Ben quickly explains how the mean-value property works.}
+    \end{proof}
+    \item Remark: An entire function with lots of zeroes must grow fast.
+    \begin{proof}
+        Let $f$ be the entire function, and suppose it has zeroes at $\{z_i\}$ with multiplicity $k_i$. Form the new function
+        \begin{equation*}
+            \frac{f(z)}{\prod_i(z-z_i)^{k_i}}
+        \end{equation*}
+        If we make $|z|$ large, then this function behaves like
+        \begin{equation*}
+            \frac{f(z)}{\prod_iz^{k_i}}
+        \end{equation*}
+        Since the above function is holomorphic, the MMP says it must obtain its maximum value on the boundary of an arbitrarily large ball around the compact set on which $f$ obtains all its zeroes. But that denominator is growing really fast, so $f$ must grow even faster to compensate.
+    \end{proof}
+    \item \textbf{Strictly ordered} ($f$ by $\rho$): An entire function $f$ for which there exists $C>1$ such that
+    \begin{equation*}
+        |f(z)| \leq C^{R^\rho}
+    \end{equation*}
+    where $R=|z|$.
+    \begin{itemize}
+        \item Alternatively, we say that "$f$ has \emph{strict order} $\leq\rho$."
+        \item This gives a bound on the growth of the function.
+        \item We will use $R$ to denote $|z|$ throughout lecture today.
+    \end{itemize}
+    \item \textbf{Algebraically independent} (functions): Two functions $f,g$ for which
+    \begin{equation*}
+        \sum_{i,j=1}^Na_{ij}f^ig^j = 0
+    \end{equation*}
+    where $a_{ij}\in\C$ implies that $a_{ij}=0$ for all $i,j$.
+    \begin{itemize}
+        \item We will apply this to $f(z)=z$ and $g(z)=\e[z]$.
+    \end{itemize}
+    \item Theorem (Gelfond-Schneider): Let $f_1,\dots,f_n$ be entire functions with strict order less than or equal to $\rho$ a positive number. Assume that at least two of these functions are algebraically independent. Assume $D:=\dv*{z}$ maps $\Q[f_1,\dots,f_n]$ into itself. Suppose $w_1,\dots,w_N$ are distinct complex numbers such that $f_i(w_j)\in\Q$ for all $1\leq i\leq n$ and $1\leq j\leq N$. Then $N\leq 4\rho$.
+    \item Corollary: $\e[w]$ cannot be rational if $w\in\Q$.
+    \begin{proof}
+        Apply the Gelfond-Schneider theorem to $\Q[z,\e[z]]$. From here, note that if $\e[w]$ were rational, then $\e[w],\e[2w],\e[3w],\dots\in\Q$ which would eventually contradict the $N\leq 4\rho$ bound.
+    \end{proof}
+    \item If we prove the Gelfond-Schneider theorem under the hypothesis that $f_i(w_j)\in\overline{\Q}$, then our corollary may state that $\e[w]$ cannot be \textbf{algebraic}.
+    \item \textbf{Algebraic number}: A number that is the zero of a one-variable polynomial.
+    \item Lemma 1 (Siegel): Let
+    \begin{align*}
+        a_{11}x_1+\cdots+a_{1n}x_n &= 0\\
+        &\ \ \vdots\\
+        a_{r1}x_1+\cdots+a_{rn}x_n &= 0
+    \end{align*}
+    be such that (i) $a_{ij}\in\Z$, (ii) $n>r$, and (iii) $|a_{ij}|\leq A$. Then there exists an integral, nonzero solution $(x_1,\dots,x_n)$ to this system of equations with
+    \begin{equation*}
+        |x_j| \leq 2(2nA)^{\frac{r}{n-r}}
+    \end{equation*}
+    \begin{proof}
+        We know that there has to be at least \emph{some} solution by condition (ii) and linear algebra, which confirms sufficient information and a nontrivial kernel.\par
+        Let $T$ be the $r\times n$ matrix $(a_{ij})$. Then $T$ maps $\Z^n(B)$ into $\Z^r(nBA)$, where $\Z^m(s):=B_0(s)\cap\Z^m$.\footnote{Pronounced "the $m^\text{th}$-dimensional integer ball of radius $s$."} Find $x,y\in\Z^n(B)$ such that $T(x)=T(y)$ and hence $T(x-y)=0$. Via a pigeonhole principle argument, make $B$ big enough so that $\Z^r(nBA)$ (which is growing slower due to its smaller exponent of $r$) has cardinality smaller than $\Z^n(B)$; this will mean that two things have to map to the same thing. Then if we do the computation, we get the stated bound.\par
+        Essentially, we're relying on the principle that integer balls in higher-dimensional Euclidean spaces have more points in the limit of large radius.
+    \end{proof}
+    \item \textbf{Size} (of a polynomial): The following number, where $P(x_1,\dots,x_n)=\sum_{I=(i_1,\dots,i_n)}a_Ix_1^{i_1}\cdots x_n^{i_n}$ is a polynomial. \emph{Denoted by} $\bm{\size(P)}$. \emph{Given by}
+    \begin{equation*}
+        \size(P) := \max_I|a_I|
+    \end{equation*}
+    \item \textbf{Denominator} (of $\{a_i\}\subset\Q$): A number $d$ such that $d\cdot a_i\in\Z$ for ever $a_i$ in the subset $\{a_i\}\subset\Q$. \emph{Denoted by} $\bm{\den(\{a_i\})}$.
+    \item Lemma 2: Let $f_1,\dots,f_n$ be functions as in the Gelfond-Schneider theorem. Then there exists a constant $C_1$ such that if $\Q(T_1,\dots,T_n)$ is a polynomial with rational coefficients and degree less than or equal to $r$, then
+    \begin{equation*}
+        P^m(Q(f_1,\dots,f_n)) = Q_m(f_1,\dots,f_n)
+    \end{equation*}
+    where\dots
+    \begin{enumerate}[label={\roman*.)}]
+        \item $\deg(Q_m)\leq C_1(m+r)$;
+        \item $\size(Q_m)\leq\size(Q)m!C_1^{m+r}$;
+        \item There exists a denominator for the coefficients of $Q_m$ bounded by $\den(Q)C_1^{m+r}$.
+    \end{enumerate}
+    \item We are now ready to prove the Gelfond-Schneider theorem.
+    \begin{proof}
+        By hypothesis, we have common elements $w_1,\dots,w_N$ of $\C$ such that $f_i(w_j)\in\Q$ and $f_{ij}\in\{f_1,\dots,f_n\}$ algebraically independent. Let $L\in\Z^+$ be divisible by $2N$, $b_{ij}\in\Z$, and let $F=\sum_{i,j=1}^Lb_{ij}f^ig^j$ and let $L=2MN$ be such that
+        \begin{equation*}
+            D^mF(w_\ell) = 0\tag{$*$}
+        \end{equation*}
+        for $m=0,\dots,M-1$ and $\ell=1,\dots,N$; we will send both of these constants to infinity eventually.\par
+        $(*)$ has $L^2$ unknowns and $MN$ equations. Multiply the equations in $(*)$ by a common denominator and using Lemma 2 and Siegel's Lemma, we can find $b_{ij}$ such that
+        \begin{equation*}
+            |b_{ij}| \leq M!C_2^{M+L} \leq M^MC_2^{M+L}\tag{$**$}
+        \end{equation*}
+        as $M\to\infty$. Note that in the second inequality, we used Stirling's approximation.\par
+        The next observation is that $F\neq 0$ since $f$ and $g$ are algebraically independent. Let $s$ be the smallest integer such that $D^mf(w_i)=0$ for $m<s$ for all $i$ but $D^sF\neq 0$ at some $w_i$, which WLOG we will let be $w_1$.\par
+        Let $\alpha:=D^sF(w_1)$. Then $\alpha\in\Q$ since $F(W_1)\in\Q$ so all its derivatives will, too. Additionally, $C:=\den(\alpha)\leq(C_1)^s$ as $s\to\infty$, this from (i) and (iii) of Lemma 2. Then $C\alpha\in\Z$, which implies that $|C\alpha|\geq 1$ and hence $|\alpha|\geq C^{-1}$. Thus, at this point, we have a lower bound on $|\alpha|$; the next step is to move toward an upper bound and then get what we want.\par
+        We upper-bound $\alpha$ using the MMP. Compute
+        \begin{equation*}
+            D^sF(w_1) = \eval{s!\frac{F(w_1)}{(z-w_1)^s}}_{z=w_1}
+        \end{equation*}
+        Estimate
+        \begin{equation*}
+            H(z) := s!\frac{F(z)}{\prod_{i=1}^N(z-w_i)^s}\prod_{i>1}^N(w_1-w_i)^s
+        \end{equation*}
+        on the circle of radius $B=s^{1/2\rho}$. Then the MMP tells us that
+        \begin{equation*}
+            |D^sF(w_1)| = |H(w_1)|
+            \leq \norm{H}_R
+            \leq \frac{s^sC^{Ns}\norm{F}_R}{R^{Ns}}
+        \end{equation*}
+        Then after working this out, we get
+        \begin{equation*}
+            1 \leq |c\alpha|
+            \leq \frac{s^{2s}C^{Ns}}{\e[Ns\log(s)/2\rho]}
+        \end{equation*}
+        which gets to $N\leq 4\rho$.
+    \end{proof}
+\end{itemize}
+
+
+
+
+\end{document}
