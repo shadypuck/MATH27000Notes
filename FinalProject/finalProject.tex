@@ -6,6 +6,8 @@
 
 \externaldocument{finalProject}
 
+\let\oldnumberline\numberline
+
 \title{MATH 27000 (Basic Complex Variables) Final Project Notes}
 \author{Steven Labalme}
 
@@ -97,13 +99,21 @@
 
 
 \pagestyle{empty}
-\part{Final Report}
+\part{Final Product}
 \newpage
 
 \pagestyle{main}
 \renewcommand{\leftmark}{Report and Presentation Outline}
 \subfile{Outline/outline.tex}
 \newpage
+
+\addtocontents{toc}{\protect\renewcommand{\protect\numberline}[1]{}}
+\includepdf[pages=-,addtotoc={1,section,1,Outline Feedback,OutlineFeedback}]{../ExtFiles/OutlineFeedback.pdf}
+\addtocontents{toc}{\let\protect\numberline\protect\oldnumberline}
+
+\addtocontents{toc}{\protect\renewcommand{\protect\numberline}[1]{}}
+\includepdf[pages=-,addtotoc={1,section,1,Presentation Feedback (Spencer),FromSpencer}]{../ExtFiles/steven_feedback.pdf}
+\addtocontents{toc}{\let\protect\numberline\protect\oldnumberline}
 
 \renewcommand{\leftmark}{Presentation Feedback Form}
 \renewcommand{\proofname}{Response}
