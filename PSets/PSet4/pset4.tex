@@ -1,0 +1,77 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{3}
+
+\begin{document}
+
+
+
+
+\section{Modulus Principles, Meromorphicity, and M\"{o}bius Transforms}
+\subsection*{Set A: Graded for Completion}
+\begin{enumerate}[ref={A.\arabic*}]
+    \item \marginnote{5/3:}\textcite{bib:FischerLieb}, QIII.1.1.
+    \begin{enumerate}
+        \item Determine the order of the zero of $\sum_{n=1}^kb_n(z-z_0)^{-n}$ at $\infty$.
+        \item For the following functions, determine the value $w_0=f(\infty)$ and its multiplicity.
+        \begin{align*}
+            f(z) &= \frac{2z^4-2z^3-z^2-z+1}{z^4-z^3-z+1}&
+            f(z) &= \frac{z^4+iz^3+z^2+1}{z^4+iz^3+z^2-iz}
+        \end{align*}
+    \end{enumerate}
+    \item \textcite{bib:FischerLieb}, QIII.3.1. Let $f$ and $g$ be entire functions such that $|f|\leq|g|$. Show that $f=cg$ for some constant $c$.
+    \item \textcite{bib:FischerLieb}, QIII.4.1.
+    \begin{enumerate}
+        \item Let $S,T\in\Mob$. Show that a point $z_1\in\hat{\C}$ is a fixed point of $T$ if and only if $Sz_1$ is a fixed point of $STS^{-1}$.
+        \item Suppose $T$ has exactly one fixed point $z_1$. Show that there is an $S\in\Mob$ such that $STS^{-1}$ is a translation. Moreover, show that for every $z\in\hat{\C}$, we have
+        \begin{equation*}
+            \lim_{n\to\infty}T^nz = z_1
+        \end{equation*}
+        where $T^n=T\circ\cdots\circ T$ denotes the $n$-fold composition of $T$ with itself.
+        \item Suppose $T$ has exactly two fixed points $z_1$ and $z_2$. Show that there is an $S\in\Mob$ such that $STS^{-1}$ is of the form $z\mapsto az$, where $a\in\C^*$, and that the pair $\{a,a^{-1}\}$ is uniquely determined by $T$.
+        \item Show that if we have $|a|\neq 1$ in part (c), then after a possible renumbering of our fixed points, we have
+        \begin{equation*}
+            \lim_{n\to\infty}T^nz = z_1
+        \end{equation*}
+        for all $z\in\hat{\C}\setminus\{z_2\}$. In the case that $|a|=1$, show that every point in $\hat{\C}\setminus\{z_1,z_2\}$ lies on a $T$-invariant M\"{o}bius circle.
+    \end{enumerate}
+    \item \textcite{bib:FischerLieb}, QIII.5.1. Let $f$ be the branch of the logarithm on $\C\setminus\R_{\geq 0}$ that takes the value $-i\pi/2$ at $-i$. Determine\dots
+    \begin{align*}
+        f(i)&&
+        f(-\e)&&
+        f(-1-i\sqrt{3})&&
+        f((-1-i\sqrt{3})^2)
+    \end{align*}
+    \item If $z_1$ and $z_2$ are related by inversion in a circle $C$, and $z_3$ and $z_4$ are arbitrary (distinct) points of $C$, show that the cross ratio of the four points has modulus 1.
+\end{enumerate}
+
+
+\subsection*{Set B: Graded for Content}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item \textcite{bib:FischerLieb}, QIII.3.4. Consider the function $f(z)=z+\e[z]$. Show that for all $t\in[0,2\pi]$,
+    \begin{equation*}
+        \lim_{r\to\infty}f(r\e[it]) = \infty
+    \end{equation*}
+    and that the convergence is uniform with respect to $t$ on the sets $\{t:|t-\pi|\leq\tfrac{\pi}{2}\}$ and $\{t:|t|\leq\alpha\}$ for every $\alpha<\pi/2$. How does this agree with Proposition 3.4?
+    \item \textcite{bib:FischerLieb}, QIII.5.2.
+    \begin{enumerate}
+        \item Find a maximal domain on which holomorphic functions $\log(1-z)^2$ and $\sqrt{z+\sqrt{z}}$, respectively, can be defined.
+        \item Show that a logarithm of the tangent function exists on the set
+        \begin{equation*}
+            G = \C\setminus\bigcup_{k\in\Z}[k\pi-\tfrac{\pi}{2},k\pi]
+        \end{equation*}
+    \end{enumerate}
+    \item Show that a fractional linear transformation
+    \begin{equation*}
+        z \mapsto \frac{az+b}{cz+d}
+    \end{equation*}
+    maps the upper half plane to itself if and only if $a,b,c,d\in\R$ and $ad-bc>0$.
+    \item Suppose that $U$ is a domain, $f\in\mO(U)$ is never zero, and suppose that a holomorphic branch of the logarithm exists on $f(U)$; then the function $\log[f(z)]$ is holomorphic. By considering the real part of $\log f$, show that the maximum modulus principles for harmonic functions and for holomorphic functions are equivalent.
+\end{enumerate}
+
+
+
+
+\end{document}
