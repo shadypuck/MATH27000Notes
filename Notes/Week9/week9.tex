@@ -9,7 +9,7 @@
 
 
 
-\chapter{???}
+\chapter{Advanced Topics and Applications}
 \section{The Gelfond-Schneider Theorem}
 \begin{itemize}
     \item \marginnote{5/14:}Today's lecture.
@@ -130,6 +130,99 @@
         \end{equation*}
         which gets to $N\leq 4\rho$.
     \end{proof}
+\end{itemize}
+
+
+
+\section{Moduli Spaces of Elliptic Curves}
+\begin{itemize}
+    \item \marginnote{5/16:}Announcements.
+    \begin{itemize}
+        \item PSet 5 due tomorrow.
+        \item Final Tuesday.
+        \item Project due end of day Tuesday.
+        \item Final presentations in my office (E313) unless you hear otherwise.
+        \begin{itemize}
+            \item We can show up in his office to watch other people's questions.
+        \end{itemize}
+        \item Stop rescheduling!
+    \end{itemize}
+    \item No notes will be posted for today; it's like three weeks worth of content.
+    \begin{itemize}
+        \item Nothing from Week 9 will be on the final exam!
+    \end{itemize}
+    \item Today: Moduli spaces of elliptic curves.
+    \begin{itemize}
+        \item A topic near and dear to Calderon's heart that uses complex analysis heavily.
+        \item Calderon is first and foremost a topologist/geometer.
+    \end{itemize}
+    \item Theorem (Topological classification of surfaces): Consider a 2-manifold space locally homeomorphic to $\R^2$ that is compact without boundary (e.g., closed). All of the closed, orientable 2-manifolds are classified by their number of holes, i.e., homeomorphic go a genus $n$ surface.
+    \item Let's equip our surface with a complex structure. Essentially, instead of charting pieces to $\R^2$, we'll chart them to $\C$!
+    \begin{itemize}
+        \item An elliptic curve $E$ is just a complex torus.
+        \item What are holomorphic functions on Riemann surfaces?
+        \begin{itemize}
+            \item Recall that $f\in\mO(U)$ iff $f\circ\phi_U^{-1}$ is holomorphic on $\phi_U(U)$.
+            \item They are constant on $\hat{\C}$! This is just Liouville's theorem again.
+            \item They are also constant on $E$.
+        \end{itemize}
+        \item If $U\subset E$ is a nice open set, it maps to a domain.
+    \end{itemize}
+    \item There are many Riemann surface structures.
+    \begin{itemize}
+        \item For example, transition maps are translations.
+        \item A projective plane curve is another.
+    \end{itemize}
+    \item \textbf{Complex projective space} (of dimension $n$): \emph{Denoted by} $\bm{\pmb{\C}\pmb{\Pp}^n}$. \emph{Given by}
+    \begin{equation*}
+        \C\Pp^n := \left( \C^{n+1}\setminus\{(0,\dots,0)\} \right)/\text{scaling}
+    \end{equation*}
+    \begin{itemize}
+        \item This is the set of lines through the origin, e.g., $(1,1,1)=(2,2,2)$.
+    \end{itemize}
+    \item Example: $\R\Pp^1=\R^2\setminus 0/\text{scaling}$.
+    \begin{itemize}
+        \item We get rays and lines.
+    \end{itemize}
+    \item TPS: $\C\Pp^1\cong\hat{\C}$, where $\cong$ denotes a biholomorphic equivalence.
+    \begin{itemize}
+        \item Let $\{(x,y)\}/\text{scaling}\mapsto x/y$.
+        \item This does preserve scaling: $(2x,2y)\mapsto x/y$, as well!
+        \item It also is onto: $(x,1)\mapsto x\in\hat{\C}$, and any point $(x,0)\mapsto\infty$.
+        \item Then to prove biholomorphic-ness, on charts to $\C$:
+        \begin{itemize}
+            \item If $y\neq 0$, send $x,y\mapsto x/y$.
+            \item If $x\neq 0$, send $x,y\mapsto y/x$.
+            \item The transition map between these two is $1/z$.
+        \end{itemize}
+    \end{itemize}
+    \item We can homogenize...
+    \item Uniformization: Every complex torus looks like $\C/\Lambda$, where
+    \begin{equation*}
+        \Lambda = \{n_1w_1+n_2w_2\mid n_i\in\Z,\ w_i\text{ being }\R\text{-linearly independent}\}
+    \end{equation*}
+    \begin{itemize}
+        \item Every complex torus also has a representation as $\{y^2z=x^3+axz^2+bz^3\}$.
+        \begin{itemize}
+            \item Apply the Weierstrass $\wp$-function.
+        \end{itemize}
+    \end{itemize}
+    \item Question: How many ways are there to do this and get different tori?
+    \begin{itemize}
+        \item If $c\in\C$, then $c\omega_2$ and $c\omega_1$ gives the same torus up to biholomorphism.
+        \begin{itemize}
+            \item You can scale the torus on the plane.
+        \end{itemize}
+    \end{itemize}
+    \item Up to scaling, assume $\omega_1=1$.
+    \begin{itemize}
+        \item We'll now start calling $\omega_2$ by $\tau$.
+    \end{itemize}
+    \item Discussion of the Gaussian integers.
+    \item The set of complex tori is equal to $\Hh$ with $SL_2\Z$ modded out. In particular, $SL_2\Z\acts\Z^2$ by changing basis.
+    \item In fact, we're interested in $PSL_2\Z$, which lives inside $PSL_2\R$.
+    \item Something with matrices and getting a tesselation of the upper half plane with circular arcs.
+    \item In conclusion, the space of complex tori is called a modular curve.
 \end{itemize}
 
 

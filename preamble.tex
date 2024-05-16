@@ -82,8 +82,31 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\Ss}{\mathbb{S}}
+\newcommand{\Pp}{\mathbb{P}}
 \newcommand{\Hh}{\mathbb{H}}
 \newcommand{\mO}{\mathcal{O}}
 
 \newcommand{\e}[1][]{\text{e}^{#1}}
 \newcommand{\inp}[1]{\left\langle{#1}\right\rangle}
+
+\DeclareFontFamily{U}{mathb}{}
+\DeclareFontShape{U}{mathb}{m}{n}{
+       <-5.5> mathb5
+    <5.5-6.5> mathb6
+    <6.5-7.5> mathb7
+    <7.5-8.5> mathb8
+    <8.5-9.5> mathb9
+    <9.5-11>  mathb10
+    <11->     mathb12
+}{}
+\DeclareSymbolFont{mathb}{U}{mathb}{m}{n}
+\DeclareMathSymbol{\righttoleftarrow}{3}{mathb}{"FD}
+% 
+\makeatletter
+\DeclareRobustCommand{\looparrow}[1]{%
+  \mathrel{\mathpalette\looparrow@{#1}}%
+}
+\newcommand{\looparrow@}[2]{\reflectbox{$\m@th#1#2$}}
+\makeatother
+% 
+\newcommand{\acts}{\looparrow{\righttoleftarrow}}
