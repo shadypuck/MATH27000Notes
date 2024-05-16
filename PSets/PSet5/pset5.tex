@@ -1,0 +1,93 @@
+\documentclass[../psets.tex]{subfiles}
+
+\pagestyle{main}
+\renewcommand{\leftmark}{Problem Set \thesection}
+\setcounter{section}{4}
+
+\begin{document}
+
+
+
+
+\section{Residues}
+\subsection*{Set A: Graded for Completion}
+\begin{enumerate}[ref={A.\arabic*}]
+    \item \marginnote{5/17:}\textcite{bib:FischerLieb}, QIV.1.3. Show that the image of a simply connected domain under a biholomorphic mapping is simply connected. Is it sufficient to assume that the mapping is locally biholomorphic?
+    \item \textcite{bib:FischerLieb}, QIV.3.2. Find the principal part of the Laurent expansion of
+    \begin{equation*}
+        \frac{z-1}{\sin^2z}
+    \end{equation*}
+    in $0<|z|<\pi$ and of
+    \begin{equation*}
+        \frac{z}{(z^2+b^2)^2}
+    \end{equation*}
+    in $0<|z-ib|<2b$.
+    \item \textcite{bib:FischerLieb}, QIV.4.1. Let $f\in\mO(\C\setminus S)$ for some discrete set $S$ of singularities. Show that\dots
+    \begin{enumerate}
+        \item If $f$ is even, then
+        \begin{equation*}
+            \res_{-z}f = -\res_zf
+        \end{equation*}
+        \item If $f$ is odd, then
+        \begin{equation*}
+            \res_{-z}f = \res_zf
+        \end{equation*}
+        \item If $f(z+\omega)=f(z)$ for some $\omega\in\C$, then
+        \begin{equation*}
+            \res_{z+\omega}f=\res_zf
+        \end{equation*}
+        \item If $f$ is real on $\R$, then
+        \begin{equation*}
+            \res_{\bar{z}}f = \overline{\res_zf}
+        \end{equation*}
+    \end{enumerate}
+    \item \textcite{bib:FischerLieb}, QIV.5.1. Prove that
+    \begin{equation*}
+        \int_{-\infty}^\infty\frac{\dd{x}}{\cosh x} = \pi
+    \end{equation*}
+    \emph{Hint}: Integrate over the boundary of the rectangle whose corners are $\pm r$ and $\pm r+i\pi$.
+    \item \label{prb:5.A.5}Verify the claim from class that the integral of
+    \begin{equation*}
+        f(z) = \frac{\pi}{z^2\tan(\pi z)}
+    \end{equation*}
+    over the square with vertices $[\pm(N+\tfrac{1}{2}),\pm(N+\tfrac{1}{2})]$ for $N\in\N$ converges to 0 as $N\to\infty$.
+    \item For $\alpha\notin\Z$, prove that
+    \begin{equation*}
+        \sum_{n=-\infty}^\infty\frac{1}{(\alpha+n)^2} = \frac{\pi^2}{\sin^2(\pi\alpha)}
+    \end{equation*}
+    \emph{Hint}: Adapt your computation from Problem \ref{prb:5.A.5}.
+\end{enumerate}
+
+
+\subsection*{Set B: Graded for Content}
+\begin{enumerate}[label={\textbf{\arabic*.}}]
+    \item \textcite{bib:FischerLieb}, QIV.4.3. Let $G$ be a simply connected domain, and let $f\in\mO(G\setminus S)$. Show that $f$ has a primitive on $G\setminus S$ if and only if all residues of $f$ vanish.
+    \item \textcite{bib:FischerLieb}, QIV.5.3. Compute the following.
+    \begin{enumerate}
+        \item For $a>1$,
+        \begin{equation*}
+            \int_0^\pi\frac{\sin^2x}{a+\cos x}\dd{x}
+        \end{equation*}
+        \item For $a\in\C$ and $|a|\neq 1$,
+        \begin{equation*}
+            \int_0^{2\pi}\frac{\dd{t}}{1-2a\cos t+a^2}
+        \end{equation*}
+    \end{enumerate}
+    \emph{Hint}: To get started, make the substitution $z=\e[it]$ as on \textcite[127]{bib:FischerLieb} so that
+    \begin{align*}
+        \cos(t) &= \frac{1}{2}\left( z+\frac{1}{z} \right)&
+        \sin(t) &= \frac{1}{2i}\left( z-\frac{1}{z} \right)
+    \end{align*}
+    and so that the integral from $t=0$ to $2\pi$ becomes a contour integral over the unit circle.
+    \item \textcite{bib:FischerLieb}, QIV.6.3. Let $\lambda>1$. Show that the equation $\e[-z]+z=\lambda$ has exactly one solution in the half plane $\re z>0$. Show that this solution is real.
+    \item Show that
+    \begin{equation*}
+        \int_0^1\log[\sin(\pi x)]\dd{x} = -\log(2)
+    \end{equation*}
+    \emph{Hint}: Consider the contour of integration that goes from $\infty$ to 0 along the positive imaginary axis, then runs from 0 to 1 along the real axis, then runs from 1 to $\infty$ along the ray $\{z\mid\re(z)=1,\ \im(z)\geq 0\}$.
+\end{enumerate}
+
+
+
+
+\end{document}
