@@ -12,14 +12,138 @@
 \section{Generating Functions and Recursion Formulas}
 \subsection{Hermite Polynomials}
 \begin{itemize}
-    \item \marginnote{5/10:}Generating functions of these two. Same as above. Did Mazziotti allude to recursion relations??
+    \item \marginnote{5/18:}In this section, we seek to find the \textbf{generating function} for the Hermite polynomials. Besides being interesting in its own right, it will also allow us to derive an integral representation and recursion formula.
+    \item \textbf{Exponential generating function} (of $\{p_n\}$): A representation of the infinite sequence $\{p_n\}$ of polynomials as the $n^\text{th}$ derivatives of a formal power series. \emph{Also known as} \textbf{generating function}. \emph{Denoted by} $\bm{g(x,t)}$. \emph{Given by}
+    \begin{equation*}
+        g(x,t) := \sum_{n=0}^\infty\frac{p_n(x)}{n!}t^n
+    \end{equation*}
+    \begin{itemize}
+        \item Note that "the factorial term $n!$ is merely a counter-term to normalize the derivative operator acting on $x^n$."\footnote{Source: \url{https://en.wikipedia.org/wiki/Generating_function\#Exponential_generating_function_(EGF)}.}
+    \end{itemize}
+    \item We now derive the generating function $g$.
+    \begin{itemize}
+        \item Assume $g$ is analytic at and near $t=0$.\footnote{There is no reason that this must be true, but we are free to assume it and see where it gets us. If it gets us somewhere, we're golden!} Then
+        \begin{equation*}
+            H_n(x) = \eval{\pdv[n]{t}g(x,t)}_{t=0}
+        \end{equation*}
+        \item Recall from Section \ref{sss:9.4} that
+        \begin{equation*}
+            H_n(x) = (-1)^n\e[x^2]\dv[n]{x}\e[-x^2]
+        \end{equation*}
+        \item Thus, by transitivity, we need to solve
+        \begin{equation*}
+            (-1)^n\e[x^2]\dv[n]{x}\e[-x^2] = \eval{\pdv[n]{t}g(x,t)}_{t=0}
+        \end{equation*}
+        for $g$.
+        \item Let
+        \begin{equation*}
+            g(x,t) = \e[x^2]f(x-t)
+        \end{equation*}
+        for some undetermined function $f$.
+        \begin{itemize}
+            \item Then
+            \begin{equation*}
+                \eval{\pdv[n]{t}g(x,t)}_{t=0} = \eval{\e[x^2]\pdv[n]{t}f(x-t)}_{t=0}
+                = \eval{(-1)^n\e[x^2]\dv[n]{u}f(u)}_{t=0}
+            \end{equation*}
+        \end{itemize}
+        \item It follows by comparison with the Rodrigues formula for $H_n(x)$ that
+        \begin{equation*}
+            f(u) = \e[-u^2]
+        \end{equation*}
+        \item Therefore, returning the substitution, we have that
+        \begin{equation*}
+            g(x,t) = \e[x^2]\e[-(x-t)^2] = \sum_{n=0}^\infty\frac{H_n(x)}{n!}t^n
+        \end{equation*}
+    \end{itemize}
+    \pagebreak
+    \item We now derive the first integral representations of the Hermite polynomials listed in Section \ref{sss:10.6}.
+    \begin{itemize}
+        \item Using the formula for the derivative of the CIF from the 4/2 lecture, another formula for the Taylor series of $g$ about $t=0$ is
+        \begin{equation*}
+            g(x,t) = \sum_{n=0}^\infty\frac{g^{(n)}(x,t)}{n!}t^n
+            = \sum_{n=0}^\infty\frac{\pdv*[n]{t}g(x,t)}{n!}t^n
+            = \sum_{n=0}^\infty\left( \frac{n!}{2\pi i}\oint_C\frac{g(x,t)}{t^{n+1}}\dd{t} \right)\frac{t^n}{n!}
+        \end{equation*}
+        where $C\ni 0$.
+        \item Thus, by comparing this to the generating function, we learn that
+        \begin{equation*}
+            H_n(x) = \frac{n!}{2\pi i}\oint_C\frac{g(x,t)}{t^{n+1}}\dd{t}
+            = \frac{n!}{2\pi i}\oint_C\frac{\e[x^2]\e[-(x-t)^2]}{t^{n+1}}\dd{t}
+            = \frac{n!}{2\pi i}\oint_C\frac{\e[2xt-t^2]}{t^{n+1}}\dd{t}
+        \end{equation*}
+        as desired.
+    \end{itemize}
+    \item As mentioned in Section \ref{sss:10.6}, we now use this integral representation to derive the recursion formula for the Hermite polynomials.
+    \begin{itemize}
+        \item We have that
+        \begin{equation*}
+            H_n'(x) = \frac{n!}{2\pi i}\oint_C\frac{2t\e[2xt-t^2]}{t^{n+1}}\dd{t}
+            = 2n\cdot \frac{(n-1)!}{2\pi i}\oint_C\frac{\e[2xt-t^2]}{t^{(n-1)+1}}\dd{t}
+            = 2nH_{n-1}(x)
+        \end{equation*}
+        \item Differentiating both sides of the above (and using the above), we obtain
+        \begin{equation*}
+            H_n''(x) = 2n\cdot H_{n-1}'(x)
+            = 2n\cdot 2(n-1)H_{n-2}(x)
+            = 4n(n-1)H_{n-2}(x)
+        \end{equation*}
+        \item Now recall that Hermite's equation reads
+        \begin{equation*}
+            H_n''(x)-2xH_n'(x)+2nH_n(x) = 0
+        \end{equation*}
+        \item Thus, with our new definitions for $H_n'(x),H_n''(x)$, we obtain
+        \begin{align*}
+            4n(n-1)H_{n-2}(x)-2x\cdot 2nH_{n-1}(x)+2nH_n(x) &= 0\\
+            2(n-1)H_{n-2}(x)-2xH_{n-1}(x)+H_n(x) &= 0\\
+            H_n(x) &= 2xH_{n-1}(x)-2(n-1)H_{n-2}(x)
+        \end{align*}
+        \item Redefining the indices $n-1\to n$ in the above yields the final recursion formula
+        \begin{equation*}
+            H_{n+1}(x) = 2xH_n(x)-2nH_{n-1}(x)
+        \end{equation*}
+    \end{itemize}
+    \item \textcite{bib:Seaborn} uses the recursion formula along with the initial conditions $H_0(x)=1$ and $H_1(x)=2x$ to compute the first few Hermite polynomials.
 \end{itemize}
 
 
 \setcounter{subsection}{3}
 \subsection{Legendre Polynomials}
+\subsubsection{The Generating Function}
 \begin{itemize}
-    \item 
+    \item In this section, we will derive an (ordinary) generating function for the Legendre polynomials.
+    \item \textbf{Ordinary generating function} (of $\{p_n\}$): A representation of the infinite sequence $\{p_n\}$ of polynomials as the coefficients of a formal power series. \emph{Denoted by} $\bm{g(x,u)}$. \emph{Given by}
+    \begin{equation*}
+        g(x,u) := \sum_{n=0}^\infty p_n(x)u^n
+    \end{equation*}
+    \item We now begin the derivation.
+    \begin{itemize}
+        \item Like in the previous derivation, another formula for the Taylor series of $g$ about $u=0$ is
+        \begin{equation*}
+            g(x,u) = \sum_{n=0}^\infty\left( \frac{n!}{2\pi i}\oint_C\frac{g(x,u)}{u^{n+1}}\dd{u} \right)\frac{u^n}{n!}
+            = \sum_{n=0}^\infty\left( \frac{1}{2\pi i}\oint_C\frac{g(x,u)}{u^{n+1}}\dd{u} \right)u^n
+        \end{equation*}
+        \item Consequently, we obtain the following by matching up coefficients.
+        \begin{equation*}
+            P_n(x) = \frac{1}{2\pi i}\oint_C\frac{g(x,u)}{u^{n+1}}\dd{u}
+        \end{equation*}
+        \item Additionally, recall the Schl\"{a}fli integral:
+        \begin{equation*}
+            P_n(x) = \frac{1}{2^n}\frac{1}{2\pi i}\oint_{C'}\frac{(t^2-1)^n}{(t-x)^{n+1}}\dd{t}
+            = \frac{1}{\pi i}\oint_{C'}\left[ \frac{(t^2-1)}{2(t-x)} \right]^{n+1}\frac{\dd{t}}{t^2-1}
+        \end{equation*}
+        \begin{itemize}
+            \item Note that $C'$ may equal $C$, but it need not; it need only enclose 0.
+        \end{itemize}
+        \item Comparing the integrands of the last two equations suggests that a good substitution of variables may be
+        \begin{equation*}
+            u = \frac{2(t-x)}{t^2-1}
+        \end{equation*}
+        which is equivalent to
+        \begin{equation*}
+            t = u^{-1}(1\pm\sqrt{1-2xu+u^2})
+        \end{equation*}
+    \end{itemize}
 \end{itemize}
 
 
