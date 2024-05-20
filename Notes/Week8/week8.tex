@@ -106,22 +106,22 @@
         \item A better way to find the number of zeroes uses \textbf{Rouch\'{e}'s theorem}, which we'll introduce shortly.
     \end{itemize}
     \item Understanding the argument principle geometrically.
-    \emph{picture}
     \begin{itemize}
-        \item Suppose you have an SCC $\gamma$ enclosing a zero or order 1 and a pole of order 1.
+        \item See \verb|IMG_9306.JPG| and \verb|IMG_9364.JPG| for some context.
+        \item Suppose you have an SCC $\gamma$ enclosing a zero or order 2 and a pole of order 1.
         \item We'll now investigate $f$ as a mapping of $\C\to\C$ and $\C\to\hat{\C}$.
         \item As a mapping into the complex plane, $f$ maps $\gamma$ to $f(\gamma)$.
         \begin{itemize}
             \item Note that the curve $f(\gamma)$ is just another mapping of the circle into the complex plane.
         \end{itemize}
         \item As a mapping into the Riemann sphere, $f$ maps the zero to 0 and the pole to $\infty$.
-        \item Now draw little counterclockwise-oriented curves around the zero and pole.
+        \item Now draw little counterclockwise-oriented curves around the zero and pole in the domain.
         \begin{itemize}
             \item Since the pole has order 1, its little loop maps to a little loop around $\infty\in\hat{\C}$ that goes around 1 time.
+            \item Since the zero has order 2, its little loop maps to a little loop around $0\in\hat{\C}$ that goes around 2 times.
             \begin{itemize}
-                \item If the pole had order 2, for example, then a little loop that goes around it 1 time would map to a loop that goes around $\infty$ 2 times.
+                \item This is because locally, the area near an order 2 zero looks like $z^2$ and the complex function $z^2$ rotates the complex plane around on top of itself twice. Thus, a single loop will get spun around twice, a double loop will get spun around 4 times, and so on.
             \end{itemize}
-            \item Similarly, since the zero has order 1, its little loop maps to a little loop around $0\in\hat{\C}$ that goes around 1 time.
         \end{itemize}
         \item Now pull the two loops down the Riemann sphere to the equator.
         \begin{itemize}
@@ -131,8 +131,8 @@
             \end{itemize}
             \item Projecting the pulled-down curves into $\C$, we can observe that the one around $\infty$ is oriented clockwise and encompasses $f(\gamma)$ while the one around 0 is oriented counterclockwise and situated within $f(\gamma)$.
         \end{itemize}
-        \item ??
         \item This all results in the order of zeros minus the order of poles is equal to the winding number of $f(\gamma)$ about zero.
+        \item See Week 9 office hours for more.
     \end{itemize}
     \item Here's a computation that justifies all of the handwavey stuff above:
     \begin{align*}
