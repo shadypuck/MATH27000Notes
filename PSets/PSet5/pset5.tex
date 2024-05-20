@@ -13,6 +13,30 @@
 \subsection*{Set A: Graded for Completion}
 \begin{enumerate}[ref={A.\arabic*}]
     \item \marginnote{5/17:}\textcite{bib:FischerLieb}, QIV.1.3. Show that the image of a simply connected domain under a biholomorphic mapping is simply connected. Is it sufficient to assume that the mapping is locally biholomorphic?
+    \begin{proof}
+        % Simply connected: For all curves $\gamma\subset U$ and for all $z_0\in\C\setminus U$, we have
+        % \begin{equation*}
+        %     0 = \wn(\gamma,z_0)
+        %     \propto \int_\gamma\frac{1}{z-z_0}\dd{z}
+        % \end{equation*}
+        % WTS: For all curves $f(\gamma)\subset f(U)$ and for all $z_0\in\C\setminus f(U)$, we have
+        % \begin{equation*}
+        %     0 = \wn(f(\gamma),z_0)
+        % \end{equation*}
+        
+        % Suppose there exists $f(\gamma)\subset f(U)$ and $z_0\in\C\setminus f(U)$ such that $\wn(f(\gamma),z_0)\neq 0$.
+
+
+        Let $U$ be a simply connected domain, $f$ be a biholomorphic mapping, $f(\gamma)\subset f(U)$, and $w_0\in\C\setminus f(U)$ be arbitrary. We have that
+        \begin{align*}
+            \wn(f(\gamma),w_0) &= \frac{1}{2\pi i}\int_{f(\gamma)}\frac{1}{w-w_0}\dd{w}\\
+            &= \frac{1}{2\pi i}\int_\gamma\frac{f'(z)}{f(z)-w_0}\dd{z}\\
+            &= \frac{1}{2\pi i}\cdot 0\tag*{CIT 2}\\
+            &= 0
+        \end{align*}
+        Note that it is the fact that $f$ is biholomorphic that allows us to perform a complex change of variables. Also note that $f(z)-w_0$ never equals zero because $w_0\notin f(U)$, hence why we can call the integrand of the second line holomorphic and apply the Cauchy Integral Theorem. Therefore, by the winding-number definition of a simply connected domain, $f(U)$ is simply connected.\par
+        \fbox{Yes}, it is sufficient to assume the mapping is locally biholomorphic. Assuming that "locally biholomorphic" means that $f$ is biholomorphic on some $D_r(x)\cap U$ for all $x\in U$, we know that each $f(D_r(x)\cap U)$ will be individually simply connected and since they overlap, we can build out the image simply connected region with overlapping patches like in the identity theorem and analytic continuation.
+    \end{proof}
     \item \textcite{bib:FischerLieb}, QIV.3.2. Find the principal part of the Laurent expansion of
     \begin{equation*}
         \frac{z-1}{\sin^2z}
@@ -22,69 +46,426 @@
         \frac{z}{(z^2+b^2)^2}
     \end{equation*}
     in $0<|z-ib|<2b$.
+    \begin{proof}
+        % You can do the geometric series test with infinite sums in the denominator.
+
+        % Second one, we might be able to do what is shown on p. 122.
+
+
+        Using the power series expansion of $\sin z$, the Cauchy product, the power series inversion formulas from \textcite[51]{bib:FischerLieb}, and some more power series manipulations, we have that
+        \begingroup
+        \allowdisplaybreaks
+        \begin{align*}
+            \frac{z-1}{\sin^2z} &= \frac{z-1}{\left( \sum_{n=0}^\infty\frac{(-1)^n}{(2n+1)!}z^{2n+1} \right)^2}\\
+            &= \frac{z-1}{z^2}\cdot\frac{1}{\left( \sum_{n=0}^\infty\frac{(-1)^n}{(2n+1)!}z^{2n} \right)^2}\\
+            &= \frac{z-1}{z^2}\cdot\frac{1}{\sum_{n=0}^\infty\left( \sum_{m=0}^n\frac{(-1)^m}{(2m+1)!}\cdot\frac{(-1)^{n-m}}{(2(n-m)+1)!} \right)z^{2n}}\\
+            &= \frac{z-1}{z^2}\cdot\frac{1}{\sum_{n=0}^\infty(-1)^n\left( \sum_{m=0}^n\frac{1}{(2m+1)!\cdot(2(n-m)+1)!} \right)z^{2n}}\\
+            &= \frac{z-1}{z^2}\cdot\left[ 1+\frac{2}{3!}z^2+\left( \frac{3}{3!^2}-\frac{2}{5!} \right)z^4+\cdots \right]\\
+            &= (z-1)\cdot\left[ \frac{1}{z^2}+\frac{2}{3!}+\left( \frac{3}{3!^2}-\frac{2}{5!} \right)z^2+\cdots \right]\\
+            &= -\frac{1}{z^2}+\frac{1}{z}-\frac{2}{3!}+\frac{2}{3!}z-\left( \frac{3}{3!^2}-\frac{2}{5!} \right)z^2+\left( \frac{3}{3!^2}-\frac{2}{5!} \right)z^3+\cdots
+        \end{align*}
+        \endgroup
+        Therefore, the principal part of the Laurent expansion of $(z-1)/\sin^2z$ in the punctured disk $0<|z|<\pi$ is
+        \begin{equation*}
+            \boxed{-\frac{1}{z^2}+\frac{1}{z}}
+        \end{equation*}
+        For the other function in question, observe that
+        \begin{equation*}
+            \frac{z}{(z^2+b^2)^2} = \frac{z}{(z+ib)^2(z-ib)^2}
+            = (z-ib)^{-2}\cdot\frac{z}{(z+ib)^2}
+        \end{equation*}
+        This decomposition is important because we have --- as in the 4/9 lecture --- rewritten the function as the product of a $z-ib$ term and a function that is holomorphic on the entire punctured disk $0<|z-ib|<2b$. Let's call the right term above $g$. Since $g\in\mO(D_{2b}(ib))$, we can compute its power series about $ib$ in $D_{2b}(ib)$. In particular, we need only compute the first two terms of its power series because since $(z-ib)$ has a $-2$ exponent above, any higher order terms in the computed power series will contribute to the regular part of the Laurent expansion, not the principal part. Carrying out this computation, we have
+        \begin{equation*}
+            g(ib) = \frac{ib}{(2ib)^2} = \frac{1}{4ib}
+        \end{equation*}
+        and
+        \begin{equation*}
+            g'(ib) = \eval{\frac{(z+ib)^2\cdot 1-z\cdot 2(z+ib)}{(z+ib)^4}}_{z=ib}
+            = \eval{\frac{ib-z}{(z+ib)^3}}_{z=ib}
+            = 0
+        \end{equation*}
+        Thus,
+        \begin{equation*}
+            \frac{z}{(z+ib)^2} = g(z) = \frac{1}{4ib}+0(z-ib)+\cdots
+        \end{equation*}
+        It follows that
+        \begin{equation*}
+            \frac{z}{(z^2+b^2)^2} = (z-ib)^{-2}\cdot\left( \frac{1}{4ib}+0(z-ib)+\cdots \right)
+            = \boxed{\frac{1}{4ib(z-ib)^2}}+\cdots
+        \end{equation*}
+        as desired.
+    \end{proof}
     \item \textcite{bib:FischerLieb}, QIV.4.1. Let $f\in\mO(\C\setminus S)$ for some discrete set $S$ of singularities. Show that\dots
     \begin{enumerate}
         \item If $f$ is even, then
         \begin{equation*}
             \res_{-z}f = -\res_zf
         \end{equation*}
+        \begin{proof}
+            % Since $f$ is even, $f(z)=f(-z)$ and all the odd terms of the Laurent expansion are zero. Since $f\in\mO(\C\setminus S)$, $f$ has a Laurent expansion about $z_0$ and $-z_0$. Let $D$ be a small disk whose only singularity is $z_0$. Then we have that
+            % \begin{align*}
+            %     \res_{-z}f &= \frac{1}{2\pi i}\int_{\partial D}f(z)\dd{z}\\
+            %     &= \frac{1}{2\pi i}\int_{\partial D}\sum_{k=-\infty}^\infty a_k(z-(-z_0))^{2k}\dd{z}\\
+            %     &= \frac{1}{2\pi i}\int_{\partial D}\sum_{k=-\infty}^\infty a_k(z+z_0)^{2k}\dd{z}\\
+
+            %     &= -\frac{1}{2\pi i}\int_{\partial D}\sum_{k=-\infty}^\infty a_k(z-z_0)^{2k}\dd{z}
+                
+            %     % &= \sum_{k=-\infty}^\infty a_k(\zeta-(-z))^k\\
+            %     % &= \sum_{k=-\infty}^\infty a_k(\zeta+z)^k
+            %     % \\
+            %     % &= \sum_{k=-\infty}^\infty a_k(\zeta+z)^k
+            % \end{align*}
+
+            % Let $g(z):=-z$.
+
+            % We first establish that both $\res_zf$ and $\res_{-z}f$ are well-defined numbers. Indeed, if $f$ is even and $z$ is a singularity of $f$, then $-z$ is also a singularity of $f$ because if $-z$ is not a singularity of $f$, then $f(z)=f(-z)\in\C$ is not a singularity either, a contradiction.\par
+            % Having established this, 
+
+            Let
+            \begin{equation*}
+                w = g(\zeta) := -\zeta
+            \end{equation*}
+            Additionally, let $D$ be a small disk around $z$ containing at most one singularity and containing one singularity iff that singularity is $z$. Then $g(D)$ is a small disk around $-z$ with the same singularity conditions. Therefore,
+            \begingroup
+            \allowdisplaybreaks
+            \begin{align*}
+                \res_{-z}f &= \frac{1}{2\pi i}\int_{g(\partial D)}f(w)\dd{w}\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(g(\zeta))\cdot -1\dd\zeta\\
+                &= -\frac{1}{2\pi i}\int_{\partial D}f(-\zeta)\dd\zeta\\
+                &= -\frac{1}{2\pi i}\int_{\partial D}f(\zeta)\dd\zeta\\
+                &= -\res_zf
+            \end{align*}
+            \endgroup
+            as desired. Note that we can substitute $f(-\zeta)=f(\zeta)$ from the third to the fourth line, above, because $f$ is even by hypothesis.
+        \end{proof}
         \item If $f$ is odd, then
         \begin{equation*}
             \res_{-z}f = \res_zf
         \end{equation*}
+        \begin{proof}
+            Using the same terminology as in part (a), we have that
+            \begin{align*}
+                \res_{-z}f &= \frac{1}{2\pi i}\int_{g(\partial D)}f(w)\dd{w}\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(g(\zeta))\cdot -1\dd\zeta\\
+                &= \frac{1}{2\pi i}\int_{\partial D}-f(-\zeta)\dd\zeta\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(\zeta)\dd\zeta\\
+                &= \res_zf
+            \end{align*}
+            as desired.
+        \end{proof}
         \item If $f(z+\omega)=f(z)$ for some $\omega\in\C$, then
         \begin{equation*}
-            \res_{z+\omega}f=\res_zf
+            \res_{z+\omega}f = \res_zf
         \end{equation*}
+        \begin{proof}
+            Let
+            \begin{equation*}
+                w = g(\zeta) := \zeta+\omega
+            \end{equation*}
+            Additionally, let $D$ be a small disk around $z$ with the same singularity conditions as in part (a). Then $g(D)$ is a small disk around $z+\omega$ with the same singularity conditions. Therefore,
+            \begin{align*}
+                \res_{z+\omega}f &= \frac{1}{2\pi i}\int_{g(\partial D)}f(w)\dd{w}\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(g(\zeta))\dd\zeta\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(\zeta+\omega)\dd\zeta\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(\zeta)\dd\zeta\\
+                &= \res_zf
+            \end{align*}
+            as desired.
+        \end{proof}
         \item If $f$ is real on $\R$, then
         \begin{equation*}
             \res_{\bar{z}}f = \overline{\res_zf}
         \end{equation*}
+        \begin{proof}
+            Let
+            \begin{equation*}
+                w = g(\zeta) := \bar{\zeta}
+            \end{equation*}
+            Additionally, let $D$ be a small disk around $z$ with the same singularity conditions as in part (a). Then $g(D)$ is a small disk around $\bar{z}$ with the same singularity conditions. Furthermore, if $f$ is real on $\R$, then by PSet 3, QA.2a, every coefficient in the Laurent series is real. Thus, $f(\bar{z})=\overline{f(z)}$. Therefore,
+            \begin{align*}
+                \res_{\bar{z}}f &= \frac{1}{2\pi i}\int_{g(\partial D)}f(w)\dd{w}\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(g(\zeta))\dd{w}\\
+                &= \frac{1}{2\pi i}\int_{\partial D}f(\bar{\zeta})\dd\bar{\zeta}\\
+                &= \frac{1}{2\pi i}\int_{\partial D}\overline{f(\zeta)\dd\zeta}\\
+                &= \frac{1}{2\pi i}\overline{\int_{\partial D}f(\zeta)\dd\zeta}\\
+                &= \overline{\frac{1}{2\pi i}\int_{\partial D}f(\zeta)\dd\zeta}\\
+                &= \overline{\res_zf}
+            \end{align*}
+            as desired. Note that from the second to the third line above, we have just renamed $\dd{w}$ to $\dd\bar{z}$; we have not taken a derivative and done an infinitesimal substitution as in parts (a)-(c).
+        \end{proof}
     \end{enumerate}
     \item \textcite{bib:FischerLieb}, QIV.5.1. Prove that
     \begin{equation*}
         \int_{-\infty}^\infty\frac{\dd{x}}{\cosh x} = \pi
     \end{equation*}
     \emph{Hint}: Integrate over the boundary of the rectangle whose corners are $\pm r$ and $\pm r+i\pi$.
+    \begin{proof}
+        Taking the hint, we will analytically continue $1/\cosh x$ to the meromorphic function $1/\cosh z$ and integrate it over the described path, which we will denote by $\sqsubset\!\sqsupset$. Introducing some additional notation, let $\gamma_2$ denote the right side of the rectangle (oriented from $r$ to $r+i\pi$), let $\gamma_3$ denote the top of the rectangle (oriented from $r+i\pi$ to $-r+i\pi$), and let $\gamma_4$ denote the left side of the rectangle (oriented from $-r+i\pi$ to $-r$). Then
+        \begin{equation*}
+            \int_{\sqsubset\!\sqsupset}\frac{\dd{z}}{\cosh z} = \int_{-r}^r\frac{\dd{x}}{\cosh x}+\int_{\gamma_3}\frac{\dd{z}}{\cosh z}+\int_{\gamma_2+\gamma_4}\frac{\dd{z}}{\cosh z}
+        \end{equation*}
+        The reason for writing the integrals in this order will soon become apparent. From here, we seek to rearrange the above expression to get the integral over the real line ($\int_{-r}^r\dd{x}/\cosh x$) by itself and take the limit as $r\to\infty$. We begin this process by simplifying the above equation.\par
+        Since $1/\cosh z$ has only one pole inside $\sqsubset\!\sqsupset$ (namely, at $i\pi/2$), we have by the residue theorem that
+        \begin{equation*}
+            \int_{\sqsubset\!\sqsupset}\frac{\dd{z}}{\cosh z} = 2\pi i\cdot\wn(\sqsubset\!\sqsupset,\tfrac{i\pi}{2})\cdot\res_{i\pi/2}\left( \frac{1}{\cosh z} \right)
+        \end{equation*}
+        We know just by how $\sqsubset\!\sqsupset$ is defined that it has a winding number of 1 around $i\pi/2$. To evaluate the residue, begin by computing the power series expansion of $\cosh z$ about $i\pi/2$.
+        \begin{align*}
+            \cosh z &= \sum_{k=0}^\infty\frac{\cosh^{(k)}(\tfrac{i\pi}{2})}{k!}(z-\tfrac{i\pi}{2})^k\\
+            &= i\cdot(z-\tfrac{i\pi}{2})+\frac{i}{3!}(z-\tfrac{i\pi}{2})^3+\cdots\\
+            &= (z-\tfrac{i\pi}{2})\cdot\left[ i+\frac{i}{3!}(z-\tfrac{i\pi}{2})^2+\cdots \right]
+        \end{align*}
+        Thus,
+        \begin{align*}
+            \frac{1}{\cosh z} &= \frac{1}{z-\tfrac{i\pi}{2}}\cdot\left[ -i+\frac{i}{3!}(z-\tfrac{i\pi}{2})^2+\cdots \right]\\
+            &= \frac{-i}{z-\tfrac{i\pi}{2}}+\frac{i}{3!}(z-\tfrac{i\pi}{2})+\cdots
+        \end{align*}
+        This tells us that the desired residue is $-i$. Putting the last several results together, we learn that
+        \begin{equation*}
+            \int_{\sqsubset\!\sqsupset}\frac{\dd{z}}{\cosh z} = 2\pi i\cdot 1\cdot -i
+            = 2\pi
+        \end{equation*}
+        Additionally, since $1/\cosh z=:f(z)$ is antiperiodic --- that is, $-f(z)=f(z+i\pi)$ --- we have that
+        \begin{equation*}
+            \int_{\gamma_3}\frac{\dd{z}}{\cosh z} = \int_r^{-r}\frac{\dd{x}}{\cosh(x+i\pi)}
+            = \int_r^{-r}\frac{\dd{x}}{-\cosh x}
+            = \int_{-r}^r\frac{\dd{x}}{\cosh x}
+        \end{equation*}
+        Lastly, since $1/\cosh(x+iy)\to 0$ as $|x|\to\infty$, we have that
+        \begin{equation*}
+            \lim_{r\to\infty}\int_{\gamma_2+\gamma_4}\frac{\dd{z}}{\cosh z} = 0
+        \end{equation*}
+        Therefore, the original equation rearranges to
+        \begin{align*}
+            2\pi &= 2\int_{-r}^r\frac{\dd{x}}{\cosh x}\\
+            \pi &= \int_{-r}^r\frac{\dd{x}}{\cosh x}
+        \end{align*}
+        Taking the limit as $r\to\infty$ yields the desired result.
+    \end{proof}
     \item \label{prb:5.A.5}Verify the claim from class that the integral of
     \begin{equation*}
         f(z) = \frac{\pi}{z^2\tan(\pi z)}
     \end{equation*}
     over the square with vertices $[\pm(N+\tfrac{1}{2}),\pm(N+\tfrac{1}{2})]$ for $N\in\N$ converges to 0 as $N\to\infty$.
+    \begin{proof}
+        Let $\gamma_N$ be the aforementioned square. We will compute the integral by first bounding the integrand $f$ and then showing that said integrand converges to zero as the path grows larger. It will follow that in the limit, the integrand $f=0$ and hence the integral must be zero.\par
+        To begin, let's bound the reciprocal of $\tan(\pi z)$, which is
+        \begin{equation*}
+            \cot(\pi z) = i\cdot\frac{\e[\pi iz]+\e[-\pi iz]}{\e[\pi iz]-\e[-\pi iz]}
+        \end{equation*}
+        We will do this one side at a time for all four sides of $\gamma_N$.\par
+        \underline{The right side}: When $\re(z)=N+1/2$ (for some $N\in\Z$) and $y=\im(z)\in\R$, we have that
+        \begin{equation*}
+            \e[\pi iz] = \e[\pi i(N+1/2+yi)]
+            = \e[N\pi i]\cdot\e[\pi i/2]\cdot\e[-\pi y]
+            = \pm 1\cdot i\cdot\e[-\pi y]
+            = \pm i\e[-\pi y]
+        \end{equation*}
+        and
+        \begin{equation*}
+            \e[-\pi iz] = \e[-\pi i(N+1/2+yi)]
+            = \e[-N\pi i]\cdot\e[-\pi i/2]\cdot\e[\pi y]
+            = \pm 1\cdot -i\cdot\e[\pi y]
+            = \mp i\e[\pi y]
+        \end{equation*}
+        so hence,
+        \begin{equation*}
+            |\cot(\pi z)| = \left| \frac{\e[\pi iz]+\e[-\pi iz]}{\e[\pi iz]-\e[-\pi iz]} \right|
+            = \left| \frac{\pm i\e[-\pi y]+\mp i\e[\pi y]}{\pm i\e[-\pi y]-\mp i\e[\pi y]} \right|
+            = \left| \frac{\pm\e[-\pi y]-\pm\e[\pi y]}{\pm\e[-\pi y]+\pm\e[\pi y]} \right|
+            = \left| \frac{\e[-\pi y]-\e[\pi y]}{\e[-\pi y]+\e[\pi y]} \right|
+            \leq 1
+        \end{equation*}
+        \underline{The left side}: The argument is symmetric to that used for the right side.\par
+        \underline{The top side}: In this case, $\im(z)=N+1/2$ and $x=\re(z)\in\R$. First off, observe that as $\im(z)\to\infty$, we have that
+        \begin{equation*}
+            \cot(\pi z) \to -i
+        \end{equation*}
+        Thus, if we want to keep $\cot(\pi z)$ bounded, it will suffice to keep it near $-i$. By our observation, to achieve this, we need only require that $\im(z)=N+1/2$ is greater than a certain threshold. This threshold can be determined using the applet from the 3/21 lecture, which shows us that if $\im(z)\geq 0+1/2=1/2$, then we already have
+        \begin{equation*}
+            |\cot(\pi z)+i| \ll 1
+        \end{equation*}
+        But if $\cot(\pi z)$ is so close to $-i$, then certainly
+        \begin{equation*}
+            |\cot(\pi z)| \leq 2
+        \end{equation*}
+        along the top side.\footnote{Note that for the sake of bounding the $\cot(\pi z)$ component of $\pi/z^2\tan(\pi z)$, we need not continue to move the top and bottom of $\gamma_N$ up and down to $\pm\infty$ along with the right and left sides of the box; rather, they could stay at $\im(z)=\pm 1/2$ and we'd be totally fine on bounding $\cot(\pi z)$. However, we \emph{do} have the top and bottom diverge so that the $z^2$ term in the denominator of $\pi/z^2\tan(\pi z)$ becomes large at \emph{all} points along $\gamma_N$ as $N\to\infty$. This fact will be used shortly when we compute $\int_{\gamma_N}f\dd{z}$.}\par
+        \underline{The bottom side}: An analogous argument to the top side holds based on the fact that as $\im(z)\to -\infty$, $\cot(\pi z)\to i$.\par
+        Thus, since $|\cot(\pi z)|\leq 1$ on the right and left sides of $\gamma_N$ and $|\cot(\pi z)\leq 2$ on the top and bottom of $\gamma_n$, we have that $|\cot(\pi z)|\leq 2$ for all $z\in\im(\gamma_N)$ and $N\in\N$.\par
+        Consequently, as $N\to\infty$,
+        \begin{equation*}
+            |f(z)| = \left| \frac{\pi}{z^2}\cot(\pi z) \right|
+            \leq \left| \frac{2\pi}{z^2} \right|
+            \to 0
+        \end{equation*}
+        for all $z\in\im(\gamma_N)$. Thus, the integral of $f$ over $\gamma_N$ goes to zero, too. In a statement,
+        \begin{equation*}
+            \lim_{N\to\infty}\int_{\gamma_N}f\dd{z} = 0
+        \end{equation*}
+        as desired.
+    \end{proof}
     \item For $\alpha\notin\Z$, prove that
     \begin{equation*}
         \sum_{n=-\infty}^\infty\frac{1}{(\alpha+n)^2} = \frac{\pi^2}{\sin^2(\pi\alpha)}
     \end{equation*}
     \emph{Hint}: Adapt your computation from Problem \ref{prb:5.A.5}.
+    \begin{proof}
+        Taking the hint, we will choose to work with the analogous helper function\footnote{A good way to find this function is to first look at analogous functions that have infinitely many residues of the form $(\alpha+n)^{-1}$, of which there are a few. From here, we narrow it down to a function that has an "easily" computable final residue. One pattern that emerges is that computability is improved when we leave the argument of the tangent function alone and only modify the $z^2$ in the denominator. Another one is that it is good to separate the poles caused by tangent from the pole caused by $z^2$ so that we can take a positive and negative infinite sum without having to treat the "zero case" separately as we did in the Basel problem; instead, we introduce a new pole whose residue we will compute at the end. These criteria are what leads to the chosen function which, as we are about to see, works quite nicely. So there's an element of "because it works" mathematics at work here, but a bit of strategy, too.}
+        \begin{equation*}
+            f(z) = \frac{\pi}{(\alpha+z)^2\tan(\pi z)}
+        \end{equation*}
+        Similar to the Basel problem, $f$ is meromorphic on $\C$ with poles of order 1 at every $n\in\Z$ (because tangent is periodic) and an additional pole of order 2 at $-\alpha$. Let's compute the residue of $f$ about the tangent-caused poles. In these cases, the denominator has a simple zero (because $\alpha$ is not equal to any $n$ by hypothesis) and the numerator is holomorphic, so we may apply "Property 4" from the 5/2 lecture to learn that
+        \begin{equation*}
+            \res_nf = \frac{\eval{\pi}_n}{\eval{\dv*{z}[(\alpha+z)^2\tan(\pi z)]}_n}
+            = \frac{\pi}{2(\alpha+n)\underbrace{\tan(\pi n)}_0+\pi(\alpha+n)^2\underbrace{\sec^2(\pi n)}_1}
+            = \frac{\pi}{\pi(\alpha+n)^2}
+            = \frac{1}{(\alpha+n)^2}
+        \end{equation*}
+        Defining $\gamma_N$ as in Problem \ref{prb:5.A.5}, we have via the residue theorem (since $\gamma_N$ has a winding number of 1 around all the poles it encloses) that
+        \begin{equation*}
+            \frac{1}{2\pi i}\int_{\gamma_N}f(z)\dd{z} = \res_{-\alpha}f+\sum_{n=-N}^N\res_nf
+        \end{equation*}
+        for $N>|\alpha|$. Now analogously to what we did in Problem \ref{prb:5.A.5}, we can compute the above integral to be zero in the limit that $N\to\infty$. Consequently, combining the last two results, we have that
+        \begin{align*}
+            \frac{1}{2\pi i}\lim_{N\to\infty}\int_{\gamma_N}f(z)\dd{z} &= \lim_{N\to\infty}\left( \res_{-\alpha}f+\sum_{n=-N}^N\res_nf \right)\\
+            \frac{1}{2\pi i}\cdot 0 &= \res_{-\alpha}f+\sum_{n=-\infty}^\infty\res_nf\\
+            \sum_{n=-\infty}^\infty\frac{1}{(\alpha+n)^2} &= -\res_{-\alpha}f
+        \end{align*}
+        Evidently, we must now compute $\res_{-\alpha}f$. Rewrite $f$ as follows.
+        \begin{equation*}
+            f(z) = \frac{1}{(\alpha+z)^2}\cdot\underbrace{\pi\cot(\pi z)}_{g(z)}
+        \end{equation*}
+        Observe that $g$ is holomorphic in a neighborhood of $-\alpha$ (again, since $\alpha\notin\Z$). Thus, $g$ has a power series expansion about $-\alpha$ given by
+        \begin{equation*}
+            g(z) = \sum_{k=0}^\infty\frac{g^{(k)}(-\alpha)}{k!}(z+\alpha)^k
+        \end{equation*}
+        Consequently, the Laurent expansion of $f$ about $-\alpha$ is
+        \begin{equation*}
+            f(z) = \sum_{k=-2}^\infty\frac{g^{(k+2)}(-\alpha)}{(k+2)!}(z+\alpha)^k
+        \end{equation*}
+        It follows by the definition of the residue as the $a_{-1}$ coefficient that
+        \begin{equation*}
+            \res_{-\alpha}f = \frac{g'(-\alpha)}{1!}
+            = \eval{\pi\cdot -\csc^2(\pi z)\cdot\pi}_{-\alpha}
+            = -\frac{\pi^2}{\sin^2(-\pi\alpha)}
+            = -\frac{\pi^2}{(-1)^2\sin^2(\pi\alpha)}
+            = -\frac{\pi^2}{\sin^2(\pi\alpha)}
+        \end{equation*}
+        Therefore,
+        \begin{equation*}
+            \sum_{n=-\infty}^\infty\frac{1}{(\alpha+n)^2} = -\left( -\frac{\pi^2}{\sin^2(\pi\alpha)} \right)
+            = \frac{\pi^2}{\sin^2(\pi\alpha)}
+        \end{equation*}
+        as desired.
+    \end{proof}
 \end{enumerate}
 
 
 \subsection*{Set B: Graded for Content}
 \begin{enumerate}[label={\textbf{\arabic*.}}]
     \item \textcite{bib:FischerLieb}, QIV.4.3. Let $G$ be a simply connected domain, and let $f\in\mO(G\setminus S)$. Show that $f$ has a primitive on $G\setminus S$ if and only if all residues of $f$ vanish.
-    \item \textcite{bib:FischerLieb}, QIV.5.3. Compute the following.
-    \begin{enumerate}
-        \item For $a>1$,
+    \begin{proof}
+        Suppose first that $f$ has a primitive $F$ on $G\setminus S$. Then by the corollary to the fundamental theorem of calculus from the 3/28 lecture,
         \begin{equation*}
-            \int_0^\pi\frac{\sin^2x}{a+\cos x}\dd{x}
+            \int_{\partial G}f\dd{z} = 0
         \end{equation*}
-        \item For $a\in\C$ and $|a|\neq 1$,
-        \begin{equation*}
-            \int_0^{2\pi}\frac{\dd{t}}{1-2a\cos t+a^2}
-        \end{equation*}
-    \end{enumerate}
-    \emph{Hint}: To get started, make the substitution $z=\e[it]$ as on \textcite[127]{bib:FischerLieb} so that
+        It follows by the residue theorem that
+        \begin{align*}
+            \frac{1}{2\pi i}\underbrace{\int_{\partial G}f\dd{z}}_0 &= \sum_{s\in S}\underbrace{\wn(\partial G,s)}_1\cdot\res_sf\\
+            0 &= \sum_{s\in S}\res_sf
+        \end{align*}
+        Therefore, the residues of $f$ vanish, as desired.\par
+        Now suppose that all residues of $f$ vanish. Since $G$ is simply connected, it is bounded by a nulhomologous multicurve $\partial G$. Thus, by the residue theorem,
+        \begin{align*}
+            \frac{1}{2\pi i}\int_{\partial G}f\dd{z} &= \sum_{s\in S}\wn(\partial G,s)\cdot\underbrace{\res_sf}_0\\
+            \int_{\partial G}f\dd{z} &= 0
+        \end{align*}
+        It follows that the integral over any closed loop in $G$ (which is necessarily homotopic to $\partial G$) must be zero. This combined with the fact that $f$ is holomorphic and hence continuous implies by the proposition from the 3/28 class that $f$ has a primitive on $G\setminus S$.
+    \end{proof}
+    \item \textcite{bib:FischerLieb}, QIV.5.3. Compute the following. \emph{Hint}: To get started, make the substitution $z=\e[it]$ as on \textcite[127]{bib:FischerLieb} so that
     \begin{align*}
         \cos(t) &= \frac{1}{2}\left( z+\frac{1}{z} \right)&
         \sin(t) &= \frac{1}{2i}\left( z-\frac{1}{z} \right)
     \end{align*}
     and so that the integral from $t=0$ to $2\pi$ becomes a contour integral over the unit circle.
+    \begin{enumerate}
+        \item For $a>1$,
+        \begin{equation*}
+            \int_0^\pi\frac{\sin^2x}{a+\cos x}\dd{x}
+        \end{equation*}
+        \begin{proof}
+            Let $\gamma$ denote the upper half circle $\partial\D\cap\overline{\Hh}$ oriented counterclockwise. Then taking the hint, we have that
+            \begin{equation*}
+                \int_0^\pi\frac{\sin^2x}{a+\cos x}\dd{x} = \int_\gamma\frac{\left[ \frac{1}{2i}\left( z-\frac{1}{z} \right) \right]^2}{a+\frac{1}{2}\left( z+\frac{1}{z} \right)}\frac{\dd{z}}{iz}
+                % = \int_\gamma\frac{\frac{1}{-4}\left( z-\frac{1}{z} \right)^2}{a+\frac{1}{2}\left( z+\frac{1}{z} \right)}\frac{\dd{z}}{iz}
+                % = \int_\gamma\frac{-\left( z^2-2+\frac{1}{z^2} \right)}{4a+2\left( z+\frac{1}{z} \right)}\frac{\dd{z}}{iz}
+                % = \int_\gamma\frac{-z^2+2-\frac{1}{z^2}}{4aiz+2iz^2+2i}\dd{z}
+                = \int_\gamma\frac{-z^4+2z^2-1}{4aiz^3+2iz^4+2iz^2}\dd{z}
+            \end{equation*}
+        \end{proof}
+        \item For $a\in\C$ and $|a|\neq 1$,
+        \begin{equation*}
+            \int_0^{2\pi}\frac{\dd{t}}{1-2a\cos t+a^2}
+        \end{equation*}
+        \begin{proof}
+            Taking the hint, we have that
+            \begin{equation*}
+                \int_0^{2\pi}\frac{\dd{t}}{1-2a\cos t+a^2} = \int_{\partial\D}\frac{1}{1-a(z+\tfrac{1}{z})+a^2}\frac{\dd{z}}{iz}
+                = \int_{\partial\D}\frac{i}{az^2-(a^2+1)z+a}\dd{z}
+            \end{equation*}
+            The integrand has poles at
+            \begin{align*}
+                z_1 &= \frac{a^2+1}{2a}+\frac{\sqrt{(a^2+1)^2-4a^2}}{2a}&
+                    z_2 &= \frac{a^2+1}{2a}-\frac{\sqrt{(a^2+1)^2-4a^2}}{2a}\\
+                &= \frac{a^2+1}{2a}+\frac{a^2-1}{2a}&
+                    &= \frac{a^2+1}{2a}-\frac{a^2-1}{2a}\\
+                &= a&
+                    &= \frac{1}{a}
+            \end{align*}
+            Since $|a|\neq 1$ by hypothesis, exactly one of these poles will lie in $\D$. Thus, by the residue theorem,
+            \begin{equation*}
+                \frac{1}{2\pi i}\int_{\partial\D}\frac{i}{az^2-(a^2+1)z+a}\dd{z} = \res_{z_i}\left( \frac{i}{a(z-a)(z-a^{-1})} \right)
+            \end{equation*}
+            We now divide into two cases: $|a|<1$ and $|a|>1$. If $|a|<1$, then we evaluate the following using the heuristic from class on 5/2 about shrinking the loop around the singularity so that the multiplied terms approach being constant.
+            \begin{equation*}
+                \res_{z_1}\left( \frac{i}{a(z-a)(z-a^{-1})} \right) = \frac{i}{a(a-a^{-1})}
+            \end{equation*}
+            Similarly, if $|a|>1$, then we evaluate
+            \begin{equation*}
+                \res_{z_2}\left( \frac{i}{a(z-a)(z-a^{-1})} \right) = \frac{i}{a(a^{-1}-a)}
+            \end{equation*}
+            Therefore, the desired integral equals
+            \begin{equation*}
+                \boxed{\pm\frac{2\pi}{a(a-a^{-1})}}
+            \end{equation*}
+        \end{proof}
+    \end{enumerate}
     \item \textcite{bib:FischerLieb}, QIV.6.3. Let $\lambda>1$. Show that the equation $\e[-z]+z=\lambda$ has exactly one solution in the half plane $\re z>0$. Show that this solution is real.
+    \begin{proof}
+        Let $U$ be the half plane described in the question. Consider the function
+        \begin{equation*}
+            f(z) := \e[-z]+z-\lambda
+        \end{equation*}
+        Apply Rouch\'{e}'s theorem.
+    \end{proof}
     \item Show that
     \begin{equation*}
         \int_0^1\log[\sin(\pi x)]\dd{x} = -\log(2)
     \end{equation*}
     \emph{Hint}: Consider the contour of integration that goes from $\infty$ to 0 along the positive imaginary axis, then runs from 0 to 1 along the real axis, then runs from 1 to $\infty$ along the ray $\{z\mid\re(z)=1,\ \im(z)\geq 0\}$.
+    \begin{proof}
+        Call the contour described in the hint $\gamma$, and call the three segments of it $\gamma_1,\gamma_2,\gamma_3$ in the order they're introduced.
+
+        $\sin(\pi z)$ has an essential singularity at $\infty$. On the Riemann sphere, $\gamma$ is an SCC.
+
+        \begin{align*}
+            \int_\gamma\log[\sin(\pi z)]\dd{z} &= \int_0^1\log[\sin(\pi x)]\dd{x}+\int_{\gamma_1}\log[\sin(\pi z)]\dd{z}+\int_{\gamma_3}\log[\sin(\pi z)]\dd{z}\\
+            &= \int_0^1\log[\sin(\pi x)]\dd{x}+\lim_{r\to\infty}\left( \int_{ir}^0\log[\sin(\pi z)]\dd{z}+\int_1^{1+ir}\log[\sin(\pi z)]\dd{z} \right)\\
+            &= \int_0^1\log[\sin(\pi x)]\dd{x}+\lim_{r\to\infty}\left( \int_{ir}^0\log[\sin(\pi z)]\dd{z}+\int_0^{ir}-\log[\sin(\pi z)]\dd{z} \right)\\
+            &= \int_0^1\log[\sin(\pi x)]\dd{x}-2\lim_{r\to\infty}\left( \int_0^{ir}\log[\sin(\pi z)]\dd{z} \right)\\
+            &= \int_0^1\log[\sin(\pi x)]\dd{x}+2\int_{\gamma_1}\log[\sin(\pi z)]\dd{z}
+        \end{align*}
+    \end{proof}
 \end{enumerate}
 
 
