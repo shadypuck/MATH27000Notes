@@ -10,17 +10,138 @@
 
 
 \section{Integral Representations of Special Functions}
+\subsection{The Gamma Function}
+\begin{itemize}
+    \item \marginnote{5/18:}Has some good background for why we need integral representations, as well as some other useful forms of $\Gamma$ that more clearly illustrate its properties (such as poles at the nonpositive integers).
+    \begin{itemize}
+        \item In particular, contour integrals provide "recursion formulas, asymptotic forms, and analytic continuations of the special functions" \parencite[171]{bib:Seaborn}.
+    \end{itemize}
+    \item Main results.
+    \begin{itemize}
+        \item We get an analytic continuation of $\Gamma$ to the left half plane.
+        \item Then its the aforementioned poles.
+    \end{itemize}
+\end{itemize}
+
+
 \setcounter{subsection}{3}
 \subsection{Legendre Polynomials}
 \begin{itemize}
-    \item \marginnote{5/10:}Contour integral definitions of these two. Never seen in physics, but cool characterization!
+    \item In this section, we will derive two contour integral representations of the Legendre polynomials. The first one will be much more useful, so we will spend more time on it.
+    \item Deriving the first contour integral representation.
+    \begin{itemize}
+        \item Recall Rodrigues's formula, which is
+        \begin{equation*}
+            P_n(x) = \frac{1}{2^nn!}\dv[n]{x}(x^2-1)^n
+        \end{equation*}
+        \item Also recall the $n^\text{th}$ derivative of the CIF either from class or \textcite{bib:Seaborn}, which states that given a complex function $f$ and $C$ a curve surrounding $z$ such that no singularities of $f$ lie within it, we have
+        \begin{equation*}
+            \dv[n]{z}f(z) = \frac{n!}{2\pi i}\oint_C\frac{f(t)}{(t-z)^{n+1}}\dd{t}
+        \end{equation*}
+        \item Analytically continue $(x^2-1)^n$ to $(z^2-1)^n\in\mO(\C)$ so that by the above,
+        \begin{equation*}
+            \dv[n]{z}(z^2-1)^n = \frac{n!}{2\pi i}\oint_C\frac{(t^2-1)^n}{(t-z)^{n+1}}\dd{t}
+        \end{equation*}
+        \item Then \textbf{Schl\"{a}fli's integral} for the $P_n(z)$ follows by transitivity.
+    \end{itemize}
+    \item \textbf{Schl\"{a}fli's integral} (for the $P_n(z)$): The integral formula for the Legendre polynomials given as follows. \emph{Given by}
+    \begin{equation*}
+        P_n(z) = \frac{1}{2^n}\frac{1}{2\pi i}\oint_C\frac{(t^2-1)^n}{(t-z)^{n+1}}\dd{t}
+    \end{equation*}
+    \item Schl\"{a}fli's integral is not particularly useful for direct computations, but it gets us both a recursion formula for the Legendre polynomials and, later, the generating function.
+    \item Using Schl\"{a}fli's integral to find a recursion formula for the Legendre polynomials.
+    \begin{itemize}
+        \item First, we write $P_n'$ in a certain form.
+        \begin{align*}
+            P_n'(z) &= \frac{1}{2^n}\frac{1}{2\pi i}\oint_C(t^2-1)^n\dv{z}[(t-z)^{-(n+1)}]\dd{t}\\
+            &= \frac{1}{2^n}\frac{1}{2\pi i}\oint_C(t^2-1)^n\cdot -(n+1)(t-z)^{-(n+2)}\cdot -1\dd{t}\\
+            &= (n+1)\frac{1}{2^n}\frac{1}{2\pi i}\oint_C\frac{(t^2-1)^n}{(t-z)^{n+2}}\dd{t}
+        \end{align*}
+        \item Separately, we rewrite Schl\"{a}fli's integral in a form that lines up with the new integral above.
+        \begin{align*}
+            P_n(z) &= \frac{1}{2^n}\frac{1}{2\pi i}\oint_C\frac{(t-z)(t^2-1)^n}{(t-z)^{n+2}}\dd{t}\\
+            P_n(z) &= \frac{1}{2^n}\frac{1}{2\pi i}\left[ \oint_C\frac{t(t^2-1)^n}{(t-z)^{n+2}}\dd{t}-z\oint_C\frac{(t^2-1)^n}{(t-z)^{n+2}}\dd{t} \right]\\
+            z\cdot\frac{1}{2^n}\frac{1}{2\pi i}\oint_C\frac{(t^2-1)^n}{(t-z)^{n+2}}\dd{t} &= \frac{1}{2^n}\frac{1}{2\pi i}\oint_C\frac{t(t^2-1)^n}{(t-z)^{n+2}}\dd{t}-P_n(z)\\
+            \frac{1}{2^n}\frac{1}{2\pi i}\oint_C\frac{(t^2-1)^n}{(t-z)^{n+2}}\dd{t} &= \frac{1}{2^nz}\frac{1}{2\pi i}\oint_C\frac{t(t^2-1)^n}{(t-z)^{n+2}}\dd{t}-\frac{1}{z}P_n(z)
+        \end{align*}
+        \item Combining the last two results, we obtain
+        \begin{equation*}
+            P_n'(z) = \frac{n+1}{2^nz}\frac{1}{2\pi i}\oint_C\frac{t(t^2-1)^n}{(t-z)^{n+2}}\dd{t}-\frac{n+1}{z}P_n(z)
+        \end{equation*}
+        \item We now start working on simplifying the left term above. Observe that
+        \begin{align*}
+            0 &= \oint_C\dv{t}\left[ \frac{(t^2-1)^{n+1}}{(t-z)^{n+2}} \right]\dd{t}\\
+            &= \oint_C\frac{(t-z)^{n+2}\cdot(n+1)(t^2-1)^n\cdot 2t-(t^2-1)^{n+1}\cdot(n+2)(t-z)^{n+1}}{(t-z)^{2n+4}}\dd{t}\\
+            &= 2(n+1)\oint_C\frac{t(t^2-1)^n}{(t-z)^{n+2}}\dd{t}-\underbrace{(n+2)\oint_C\frac{(t^2-1)^{n+1}}{(t-z)^{n+3}}\dd{t}}_{2\pi i2^{n+1}P_{n+1}'(z)}
+        \end{align*}
+        \begin{itemize}
+            \item Note that the integral in the first line, above, is zero because the integrand is an exact differential integrated around a closed loop. Essentially, we are applying the fact (from the 3/28 lecture) that the integrand has a primitive, so we can apply the FTC to a path with the same start and end points.
+            \item Additionally, it follows by rearranging the above expression that
+            \begin{equation*}
+                (n+1)\oint_C\frac{t(t^2-1)^n}{(t-z)^{n+2}}\dd{t} = 2\pi i2^nP_{n+1}'(z)
+            \end{equation*}
+        \end{itemize}
+        \item Substituting this back into the above expression for $P_n'(z)$ yields
+        \begin{equation*}
+            P_n'(z) = \frac{1}{z}P_{n+1}'(z)-\frac{n+1}{z}P_n(z)
+        \end{equation*}
+        \item This equation rearranges into the final recursion formula
+        \begin{equation*}
+            zP_n'(z)+(n+1)P_n(z)-P_{n+1}'(z) = 0
+        \end{equation*}
+    \end{itemize}
+    \item \textcite{bib:Seaborn} --- as mentioned --- now derives one additional contour integral representation of the Legendre polynomials.
+    \item \textbf{Laplace's integral representation} (for $P_n(z)$): The integral formula for the Legendre polynomials given as follows. \emph{Given by}
+    \begin{equation*}
+        P_n(z) = \frac{1}{\pi}\int_0^\pi(z+\sqrt{z^2-1}\cos\phi)^n\dd\phi
+    \end{equation*}
+    \begin{itemize}
+        \item Note that despite the integral being taken between two real numbers, this is still a complex contour integral since $\phi$ feeds into a cosine function that wraps into a contour.
+    \end{itemize}
 \end{itemize}
 
 
 \stepcounter{subsection}
-\subsection{Hermite Polynomials}
+\subsection{Hermite Polynomials}\label{sss:10.6}
 \begin{itemize}
-    \item 
+    \item Here are two integral representations that will be derived in later chapters.
+    \begin{itemize}
+        \item If $C$ encloses the origin, then
+        \begin{equation*}
+            H_n(x) = \frac{n!}{2\pi i}\oint_C\frac{\e[2xt-t^2]}{t^{n+1}}\dd{t}
+        \end{equation*}
+        \begin{itemize}
+            \item The recursion formula for the Hermite polynomials will be derived from this contour integral.
+        \end{itemize}
+        \item Additionally, we have
+        \begin{equation*}
+            H_n(x) = \frac{i^n}{2\sqrt{\pi}}\int_{-\infty}^\infty t^n\e[-(t+2ix)^2/4]\dd{t}
+        \end{equation*}
+    \end{itemize}
+\end{itemize}
+
+
+\subsection{The Hypergeometric Function}
+\begin{itemize}
+    \item Integral representations for both the hypergeometric function and confluent hypergeometric function are derived using properties of $\Gamma$.
+\end{itemize}
+
+
+\subsection{Asymptotic Expansions}
+\begin{itemize}
+    \item \textbf{Asymptotic series} (of $f$): The infinite series $\sum_{k=0}^\infty a_kz^{-k}$ satisfying the following constraint. \emph{Also known as} \textbf{asymptotic expansion}. \emph{Constraint}
+    \begin{equation*}
+        \lim_{|z|\to\infty}z^n\left[ f(z)-\sum_{k=0}^na_kz^{-k} \right] = 0\tag{$n>0$}
+    \end{equation*}
+    \begin{itemize}
+        \item This means that for a given $n$, if $|z|$ is large enough, then the partial sum approximates $f(z)$.
+    \end{itemize}
+    \item Asymptotic expansions are useful in quantum mechanics when we want to talk about the behavior of a given wave function at points far from the source of the field to which the quantum particle is subject.
+    \item \textcite{bib:Seaborn} uses the integral representation of the confluent hypergeometric function to derive its asymptotic series.
+    \begin{itemize}
+        \item Come back (for funsies) if I have time!!
+    \end{itemize}
+    \item Discussion of \textbf{Stokes's phenomenon}.
 \end{itemize}
 
 
