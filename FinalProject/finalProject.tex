@@ -120,6 +120,19 @@
 \subfile{FeedbackEric/feedbackEric.tex}
 \renewcommand{\proofname}{Proof}
 
+\addtocontents{toc}{\protect\renewcommand{\protect\numberline}[1]{}}
+\includepdf[pages=-,addtotoc={1,section,1,Presentation Feedback (Daniel),FromDaniel}]{../ExtFiles/Presentation Feedback Form - Steven.pdf}
+\addtocontents{toc}{\let\protect\numberline\protect\oldnumberline}
+
+\addtocontents{toc}{\protect\renewcommand{\protect\numberline}[1]{}}
+\includepdf[pages=-,addtotoc={1,section,1,Written Report Feedback (Daniel),FromDanielWri}]{../ExtFiles/Written Report Feedback - Steven.pdf}
+\addtocontents{toc}{\let\protect\numberline\protect\oldnumberline}
+
+\renewcommand{\proofname}{Response}
+\renewcommand{\leftmark}{Written Report Feedback Form}
+\subfile{FeedbackDaniel/feedbackDaniel.tex}
+\renewcommand{\proofname}{Proof}
+
 
 
 

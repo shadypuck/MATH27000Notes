@@ -37,7 +37,7 @@ The \textbf{time-independent Schr\"{o}dinger equation}, Equation \ref{eqn:Schrod
 \begin{equation}\label{eqn:Schrodinger1D}
     -\frac{\hbar^2}{2m}\dv[2]{\psi(x)}{x}+V(x)\cdot\psi(x) = E\psi(x)
 \end{equation}
-This differential equation allows them to convert a `potential energy function' $V:\R\to\R$ of interest into a corresponding `wave function' $\psi:\R\to\R$. Some potential energy functions $V$ give rise to \textbf{special} differential equations, which are differential equations tha occur often enough in the applied sciences to warrant special consideration, often expressed through extensive dedicated literature. Two such special differential equations are the \textbf{Hermite equation} and \textbf{Legendre equation}, Equations \ref{eqn:Hermite} and \ref{eqn:Legendre} below, respectively.
+This differential equation allows them to convert a `potential energy function' $V:\R\to\R$ of interest into a corresponding `wave function' $\psi:\R\to\R$. Some potential energy functions $V$ give rise to \textbf{special} differential equations, which are differential equations that occur often enough in the applied sciences to warrant special consideration, often expressed through extensive dedicated literature. Two such special differential equations are the \textbf{Hermite equation} and \textbf{Legendre equation}, Equations \ref{eqn:Hermite} and \ref{eqn:Legendre} below, respectively.
 \begin{equation}\label{eqn:Hermite}
     \dv[2]{H}{x}-2x\dv{H}{x}+(\mu-1)H(x) = 0
 \end{equation}
@@ -54,14 +54,14 @@ This equation can then be solved with the \textbf{hypergeometric function}, Equa
 \begin{equation}\label{eqn:hypergeometricF}
     {}_2F_1(a,b;c;z) := \sum_{n=0}^\infty\frac{(a)_n(b)_n}{n!(c)_n}z^n
 \end{equation}\par
-Carrying out this procedure will leave us with computable solutions, but not with \emph{easily} computable solutions. To aid us in transforming the original solution into a more computationally friendly one, Section \ref{sse:complex} will reintroduce several topics in complex analysis presented throughout the quarter. These include the contour integrals, the Cauchy integral formula, and the residue theorem. One additional topic that will be introduced is the \textbf{generating function}.\par
-Lastly, in Section \ref{sse:applications}, we will then apply these topics to derive \textbf{Rodrigues's formula} for the solutions to the Legendre equation, Equation \ref{eqn:Rodrigues} below, and a \textbf{recursion formula} for the solutions to the Hermite equation, Equation \ref{eqn:recursionHermite}.
+Carrying out this procedure will leave us with computable solutions, but not with \emph{easily} computable solutions. To aid us in transforming the original solution into a more computationally friendly one, Section \ref{sse:complex} will reintroduce several topics in complex analysis presented throughout the quarter. These include the Cauchy integral formula and the residue theorem. Two additional topics that will be introduced are the \textbf{gamma function} and the \textbf{generating function}.\par
+Lastly, in Section \ref{sse:applications}, we will apply these topics to derive \textbf{Rodrigues's formula} for the solutions to the Legendre equation, Equation \ref{eqn:Rodrigues} below, and a \textbf{recursion formula} for the solutions to the Hermite equation, Equation \ref{eqn:recursionHermite} below.
 \begin{equation}\label{eqn:Rodrigues}
     P_\ell(x) = \frac{1}{2^\ell\ell!}\dv[\ell]{x}(x^2-1)^\ell
 \end{equation}
 \begin{equation}\label{eqn:recursionHermite}
     H_{n+1}(x) = 2xH_n(x)-2nH_{n-1}(x)
-\end{equation}
+\end{equation}\par
 The content of this paper was adapted from \textcite{bib:Seaborn} as well as my class notes for the University of Chicago's CHEM 26100 Quantum Mechanics and PHYS 23410 Quantum Mechanics I courses, \textcite{bib:CHEM26100Notes} and \textcite{bib:PHYS23410Notes}, respectively.
 \newpage
 
@@ -81,8 +81,8 @@ In classical physics, developed by Sir Isaac Newton in the 1600s, matter is thou
     = ma
     = m\dv[2]{x}{t}
 \end{equation}
-Practitioners of classical physics analyze larger objects as collections of particles, each of which evolves under Newton's laws. Simply put, matter has a fundamentally \emph{particle-like} nature. This method of thinking about the universe stood unchallenged for 300 years and is still widely used today for applications ranging from building bridges to designing rocket ships.\par
-However, modern physicists no longer accept classical physics as an \emph{everywhere applicable} model of the universe in which we live. In the early 1900s, experimentalists began to make observations of very small things that called the universality of the postulates of classical physics into question. The most prominent example called into question the idea that matter is fundamentally particle-like. This example is described in the following paragraph.\par
+Practitioners of classical physics analyze larger objects as collections of particles, each of which evolves under Newton's laws. Simply put, matter is thought of as having a fundamentally \emph{particle-like} nature. This method of thinking about the universe stood unchallenged for 300 years and is still widely used today for applications ranging from building bridges to designing rocket ships.\par
+However, modern physicists no longer accept classical physics as an \emph{everywhere applicable} model of the universe in which we live. In the early 1900s, experimentalists began to make observations of very small things. These observations called the universality of the postulates of classical physics into question. The most prominent example called into question the idea that matter is fundamentally particle-like. This example is described in the following paragraph.\par
 The story begins with two of Einstein's 1905 \emph{annus mirabilis} papers, in particular those that culminated in the photoelectric effect and mass-energy equivalence equations (left and right below, respectively).
 \begin{align*}
     E &= h\nu = \frac{hc}{\lambda}&
@@ -98,9 +98,9 @@ This may seem an absurd statement to one who has not worked extensively with qua
 \begin{equation*}
     \lambda = \frac{h}{mc}
 \end{equation*}
-The Paris committee was ready to fail him, but they wrote to Einstein first. Fortunately for de Broglie, Einstein recognized the importance of this idea: That just like light has the matter-like property of mass, mass has the wave-like property of wavelength. Essentially, de Broglie had just postulated that fundamental particles of matter, such as electrons, have a wavelike nature. A few years later, the Davisson-Germer experiment --- an update to Thomas Young's double-slit experiment that verified the wavelike nature of light --- confirmed the wavelike nature of electrons. Once again, it may seem absurd to say that electrons can be both particles and waves, but this is what current experimental data suggests.\par
-So what is matter? Newton said it's particles and provided plenty of evidence to substantiate that claim, and de Broglie said it's waves and provided (or, rather, had others provide) plenty of evidence to substantiate this claim. Modern physicists and chemists will say that matter has a \textbf{dual wave-particle nature}. Essentially, this means that there are some experimental results in which matter behaves like a particle and some in which it behaves like a wave; we will use each model when appropriate and leave the true nature of matter unsettled until we have more data.\par
-So, if matter is a wave, then it is spread out over all space in some sense. It does not exist locally at some point $x$, but rather at each point $x\in\R$, it should have some intensity $\psi(x)$ given by a \textbf{wave function} $\psi:\R\to\R$. A logical next question is whether or not there is an analogy to Newton's second law (Equation \ref{eqn:Newton2nd}), that is, a constraint we can put on the behavior and form of $\psi$. A year after de Broglie's breakthrough, Erwin Schr\"{o}dinger provided exactly such a constraint. While in the Swiss Alps with his mistress --- it wasn't only Oppenheimer! --- Schr\"{o}dinger postulated that in one dimension, $\psi$ should satisfy the time-independent Schr\"{o}dinger equation introduced in Equation \ref{eqn:Schrodinger1D} and restated below.
+The Paris committee was ready to fail him, but they wrote to Einstein first. Fortunately for de Broglie, Einstein recognized the importance of this idea: That just like light has the matter-like property of mass, mass has the wave-like property of wavelength. Essentially, de Broglie had just postulated that fundamental particles of matter, such as electrons, have a wavelike nature. A few years later, the Davisson-Germer experiment --- an update to Thomas Young's double-slit experiment, famous for verifying the wavelike nature of light --- confirmed the wavelike nature of electrons. Once again, it may seem absurd to say that electrons can be both particles and waves, but this is what current experimental data suggests.\par
+So what is matter? Newton said it's particles and provided plenty of evidence to substantiate that claim. De Broglie said it's waves and provided (or, rather, had others provide) plenty of evidence to substantiate this claim. Modern physicists and chemists will say that matter has a \textbf{dual wave-particle nature}. Essentially, this means that there are some experiments in which matter behaves like a particle and some in which it behaves like a wave; we will use each model when appropriate and leave the true nature of matter unsettled until we have more data.\par
+So, if matter is a wave, then it is spread out over all space in some sense. It does not exist locally at some point $x$ (like a particle does), but rather at each point $x\in\R$, it should have some intensity $\psi(x)$ given by a \textbf{wave function} $\psi:\R\to\R$. A logical next question is whether or not there is an analogy to Newton's second law (Equation \ref{eqn:Newton2nd}), that is, a constraint we can put on the behavior and form of $\psi$. A year after de Broglie's breakthrough, Erwin Schr\"{o}dinger provided exactly such a constraint. While in the Swiss Alps with his mistress --- it wasn't only Oppenheimer! --- Schr\"{o}dinger postulated that in one dimension, $\psi$ should satisfy the time-independent Schr\"{o}dinger equation introduced in Equation \ref{eqn:Schrodinger1D} and restated below.
 \begin{equation*}
     -\frac{\hbar^2}{2m}\dv[2]{\psi(x)}{x}+V(x)\cdot\psi(x) = E\psi(x)
 \end{equation*}
@@ -111,7 +111,7 @@ At this point, you (the reader) have all the necessary background to motivate qu
 \subsection{Motivating the Hermite Equation}
 Think about popcorn. Think about how fluffy and buttery it is. Think about all the positive childhood memories you have of eating popcorn, be it at home, at the movies, or with friends. Am I making you hungry yet? Would you like to stop reading this and go throw a packet in the microwave? Well without quantum mechanics, you couldn't!\par
 Microwaves work by shooting light of just the right frequency at your food so that molecules in it --- which are already vibrating harmonically --- vibrate faster. Faster vibrations means warmer food. But how do we know what frequency of light to use? How do we analyze the vibrating molecule we seek to irradiate?\par
-One way of modeling a vibrating molecule is as a quantum harmonic oscillator, that is, a quantum particle with
+One way of modeling a vibrating molecule is as a quantum harmonic oscillator, that is, a quantum particle subject to the following potential energy function.
 \begin{equation*}
     V(x) = \frac{1}{2}kx^2
 \end{equation*}
@@ -124,7 +124,7 @@ To solve the Hermite equation, we need complex analysis and hypergeometric funct
 
 \subsection{Motivating the Legendre Equation}
 Another place we can make use of quantum mechanics is in chemistry. Once atoms and molecules were discovered, chemistry developed as the discipline that uses atoms and molecules to "do stuff," be it synthesizing a new medicine, mass-producing the ammonia fertilizer that feeds the planet, and much more. "Doing stuff" with atoms and molecules, however, is greatly facilitated by a good understanding of how atoms and molecules interact, and hence how they're structured. Once again, quantum mechanics provides the answers we need.\par
-A classic example is the electronic structure of the hydrogen atom, which consists of a single electron (a quantum particle) existing in the following potential. Note that the $e$ in the numerator is not Euler's number in the numerator but rather the charge of an electron.
+A classic example is the electronic structure of the hydrogen atom, which consists of a single electron (a quantum particle) existing in the following potential. Note that the $e$ in the numerator is not Euler's number but rather is the charge of an electron.
 \begin{equation*}
     V(r) = -\frac{e^2}{4\pi\varepsilon_0r}
 \end{equation*}
@@ -156,7 +156,7 @@ Standard coursework in calculus and differential equations --- along with this q
     is called the \textbf{hypergeometric equation}.
 \end{definition}
 \begin{definition}
-    The \textbf{hypergeometric function} is a particular solution to the hypergeometric equation. It is denoted by $\bm{{}_2F_1(a,b;c;z)}$ and given by
+    The \textbf{hypergeometric function} is a particular solution of the hypergeometric equation. It is denoted by $\bm{{}_2F_1(a,b;c;z)}$ and given by
     \begin{equation*}
         {}_2F_1(a,b;c;z) := \sum_{n=0}^\infty\frac{(a)_n(b)_n}{n!(c)_n}z^n
     \end{equation*}
@@ -169,7 +169,7 @@ Standard coursework in calculus and differential equations --- along with this q
     is called the \textbf{confluent hypergeometric equation}. It is a particular restricted case of the hypergeometric equation introduced in Definition \ref{dfn:hypergeometricEqn}.
 \end{definition}
 \begin{definition}
-    The \textbf{confluent hypergeometric function} is a particular solution to the confluent hypergeometric equation. It is denoted by $\bm{{}_1F_1(a;c;z)}$ and given by
+    The \textbf{confluent hypergeometric function} is a particular solution of the confluent hypergeometric equation. It is denoted by $\bm{{}_1F_1(a;c;z)}$ and given by
     \begin{equation*}
         {}_1F_1(a;c;z) := \sum_{n=0}^\infty\frac{(a)_n}{n!(c)_n}z^n
     \end{equation*}
@@ -278,7 +278,7 @@ Using a little bit more algebra, we can fully transform the above into the form 
 \begin{equation*}
     w(z) = {}_2F_1(\underbrace{\tfrac{1}{2}(1-\sqrt{4\lambda+1})\pm|m|}_a,\underbrace{\tfrac{1}{2}(1+\sqrt{4\lambda+1})\pm|m|}_b;\underbrace{1\pm|m|}_c;z)
 \end{equation*}
-Employing an assumptions from quantum mechanics that was left undiscussed in Section \ref{sse:qmech}, we choose the positive sign in every instance of the $\pm$ above. A further assumption from quantum mechanics allows us to solve for
+Employing an assumption from quantum mechanics that was left undiscussed in Section \ref{sse:qmech}, we choose the positive sign in every instance of the $\pm$ above. A further assumption from quantum mechanics allows us to solve for
 \begin{equation*}
     \lambda = \ell(\ell+1)\tag{$\ell=0,1,2,\dots$}
 \end{equation*}
@@ -296,16 +296,16 @@ Lastly, note that using the substitution $\lambda=\ell(\ell+1)$ and taking $m=0$
 
 
 \section{Relevant Topics in Complex Analysis}\label{sse:complex}
-First, recall the Cauchy integral formula from the 4/2 lecture, restated as follows.
+First, recall the Cauchy integral formula from the 4/2 lecture, restated as follows. Note that the closed curve $C$ must contain $z$.
 \begin{equation*}
     f(z) = \frac{1}{2\pi i}\oint_C\frac{f(t)}{t-z}\dd{t}
 \end{equation*}
-Note that the closed curve $C$ must contain $z$. Differentiating the Cauchy integral formula, we obtain the following result which will be used more than once in what follows.
+Differentiating the Cauchy integral formula, we obtain the following result which will be used more than once in what follows.
 \begin{equation*}
     f^{(n)}(z) = \frac{n!}{2\pi i}\oint_C\frac{f(t)}{(t-z)^{n+1}}\dd{t}
 \end{equation*}\par
 Additionally, we will state and prove a restricted version of the residue theorem. What follows is less general than what was presented in class on 5/2, but it is perfectly adequate for our purposes.
-\begin{theorem}
+\begin{theorem}\label{trm:residue}
     If $C$ is a curve that encloses $N$ isolated singularities of $f$, the $k^\text{th}$ one being at $z_k$, then we have
     \begin{align*}
         \oint_Cf(z)\dd{z} &= \sum_{k=1}^N\oint_{C_k}f(z)\dd{z}
@@ -313,29 +313,55 @@ Additionally, we will state and prove a restricted version of the residue theore
         &= 2\pi i[\emph{sum of residues}]
     \end{align*}
     \begin{proof}
-        For the sake of this argument, we will discuss a region with two holes/singularities, but the argument easily generalizes. Draw curves $C_1,C_2$ around these holes/singularities oriented counterclockwise as well. Make cut lines from $C$ to $C_1$ and from $C$ to $C_2$. Thus, the single continuous contour
+        For the sake of this argument, we will discuss a region with two holes/singularities, but the argument easily generalizes.
+        \begin{figure}[H]
+            \centering
+            \begin{subfigure}[b]{0.4\linewidth}
+                \centering
+                \includegraphics[width=0.9\linewidth]{residueTrma.png}
+                \caption{Initial domain.}
+                \label{fig:residueTrma}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.4\linewidth}
+                \centering
+                \includegraphics[width=0.9\linewidth]{residueTrmb.png}
+                \caption{Cut lines.}
+                \label{fig:residueTrmb}
+            \end{subfigure}
+            \caption{Proving the Cauchy Residue Theorem.\protect\footnotemark}
+            \label{fig:residueTrm}
+        \end{figure}
+        \footnotetext{Pictures from \textcite[130]{bib:Seaborn}.}
+        Draw curves $C_1,C_2$ around these holes/singularities oriented counterclockwise as well (Figure \ref{fig:residueTrma}). Make cut lines from $C$ to $C_1$ and from $C$ to $C_2$ (Figure \ref{fig:residueTrmb}). Thus, the single continuous contour
         \begin{equation*}
             C' := C+(-C_1)+(-C_2)+\text{cut lines}
         \end{equation*}
-        encloses a simply connected region. Thus, by the definition of integrating over multiple curves,
+        encloses a simply connected region. Thus, by the definition of integrating over a multicurve,
         \begin{equation*}
             \oint_{C'}f(z)\dd{z} = \oint_Cf(z)\dd{z}+\oint_{-C_1}f(z)\dd{z}+\oint_{-C_2}f(z)\dd{z}
         \end{equation*}
-        By the CIT, the left-hand side of the above vanishes. Thus, rearranging, we obtain
+        By the Cauchy integral theorem, the left-hand side of the above vanishes. Thus, rearranging, we obtain
         \begin{equation*}
             \oint_Cf(z)\dd{z} = \oint_{C_1}f(z)\dd{z}+\oint_{C_2}f(z)\dd{z}
         \end{equation*}
         At this point, we can evaluate each of the integrals on the RHS above via the definition of the residue to get the desired result.
     \end{proof}
 \end{theorem}
-Lastly, we will define a new mathematical object called the \textbf{gamma function}.
+Next, we will define a new mathematical object called the \textbf{gamma function}.
 \begin{definition}
-    The \textbf{gamma function} is an analytic continuation of the factorial function $!\N\to\N$ to $\C$. It is denoted by $\bm{\Gamma(z)}$ and given by
+    The \textbf{gamma function} is an analytic continuation of the factorial function $!:\N\to\N$ to $\C$. It is denoted by $\bm{\Gamma(z)}$ and given by
     \begin{equation*}
         \Gamma(z) := \int_0^\infty t^{z-1}\e[-t]\dd{t}
     \end{equation*}
 \end{definition}
-The gamma function is most useful for its numerous properties, many of which are stated throughout \textcite{bib:Seaborn}. One that will be particularly useful for us is that the gamma function is a meromorphic function on $\C$, in particular one that is holomorphic everywhere except at the nonpositive integers, where it has simple poles (i.e., takes on $\infty\in\hat{\C}$).
+The gamma function is most useful for its numerous properties, many of which are stated throughout \textcite{bib:Seaborn}. One that will be particularly useful for us is that the gamma function is a meromorphic function on $\C$, in particular one that is holomorphic everywhere except at the nonpositive integers, where it has simple poles (i.e., takes on $\infty\in\hat{\C}$). Another that will be useful is that $\Gamma(n+1)=n!$ for any $n\in\N_0$.\par
+Lastly, we will define a new mathematical object called a \textbf{generating function}.
+\begin{definition}
+    The \textbf{exponential generating function} of an infinite sequence $\{p_n(x)\}$ of functions is a representation of that sequence as the $n^\text{th}$ derivatives of a formal power series in some variable indeterminate. We will denote the variable indeterminate by $t$ and the generating function by $g(x,t)$, giving us
+    \begin{equation*}
+        g(x,t) := \sum_{n=0}^\infty\frac{p_n(x)}{n!}t^n
+    \end{equation*}
+\end{definition}
 \newpage
 
 
@@ -394,7 +420,7 @@ Since $u,v$ were both analytic (as power series), $w$ must be analytic as well w
 \begin{equation*}
     w(t) = \sum_{k=0}^\infty c_kt^k
 \end{equation*}
-Thus, by the formula for the derivative of the CIF, we know that the power series expansion of $w$ about 0 (a computationally nice point where $w$ is analytic) is the following, where $C$ is a closed curve encircling 0 but none of $w$'s singularities.
+Thus, by the formula for the derivative of the Cauchy integral formula, we know that the power series expansion of $w$ about 0 (a computationally nice point where $w$ is analytic) is the following, where $C$ is a closed curve encircling 0 but none of $w$'s singularities.
 \begin{equation*}
     w(t) = \sum_{k=0}^\infty\left( \frac{1}{2\pi i}\oint_C\frac{w(\tau)}{\tau^{k+1}}\dd\tau \right)t^k
 \end{equation*}
@@ -418,22 +444,22 @@ Using Equation \ref{eqn:1zs}, we can transform the numerator of the integrand as
     &= \frac{2^n}{2\pi i}\oint_C\sum_{r=0}^\infty\frac{(-1)^r(\tfrac{n-m-1}{2}-r+1)_r}{r!}\frac{(-1)^ru^r}{u^{n+1}}\dd{u}\tag*{Identity \ref{pci:2}}\\
     &= \frac{2^n}{2\pi i}\sum_{r=0}^\infty\frac{(\tfrac{n-m-1}{2}-r+1)_r}{r!}\oint_Cu^{r-n-1}\dd{u}
 \end{align*}
-Since $C$ surrounds $t=0$ by definition, it also naturally surrounds $u=0$. Thus, we may use the two definitions of the residue to learn that
+Since $C$ surrounds $t=0$ by definition, it also naturally surrounds $u=2(0)+(0)^2=0$. Thus, we may use the two definitions of the residue and Theorem \ref{trm:residue} to learn that
 \begin{align*}
     c_n &= \frac{2^n}{2\pi i}\sum_{r=0}^\infty\frac{(\tfrac{n-m-1}{2}-r+1)_r}{r!}\cdot 2\pi i\res_0\left( \frac{1}{u^{n+1-r}} \right)\\
     &= 2^n\sum_{r=0}^\infty\frac{(\tfrac{n-m-1}{2}-r+1)_r}{r!}\res_0\left( \frac{1}{u^{n+1-r}} \right)
 \end{align*}
-Clearly, the "$a_{-1}$ term" of $u^{r-n-1}$ is only nonzero when $r=n$, and in this case, $a_{-1}=1$.
-Thus, we may neglect all terms in the above sum save the $r=n$ term, leaving us with
+Clearly, the "$a_{-1}$ term" of $u^{r-n-1}$ is only nonzero when $r=n$, and in this case, $a_{-1}=1$. Thus, we may neglect all terms in the above sum save the $r=n$ term, leaving us with
 \begin{align*}
     c_n &= \frac{2^n(\tfrac{n-m-1}{2}-n+1)_n}{n!}\\
     &= \frac{2^n\left( -\tfrac{1}{2}(n+m-1) \right)_n}{n!}
-\end{align*}\par
+\end{align*}
+This is the final form to which we will simplify the original sum, and the derivation was greatly facilitated via the use of complex analysis.\par
 Having simplified $c_n$, we can substitute it back into the expression for $P_n(x)$, obtaining
 \begin{equation*}
     P_n(x) = \sum_{m=0}^n\frac{(-1)^mx^m2^n\left( -\tfrac{1}{2}(n+m-1) \right)_n}{m!(n-m)!}
 \end{equation*}
-Since the summation index $m\leq n$,\footnote{We neither stated nor proved this mathematical quirk of quantum mechanics in our derivation of the Legendre polynomials, but a statement and proof can be found in \textcite[32]{bib:FinalProject}.} we have that $\tfrac{1}{2}(n+m-1)<n$. Thus, $(-\tfrac{1}{2}(n+m-1))_n$ will reach zero (and hence be zero) whenever $n+m-1$ is an even integer, zeroing out those terms in the above summation. As such, we may define a new summation index $k$ by $2k=n-m$; this one will only index over the nonzero terms of the above sum by keeping $n+m-1$ equal to an odd integer. Reindexing, we get
+Since the summation index $m\leq n$,\footnote{We neither stated nor proved this mathematical quirk of quantum mechanics in our derivation of the Legendre polynomials, but a statement and proof can be found in \textcite[32]{bib:FinalProject}.} we have that $\tfrac{1}{2}(n+m-1)<n$. Thus, $(-\tfrac{1}{2}(n+m-1))_n$ will reach zero (and hence be zero) whenever $n+m-1$ is an even integer, zeroing out those terms in the above summation. As such, we may define a new summation index $k$ by $2k:=n-m$; this one will only index over the nonzero terms of the above sum by keeping $n+m-1$ equal to an odd integer. Reindexing, we get
 \begin{equation*}
     P_n(x) = \sum_{k=0}^{[n/2]}\frac{(-1)^{n-2k}x^{n-2k}2^n\left( k-n+\tfrac{1}{2} \right)_n}{(n-2k)!(2k)!}
 \end{equation*}
@@ -459,7 +485,7 @@ Now reindex with $p=n-k$:
 \begin{equation*}
     P_n(x) = \sum_{p=0}^n\frac{(-1)^{n-p}}{2^n(n-p)!p!}\dv[n]{x}x^{2p}
 \end{equation*}
-Consequently, we may rewrite the expression and compress it via a binomial expansion into the final form, matching Equation \ref{eqn:Rodrigues}.
+Consequently, we may rewrite the expression and compress it via a binomial expansion into the final form, matching Equation \ref{eqn:Rodrigues} up to the notational change $\ell\to n$.
 \begin{align*}
     P_n(x) &= \frac{1}{2^nn!}\dv[n]{x}\sum_{p=0}^n\frac{n!}{p!(n-p)!}(x^2)^p(-1)^{n-p}\\
     &= \frac{1}{2^nn!}\dv[n]{x}(x^2-1)^n
@@ -467,14 +493,7 @@ Consequently, we may rewrite the expression and compress it via a binomial expan
 
 
 \subsection{Deriving a Recursion Formula for the Hermite Polynomials}
-To derive the recursion formula, we will first derive a \textbf{generating function} for the Hermite polynomials.
-\begin{definition}
-    The \textbf{exponential generating function} of an infinite sequence $\{p_n(x)\}$ of functions is a representation of that sequence as the $n^\text{th}$ derivatives of a formal power series in some variable indeterminate. We will denote the variable indeterminate by $t$ and the generating function by $g(x,t)$, giving us
-    \begin{equation*}
-        g(x,t) := \sum_{n=0}^\infty\frac{p_n(x)}{n!}t^n
-    \end{equation*}
-\end{definition}
-This generating function will allow us to easily represent the Hermite polynomials as a complex contour integral. Finally, from this representation, we will be able to derive the recursion formula. Let's begin.
+To derive the recursion formula, we will first derive a generating function for the Hermite polynomials. This generating function will allow us to easily represent the Hermite polynomials as a complex contour integral. Finally, from this representation, we will be able to derive the recursion formula. Let's begin.
 
 \subsubsection{A Generating Function}
 Postulate the existence of a generating function $g$ for the Hermite polynomials, and assume $g$ is analytic at and near $t=0$.\footnote{There is no reason that this must be true, but we are free to assume it and see where it gets us. If it gets us somewhere, we're golden!} Then
@@ -508,10 +527,10 @@ Therefore, returning the substitution, we have that
 \end{equation*}
 
 \subsubsection{A Contour Integral Representation}
-Using the formula for the derivative of the CIF, another formula for the Taylor series of $g$ about $t=0$ is
+Using the formula for the derivative of the Cauchy integral formula, another formula for the Taylor series of $g$ about $t=0$ is
 \begin{equation*}
     g(x,t) = \sum_{n=0}^\infty\frac{g^{(n)}(x,t)}{n!}t^n
-    = \sum_{n=0}^\infty\frac{\pdv*[n]{t}g(x,t)}{n!}t^n
+    = \sum_{n=0}^\infty\pdv[n]{t}g(x,t)\frac{t^n}{n!}
     = \sum_{n=0}^\infty\left( \frac{n!}{2\pi i}\oint_C\frac{g(x,t)}{t^{n+1}}\dd{t} \right)\frac{t^n}{n!}
 \end{equation*}
 where $C\ni 0$. Thus, by comparing this to the generating function, we learn that
