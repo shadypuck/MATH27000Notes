@@ -15,16 +15,71 @@
     \item \marginnote{5/3:}\textcite{bib:FischerLieb}, QIII.1.1.
     \begin{enumerate}
         \item Determine the order of the zero of $\sum_{n=1}^kb_n(z-z_0)^{-n}$ at $\infty$.
+        \begin{proof}
+            Define
+            \begin{equation*}
+                f^*(z) = f(1/z)
+                = \sum_{n=1}^k\frac{b_n}{(\tfrac{1}{z}-z_0)^n}
+                = \sum_{n=1}^k\frac{b_nz^n}{(1-z_0z)^n}
+                = z^1\underbrace{\sum_{n=1}^k\frac{b_nz^{n-1}}{(1-z_0z)^n}}_{h(z)}
+            \end{equation*}
+            Therefore, since $h(0)\neq 0$, $f$ has a zero of order \fbox{1} at $\infty$.
+        \end{proof}
         \item For the following functions, determine the value $w_0=f(\infty)$ and its multiplicity.
         \begin{align*}
             f(z) &= \frac{2z^4-2z^3-z^2-z+1}{z^4-z^3-z+1}&
             f(z) &= \frac{z^4+iz^3+z^2+1}{z^4+iz^3+z^2-iz}
         \end{align*}
+        \begin{proof}
+            Use consecutive applications of L'H\^{o}pital's rule:
+            \begin{equation*}
+                \lim_{z\to\infty}f(z) = \frac{2\cdot 4!}{4!}
+                = 2
+            \end{equation*}
+            Therefore, for the left function above,
+            \begin{equation*}
+                \boxed{w_0 = f(\infty) = 2}
+            \end{equation*}
+            Define
+            \begin{equation*}
+                g(z) = f(z)-w_0
+                = \frac{2z^4-2z^3-z^2-z+1}{z^4-z^3-z+1}-\frac{2z^4-2z^3-2z+2}{z^4-z^3-z+1}
+                = \frac{-z^2+z-1}{z^4-z^3-z+1}
+            \end{equation*}
+            Then
+            \begin{equation*}
+                g^*(z) = \frac{-\tfrac{1}{z^2}+\tfrac{1}{z}-1}{\tfrac{1}{z^4}-\tfrac{1}{z^3}-\tfrac{1}{z}+1}
+                = \frac{-z^2+z^3-z^4}{1-z-z^3+z^4}
+                = z^2\cdot\frac{-1+z-z^2}{1-z-z^3+z^4}
+            \end{equation*}
+            Thus $w_0$ has multiplicity \fbox{2.}
+        \end{proof}
     \end{enumerate}
     \item \textcite{bib:FischerLieb}, QIII.3.1. Let $f$ and $g$ be entire functions such that $|f|\leq|g|$. Show that $f=cg$ for some constant $c$.
+    \begin{proof}
+        If $|f|\leq|g|$, then
+        \begin{equation*}
+            \left| \frac{f}{g} \right| \leq 1
+        \end{equation*}
+        Thus, $f/g$ is bounded and entire, so it must be constant by Liouville's theorem. But if $f/g=c$, then $f=cg$, as desired.\par
+        We do need a proof that $f/g$ is entire, which means considering the behavior of $f/g$ at any point that $g(z)=0$.
+    \end{proof}
     \item \textcite{bib:FischerLieb}, QIII.4.1.
     \begin{enumerate}
         \item Let $S,T\in\Mob$. Show that a point $z_1\in\hat{\C}$ is a fixed point of $T$ if and only if $Sz_1$ is a fixed point of $STS^{-1}$.
+        \begin{proof}
+            Suppose $z_1$ is a fixed point of $T$. Then $Tz_1=z_1$. Thus,
+            \begin{equation*}
+                STS^{-1}(Sz_1) = STz_1 = Sz_1
+            \end{equation*}
+            as desired.\par
+            Suppose $Sz_1$ is a fixed point of $STS^{-1}$. Then
+            \begin{align*}
+                STS^{-1}(Sz_1) &= Sz_1\\
+                STz_1 &= Sz_1
+            \end{align*}
+            Applying $S^{-1}$ to both sides of the above yields the desired result.
+        \end{proof}
         \item Suppose $T$ has exactly one fixed point $z_1$. Show that there is an $S\in\Mob$ such that $STS^{-1}$ is a translation. Moreover, show that for every $z\in\hat{\C}$, we have
         \begin{equation*}
             \lim_{n\to\infty}T^nz = z_1
@@ -44,6 +99,12 @@
         f(-1-i\sqrt{3})&&
         f((-1-i\sqrt{3})^2)
     \end{align*}
+    \begin{proof}
+        \begin{align*}
+            f(i) &= -\frac{3\pi i}{2}&
+            f(-\e) &= 1-i\pi
+        \end{align*}
+    \end{proof}
     \item If $z_1$ and $z_2$ are related by inversion in a circle $C$, and $z_3$ and $z_4$ are arbitrary (distinct) points of $C$, show that the cross ratio of the four points has modulus 1.
 \end{enumerate}
 
